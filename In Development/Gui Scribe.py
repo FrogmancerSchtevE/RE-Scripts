@@ -1,41 +1,3 @@
-# ================================================================
-# FrogScribe Suite v2 – Inscription GUI (Craft / Craft&Fill / Fill)
-# Author: Frog + UO Script Forge
-#
-# Features:
-#   * Suite-style GUI:
-#       - Header, Status, Progress bar
-#       - Resource chest + Deposit chest display and set buttons
-#       - Master "Runs" control with your 2223/2224 +/- buttons
-#       - Mode toggle: Craft / Craft&Fill / Fill
-#       - Craft All Circles + individual 1st–8th circle buttons
-#       - Fill Spellbooks button (uses deposit chest scrolls & blanks)
-#
-#   * Auto-restock:
-#       - Reagents, blank scrolls, pens from Resource chest into backpack
-#
-#   * Crafting:
-#       - Uses original Frogscribe circle gump/button IDs & scroll IDs
-#       - Requires you to hold a full spellbook (for inscription ability)
-#       - Crafts scrolls into backpack, then moves them to Deposit chest
-#       - Success/failure detected via scroll count delta
-#
-#   * Filling:
-#       - Deposit chest holds:
-#           * crafted scrolls
-#           * blank spellbooks (0x0EFA)
-#       - Script:
-#           * Moves a blank spellbook to backpack
-#           * Uses scrolls from Deposit chest to add up to 64 spells
-#           * Deposits filled book back into Deposit chest
-#           * Repeats until no blanks or no scrolls left
-#
-# Notes:
-#   * All status feedback is via the GUMP status line, not system messages.
-#   * "Craft" mode: just crafts, deposits scrolls.
-#   * "Craft&Fill" mode: crafts, deposits scrolls, then fills books.
-#   * "Fill" mode: skips crafting; just fills books from deposit chest.
-# ================================================================
 
 import Misc, Gumps, Items, Player, Target
 from System.Collections.Generic import List
@@ -44,20 +6,20 @@ from System.Collections.Generic import List
 # CONFIG / CONSTANTS
 # ------------------------------------------------
 
-GUI_GUMP_ID = 0x0F0A0001       # Custom GUI gump id
-SCRIBE_PEN_ID = 0x0FBF         # Scribe pen graphic
-SPELLBOOK_ID = 0x0EFA          # Standard spellbook itemID
+GUI_GUMP_ID = 0x0F0A0001       
+SCRIBE_PEN_ID = 0x0FBF         
+SPELLBOOK_ID = 0x0EFA          
 
 MIN_ITERATIONS = 1
 MAX_ITERATIONS = 10
-MAX_ATTEMPTS_PER_SCROLL = 15   # retry limit per scroll
+MAX_ATTEMPTS_PER_SCROLL = 15   
 
 GUMP_WIDTH = 300
 GUMP_HEIGHT = 400
 
 
 HEADER_HUE = 1152
-LABEL_HUE = 11          # per your change
+LABEL_HUE = 11          
 VALUE_HUE = 53
 BUTTON_LABEL_HUE = 54
 STATUS_HUE = 67
@@ -94,7 +56,7 @@ MODES = ["craft", "craftfill", "fill"]
 STATE = {
     "iterations": 1,
     "status": "Idle.",
-    "progress": 0.0,          # 0.0–1.0
+    "progress": 0.0,         
     "resource_chest": None,
     "deposit_chest": None,
     "mode": "craft",
@@ -106,7 +68,7 @@ STATE = {
     "abort": False,
 }
 
-SCRIBE_GUMP_ID = None   # inscription gump id, discovered dynamically
+SCRIBE_GUMP_ID = None   
 
 # ------------------------------------------------
 # CIRCLE / SPELL DEFINITIONS (from Frogscribe)
@@ -895,3 +857,4 @@ def main():
 
 
 main()
+
