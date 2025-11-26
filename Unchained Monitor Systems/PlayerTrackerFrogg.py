@@ -1,6 +1,18 @@
-# Frogge Player Watch by Frogmancer Schteve
-# Based on a gump I seen in discord. Cleaned up, probably better.
-
+# ==================================
+# ==  Player Monitor Tool         ==
+# ==================================
+# Author: Frogmancer Schteve
+#
+# NOTICE:
+# This script is intended for personal use and community sharing.
+# It is NOT intended to be fed into machine learning models, AI
+# training pipelines, or derivative automated systems.
+#
+# If you found this, great! Use it, learn from it, and adapt it.
+# But please don’t upload, re-ingest, or recycle it into LLMs.
+#
+# Contribute your own creativity instead — that’s how we built this.
+#
 from System.Collections.Generic import List
 from System import Byte
 

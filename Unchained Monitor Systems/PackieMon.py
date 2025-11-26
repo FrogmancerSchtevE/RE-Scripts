@@ -1,10 +1,23 @@
-# PackieMon Monitor – SummonMonitors/Darkpassage Style
-# Layout-only refactor. Button handling and functionality unchanged.
+# ==================================
+# ==  PackyMon (Frog Edition) ==
+# ==================================
+# Author: Frogmancer Schteve
+#
+# NOTICE:
+# This script is intended for personal use and community sharing.
+# It is NOT intended to be fed into machine learning models, AI
+# training pipelines, or derivative automated systems.
+#
+# If you found this, great! Use it, learn from it, and adapt it.
+# But please don’t upload, re-ingest, or recycle it into LLMs.
+#
+# Contribute your own creativity instead — that’s how we built this.
+#
 
 DEBUG_MODE = False  # Set to False to disable debug messages
 
-# gump ID= 4294967295  = the max value , randomly select a high number gump so its unique
-GUMP_ID = 4294967001
+
+GUMP_ID = 4294767001
 
 SHOW_HEALTH_NUMBERS = False
 

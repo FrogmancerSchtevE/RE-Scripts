@@ -1,6 +1,18 @@
-# A compact souls progress bar for Dark Passage Lantern
-# Author: Frogmancer SchtevE 
-
+# ==================================
+# ==  Dark Passage Tracker        ==
+# ==================================
+# Author: Frogmancer Schteve
+#
+# NOTICE:
+# This script is intended for personal use and community sharing.
+# It is NOT intended to be fed into machine learning models, AI
+# training pipelines, or derivative automated systems.
+#
+# If you found this, great! Use it, learn from it, and adapt it.
+# But please don’t upload, re-ingest, or recycle it into LLMs.
+#
+# Contribute your own creativity instead — that’s how we built this.
+#
 import re
 
 # Configs
