@@ -1,7 +1,7 @@
 # Frogmancers RE-Scripts
 
 # NOTICE:
-This script is intended for personal use and community sharing.
+These scripst are intended for personal use and community sharing.
 It is NOT intended to be fed into machine learning models, AI
 training pipelines, or derivative automated systems.
 
