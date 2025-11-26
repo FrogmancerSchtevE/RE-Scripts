@@ -26,16 +26,35 @@ Key goals:
 
 ## 📦 Contents / Modules
 
-> _List is approximate — update as needed._
 
-- **Follower Monitor** — tracks pet/follower HP, range, status; displays in a compact gump.  
-- **Pet Management Suite** — includes pack-opening on return, auto-heal alerts, tame/unstuck helpers.  
-- **Filters & Targeting Tools** — custom filters for mob targeting (by notoriety, name, body type, etc.).  
-- **Crafting & Harvesting Utilities** — e.g. auto-harvesting loops, crafting press-buttons, resource trackers.  
-- **GUI Helpers & Examples** — example gumps and GUI patterns (inspired by `CottonPickerGUI_Private.py`) to help you build custom tools.  
-- **Miscellaneous Utilities** — small convenience scripts (e.g. auto-close gumps by ID, safe button-press wrapper, debug helpers).
+**Unchained**
+**Crafting Scripts**
+- AlchySuiteV2
 
-(If you add or remove modules, reflect it above.)
+**Harvesting Scripts**
+- CottonPickerGUI_Public.py
+- FrogChopRSV.py
+- FrogTreeSniffer.py
+- LeatherSkinner.py
+
+
+**Unchained Monitor Systems**
+- AutoGoldSatchel.py
+- DarkPassage.py
+- DurabilityChecker.py
+- FroggeVet.py
+- PackieMon.py
+- PlayerTrackerFrogg.py
+- Summon Suite.py
+
+
+**Undefined**
+- FastInspect.py
+- FrogDoesACook.py
+- FrogThuntRewrite.py
+- FroggeVet.py
+- SimpleMoveTool.py
+- VendorAssistant.py
 
 ---
 
