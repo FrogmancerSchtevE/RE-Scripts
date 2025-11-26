@@ -13,7 +13,7 @@
 #
 # Contribute your own creativity instead — that’s how we built this.
 #
-import Misc, Player, Items, Mobiles, Timer, Target, Gumps
+import Misc, Player, Items, Mobiles, Timer, Target, Gumps, Journal, time
 from System import Int32
 from System.Collections.Generic import List
 
@@ -131,7 +131,7 @@ def get_hostiles_sorted(limit=5):
                 break
 
     return results    
-    
+
 _last_targets = []
 
 def targets_changed():
@@ -143,6 +143,7 @@ def targets_changed():
         _last_targets = names
         return True
     return False    
+
 def find_in_backpack_by_id(item_id, hue=-1):
     """Find an item by ID in the backpack."""
     return Items.FindByID(int(item_id), int(hue), Player.Backpack.Serial, True, False)
@@ -175,6 +176,42 @@ _main_weapon = None
 _main_shield = None
 _secondary_weapon = None
 _secondary_shield = None
+
+def clear_hands(preserve_left_serial=None):
+    """Unequip current weapons/shields, optionally preserving offhand."""
+    right = Player.GetItemOnLayer("RightHand")
+    left  = Player.GetItemOnLayer("LeftHand")
+
+    if right:
+        Items.Move(right, Player.Backpack.Serial, 0, 0, 0)
+        Misc.Pause(400)
+
+    if left and (preserve_left_serial is None or left.Serial != preserve_left_serial):
+        Items.Move(left, Player.Backpack.Serial, 0, 0, 0)
+        Misc.Pause(400)
+
+def save_weapons():
+    """Save currently equipped weapons as main/secondary if they're not already."""
+    global _main_weapon, _main_shield, _secondary_weapon, _secondary_shield
+
+    right = Player.GetItemOnLayer("RightHand")
+    left  = Player.GetItemOnLayer("LeftHand")
+
+    if right and not _main_weapon:
+        _main_weapon = right
+        Player.HeadMessage(68, "Main weapon saved")
+
+    if left and not _main_shield:
+        _main_shield = left
+        Player.HeadMessage(68, "Main shield saved")
+
+    if right and not _secondary_weapon and _main_weapon and right.Serial != _main_weapon.Serial:
+        _secondary_weapon = right
+        Player.HeadMessage(68, "Secondary weapon saved")
+
+    if left and not _secondary_shield and _main_shield and left.Serial != _main_shield.Serial:
+        _secondary_shield = left
+        Player.HeadMessage(68, "Secondary shield saved")
 
 def equip_main():
     global _main_weapon, _main_shield
@@ -259,92 +296,42 @@ def equip_secondary():
         left = Player.GetItemOnLayer("LeftHand")
         if not left or left.Serial != desired_shield:
             Items.UseItem(_secondary_shield)
-    save_weapons()           
-        
+
+    save_weapons()
+
 def disarm():
     clear_hands()
-    Player.HeadMessage(68, "Clearing hands")
-    
-def use_shield():
-    left = Player.GetItemOnLayer("LeftHand")
-    if left:
-        Items.UseItem(left)
-        Player.HeadMessage(68, "Using Shield")
-    else:
-        Player.HeadMessage(33, "No shield equipped")
-    
-def clear_hands(preserve_left_serial=None):
-    r = Player.GetItemOnLayer("RightHand")
-    if r:
-        Items.Move(r, Player.Backpack.Serial, 0)
-        Misc.Pause(400)
-
-    l = Player.GetItemOnLayer("LeftHand")
-    keep_serial = None
-    try:
-        keep_serial = int(preserve_left_serial.Serial) if preserve_left_serial else None
-    except:
-        try:
-            keep_serial = int(preserve_left_serial) if preserve_left_serial is not None else None
-        except:
-            keep_serial = None
-
-    if l and (keep_serial is None or l.Serial != keep_serial):
-        Items.Move(l, Player.Backpack.Serial, 0)
-        Misc.Pause(400)
-  
-# ====================================================================
-# MODULE: PERSISTANCE
-# ====================================================================       
-
-def save_weapons():
-    if _main_weapon:   Misc.SetSharedValue("dexxer_main_weapon", _main_weapon.Serial)
-    else:              Misc.RemoveSharedValue("dexxer_main_weapon")
-    if _main_shield:   Misc.SetSharedValue("dexxer_main_shield", _main_shield.Serial)
-    else:              Misc.RemoveSharedValue("dexxer_main_shield")
-    if _secondary_weapon: Misc.SetSharedValue("dexxer_secondary_weapon", _secondary_weapon.Serial)
-    else:                 Misc.RemoveSharedValue("dexxer_secondary_weapon")
-    if _secondary_shield: Misc.SetSharedValue("dexxer_secondary_shield", _secondary_shield.Serial)
-    else:                 Misc.RemoveSharedValue("dexxer_secondary_shield")
-
-def load_weapons():
-    global _main_weapon, _main_shield, _secondary_weapon, _secondary_shield
-
-    try:
-        main = Misc.ReadSharedValue("dexxer_main_weapon")
-        if main: _main_weapon = Items.FindBySerial(int(main))
-    except: pass
-
-    try:
-        sh = Misc.ReadSharedValue("dexxer_main_shield")
-        if sh: _main_shield = Items.FindBySerial(int(sh))
-    except: pass
-
-    try:
-        sec = Misc.ReadSharedValue("dexxer_secondary_weapon")
-        if sec: _secondary_weapon = Items.FindBySerial(int(sec))
-    except: pass
-
-    try:
-        secsh = Misc.ReadSharedValue("dexxer_secondary_shield")
-        if secsh: _secondary_shield = Items.FindBySerial(int(secsh))
-    except: pass
+    Player.HeadMessage(68, "Disarmed")
 
 def reset_weapons():
     global _main_weapon, _main_shield, _secondary_weapon, _secondary_shield
     _main_weapon = _main_shield = _secondary_weapon = _secondary_shield = None
-    for key in ["dexxer_main_weapon", "dexxer_main_shield", "dexxer_secondary_weapon", "dexxer_secondary_shield"]:
-        Misc.RemoveSharedValue(key)
-    Player.HeadMessage(33, f"Reset: {_main_weapon}, {_main_shield}, {_secondary_weapon}, {_secondary_shield}")
-    
-load_weapons()   
-if _main_weapon: Player.HeadMessage(68, "Loaded Main weapon")
-if _main_shield: Player.HeadMessage(68, "Loaded Main shield")
-if _secondary_weapon: Player.HeadMessage(68, "Loaded Secondary weapon")
-if _secondary_shield: Player.HeadMessage(68, "Loaded Secondary shield")
+    Player.HeadMessage(33, "Weapon presets reset")
+
+def use_shield():
+    """Equip only the shield (main or secondary) without changing weapon."""
+    global _main_shield, _secondary_shield
+
+    shield = _main_shield or _secondary_shield
+    if not shield:
+        shield_serial = Target.PromptTarget("Select shield to equip")
+        if shield_serial:
+            shield = Items.FindBySerial(shield_serial)
+            _main_shield = shield
+            Player.HeadMessage(68, "Shield saved")
+        else:
+            Player.HeadMessage(33, "No shield selected")
+            return
+
+    left = Player.GetItemOnLayer("LeftHand")
+    if not left or left.Serial != shield.Serial:
+        Items.UseItem(shield)
+        Player.HeadMessage(68, "Shield equipped")
+    else:
+        Player.HeadMessage(33, "Shield already equipped")
 
 # ====================================================================
-# MODULE: MANUAL ACTIONS
+# MANUAL USE MODULES
 # ====================================================================
 def manual_bandage_self():
     if not have_in_backpack(ID_BANDAGE):
@@ -353,7 +340,7 @@ def manual_bandage_self():
 
     Target.Cancel()
     Misc.Pause(50)
-    Misc.ClearJournal()
+    Journal.Clear()
 
     bandage = find_in_backpack_by_id(ID_BANDAGE)
     Items.UseItem(bandage)
@@ -423,7 +410,7 @@ def step_bandage():
     if Player.Hits < BANDAGE_HP_THRESHOLD and timer_ready("bandageCD"):
         if have_in_backpack(ID_BANDAGE):
             Target.Cancel()
-            Misc.ClearJournal()
+            Journal.Clear()
             Items.UseItem(find_in_backpack_by_id(ID_BANDAGE))
             if Target.WaitForTarget(500):
                 Target.Self()
@@ -434,7 +421,7 @@ def step_bandage():
                 Misc.SendMessage("Auto-bandaging", 68)
 
 def step_healpot():
-    if not _auto_heal: 
+    if not _auto_heal:
         return
 
     if Player.Hits <= HEAL_HP_THRESHOLD and timer_ready("healPotCD"):
@@ -449,50 +436,50 @@ def step_curepot():
             reset_timer("curePotCD", 10000)
 
 def step_refreshpot():
-    if not _auto_refresh: 
+    if not _auto_refresh:
         return
 
-    stam_gap = Player.StamMax - Player.Stam
-    if stam_gap > REFRESH_STAM_GAP and timer_ready("refreshCD"):
+    if Player.StamMax - Player.Stam >= REFRESH_STAM_GAP and timer_ready("refreshPotCD"):
         if drink_potion(ID_POT_REFRESH):
             Misc.SendMessage("Auto refresh pot", 68)
-            reset_timer("refreshCD", 5000)
+            reset_timer("refreshPotCD", 8000)
 
 def step_strpot():
-    if not _auto_str: 
+    if not _auto_str:
         return
 
-    if not Player.BuffsExist("Strength") and timer_ready("strPotCD"):
+    if timer_ready("strPotCD"):
         if drink_potion(ID_POT_STRENGTH):
-            Misc.SendMessage("Auto STR pot", 68)
-            reset_timer("strPotCD", 120000)  # ~2 mins
+            Misc.SendMessage("Auto strength pot", 68)
+            reset_timer("strPotCD", 120000)
 
 def step_agipot():
-    if not _auto_agi: 
+    if not _auto_agi:
         return
 
-    if not Player.BuffsExist("Agility") and timer_ready("agiPotCD"):
+    if timer_ready("agiPotCD"):
         if drink_potion(ID_POT_AGILITY):
-            Misc.SendMessage("Auto AGI pot", 68)
-            reset_timer("agiPotCD", 120000)  
+            Misc.SendMessage("Auto agility pot", 68)
+            reset_timer("agiPotCD", 120000)
 
 def step_petals():
-    if not (_auto_orange or _auto_purple):
-        return
+    if _auto_orange and timer_ready("orangePetalCD"):
+        if use_item(ID_ORANGE_PETAL):
+            Misc.SendMessage("Auto orange petals", 68)
+            reset_timer("orangePetalCD", 600000)  # 10 minutes
 
-    if _auto_orange and not Player.BuffsExist("Orange Petals") and timer_ready("orangePetalCD"):
-        if drink_potion(ID_ORANGE_PETAL):
-            Misc.SendMessage("Auto Orange Petals", 68)
-            reset_timer("orangePetalCD", 180000)
-
-    if _auto_purple and not Player.BuffsExist("Purple Petals") and timer_ready("purplePetalCD"):
-        if drink_potion(ID_PURPLE_PETAL):
-            Misc.SendMessage("Auto Purple Petals", 68)
-            reset_timer("purplePetalCD", 180000)       
+    if _auto_purple and timer_ready("purplePetalCD"):
+        if use_item(ID_PURPLE_PETAL):
+            Misc.SendMessage("Auto purple petals", 68)
+            reset_timer("purplePetalCD", 600000)
 
 # ====================================================================
-# GUI / GUMP
+# UI / GUMP
 # ====================================================================
+_dirty_ui = True
+_drag_pause = 0
+FROG_BTN_ID = 91000
+
 def build_gui():
     global _dirty_ui
     Gumps.CloseGump(GUMP_ID)
@@ -561,7 +548,6 @@ def build_gui():
         Gumps.AddButton(gd, swap_x+140, y, 2381, 2381, 60005, 1, 0)  
         y += row_height
 
-
     Gumps.AddLabel(gd, x, y, 1152, "Targets:")
     y += 20
     for m, dist in get_hostiles_sorted(5):
@@ -590,7 +576,7 @@ def build_gui():
         total_h - 30,   
         TOGGLE_MODE_BTN, TOGGLE_MODE_BTN,
         90001, 1, 0
-)
+    )
 
     Gumps.SendGump(GUMP_ID, Player.Serial, 50, 50, gd.gumpDefinition, gd.gumpStrings)
     _dirty_ui = False
@@ -598,9 +584,6 @@ def build_gui():
 # ====================================================================
 # BUTTON HANDLER
 # ====================================================================
-_drag_pause = 0
-FROG_BTN_ID = 91000
-
 def handle_button(buttonid):
     global _auto_bandage, _auto_heal, _auto_cure, _auto_refresh
     global _auto_str, _auto_agi, _auto_orange, _auto_purple
@@ -670,7 +653,7 @@ def handle_button(buttonid):
     elif buttonid == 90001:  
         _compact_mode = not _compact_mode
     elif buttonid == FROG_BTN_ID:  
-        _drag_pause = Misc.Timer()
+        _drag_pause = time.monotonic()
 
     else:
         try:
@@ -679,26 +662,20 @@ def handle_button(buttonid):
                 Player.Attack(mob)
 
                 notoriety_colors = {
-                    1: 99,   
-                    2: 68,   
-                    3: 902,  
-                    4: 43,   
-                    5: 33,   
-                    6: 83    
+                    1: 99,    # Blue (ally)
+                    2: 59,    # Green (innocent)
+                    3: 1109,  # Grey (criminal)
+                    4: 2117,  # Grey (attackable)
+                    5: 37,    # Orange (enemy)
+                    6: 38,    # Red (murderer)
                 }
-                hue = notoriety_colors.get(mob.Notoriety, 68)
 
-                if mob.Name:
-                    Player.HeadMessage(hue, f"Attacking {mob.Name}")
-                else:
-                    Player.HeadMessage(hue, "Attacking target")
-            else:
-                Player.Attack(buttonid)
+                notoriety = mob.Notoriety
+                hue = notoriety_colors.get(notoriety, 1152)
+
+                Player.HeadMessage(hue, "Targeting: {}".format(mob.Name or "Unknown"))
         except:
             pass
-
-
-
 
 # ====================================================================
 # MAIN LOOP
@@ -724,5 +701,3 @@ while _running and Player.Connected:
         Timer.Create("uiUpdate", 3000)
 
     ms_pause(200)
-
-

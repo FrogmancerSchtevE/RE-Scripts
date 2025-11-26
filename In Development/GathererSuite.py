@@ -29,6 +29,8 @@ from System import Int32
 from System.Collections.Generic import List as CList, List
 import time
 from math import sqrt
+import System
+from System.Media import SoundPlayer, SystemSounds
 
 # ===========================================================
 # CONFIGURATION
@@ -1182,9 +1184,21 @@ def find_mining_tool_in_pack():
     return None
 
 def find_fire_beetle():
+    """
+    Prefer the user-configured fire beetle serial.
+    Fallback to nearby fire beetle body IDs.
+    """
+    # 1) Use configured serial first
+    if _mining_firebet:
+        mob = Mobiles.FindBySerial(_mining_firebet)
+        if mob:
+            return mob
+
+    # 2) Fallback to body search nearby
+    beetle_body_ids = [0x031A]  # expand if your shard uses variants
     f = Mobiles.Filter()
     f.RangeMax = 8
-    f.Bodies = List[Int32]([0x031A])
+    f.Bodies   = List[Int32](beetle_body_ids)
     result = Mobiles.ApplyFilter(f)
     return result[0] if result else None
 
@@ -1194,17 +1208,6 @@ def find_giant_beetle():
     f.Bodies = List[Int32]([0x0317])
     result = Mobiles.ApplyFilter(f)
     return result[0] if result else None
-
-def find_nearby_forge():
-    f = Items.Filter()
-    f.Enabled = True
-    f.OnGround = True
-    f.RangeMax = 5
-    f.Graphics = List[Int32]([0x0FB1])
-    items = Items.ApplyFilter(f)
-    if items:
-        return items[0]
-    return None
 
 def find_worn_resource_satchel():
     for layer_name in ["OuterTorso", "MiddleTorso", "InnerTorso",
@@ -1217,47 +1220,142 @@ def find_worn_resource_satchel():
             return item
     return None
 
+def find_nearest_forge_item():
+    """
+    Finds the closest forge item by checking known forge graphics.
+    Works even if statics aren’t returned properly by the shard.
+    """
+    forge_ids = [0x0FB1, 0x197A, 0x197E, 0x1982, 0x1996]  # Common forge types
+
+    f = Items.Filter()
+    f.Enabled = True
+    f.OnGround = True
+    f.RangeMax = 12
+    f.Graphics = List[Int32](forge_ids)
+
+    items = Items.ApplyFilter(f)
+    if not items or len(items) == 0:
+        return None
+
+    # Sort by distance
+    items = sorted(items, key=lambda i: Player.DistanceTo(i))
+    return items[0]
+
+
 def smelt_ore_in_pack():
-    target = None
+    """
+    Smelt ores based on mining storage mode:
 
-    if _mining_smelt_target == "beetle":
-        if _mining_firebet:
-            target = Mobiles.FindBySerial(_mining_firebet)
-        if not target:
-            target = find_fire_beetle()
-    elif _mining_smelt_target == "forge":
-        if _mining_forge:
-            target = Items.FindBySerial(_mining_forge)
-        if not target:
-            target = find_nearby_forge()
-    else:
-        if _mining_firebet:
-            target = Mobiles.FindBySerial(_mining_firebet)
-        if not target:
-            target = find_fire_beetle()
-        if not target:
-            if _mining_forge:
-                target = Items.FindBySerial(_mining_forge)
-            if not target:
-                target = find_nearby_forge()
+      - firebeetle:
+          Smelt on fire beetle only, then store ingots in satchel > beetle.
+      - giantbeetle:
+          If a forge is configured, smelt on it; otherwise store raw ore.
+      - forge:
+          Smelt on configured forge, then store ingots in satchel.
 
-    if not target:
-        Misc.SendMessage("No forge or fire beetle found for smelting.", 33)
-        return
-
+    If no valid smelting target is available, raw ore is just stored.
+    """
     ores = [i for i in Player.Backpack.Contains if i.ItemID in ORE_IDS]
     if not ores:
         return
 
-    Misc.SendMessage("Smelting ores...", 55)
-    for ore in ores:
-        check_runtime(_runtime_mining)
-        Items.UseItem(ore)
-        if Target.WaitForTarget(1500):
-            Target.TargetExecute(target.Serial)
-        Misc.Pause(700)
+    mode = _mining_mode_display.lower()
 
-    deposit_ingots_to_preferred_storage()
+    # -------------------------------------------------------
+    # 1) Fire Beetle + Satchel mode
+    # -------------------------------------------------------
+    if mode == "firebeetle":
+        beetle = find_fire_beetle()
+        if not beetle:
+            Misc.SendMessage("No fire beetle found for smelting; storing raw ore.", 33)
+            deposit_ore_to_storage()
+            return
+
+        Misc.SendMessage("Smelting on fire beetle...", 68)
+        for ore in ores:
+            check_runtime(_runtime_mining)
+            Items.UseItem(ore)
+            if Target.WaitForTarget(2000):
+                Target.TargetExecute(beetle.Serial)
+                Misc.Pause(700)
+
+        deposit_ingots_to_preferred_storage()
+        return
+
+    # -------------------------------------------------------
+    # 2) Giant Beetle + Forge mode
+    #    - if forge configured, smelt there
+    #    - if no forge, just store raw ore
+    # -------------------------------------------------------
+    if mode == "giantbeetle":
+        forge = Items.FindBySerial(_mining_forge) if _mining_forge else None
+        if forge:
+            Misc.SendMessage("Smelting on configured forge...", 68)
+
+            # Move closer if needed, highlight forge while out of range
+            while Player.DistanceTo(forge) > 2:
+                Misc.SendMessage("Move closer to forge!", 33)
+                try:
+                    Items.SetColor(forge.Serial, 1152)
+                except:
+                    pass
+                Misc.Pause(1500)
+            try:
+                Items.SetColor(forge.Serial, 0)
+            except:
+                pass
+
+            for ore in ores:
+                check_runtime(_runtime_mining)
+                Items.UseItem(ore)
+                if Target.WaitForTarget(2000):
+                    Target.TargetExecute(forge.Serial)
+                    Misc.Pause(700)
+
+            deposit_ingots_to_preferred_storage()
+        else:
+            Misc.SendMessage("No forge set; storing raw ores on beetle/satchel.", 33)
+            deposit_ore_to_storage()
+        return
+
+    # -------------------------------------------------------
+    # 3) Forge + Satchel mode
+    # -------------------------------------------------------
+    if mode == "forge":
+        forge = Items.FindBySerial(_mining_forge) if _mining_forge else None
+        if not forge:
+            Misc.SendMessage("Forge mode selected but no forge set; storing raw ore.", 33)
+            deposit_ore_to_storage()
+            return
+
+        Misc.SendMessage("Smelting on configured forge...", 68)
+        while Player.DistanceTo(forge) > 2:
+            Misc.SendMessage("Move closer to forge!", 33)
+            try:
+                Items.SetColor(forge.Serial, 1152)
+            except:
+                pass
+            Misc.Pause(1500)
+        try:
+            Items.SetColor(forge.Serial, 0)
+        except:
+            pass
+
+        for ore in ores:
+            check_runtime(_runtime_mining)
+            Items.UseItem(ore)
+            if Target.WaitForTarget(2000):
+                Target.TargetExecute(forge.Serial)
+                Misc.Pause(700)
+
+        deposit_ingots_to_preferred_storage()
+        return
+
+    # -------------------------------------------------------
+    # Fallback: unknown mode, just store raw ore
+    # -------------------------------------------------------
+    Misc.SendMessage("Unknown mining mode; storing raw ores.", 33)
+    deposit_ore_to_storage()
 
 def deposit_ingots_to_preferred_storage():
     ingots = [i for i in Player.Backpack.Contains if i.ItemID in INGOT_IDS]
@@ -1354,6 +1452,43 @@ def mining_step_recall():
     Misc.SendMessage("Recall Mining mode is currently unavailable.", 33)
     Misc.Pause(1000)
     return
+# ===========================================================
+# Bonus Harvest Gumps Check (ANTIBOT)
+# ===========================================================
+
+# Number Captcha =  "0x968740"
+# Picta Captcha = "0xd0c93672"
+
+_last_gump_alert = 0
+_last_gump_id = None
+
+def check_special_gumps():
+    """
+    Detect special gumps and play an audible alert.
+    Works in IronPython without System.Speech.
+    """
+    global _last_gump_alert, _last_gump_id
+
+    try:
+        gump = Gumps.CurrentGump()
+        if not gump:
+            return
+
+        gid = int(gump.GumpID)
+        target_gumps = [0x968740, 0xD0C93672]
+
+        if gid in target_gumps:
+            now = time.time()
+            if gid != _last_gump_id or (now - _last_gump_alert) > 10:
+                _last_gump_alert = now
+                _last_gump_id = gid
+
+                # --- Play system "Exclamation" sound ---
+                SystemSounds.Exclamation.Play()
+
+                Misc.SendMessage(f"Alert! Gump {hex(gid)} detected.", 68)
+    except Exception as e:
+        Misc.SendMessage(f"Gump check error: {e}", 33)
 
 # ===========================================================
 # GUI RENDERING
@@ -1807,6 +1942,7 @@ load_persisted_settings()
 render_gui()
 
 while _running and Player.Connected:
+    check_special_gumps()
     gd = Gumps.GetGumpData(GUMP_ID)
     current_button = 0
     if gd and gd.buttonid:

@@ -46,9 +46,9 @@ BAR_HUE_BG         = 2999
 HUES_BY_LEVEL      = [0x021, 0x026, 0x02B, 0x030, 0x035, 0x03A]
 
 AUTO_TAG_SUMMONS   = True
-TAG_PREFIX         = "Frogge" ## Change this to whatever you want. within the ""
-USE_TAG_IN_RENAME  = True
-SAFE_TAG_PREFIX    = "Frogge" ## Change this to whatever you want. within the ""
+TAG_PREFIX         = "" ## Change this to whatever you want. within the ""
+USE_TAG_IN_RENAME  = False
+SAFE_TAG_PREFIX    = "" ## Change this to whatever you want. within the ""
 MAX_NAME_LEN       = 16
 GRACE_TICKS        = 6
 OUT_OF_RANGE_TICKS = 3
@@ -76,7 +76,7 @@ CUSTOM_SUMMON_NAMES = {
     "greater air elemental":"GAirElem",
     "greater earth elemental":"GEarthElem",
     "fire elemental":       "Fire",
-    "water elemental":      "Water",
+    "water elemental":      "a fira elemental",
     "air elemental":        "AirElem",
     "earth elemental":      "Earth",
     "daemon":               "Daemon",
