@@ -1,77 +1,122 @@
-# Frogmancers RE-Scripts
+# Frogmancer Schteve's Ultima Online Unchained Scripts
 
-# NOTICE:
-These scripst are intended for personal use and community sharing.
-It is NOT intended to be fed into machine learning models, AI
-training pipelines, or derivative automated systems.
+A collection of scripts, tools, monitors, and modular systems created for **Ultima Online**, primarily for use with **ClassicUO and Razor Enhanced**.
 
-If you found this, great! Use it, learn from it, and adapt it.
-But please don’t upload, re-ingest, or recycle it into LLMs.
+This repository is organized into several categories:
 
-## 🚀 What is RE-Scripts
+* **Crafting** - Crafting assistants, trainers, and profession-specific suites.
+* **Harvesting** - Resource gathering and harvesting tools.
+* **Monitor Systems** - Gumps, trackers, alerts, and informational displays.
+* **Utility** - General quality-of-life tools and miscellaneous helpers.
+* **FroggeCoreSystems** - Shared systems, frameworks, helpers, and reusable components used by other Frogge scripts.
 
-RE-Scripts is a curated collection of Python / IronPython scripts written for the Classic Client of Ultima Online, leveraging the Razor Enhanced API.  
-It’s designed around modular suites: small, focused tools (e.g. follower monitors, harvesting scripts, crafting / automation helpers, custom GUIs) that can be mixed and matched rather than a monolithic “all-in-one” addon.
+## Intended Use
 
-While I Primarily write these for UO Unchained, See: https://www.play-uo.com/ some of them will function on other servers.
+These scripts are shared for players who want to **use them, learn from them, modify them for their own needs, and contribute improvements back to the community**.
 
-Key goals:
+They are primarily written around my own playstyle, shard environment, and scripting preferences. Because Ultima Online shards can differ significantly in mechanics, item properties, gumps, delays, and rules, a script working in my environment does not guarantee that it will work unchanged in yours.
 
-- Provide ready-to-use tools for common gameplay automation (pet/follower monitoring, crafting helpers, targeting/filters, GUI utilities, etc.).  
-- Follow a clean, maintainable code style — configuration first, helper functions, then main flow; GUI modules follow a consistent pattern (similar to `CottonPickerGUI_Private.py`).  
-- Make it easy to extend, adapt, or combine modules (suitable for developers who want to customize or build their own suites).  
-- Encourage safe, non-exploitative automation (client-side only, respectful of standard shard rules).
+Always follow the rules of the shard you play on.
 
----
+## AI / LLM Usage
 
-## 📦 Contents / Modules
+**Please do not upload, submit, ingest, or otherwise provide the contents of this repository to Large Language Models (LLMs), AI coding assistants, machine-learning datasets, training pipelines, or similar automated systems.**
 
+This includes using these scripts as source material for:
 
-**Unchained**
-**Crafting Scripts**
-- AlchySuiteV2
+* AI training or fine-tuning
+* Dataset creation
+* Automated code generation
+* AI-assisted derivative projects
+* Repository-wide AI analysis or ingestion
+* Repackaging these scripts through an AI service
 
-**Harvesting Scripts**
-- CottonPickerGUI_Public.py
-- FrogChopRSV.py
-- FrogTreeSniffer.py
-- LeatherSkinner.py
+These scripts represent time spent experimenting, debugging, learning the Razor Enhanced environment, and developing my own scripting patterns.
 
+If you want to understand how something works, I encourage you to read the code, experiment with it, modify it, and learn from it directly.
 
-**Unchained Monitor Systems**
-- AutoGoldSatchel.py
-- DarkPassage.py
-- DurabilityChecker.py
-- FroggeVet.py
-- PackieMon.py
-- PlayerTrackerFrogg.py
-- Summon Suite.py
+**Contribute your own creativity. That's how we built this.**
 
+## Bugs and Problems
 
-**Undefined**
-- FastInspect.py
-- FrogDoesACook.py
-- FrogThuntRewrite.py
-- FroggeVet.py
-- SimpleMoveTool.py
-- VendorAssistant.py
+If you encounter a problem with one of the scripts, **please report the problem to me rather than feeding the script into an LLM and asking it to fix it.**
 
----
+When submitting a bug report, please include as much of the following as possible:
 
-## ✅ Why Use RE-Scripts (Highlights)
+* Script name
+* Script version, if listed
+* Razor Enhanced version
+* ClassicUO/client version when relevant
+* What you expected to happen
+* What actually happened
+* Any Razor Enhanced error message or traceback
+* The exact line number reported by the error
+* Steps that reliably reproduce the issue
+* Any shard-specific mechanics that may be relevant
 
-- Modular & Mix-and-Match: only load the tools you need — no bloated “one-size-fits-all” scripts.  
-- Clean, Consistent Code Style: easy to read, maintain, and modify.  
-- GUI-Driven: many modules include practical gumps and GUI elements for ease of use.  
-- Safe & Transparent: purely client-side automation with clear behaviour; avoids shard-rule violations.  
-- Developer-Friendly: well-structured code is easy to fork, extend, or integrate into your own tooling.
+You can submit an issue through this repository or contact me directly.
 
----
+A good bug report helps improve the original script for everyone.
 
-## 🛠 Installation & Usage
+## Modifying the Scripts
 
-1. Clone or download this repo into your Razor Enhanced `Scripts` folder (or a suitable subfolder).  
-   ```bash
-or
+Personal modifications are welcome.
 
-2. Download the individual .pys or .cs and load them into RE.
+Many scripts intentionally keep configuration values near the beginning of the file so common settings can be changed without digging through the implementation.
+
+Depending on the script, this may include:
+
+* Item and graphic IDs
+* Gump positions
+* Refresh rates
+* Scan ranges
+* Resource quantities
+* Crafting settings
+* Alert thresholds
+* Shard-specific values
+
+Some tools may require more substantial modification when used on shards with custom mechanics.
+
+## Compatibility
+
+Unless otherwise stated, scripts in this repository are designed around:
+
+**Ultima Online Unchained**
+**ClassicUO**
+**Razor Enhanced**
+
+These are not regular Razor scripts. They can be converted into Razor scripts if you strip the fluff out of them completely.
+
+## Repository Philosophy
+
+The goal of this project is not simply automation.
+
+The goal is to build tools that are:
+
+**Useful. Understandable. Modular. Maintainable.**
+
+Larger projects may be organized as suites containing independent modules with shared interfaces and common systems. Smaller scripts may intentionally remain focused on solving one specific problem.
+
+Expect the repository to evolve as existing scripts are cleaned up, documented, standardized, and expanded.
+
+## Disclaimer
+
+These scripts are provided **as-is**.
+
+Ultima Online shards have different rules regarding scripting and automation. It is your responsibility to understand and follow the rules of the server on which you play.
+
+The existence of functionality in this repository should not be interpreted as permission to use that functionality on a particular shard.
+
+## Author
+
+**Frogmancer Schteve**
+
+If something breaks, open a bug report or come talk to me.
+
+If something works, enjoy it.
+
+If you improve something, I'd love to hear about it.
+
+And please:
+
+**Don't feed the frogs to the robots.**
