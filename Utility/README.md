@@ -88,6 +88,7 @@ GrinchSatchelPointer.py - A tool to help locate the christmas grinch satchels, c
 *FroggVet - A small utility to help manage your pets and their health.*
 SummonerSuite - A utility I use personally to manage and control my summons. I believe its pretty intuitive and easy to use. I am aware that the names glitch out. I'm working on it for the Core System.
 TrapMaster.py - A fun tool to help with a trapper build, Its janky but functional. And it looks cool.
+SkillValuePuller.py - This will run a list of GetSkillValue and print what is successful and what isnt, made it to diagnose fletching on UO Unchained.
 
 ### Equipment & Inventory Tools
 
