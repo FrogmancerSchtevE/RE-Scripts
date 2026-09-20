@@ -177,7 +177,7 @@ StealthDetector.py - A medium weight stealther detector, it works by detecting t
 
 ### Resource & Progress Trackers
 
-*Coming soon.*
+FrogQuestTracker - A rewrite of Mags quest tracker with the frogge flair.
 
 ## Bugs and Contributions
 
