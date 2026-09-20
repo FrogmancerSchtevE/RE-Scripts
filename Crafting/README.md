@@ -67,7 +67,7 @@ Specific scripts and their requirements will be documented here as they are adde
 
 ### Standalone Crafting Tools
 
-*Coming soon.*
+ToolBookRecharger.py - A tool I made to help automate the storage/withdraw of tools from UO Unchained tool book
 
 ## Bugs and Contributions
 
