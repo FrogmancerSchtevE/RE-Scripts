@@ -168,6 +168,8 @@ CircleHudork.py - A circle hud that displays your current health and some select
 ### Mobile & Follower Monitors
 
 PlayerTrackerFrogg.py - A monitor that tracks and lists out players within a 24 tile radius, enumerating them from closest to furthert away.
+FrogTamerSuite.py - A easy to use tamer monitor that has my FroggeVet built into it.
+SummonSuite.py - My personal use assistent for managing summons on UO Unchained
 
 ### Alerts & Detection Systems
 
