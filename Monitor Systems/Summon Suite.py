@@ -1,18 +1,36 @@
-# ==================================
-# === Summoner Suite ===
-# ==================================
-# Author: Frogmancer Schteve
+# ==============================================
+# === Summoner Suite (Razor Enhanced Script) ===
+# ==============================================
+# Copyright (c) Frogmancer Schteve. All rights reserved except as
+# expressly permitted by the repository License.md.
 #
-# NOTICE:
-# This script is intended for personal use and community sharing.
-# It is NOT intended to be fed into machine learning models, AI
-# training pipelines, or derivative automated systems.
+# PERSONAL USE
+# This script is provided for personal, non-commercial use.
+# You may use, study, and modify it for your own use. Redistribution,
+# resale, sublicensing, or incorporation into another distributed
+# project is not permitted without prior permission.
 #
-# If you found this, great! Use it, learn from it, and adapt it.
-# But please don’t upload, re-ingest, or recycle it into LLMs.
+# AI / LLM RESTRICTION
+# Do NOT upload, submit, ingest, or otherwise provide this script,
+# in whole or substantial part, to Large Language Models (LLMs),
+# generative AI systems, AI coding assistants, machine-learning
+# datasets, training/fine-tuning pipelines, retrieval systems, or
+# automated code-generation systems.
 #
-# Contribute your own creativity instead — that’s how we built this.
+# If you encounter a bug or compatibility issue, please submit an
+# issue through the repository or contact Frogmancer Schteve directly
+# rather than submitting the script to an AI service for troubleshooting.
 #
+# SHARD RULES
+# You are responsible for ensuring your use of this script complies
+# with the rules of the Ultima Online shard on which you play.
+#
+# This notice is only a summary. The repository License.md contains
+# the complete terms governing use of this software.
+#
+# Use it. Learn from it. Improve it.
+# Just don't feed the frogs to the robots.
+# ====================================================================
 
 from System.Collections.Generic import List
 try:

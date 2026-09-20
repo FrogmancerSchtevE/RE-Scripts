@@ -2,7 +2,7 @@
 # == Frogge Trap Placer                                    ==
 # ============================================================
 # Copyright (c) Frogmancer Schteve. All rights reserved except as
-# expressly permitted by the repository LICENSE.md.
+# expressly permitted by the repository License.md.
 #
 # PERSONAL USE
 # This script is provided for personal, non-commercial use.
@@ -25,7 +25,7 @@
 # You are responsible for ensuring your use of this script complies
 # with the rules of the Ultima Online shard on which you play.
 #
-# This notice is only a summary. The repository LICENSE.md contains
+# This notice is only a summary. The repository License.md contains
 # the complete terms governing use of this software.
 #
 # Use it. Learn from it. Improve it.
