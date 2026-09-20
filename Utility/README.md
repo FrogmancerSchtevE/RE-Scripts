@@ -80,7 +80,8 @@ When in doubt, test new utilities somewhere safe before trusting them with valua
 
 ## Scripts
 
-GrinchSatchelPointer.py - A tool to help locate the christmas grinch satchels, circa 2025. 
+GrinchSatchelPointer.py - A tool to help locate the christmas grinch satchels, circa 2025.
+FrogHouseDecayLogger.py - A tool to log fairly and worse conditioned houses, it'll output it in .xml format and place it in your CUO map data folder. Reload to refresh your markers)
 
 
 ### General Utilities
