@@ -1,0 +1,15 @@
+{
+  "character_serial": 1739,
+  "format": "frog-crafting-trainer-settings",
+  "identity_source": "player",
+  "targets": {
+    "output_chest": 0,
+    "reagent_shelf": 1140513097,
+    "resource_chest": 1078540478,
+    "resource_shelf": 1140066122,
+    "source_mode": "shelf",
+    "tool_book": 1099149899,
+    "trash_container": 
+  },
+  "version": 1
+}
