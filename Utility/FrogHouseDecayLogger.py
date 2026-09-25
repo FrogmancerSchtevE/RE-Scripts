@@ -57,21 +57,11 @@ XML_FILENAME = "House Decay.xml"
 SCAN_RANGE = 24
 SCAN_INTERVAL_MS = 150
 PROPERTY_WAIT_MS = 350
-
-# A sign is checked once when first seen, then periodically while the
-# script remains running. Restarting the script starts a fresh pass.
 RECHECK_SECONDS = 300.0
 FAILED_RETRY_SECONDS = 2.0
-
-# Verified house-sign graphic from the supplied Enhanced Item Inspector.
-# Add another shard-specific graphic here if one is discovered.
 HOUSE_SIGN_ITEM_IDS = [0x0BD2]
-
-# POINT.png is the smallest supplied CUO map icon.
 MARKER_ICON = "Point"
 SHOW_SAVED_MARKERS_IN_CHAT = True
-
-# Healthier states are inspected but are not kept in the map pack.
 MINIMUM_LOGGED_CONDITION = "Fairly Worn"
 
 
@@ -121,9 +111,6 @@ KNOWN_CONDITIONS = [
     ("condemned", "Condemned"),
 ]
 
-# Staff-provided experimental IDOC bands. The first number is the
-# earliest projected collapse and the second is the latest, measured
-# from the first time this exact sign state is observed.
 IDOC_WINDOWS = {
     "in danger of collapsing": ("36-27h", 27, 36),
     "critically worn": ("36-27h", 27, 36),
