@@ -146,12 +146,7 @@ def backpack_items_recursive():
 def storage_container_serial(target_serial):
     item = valid_item(target_serial)
     if item:
-        try:
-            if bool(item.IsContainer):
-                return int(item.Serial)
-        except:
-            return int(item.Serial)
-        return 0
+        return int(item.Serial)
 
     mobile = valid_mobile(target_serial)
     if mobile:

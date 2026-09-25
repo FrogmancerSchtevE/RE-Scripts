@@ -46,7 +46,7 @@ WEIGHT_RATIO = 0.80
 # CONFIGURATION
 # ====================================================================
 
-VERSION = "1.2"
+VERSION = "1.0"
 
 HATCHET_IDS = [0x0F43, 0x0F44]
 LOG_IDS = [0x1BDD]
@@ -145,12 +145,7 @@ def backpack_items_recursive():
 def storage_container_serial(target_serial):
     item = valid_item(target_serial)
     if item:
-        try:
-            if bool(item.IsContainer):
-                return int(item.Serial)
-        except:
-            return int(item.Serial)
-        return 0
+        return int(item.Serial)
 
     mobile = valid_mobile(target_serial)
     if mobile:
