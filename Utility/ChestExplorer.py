@@ -1,11 +1,12 @@
 # ============================================================
-# Frog Container Explorer 2.0
+# Frog Container Explorer 2.2
 # Razor Enhanced container browser with safe item actions
 # ============================================================
 
 import Gumps
 import Items
 import Misc
+import Mobiles
 import Player
 import Target
 
@@ -23,6 +24,8 @@ GUMP_REFRESH_MS = 100
 BUTTON_DEBOUNCE_MS = 175
 CONTENTS_WAIT_MS = 1800
 PROPERTY_WAIT_MS = 700
+MOVE_WAIT_MS = 2500
+MOVE_POLL_MS = 100
 ROWS_PER_PAGE = 11
 
 FROG_ICON = 0x2130
@@ -60,6 +63,7 @@ BTN_SHOW = 110
 BTN_OPEN = 111
 BTN_TAKE = 112
 BTN_CLOSE = 199
+ROW_SELECT_BUTTON_BASE = 1000
 
 SORT_MODES = ("name", "amount", "item id", "hue")
 
@@ -76,6 +80,7 @@ _items_cache = []
 _visible_items = []
 _selected_serial = 0
 _selected_properties = []
+_row_select_targets = {}
 _current_page = 1
 _filter_text = ""
 _sort_mode_index = 0
@@ -163,6 +168,48 @@ def _selected_item():
     if _selected_serial <= 0:
         return None
     return Items.FindBySerial(_selected_serial)
+
+
+def _player_backpack():
+    """Resolve the backpack across Razor Enhanced's available wrapper paths."""
+    try:
+        backpack = Player.Backpack
+        if backpack is not None:
+            return backpack
+    except:
+        pass
+    try:
+        backpack = Player.GetItemOnLayer("Backpack")
+        if backpack is not None:
+            return backpack
+    except:
+        pass
+    try:
+        player_mobile = Mobiles.FindBySerial(Player.Serial)
+        if player_mobile is not None:
+            return player_mobile.Backpack
+    except:
+        pass
+    return None
+
+
+def _item_parent_serial(item):
+    try:
+        return int(item.Container)
+    except:
+        return 0
+
+
+def _wait_for_item_to_leave(serial, source_serial):
+    """Wait for the drag/drop queue to move or merge the selected stack."""
+    elapsed = 0
+    while elapsed < MOVE_WAIT_MS:
+        current = Items.FindBySerial(serial)
+        if current is None or _item_parent_serial(current) != int(source_serial):
+            return True
+        Misc.Pause(MOVE_POLL_MS)
+        elapsed += MOVE_POLL_MS
+    return False
 
 
 def _current_sort_mode():
@@ -322,7 +369,7 @@ def _target_container():
 
 
 def _use_backpack():
-    backpack = getattr(Player, "Backpack", None)
+    backpack = _player_backpack()
     if backpack is None:
         _set_status("Player backpack is unavailable.", ERROR_HUE)
         return
@@ -373,25 +420,61 @@ def _open_selected():
     _open_container(int(item.Serial), True)
 
 
-def _take_selected():
-    item = _selected_item()
-    backpack = getattr(Player, "Backpack", None)
-    if item is None or backpack is None:
-        _set_status("Select an available item first.", ERROR_HUE)
-        return
-    try:
-        parent_serial = int(item.Container)
-    except:
-        parent_serial = 0
+def _take_item(serial):
+    global _selected_serial
+    global _selected_properties
+
+    item = Items.FindBySerial(serial)
+    backpack = _player_backpack()
+    if item is None:
+        _refresh_items("Item was no longer available; refreshed the container")
+        _set_status("That item is no longer available. Container refreshed.", ERROR_HUE)
+        return False
+    if backpack is None:
+        _refresh_items("Backpack unavailable; refreshed container contents")
+        _set_status(
+            "Razor Enhanced did not expose the player backpack. Container refreshed.",
+            ERROR_HUE
+        )
+        return False
+
+    parent_serial = _item_parent_serial(item)
     if parent_serial == int(backpack.Serial):
+        _refresh_items("Refreshed container contents")
         _set_status("The selected item is already in your backpack.", MUTED_HUE)
-        return
+        return False
+
+    item_name = _clean_text(item.Name) or _hex(serial)
+    amount = max(1, int(getattr(item, "Amount", 0) or 0))
+    source_serial = int(_container_serial)
     try:
-        Items.Move(item.Serial, backpack.Serial, max(1, int(item.Amount)))
-        Misc.Pause(250)
-        _refresh_items("Moved the selected stack to your backpack")
+        Items.Move(item.Serial, backpack.Serial, amount)
+        moved = _wait_for_item_to_leave(item.Serial, source_serial)
     except Exception as error:
+        _refresh_items("Move failed; refreshed container contents")
         _set_status("Move failed: " + _clean_text(error), ERROR_HUE)
+        return False
+
+    if moved:
+        if _selected_serial == int(serial):
+            _selected_serial = 0
+            _selected_properties = []
+        _refresh_items("Moved {0} to your backpack".format(item_name))
+        return True
+
+    _refresh_items("Move was not confirmed; refreshed container contents")
+    _set_status(
+        "Move was not confirmed for {0}. Container refreshed.".format(item_name),
+        ERROR_HUE
+    )
+    return False
+
+
+def _take_selected():
+    if _selected_serial <= 0:
+        _set_status("Select an item with its left arrow, or use its TAKE arrow.", ERROR_HUE)
+        return False
+    return _take_item(_selected_serial)
 
 
 # ============================================================
@@ -407,7 +490,8 @@ def _details_html():
             lines.extend([
                 "Choose TARGET to inspect a visible container.",
                 "Choose BACKPACK to browse your main backpack.",
-                "Item rows select first; destructive movement requires TAKE STACK.",
+                "The left row arrow selects an item for details or OPEN.",
+                "The right TAKE arrow moves that row and refreshes the container.",
             ])
         else:
             lines.extend([
@@ -420,7 +504,8 @@ def _details_html():
                 ),
                 "History depth: {0}".format(len(_container_stack)),
                 "<basefont color={0}>Workflow</basefont>".format(HTML_SECTION_COLOR),
-                "Select a row to inspect its complete property list here.",
+                "Use a row's left arrow to inspect its complete property list here.",
+                "Use its right arrow to take it immediately and refresh the source.",
                 "OPEN enters a selected nested container. BACK returns one level.",
                 "TAKE STACK moves only the selected stack to your backpack.",
             ])
@@ -459,6 +544,8 @@ def _add_button(gump, x, y, button_id, label, hue=TEXT_HUE):
 
 def _draw_gump():
     global _dirty
+    global _row_select_targets
+    _row_select_targets = {}
     Gumps.CloseGump(GUMP_ID)
     gump = Gumps.CreateGump(movable=True)
     Gumps.AddPage(gump, 0)
@@ -484,24 +571,28 @@ def _draw_gump():
     _add_button(gump, 590, 75, BTN_DIRECTION, "ASC" if _sort_ascending else "DESC", TEXT_HUE)
 
     Gumps.AddAlphaRegion(gump, 12, 108, 424, 354)
-    Gumps.AddLabel(gump, 18, 112, TITLE_HUE, "Item")
-    Gumps.AddLabel(gump, 294, 112, TITLE_HUE, "Amount")
-    Gumps.AddLabel(gump, 357, 112, TITLE_HUE, "ID")
+    Gumps.AddLabel(gump, 18, 112, TITLE_HUE, "Item / select")
+    Gumps.AddLabel(gump, 282, 112, TITLE_HUE, "Amount")
+    Gumps.AddLabel(gump, 347, 112, TITLE_HUE, "ID")
+    Gumps.AddLabel(gump, 398, 112, TITLE_HUE, "Take")
 
     start = (_current_page - 1) * ROWS_PER_PAGE
     page_items = _visible_items[start:start + ROWS_PER_PAGE]
     y = 138
-    for record in page_items:
+    for row_index, record in enumerate(page_items):
         selected = record["serial"] == _selected_serial
         if selected:
             Gumps.AddImageTiled(gump, 16, y - 3, 412, 28, ROW_BACKGROUND_ID)
         Gumps.AddItem(gump, 18, y - 7, record["item_id"], record["hue"])
-        Gumps.AddButton(gump, 54, y, 4005, 4007, record["serial"], 1, 0)
+        select_button = ROW_SELECT_BUTTON_BASE + row_index
+        _row_select_targets[select_button] = record["serial"]
+        Gumps.AddButton(gump, 54, y, 4005, 4007, select_button, 1, 0)
         name_hue = SUCCESS_HUE if selected else VALUE_HUE
         marker = "+ " if record["is_container"] else ""
-        Gumps.AddLabel(gump, 81, y, name_hue, marker + _short(record["name"], 31))
-        Gumps.AddLabel(gump, 307, y, TEXT_HUE, str(record["amount"]))
-        Gumps.AddLabel(gump, 357, y, MUTED_HUE, _hex(record["item_id"], 4))
+        Gumps.AddLabel(gump, 81, y, name_hue, marker + _short(record["name"], 27))
+        Gumps.AddLabel(gump, 294, y, TEXT_HUE, str(record["amount"]))
+        Gumps.AddLabel(gump, 347, y, MUTED_HUE, _hex(record["item_id"], 4))
+        Gumps.AddButton(gump, 407, y, 4005, 4007, record["serial"], 1, 0)
         y += 29
 
     total_pages = max(1, (len(_visible_items) + ROWS_PER_PAGE - 1) // ROWS_PER_PAGE)
@@ -580,8 +671,10 @@ def _handle_button(button_id, filter_value):
         _open_selected()
     elif button_id == BTN_TAKE:
         _take_selected()
+    elif button_id in _row_select_targets:
+        _select_item(_row_select_targets[button_id])
     elif button_id > 0:
-        _select_item(button_id)
+        _take_item(button_id)
     _dirty = True
 
 
