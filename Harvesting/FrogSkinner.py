@@ -66,7 +66,6 @@ CORPSE_READY_MS = 650
 HIDE_ID = 0x1079
 LEATHER_ID = 0x1081
 SCISSORS_ID = 0x0F9F
-SKINNED_CORPSE_HUE = 2466
 
 HUES = {
     0x0000: "Regular",
@@ -289,11 +288,6 @@ def finish_target(now):
             Target.Self()
             for serial in target:
                 _carved.add(serial)
-                if Items.FindBySerial(serial):
-                    try:
-                        Items.SetColor(serial, SKINNED_CORPSE_HUE)
-                    except:
-                        pass
             _manual_carve = False
             set_status("Scavenged nearby corpses")
         else:
