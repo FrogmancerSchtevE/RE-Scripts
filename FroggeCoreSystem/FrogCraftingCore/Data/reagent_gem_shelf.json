@@ -1,0 +1,560 @@
+{
+  "format": "frog-reagent-gem-shelf",
+  "version": 1,
+  "name": "Unchained Reagent and Gem Storage Shelf",
+  "item_id": null,
+  "gump_id": 2834126535,
+  "withdraw_amount": 100,
+  "restock_shelf_button": 1790,
+  "restock_requires_target": true,
+  "restock_target_wait_ms": 5000,
+  "restock_target_settle_ms": 250,
+  "lookup_policy": "Ingredient IDs and hues come from ingredient_ids.json when known; exact item_names remain the fallback.",
+  "categories": [
+    {
+      "id": "consumables",
+      "name": "Consumables",
+      "button": 3577,
+      "pages": [
+        { "number": 1, "open_actions": [] },
+        { "number": 2, "open_actions": [1793] }
+      ]
+    },
+    { "id": "armor", "name": "Armor", "button": 3578, "pages": [] },
+    { "id": "weapons", "name": "Weapons", "button": 3579, "pages": [] },
+    { "id": "instruments", "name": "Instruments", "button": 3580, "pages": [] },
+    {
+      "id": "gems",
+      "name": "Gems",
+      "button": 3581,
+      "pages": [
+        { "number": 1, "open_actions": [] }
+      ]
+    },
+    { "id": "other", "name": "Other", "button": 3582, "pages": [] }
+  ],
+  "resources": [
+    {
+      "id": "black_pearl",
+      "name": "Black Pearl",
+      "category": "consumables",
+      "page": 1,
+      "button": 1,
+      "string_id": 123,
+      "item_names": ["Black Pearl"]
+    },
+    {
+      "id": "bloodmoss",
+      "name": "Blood Moss",
+      "category": "consumables",
+      "page": 1,
+      "button": 2,
+      "string_id": 124,
+      "item_names": ["Blood Moss", "Bloodmoss"]
+    },
+    {
+      "id": "mandrake_root",
+      "name": "Mandrake Root",
+      "category": "consumables",
+      "page": 1,
+      "button": 3,
+      "string_id": 125,
+      "item_names": ["Mandrake", "Mandrake Root"]
+    },
+    {
+      "id": "spiders_silk",
+      "name": "Spider's Silk",
+      "category": "consumables",
+      "page": 1,
+      "button": 4,
+      "string_id": 126,
+      "item_names": ["Spider's Silk", "Spiders Silk", "Spiders' Silk"]
+    },
+    {
+      "id": "nightshade",
+      "name": "Nightshade",
+      "category": "consumables",
+      "page": 1,
+      "button": 5,
+      "string_id": 127,
+      "item_names": ["Nightshade"]
+    },
+    {
+      "id": "sulfurous_ash",
+      "name": "Sulfurous Ash",
+      "category": "consumables",
+      "page": 1,
+      "button": 6,
+      "string_id": 128,
+      "item_names": ["Sulfurous Ash", "Sulferous Ash"]
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "category": "consumables",
+      "page": 1,
+      "button": 7,
+      "string_id": 129,
+      "item_names": ["Garlic"]
+    },
+    {
+      "id": "ginseng",
+      "name": "Ginseng",
+      "category": "consumables",
+      "page": 1,
+      "button": 8,
+      "string_id": 130,
+      "item_names": ["Ginseng"]
+    },
+    {
+      "id": "bat_wing",
+      "name": "Bat Wing",
+      "category": "consumables",
+      "page": 1,
+      "button": 9,
+      "string_id": 131,
+      "item_names": ["Bat Wing", "Bat Wings"]
+    },
+    {
+      "id": "grave_dust",
+      "name": "Grave Dust",
+      "category": "consumables",
+      "page": 1,
+      "button": 10,
+      "string_id": 132,
+      "item_names": ["Grave Dust"]
+    },
+    {
+      "id": "daemon_blood",
+      "name": "Daemon Blood",
+      "category": "consumables",
+      "page": 1,
+      "button": 11,
+      "string_id": 133,
+      "item_names": ["Daemon Blood"]
+    },
+    {
+      "id": "nox_crystal",
+      "name": "Nox Crystal",
+      "category": "consumables",
+      "page": 1,
+      "button": 12,
+      "string_id": 134,
+      "item_names": ["Nox Crystal", "Nox Crystals"]
+    },
+    {
+      "id": "pig_iron",
+      "name": "Pig Iron",
+      "category": "consumables",
+      "page": 1,
+      "button": 13,
+      "string_id": 135,
+      "item_names": ["Pig Iron"]
+    },
+    {
+      "id": "eye_of_newt",
+      "name": "Eye of Newt",
+      "category": "consumables",
+      "page": 1,
+      "button": 14,
+      "string_id": 136,
+      "item_names": ["Eye of Newt"]
+    },
+    {
+      "id": "petal_of_the_rose_of_trinsic",
+      "name": "Petal of the Rose of Trinsic",
+      "category": "consumables",
+      "page": 1,
+      "button": 15,
+      "string_id": 137,
+      "item_names": ["Petal of the Rose of Trinsic"]
+    },
+    {
+      "id": "petal_of_the_rose_of_minoc",
+      "name": "Petal of the Rose of Minoc",
+      "category": "consumables",
+      "page": 1,
+      "button": 16,
+      "string_id": 138,
+      "item_names": ["Petal of the Rose of Minoc"]
+    },
+    {
+      "id": "petal_of_the_rose_of_moonglow",
+      "name": "Petal of the Rose of Moonglow",
+      "category": "consumables",
+      "page": 1,
+      "button": 17,
+      "string_id": 139,
+      "item_names": ["Petal of the Rose of Moonglow"]
+    },
+    {
+      "id": "dissidia_petals",
+      "name": "Dissidia Petals",
+      "category": "consumables",
+      "page": 1,
+      "button": 18,
+      "string_id": 140,
+      "item_names": ["Dissidia Petal", "Dissidia Petals"]
+    },
+    {
+      "id": "orange_petals",
+      "name": "Orange Petals",
+      "category": "consumables",
+      "page": 1,
+      "button": 19,
+      "string_id": 141,
+      "item_names": ["Orange Petal", "Orange Petals"]
+    },
+    {
+      "id": "empty_bottle",
+      "name": "Empty Bottle",
+      "category": "consumables",
+      "page": 1,
+      "button": 20,
+      "string_id": 142,
+      "item_names": ["Empty Bottle", "Empty Bottles"]
+    },
+    {
+      "id": "greater_refresh_potion",
+      "name": "Greater Refresh Potion",
+      "category": "consumables",
+      "page": 1,
+      "button": 21,
+      "string_id": 143,
+      "item_names": ["Greater Refresh Potion", "Greater Refresh Potions"]
+    },
+    {
+      "id": "greater_heal_potion",
+      "name": "Greater Heal Potion",
+      "category": "consumables",
+      "page": 1,
+      "button": 22,
+      "string_id": 144,
+      "item_names": ["Greater Heal Potion", "Greater Heal Potions"]
+    },
+    {
+      "id": "greater_cure_potion",
+      "name": "Greater Cure Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 23,
+      "string_id": 145,
+      "item_names": ["Greater Cure Potion", "Greater Cure Potions"]
+    },
+    {
+      "id": "greater_agility_potion",
+      "name": "Greater Agility Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 24,
+      "string_id": 146,
+      "item_names": ["Greater Agility Potion", "Greater Agility Potions"]
+    },
+    {
+      "id": "greater_strength_potion",
+      "name": "Greater Strength Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 25,
+      "string_id": 147,
+      "item_names": ["Greater Strength Potion", "Greater Strength Potions"]
+    },
+    {
+      "id": "greater_poison_potion",
+      "name": "Greater Poison Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 26,
+      "string_id": 148,
+      "item_names": ["Greater Poison Potion", "Greater Poison Potions"]
+    },
+    {
+      "id": "deadly_poison_potion",
+      "name": "Deadly Poison Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 27,
+      "string_id": 149,
+      "item_names": ["Deadly Poison Potion", "Deadly Poison Potions"]
+    },
+    {
+      "id": "explosion_potions",
+      "name": "Explosion Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 28,
+      "string_id": 150,
+      "item_names": ["Explosion Potion", "Explosion Potions"]
+    },
+    {
+      "id": "greater_conflagration_potion",
+      "name": "Greater Conflagration Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 29,
+      "string_id": 151,
+      "item_names": ["Greater Conflagration Potion", "Greater Conflagration Potions"]
+    },
+    {
+      "id": "mana_potion",
+      "name": "Mana Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 30,
+      "string_id": 152,
+      "item_names": ["Mana Potion", "Mana Potions"]
+    },
+    {
+      "id": "total_mana_potion",
+      "name": "Total Mana Potion",
+      "category": "consumables",
+      "page": 2,
+      "button": 31,
+      "string_id": 153,
+      "item_names": ["Total Mana Potion", "Total Mana Potions"]
+    },
+    {
+      "id": "invisibility_potion",
+      "name": "Potion of Invisibility",
+      "category": "consumables",
+      "page": 2,
+      "button": 32,
+      "string_id": 154,
+      "item_names": ["Potion of Invisibility", "Invisibility Potion"]
+    },
+    {
+      "id": "bandage",
+      "name": "Bandage",
+      "category": "consumables",
+      "page": 2,
+      "button": 33,
+      "string_id": 155,
+      "item_names": ["Bandage", "Bandages"]
+    },
+    {
+      "id": "arcane_dust",
+      "name": "Arcane Dust",
+      "category": "consumables",
+      "page": 2,
+      "button": 34,
+      "string_id": 156,
+      "item_names": ["Arcane Dust"]
+    },
+    {
+      "id": "arrow",
+      "name": "Arrow",
+      "category": "consumables",
+      "page": 2,
+      "button": 35,
+      "string_id": 157,
+      "item_names": ["Arrow", "Arrows"]
+    },
+    {
+      "id": "bolt",
+      "name": "Crossbow Bolt",
+      "category": "consumables",
+      "page": 2,
+      "button": 36,
+      "string_id": 158,
+      "item_names": ["Crossbow Bolt", "Crossbow Bolts", "Bolt", "Bolts"]
+    },
+    {
+      "id": "mana_steak",
+      "name": "Mana Steak",
+      "category": "consumables",
+      "page": 2,
+      "button": 37,
+      "string_id": 159,
+      "item_names": ["Mana Steak", "Mana Steaks"]
+    },
+    {
+      "id": "mana_pie",
+      "name": "Mana Pie",
+      "category": "consumables",
+      "page": 2,
+      "button": 38,
+      "string_id": 160,
+      "item_names": ["Mana Pie", "Mana Pies"]
+    },
+    {
+      "id": "mana_mushroom",
+      "name": "Mana Mushroom",
+      "category": "consumables",
+      "page": 2,
+      "button": 39,
+      "string_id": 161,
+      "item_names": ["Mana Mushroom", "Mana Mushrooms"]
+    },
+    {
+      "id": "bola",
+      "name": "Bola",
+      "category": "consumables",
+      "page": 2,
+      "button": 40,
+      "string_id": 162,
+      "item_names": ["Bola", "Bolas"]
+    },
+    {
+      "id": "teleporting_rope",
+      "name": "Teleportation Rope",
+      "category": "consumables",
+      "page": 2,
+      "button": 41,
+      "string_id": 163,
+      "item_names": ["Teleportation Rope", "Teleporting Rope"]
+    },
+    {
+      "id": "amber",
+      "name": "Amber",
+      "category": "gems",
+      "page": 1,
+      "button": 1,
+      "string_id": 51,
+      "item_names": ["Amber"]
+    },
+    {
+      "id": "amethyst",
+      "name": "Amethyst",
+      "category": "gems",
+      "page": 1,
+      "button": 2,
+      "string_id": 52,
+      "item_names": ["Amethyst"]
+    },
+    {
+      "id": "citrine",
+      "name": "Citrine",
+      "category": "gems",
+      "page": 1,
+      "button": 3,
+      "string_id": 53,
+      "item_names": ["Citrine"]
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "category": "gems",
+      "page": 1,
+      "button": 4,
+      "string_id": 54,
+      "item_names": ["Diamond", "Diamonds"]
+    },
+    {
+      "id": "emerald",
+      "name": "Emerald",
+      "category": "gems",
+      "page": 1,
+      "button": 5,
+      "string_id": 55,
+      "item_names": ["Emerald", "Emeralds"]
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "category": "gems",
+      "page": 1,
+      "button": 6,
+      "string_id": 56,
+      "item_names": ["Ruby", "Rubies"]
+    },
+    {
+      "id": "sapphire",
+      "name": "Sapphire",
+      "category": "gems",
+      "page": 1,
+      "button": 7,
+      "string_id": 57,
+      "item_names": ["Sapphire", "Sapphires"]
+    },
+    {
+      "id": "star_sapphires",
+      "name": "Star Sapphire",
+      "category": "gems",
+      "page": 1,
+      "button": 8,
+      "string_id": 58,
+      "item_names": ["Star Sapphire", "Star Sapphires"]
+    },
+    {
+      "id": "tourmaline",
+      "name": "Tourmaline",
+      "category": "gems",
+      "page": 1,
+      "button": 9,
+      "string_id": 59,
+      "item_names": ["Tourmaline", "Tourmalines"]
+    },
+    {
+      "id": "blue_diamond",
+      "name": "Blue Diamond",
+      "category": "gems",
+      "page": 1,
+      "button": 10,
+      "string_id": 60,
+      "item_names": ["Blue Diamond", "Blue Diamonds"]
+    },
+    {
+      "id": "dark_sapphire",
+      "name": "Dark Sapphire",
+      "category": "gems",
+      "page": 1,
+      "button": 11,
+      "string_id": 61,
+      "item_names": ["Dark Sapphire", "Dark Sapphires"]
+    },
+    {
+      "id": "ecru_citrine",
+      "name": "Ecru Citrine",
+      "category": "gems",
+      "page": 1,
+      "button": 12,
+      "string_id": 62,
+      "item_names": ["Ecru Citrine", "Ecru Citrines"]
+    },
+    {
+      "id": "fire_ruby",
+      "name": "Fire Ruby",
+      "category": "gems",
+      "page": 1,
+      "button": 13,
+      "string_id": 63,
+      "item_names": ["Fire Ruby", "Fire Rubies"]
+    },
+    {
+      "id": "perfect_emerald",
+      "name": "Perfect Emerald",
+      "category": "gems",
+      "page": 1,
+      "button": 14,
+      "string_id": 64,
+      "item_names": ["Perfect Emerald", "Perfect Emeralds"]
+    },
+    {
+      "id": "turquoise",
+      "name": "Turquoise",
+      "category": "gems",
+      "page": 1,
+      "button": 15,
+      "string_id": 65,
+      "item_names": ["Turquoise"]
+    },
+    {
+      "id": "white_pearl",
+      "name": "White Pearl",
+      "category": "gems",
+      "page": 1,
+      "button": 16,
+      "string_id": 66,
+      "item_names": ["White Pearl", "White Pearls"]
+    },
+    {
+      "id": "brilliant_amber",
+      "name": "Brilliant Amber",
+      "category": "gems",
+      "page": 1,
+      "button": 17,
+      "string_id": 67,
+      "item_names": ["Brilliant Amber", "Brilliant Ambers"]
+    }
+  ]
+}

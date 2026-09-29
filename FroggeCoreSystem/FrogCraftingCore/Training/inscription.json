@@ -1,0 +1,66 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "inscription",
+  "name": "Inscription Training",
+  "target_skill": 100.0,
+  "resource_choices": {},
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 30.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 30.0,
+      "max_skill": 50.0,
+      "mode": "craft",
+      "label": "1st / 2nd Circle Scrolls",
+      "recipe_ids": ["clumsy", "feeblemind", "agility", "heal"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 50.0,
+      "max_skill": 65.0,
+      "mode": "craft",
+      "label": "3rd Circle Scrolls",
+      "recipe_ids": ["fireball", "teleport"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 65.0,
+      "max_skill": 75.0,
+      "mode": "craft",
+      "label": "4th Circle Scrolls",
+      "recipe_ids": ["recall", "greater_heal", "lightning"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 75.0,
+      "max_skill": 85.0,
+      "mode": "craft",
+      "label": "5th Circle Scrolls",
+      "recipe_ids": ["magic_reflection", "mind_blast"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 85.0,
+      "max_skill": 95.0,
+      "mode": "craft",
+      "label": "6th Circle Scrolls",
+      "recipe_ids": ["mark", "reveal"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 95.0,
+      "max_skill": 100.0,
+      "mode": "craft",
+      "label": "7th / 8th Circle Scrolls",
+      "recipe_ids": ["gate_travel", "flamestrike", "resurrection"],
+      "disposal": { "mode": "save", "button": 77, "target_output": true }
+    }
+  ]
+}

@@ -1,0 +1,1754 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "alchemy",
+  "name": "Alchemy",
+  "skill_name": "Alchemy",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Mortar and Pestle",
+    "item_ids": [
+      3739
+    ],
+    "item_names": [
+      "Mortar and Pestle",
+      "Mortar & Pestle",
+      "Alchemy Tool"
+    ],
+    "toolbook_category_button": 7,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [
+        3739
+      ],
+      "output_names": [
+        "Mortar and Pestle",
+        "Mortar & Pestle",
+        "Alchemy Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [],
+  "categories": [
+    {
+      "id": "healing_and_curative",
+      "name": "Healing and Curative",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "refresh",
+          "name": "Refresh",
+          "button": 2,
+          "enabled": true,
+          "source_row": 250,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Refresh Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_refreshment",
+          "name": "Greater Refreshment",
+          "button": 9,
+          "enabled": true,
+          "source_row": 251,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "black_pearl",
+              "amount": 5
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Refreshment Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lesser_heal",
+          "name": "Lesser Heal",
+          "button": 16,
+          "enabled": true,
+          "source_row": 252,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lesser Heal Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heal",
+          "name": "Heal",
+          "button": 23,
+          "enabled": true,
+          "source_row": 253,
+          "min_skill": 15.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ginseng",
+              "amount": 3
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heal Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_heal",
+          "name": "Greater Heal",
+          "button": 30,
+          "enabled": true,
+          "source_row": 254,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ginseng",
+              "amount": 7
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Heal Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lesser_cure",
+          "name": "Lesser Cure",
+          "button": 37,
+          "enabled": true,
+          "source_row": 255,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lesser Cure Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cure",
+          "name": "Cure",
+          "button": 44,
+          "enabled": true,
+          "source_row": 256,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "garlic",
+              "amount": 3
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cure Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_cure",
+          "name": "Greater Cure",
+          "button": 51,
+          "enabled": true,
+          "source_row": 257,
+          "min_skill": 65.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "garlic",
+              "amount": 6
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Cure Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "full_potion_kegs",
+      "name": "Full Potion Kegs",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "full_total_refresh_potion_keg",
+          "name": "Full Total Refresh Potion Keg",
+          "button": 2,
+          "enabled": true,
+          "source_row": 258,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "black_pearl",
+              "amount": 500
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Total Refresh Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_heal_potion_keg",
+          "name": "Full Greater Heal Potion Keg",
+          "button": 9,
+          "enabled": true,
+          "source_row": 259,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "ginseng",
+              "amount": 700
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Heal Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_cure_potion_keg",
+          "name": "Full Greater Cure Potion Keg",
+          "button": 16,
+          "enabled": true,
+          "source_row": 260,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "garlic",
+              "amount": 600
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Cure Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_agility_potion_keg",
+          "name": "Full Greater Agility Potion Keg",
+          "button": 23,
+          "enabled": true,
+          "source_row": 261,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "bloodmoss",
+              "amount": 300
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Agility Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_strength_potion_keg",
+          "name": "Full Greater Strength Potion Keg",
+          "button": 30,
+          "enabled": true,
+          "source_row": 262,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "mandrake_root",
+              "amount": 500
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Strength Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_total_mana_potion_keg",
+          "name": "Full Total Mana Potion Keg",
+          "button": 37,
+          "enabled": true,
+          "source_row": 263,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "eye_of_newt",
+              "amount": 800
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Total Mana Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_poison_potion_keg",
+          "name": "Full Greater Poison Potion Keg",
+          "button": 44,
+          "enabled": true,
+          "source_row": 264,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 400
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Poison Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_deadly_poison_potion_keg",
+          "name": "Full Deadly Poison Potion Keg",
+          "button": 51,
+          "enabled": true,
+          "source_row": 265,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 800
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 18
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Deadly Poison Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "full_greater_explosion_potion_keg",
+          "name": "Full Greater Explosion Potion Keg",
+          "button": 58,
+          "enabled": true,
+          "source_row": 266,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1000
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 100
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 19
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Greater Explosion Potion Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "enhancement",
+      "name": "Enhancement",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "agility",
+          "name": "Agility",
+          "button": 2,
+          "enabled": true,
+          "source_row": 267,
+          "min_skill": 15.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Agility Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_agility",
+          "name": "Greater Agility",
+          "button": 9,
+          "enabled": true,
+          "source_row": 268,
+          "min_skill": 35.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "bloodmoss",
+              "amount": 3
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Agility Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "night_sight",
+          "name": "Night Sight",
+          "button": 16,
+          "enabled": true,
+          "source_row": 269,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Night Sight Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "strength",
+          "name": "Strength",
+          "button": 23,
+          "enabled": true,
+          "source_row": 270,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "mandrake_root",
+              "amount": 2
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Strength Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_strength",
+          "name": "Greater Strength",
+          "button": 30,
+          "enabled": true,
+          "source_row": 271,
+          "min_skill": 45.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "mandrake_root",
+              "amount": 5
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Strength Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "misc_potions",
+      "name": "Misc Potions",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "mana_potion",
+          "name": "Mana Potion",
+          "button": 2,
+          "enabled": true,
+          "source_row": 272,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eye_of_newt",
+              "amount": 4
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Mana Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "total_mana_potion",
+          "name": "Total Mana Potion",
+          "button": 9,
+          "enabled": true,
+          "source_row": 273,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eye_of_newt",
+              "amount": 8
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Total Mana Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "invisibility",
+          "name": "Invisibility",
+          "button": 16,
+          "enabled": true,
+          "source_row": 274,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "bloodmoss",
+              "amount": 4
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Invisibility Potion",
+            "Potion of Invisibility"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "elixir_of_rebirth",
+          "name": "Elixir of Rebirth",
+          "button": 23,
+          "enabled": true,
+          "source_row": 275,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "wyrms_heart",
+              "amount": 3
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Elixir of Rebirth"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "smoke_bomb",
+          "name": "Smoke Bomb",
+          "button": 30,
+          "enabled": true,
+          "source_row": 276,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eggs",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Smoke Bomb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "toxic",
+      "name": "Toxic",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "lesser_poison",
+          "name": "Lesser Poison",
+          "button": 2,
+          "enabled": true,
+          "source_row": 277,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lesser Poison Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "poison",
+          "name": "Poison",
+          "button": 9,
+          "enabled": true,
+          "source_row": 278,
+          "min_skill": 15.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 2
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Poison Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_poison",
+          "name": "Greater Poison",
+          "button": 16,
+          "enabled": true,
+          "source_row": 279,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 4
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Poison Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "deadly_poison",
+          "name": "Deadly Poison",
+          "button": 23,
+          "enabled": true,
+          "source_row": 280,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 8
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Deadly Poison Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "explosive",
+      "name": "Explosive",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "lesser_explosion",
+          "name": "Lesser Explosion",
+          "button": 2,
+          "enabled": true,
+          "source_row": 281,
+          "min_skill": 5.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 3
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lesser Explosion Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "explosion",
+          "name": "Explosion",
+          "button": 9,
+          "enabled": true,
+          "source_row": 282,
+          "min_skill": 35.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 5
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Explosion Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_explosion",
+          "name": "Greater Explosion",
+          "button": 16,
+          "enabled": true,
+          "source_row": 283,
+          "min_skill": 65.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 10
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Explosion Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "conflagration",
+          "name": "Conflagration",
+          "button": 23,
+          "enabled": true,
+          "source_row": 284,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 5
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Conflagration Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_conflagration",
+          "name": "Greater Conflagration",
+          "button": 30,
+          "enabled": true,
+          "source_row": 285,
+          "min_skill": 70.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 10
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Conflagration Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "confusion_blast",
+          "name": "Confusion Blast",
+          "button": 37,
+          "enabled": true,
+          "source_row": 286,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 5
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Confusion Blast Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_confusion_blast",
+          "name": "Greater Confusion Blast",
+          "button": 44,
+          "enabled": true,
+          "source_row": 287,
+          "min_skill": 70.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "nightshade",
+              "amount": 10
+            },
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Confusion Blast Potion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "mastercrafting",
+      "name": "Mastercrafting",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "fortune_mastery_orb",
+          "name": "Fortune Mastery Orb",
+          "button": 2,
+          "enabled": true,
+          "source_row": 288,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "fortune_coin",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fortune Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "shadow_mastery_orb",
+          "name": "Shadow Mastery Orb",
+          "button": 9,
+          "enabled": true,
+          "source_row": 289,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "void_orb",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shadow Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lyrical_mastery_orb",
+          "name": "Lyrical Mastery Orb",
+          "button": 16,
+          "enabled": true,
+          "source_row": 290,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "fey_wings",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lyrical Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "holy_mastery_orb",
+          "name": "Holy Mastery Orb",
+          "button": 23,
+          "enabled": true,
+          "source_row": 291,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "white_pearl",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Holy Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "blood_mastery_orb",
+          "name": "Blood Mastery Orb",
+          "button": 30,
+          "enabled": true,
+          "source_row": 292,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "goblin_blood",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Blood Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "doom_mastery_orb",
+          "name": "Doom Mastery Orb",
+          "button": 37,
+          "enabled": true,
+          "source_row": 293,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "undying_flesh",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Doom Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "poison_mastery_orb",
+          "name": "Poison Mastery Orb",
+          "button": 44,
+          "enabled": true,
+          "source_row": 294,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "slith_tongue",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Poison Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "aero_mastery_orb",
+          "name": "Aero Mastery Orb",
+          "button": 51,
+          "enabled": true,
+          "source_row": 295,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "elven_fletching",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Aero Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fira_mastery_orb",
+          "name": "Fira Mastery Orb",
+          "button": 58,
+          "enabled": true,
+          "source_row": 296,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "fire_ruby",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fira Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "earth_mastery_orb",
+          "name": "Earth Mastery Orb",
+          "button": 65,
+          "enabled": true,
+          "source_row": 297,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "lodestone",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Earth Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "druidic_mastery_orb",
+          "name": "Druidic Mastery Orb",
+          "button": 72,
+          "enabled": true,
+          "source_row": 298,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "seed_of_renewel",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Druidic Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "death_mastery_orb",
+          "name": "Death Mastery Orb",
+          "button": 79,
+          "enabled": true,
+          "source_row": 299,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "daemon_claw",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Death Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "artisan_mastery_orb",
+          "name": "Artisan Mastery Orb",
+          "button": 86,
+          "enabled": true,
+          "source_row": 300,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "relic_fragment",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Artisan Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "beserk_mastery_orb",
+          "name": "Beserk Mastery Orb",
+          "button": 93,
+          "enabled": true,
+          "source_row": 301,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "raptor_tooth",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Beserk Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "energy_mastery_orb",
+          "name": "Energy Mastery Orb",
+          "button": 100,
+          "enabled": true,
+          "source_row": 302,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "crystal_shards",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Energy Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "oblivion_mastery_orb",
+          "name": "Oblivion Mastery Orb",
+          "button": 107,
+          "enabled": true,
+          "source_row": 303,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "crystalline_blackrock",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Oblivion Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bulwark_mastery_orb",
+          "name": "Bulwark Mastery Orb",
+          "button": 114,
+          "enabled": true,
+          "source_row": 304,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "orb_fragment",
+              "amount": 10
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 100
+            },
+            {
+              "resource_key": "powdered_iron",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bulwark Mastery Orb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    }
+  ]
+}

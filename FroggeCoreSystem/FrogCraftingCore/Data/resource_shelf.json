@@ -1,0 +1,2472 @@
+{
+  "format": "frog-resource-shelf",
+  "version": 1,
+  "name": "Unchained Resource Shelf",
+  "item_id": 29180,
+  "gump_id": 111922706,
+  "withdraw_amount": 100,
+  "withdraw_amount_button": 119,
+  "add_button": 120,
+  "fill_from_backpack_button": 121,
+  "previous_page_button": 122,
+  "next_page_button": 123,
+  "lookup_policy": "Ingredient IDs and hues are merged from ingredient_ids.json; exact item_names remain the fallback.",
+  "resources": [
+    {
+      "id": "iron_ingot",
+      "name": "Iron Ingot",
+      "shelf_page": 1,
+      "shelf_button": 1,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Ingot",
+        "Ingots",
+        "Iron Ingot",
+        "Iron Ingots"
+      ]
+    },
+    {
+      "id": "dull_ingot",
+      "name": "Dull Ingot",
+      "shelf_page": 1,
+      "shelf_button": 2,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Dull Ingot",
+        "Dull Copper Ingot",
+        "Dull Copper Ingots"
+      ]
+    },
+    {
+      "id": "shadow_ingot",
+      "name": "Shadow Ingot",
+      "shelf_page": 1,
+      "shelf_button": 3,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Shadow Ingot",
+        "Shadow Iron Ingot",
+        "Shadow Iron Ingots"
+      ]
+    },
+    {
+      "id": "copper_ingot",
+      "name": "Copper Ingot",
+      "shelf_page": 1,
+      "shelf_button": 4,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Copper Ingot",
+        "Copper Ingots"
+      ]
+    },
+    {
+      "id": "bronze_ingot",
+      "name": "Bronze Ingot",
+      "shelf_page": 1,
+      "shelf_button": 5,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bronze Ingot",
+        "Bronze Ingots"
+      ]
+    },
+    {
+      "id": "gold_ingot",
+      "name": "Gold Ingot",
+      "shelf_page": 1,
+      "shelf_button": 6,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Gold Ingot",
+        "Gold Ingots"
+      ]
+    },
+    {
+      "id": "agapite_ingot",
+      "name": "Agapite Ingot",
+      "shelf_page": 1,
+      "shelf_button": 7,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Agapite Ingot",
+        "Agapite Ingots"
+      ]
+    },
+    {
+      "id": "verite_ingot",
+      "name": "Verite Ingot",
+      "shelf_page": 1,
+      "shelf_button": 8,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Verite Ingot",
+        "Verite Ingots"
+      ]
+    },
+    {
+      "id": "valorite_ingot",
+      "name": "Valorite Ingot",
+      "shelf_page": 1,
+      "shelf_button": 9,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Valorite Ingot",
+        "Valorite Ingots"
+      ]
+    },
+    {
+      "id": "azurite_ingot",
+      "name": "Azurite Ingot",
+      "shelf_page": 1,
+      "shelf_button": 10,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Azurite Ingot",
+        "Azurite Ingots"
+      ]
+    },
+    {
+      "id": "plain_board",
+      "name": "Plain Board",
+      "shelf_page": 1,
+      "shelf_button": 11,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Log",
+        "Logs",
+        "Board",
+        "Boards",
+        "Plain Board",
+        "Plain Boards",
+        "Boards or Logs"
+      ]
+    },
+    {
+      "id": "oak_board",
+      "name": "Oak Board",
+      "shelf_page": 1,
+      "shelf_button": 12,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Oak Log",
+        "Oak Logs",
+        "Oak Board",
+        "Oak Boards"
+      ]
+    },
+    {
+      "id": "ash_board",
+      "name": "Ash Board",
+      "shelf_page": 1,
+      "shelf_button": 13,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Ash Log",
+        "Ash Logs",
+        "Ash Board",
+        "Ash Boards"
+      ]
+    },
+    {
+      "id": "yew_board",
+      "name": "Yew Board",
+      "shelf_page": 1,
+      "shelf_button": 14,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Yew Log",
+        "Yew Logs",
+        "Yew Board",
+        "Yew Boards"
+      ]
+    },
+    {
+      "id": "heartwood_board",
+      "name": "Heartwood Board",
+      "shelf_page": 1,
+      "shelf_button": 15,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Heartwood Log",
+        "Heartwood Logs",
+        "Heartwood Board",
+        "Heartwood Boards"
+      ]
+    },
+    {
+      "id": "bloodwood_board",
+      "name": "Bloodwood Board",
+      "shelf_page": 1,
+      "shelf_button": 16,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bloodwood Log",
+        "Bloodwood Logs",
+        "Bloodwood Board",
+        "Bloodwood Boards"
+      ]
+    },
+    {
+      "id": "frostwood_board",
+      "name": "Frostwood Board",
+      "shelf_page": 1,
+      "shelf_button": 17,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Frostwood Log",
+        "Frostwood Logs",
+        "Frostwood Board",
+        "Frostwood Boards"
+      ]
+    },
+    {
+      "id": "normal_leather",
+      "name": "Normal Leather",
+      "shelf_page": 1,
+      "shelf_button": 18,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Hide",
+        "Hides",
+        "Leather",
+        "Normal Leather"
+      ]
+    },
+    {
+      "id": "spined_leather",
+      "name": "Spined",
+      "shelf_page": 1,
+      "shelf_button": 19,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Spined",
+        "Spined Hide",
+        "Spined Hides",
+        "Spined Leather"
+      ]
+    },
+    {
+      "id": "horned_leather",
+      "name": "Horned",
+      "shelf_page": 1,
+      "shelf_button": 20,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Horned",
+        "Horned Hide",
+        "Horned Hides",
+        "Horned Leather"
+      ]
+    },
+    {
+      "id": "barbed_leather",
+      "name": "Barbed Leather",
+      "shelf_page": 2,
+      "shelf_button": 21,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Barbed Hide",
+        "Barbed Hides",
+        "Barbed Leather"
+      ]
+    },
+    {
+      "id": "scaled_leather",
+      "name": "Scaled Leather",
+      "shelf_page": 2,
+      "shelf_button": 22,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Scaled Hide",
+        "Scaled Hides",
+        "Scaled Leather"
+      ]
+    },
+    {
+      "id": "blue_diamond",
+      "name": "Blue Diamond",
+      "shelf_page": 2,
+      "shelf_button": 23,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Blue Diamond"
+      ]
+    },
+    {
+      "id": "dark_sapphire",
+      "name": "Dark Sapphire",
+      "shelf_page": 2,
+      "shelf_button": 24,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Dark Sapphire"
+      ]
+    },
+    {
+      "id": "ecru_citrine",
+      "name": "Ecru Citrine",
+      "shelf_page": 2,
+      "shelf_button": 25,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Ecru Citrine"
+      ]
+    },
+    {
+      "id": "fire_ruby",
+      "name": "Fire Ruby",
+      "shelf_page": 2,
+      "shelf_button": 26,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Fire Ruby"
+      ]
+    },
+    {
+      "id": "emerald",
+      "name": "Emerald",
+      "shelf_page": 2,
+      "shelf_button": 27,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Emerald"
+      ]
+    },
+    {
+      "id": "turquoise",
+      "name": "Turquoise",
+      "shelf_page": 2,
+      "shelf_button": 28,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Turquoise"
+      ]
+    },
+    {
+      "id": "white_pearl",
+      "name": "White Pearl",
+      "shelf_page": 2,
+      "shelf_button": 29,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "White Pearl"
+      ]
+    },
+    {
+      "id": "amber",
+      "name": "Amber",
+      "shelf_page": 2,
+      "shelf_button": 30,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Amber"
+      ]
+    },
+    {
+      "id": "kindling",
+      "name": "Kindling",
+      "shelf_page": 2,
+      "shelf_button": 31,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Kindling"
+      ]
+    },
+    {
+      "id": "shaft",
+      "name": "Shaft",
+      "shelf_page": 2,
+      "shelf_button": 32,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Shaft",
+        "shafts"
+      ]
+    },
+    {
+      "id": "feather",
+      "name": "Feather",
+      "shelf_page": 2,
+      "shelf_button": 33,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Feather",
+        "Feathers"
+      ]
+    },
+    {
+      "id": "arrow",
+      "name": "Arrow",
+      "shelf_page": 2,
+      "shelf_button": 34,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Arrow"
+      ]
+    },
+    {
+      "id": "bolt",
+      "name": "Bolt",
+      "shelf_page": 2,
+      "shelf_button": 35,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bolt"
+      ]
+    },
+    {
+      "id": "bandage",
+      "name": "Bandage",
+      "shelf_page": 2,
+      "shelf_button": 36,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bandage"
+      ]
+    },
+    {
+      "id": "bola",
+      "name": "Bola",
+      "shelf_page": 2,
+      "shelf_button": 37,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bola"
+      ]
+    },
+    {
+      "id": "bola_ball",
+      "name": "Bola Ball",
+      "shelf_page": 2,
+      "shelf_button": 38,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bola Ball",
+        "Bola Balls"
+      ]
+    },
+    {
+      "id": "arcane_dust",
+      "name": "Arcane Dust",
+      "shelf_page": 2,
+      "shelf_button": 39,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Arcane Dust"
+      ]
+    },
+    {
+      "id": "blank_scroll",
+      "name": "Blank Scroll",
+      "shelf_page": 2,
+      "shelf_button": 40,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Blank Scroll",
+        "Blank Scrolls"
+      ]
+    },
+    {
+      "id": "red_scale",
+      "name": "Red Scale",
+      "shelf_page": 3,
+      "shelf_button": 41,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Red Scale",
+        "Red Scales"
+      ]
+    },
+    {
+      "id": "yellow_scale",
+      "name": "Yellow Scale",
+      "shelf_page": 3,
+      "shelf_button": 42,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Yellow Scale",
+        "Yellow Scales"
+      ]
+    },
+    {
+      "id": "black_scale",
+      "name": "Black Scale",
+      "shelf_page": 3,
+      "shelf_button": 43,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Black Scale",
+        "Black Scales"
+      ]
+    },
+    {
+      "id": "green_scale",
+      "name": "Green Scale",
+      "shelf_page": 3,
+      "shelf_button": 44,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Green Scale",
+        "Green Scales"
+      ]
+    },
+    {
+      "id": "white_scale",
+      "name": "White Scale",
+      "shelf_page": 3,
+      "shelf_button": 45,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "White Scale",
+        "White Scales"
+      ]
+    },
+    {
+      "id": "blue_scale",
+      "name": "Blue Scale",
+      "shelf_page": 3,
+      "shelf_button": 46,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Blue Scale",
+        "Blue Scales"
+      ]
+    },
+    {
+      "id": "bone",
+      "name": "Bone",
+      "shelf_page": 3,
+      "shelf_button": 47,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bone",
+        "Bones"
+      ]
+    },
+    {
+      "id": "cloth",
+      "name": "Cloth",
+      "shelf_page": 3,
+      "shelf_button": 48,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Cloth"
+      ]
+    },
+    {
+      "id": "potion_keg",
+      "name": "Potion Keg",
+      "shelf_page": 3,
+      "shelf_button": 49,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Potion Keg"
+      ]
+    },
+    {
+      "id": "empty_bottle",
+      "name": "Empty Bottle",
+      "shelf_page": 3,
+      "shelf_button": 50,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Empty Bottle",
+        "Empty Bottles"
+      ]
+    },
+    {
+      "id": "plain_rock",
+      "name": "Plain Rock",
+      "shelf_page": 3,
+      "shelf_button": 51,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Plain Rock"
+      ]
+    },
+    {
+      "id": "dull_rock",
+      "name": "Dull Rock",
+      "shelf_page": 3,
+      "shelf_button": 52,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Dull Rock"
+      ]
+    },
+    {
+      "id": "shadow_rock",
+      "name": "Shadow Rock",
+      "shelf_page": 3,
+      "shelf_button": 53,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Shadow Rock"
+      ]
+    },
+    {
+      "id": "copper_rock",
+      "name": "Copper Rock",
+      "shelf_page": 3,
+      "shelf_button": 54,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Copper Rock"
+      ]
+    },
+    {
+      "id": "bronze_rock",
+      "name": "Bronze Rock",
+      "shelf_page": 3,
+      "shelf_button": 55,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bronze Rock"
+      ]
+    },
+    {
+      "id": "gold_rock",
+      "name": "Gold Rock",
+      "shelf_page": 3,
+      "shelf_button": 56,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Gold Rock"
+      ]
+    },
+    {
+      "id": "agapite_rock",
+      "name": "Agapite Rock",
+      "shelf_page": 3,
+      "shelf_button": 57,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Agapite Rock"
+      ]
+    },
+    {
+      "id": "verite_rock",
+      "name": "Verite Rock",
+      "shelf_page": 3,
+      "shelf_button": 58,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Verite Rock"
+      ]
+    },
+    {
+      "id": "valorite_rock",
+      "name": "Valorite Rock",
+      "shelf_page": 3,
+      "shelf_button": 59,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Valorite Rock"
+      ]
+    },
+    {
+      "id": "black_pearl",
+      "name": "Black Pearl",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Black Pearl"
+      ]
+    },
+    {
+      "id": "bloodmoss",
+      "name": "Bloodmoss",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Bloodmoss",
+        "Blood Moss"
+      ]
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Garlic"
+      ]
+    },
+    {
+      "id": "ginseng",
+      "name": "Ginseng",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Ginseng"
+      ]
+    },
+    {
+      "id": "mandrake_root",
+      "name": "Mandrake Root",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Mandrake",
+        "Mandrake Root"
+      ]
+    },
+    {
+      "id": "eye_of_newt",
+      "name": "Eye of Newt",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Eye of Newt"
+      ]
+    },
+    {
+      "id": "nightshade",
+      "name": "Nightshade",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Nightshade"
+      ]
+    },
+    {
+      "id": "sulfurous_ash",
+      "name": "Sulfurous Ash",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Sulfurous ash",
+        "Sulfuroush Ash",
+        "1 Sulferous Ash"
+      ]
+    },
+    {
+      "id": "spiders_silk",
+      "name": "Spiders Silk",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Spiders Silk",
+        "Spiders' Silk"
+      ]
+    },
+    {
+      "id": "wyrms_heart",
+      "name": "Wyrms Heart",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Wyrms Heart"
+      ]
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Eggs"
+      ]
+    },
+    {
+      "id": "parasitic_plant",
+      "name": "Parasitic Plant",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Parasitic Plant"
+      ]
+    },
+    {
+      "id": "vial_of_tincture",
+      "name": "Vial of Tincture",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Vial of Tincture",
+        "a Vial of Tincture"
+      ]
+    },
+    {
+      "id": "wool",
+      "name": "Wool",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Wool"
+      ]
+    },
+    {
+      "id": "tribal_berries",
+      "name": "Tribal Berries",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Tribal Berry",
+        "Tribal Berries"
+      ]
+    },
+    {
+      "id": "book_of_lost_knowledge",
+      "name": "Book of Lost Knowledge",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Book of Lost Knowledge"
+      ]
+    },
+    {
+      "id": "arcane_wool",
+      "name": "Arcane Wool",
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null,
+      "item_names": [
+        "Arcane Wool"
+      ]
+    },
+    {
+      "id": "agapite_shards",
+      "name": "Agapite Shards",
+      "item_names": [
+        "Agapite Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "amethyst",
+      "name": "amethyst",
+      "item_names": [
+        "amethyst"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "item_names": [
+        "Apple",
+        "Apples"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "ash_fletching",
+      "name": "Ash Fletching",
+      "item_names": [
+        "Ash Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "ash_wooden_shaft",
+      "name": "Ash Wooden Shaft",
+      "item_names": [
+        "Ash Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "axles",
+      "name": "Axles",
+      "item_names": [
+        "Axles"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "axles_with_gears",
+      "name": "Axles with gears",
+      "item_names": [
+        "Axles with gears"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "bacon",
+      "name": "Bacon",
+      "item_names": [
+        "Bacon"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "item_names": [
+        "Banana"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "barbed_wool",
+      "name": "Barbed Wool",
+      "item_names": [
+        "Barbed Wool"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "barrel_hoops",
+      "name": "Barrel Hoops",
+      "item_names": [
+        "Barrel Hoops"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "barrel_lids",
+      "name": "Barrel Lids",
+      "item_names": [
+        "Barrel Lids"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "barrel_staves",
+      "name": "Barrel Staves",
+      "item_names": [
+        "Barrel Staves"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "bloodwood_fletching",
+      "name": "Bloodwood Fletching",
+      "item_names": [
+        "Bloodwood Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "bloodwood_wooden_shaft",
+      "name": "Bloodwood Wooden Shaft",
+      "item_names": [
+        "Bloodwood Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "bowl_of_peas",
+      "name": "Bowl of Peas",
+      "item_names": [
+        "Bowl of Peas"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "brilliant_amber",
+      "name": "Brilliant Amber",
+      "item_names": [
+        "Brilliant Amber"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "bronze_shards",
+      "name": "Bronze Shards",
+      "item_names": [
+        "Bronze Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "cake_mix",
+      "name": "Cake Mix",
+      "item_names": [
+        "Cake Mix"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "item_names": [
+        "Carrot",
+        "Carrots"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "chaga_mushrooms",
+      "name": "Chaga Mushrooms",
+      "item_names": [
+        "Chaga Mushrooms"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "cheese",
+      "name": "Cheese",
+      "item_names": [
+        "Cheese"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "chicken_leg",
+      "name": "Chicken Leg",
+      "item_names": [
+        "Chicken Leg"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "chicken_legs",
+      "name": "Chicken Legs",
+      "item_names": [
+        "Chicken Legs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "citrine",
+      "name": "citrine",
+      "item_names": [
+        "citrine"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "clock_frames",
+      "name": "Clock Frames",
+      "item_names": [
+        "Clock Frames"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "clock_parts",
+      "name": "Clock Parts",
+      "item_names": [
+        "Clock Parts"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "cocoa_butter",
+      "name": "Cocoa Butter",
+      "item_names": [
+        "Cocoa Butter"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "coconuts",
+      "name": "Coconuts",
+      "item_names": [
+        "Coconuts"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "cooked_ribs",
+      "name": "Cooked Ribs",
+      "item_names": [
+        "Cooked Ribs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "cookie_mix",
+      "name": "Cookie Mix",
+      "item_names": [
+        "Cookie Mix"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "copper_shards",
+      "name": "Copper Shards",
+      "item_names": [
+        "Copper Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "copper_wire",
+      "name": "Copper Wire",
+      "item_names": [
+        "Copper Wire"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "crab",
+      "name": "Crab",
+      "item_names": [
+        "Crab",
+        "Crabs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "crystal_shards",
+      "name": "Crystal Shards",
+      "item_names": [
+        "Crystal Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "crystalline_blackrock",
+      "name": "Crystalline Blackrock",
+      "item_names": [
+        "Crystalline Blackrock"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "daemon_claw",
+      "name": "Daemon Claw",
+      "item_names": [
+        "Daemon Claw"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "dbanana",
+      "name": "DBanana",
+      "item_names": [
+        "DBanana"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "deadly_poison_potion",
+      "name": "Deadly Poison Potion",
+      "item_names": [
+        "Deadly Poison Potion"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "delicate_scales",
+      "name": "Delicate Scales",
+      "item_names": [
+        "Delicate Scales"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "item_names": [
+        "Diamond"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "dough",
+      "name": "Dough",
+      "item_names": [
+        "Dough"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "dragon_blood",
+      "name": "Dragon Blood",
+      "item_names": [
+        "Dragon Blood"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "dried_herbs",
+      "name": "Dried Herbs",
+      "item_names": [
+        "Dried Herbs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "dull_copper_shards",
+      "name": "Dull Copper Shards",
+      "item_names": [
+        "Dull Copper Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "elixir_of_rebirth",
+      "name": "Elixir of Rebirth",
+      "item_names": [
+        "Elixir of Rebirth"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "elven_fletching",
+      "name": "Elven Fletching",
+      "item_names": [
+        "Elven Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "enchanted_essence",
+      "name": "Enchanted Essence",
+      "item_names": [
+        "Enchanted Essence"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "explosion_potions",
+      "name": "Explosion Potions",
+      "item_names": [
+        "Explosion Potions"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "faery_dust",
+      "name": "Faery Dust",
+      "item_names": [
+        "Faery Dust"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "fairy_salmon_steak",
+      "name": "Fairy Salmon Steak",
+      "item_names": [
+        "Fairy Salmon Steak"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "fey_wings",
+      "name": "Fey Wings",
+      "item_names": [
+        "Fey Wings"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "fish_steak",
+      "name": "Fish Steak",
+      "item_names": [
+        "Fish Steak"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "flour",
+      "name": "Flour",
+      "item_names": [
+        "Flour"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "fortune_coin",
+      "name": "Fortune Coin",
+      "item_names": [
+        "Fortune Coin"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "frostwood_fletching",
+      "name": "Frostwood Fletching",
+      "item_names": [
+        "Frostwood Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "frostwood_wooden_shaft",
+      "name": "Frostwood Wooden Shaft",
+      "item_names": [
+        "Frostwood Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "gate_scrolls",
+      "name": "Gate Scrolls",
+      "item_names": [
+        "Gate Scrolls"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "gears",
+      "name": "Gears",
+      "item_names": [
+        "Gears"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "goblin_blood",
+      "name": "Goblin Blood",
+      "item_names": [
+        "Goblin Blood"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "goby_fish_bowl",
+      "name": "Goby Fish Bowl",
+      "item_names": [
+        "Goby Fish Bowl"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "gold_shards",
+      "name": "Gold Shards",
+      "item_names": [
+        "Gold Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "gold_wire",
+      "name": "Gold Wire",
+      "item_names": [
+        "Gold Wire"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "grapes",
+      "name": "Grapes",
+      "item_names": [
+        "Grapes"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "greater_explosion_potion",
+      "name": "Greater Explosion Potion",
+      "item_names": [
+        "Greater Explosion Potion",
+        "Greater Explosion Potions"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "greater_heal_potion",
+      "name": "Greater Heal Potion",
+      "item_names": [
+        "Greater Heal Potion"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "greater_poison_potion",
+      "name": "Greater Poison Potion",
+      "item_names": [
+        "Greater Poison Potion"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "ham",
+      "name": "Ham",
+      "item_names": [
+        "Ham"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "heartwood_fletching",
+      "name": "Heartwood Fletching",
+      "item_names": [
+        "Heartwood Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "heartwood_wooden_shaft",
+      "name": "Heartwood Wooden Shaft",
+      "item_names": [
+        "Heartwood Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "hinges",
+      "name": "Hinges",
+      "item_names": [
+        "Hinges"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "honey",
+      "name": "Honey",
+      "item_names": [
+        "Honey"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "horned_wool",
+      "name": "Horned Wool",
+      "item_names": [
+        "Horned Wool"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "jar_of_honey",
+      "name": "Jar of Honey",
+      "item_names": [
+        "Jar of Honey"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "lamb_leg",
+      "name": "Lamb Leg",
+      "item_names": [
+        "Lamb Leg"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "lava_serpent_crust",
+      "name": "Lava Serpent Crust",
+      "item_names": [
+        "Lava Serpent Crust"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "lettuce",
+      "name": "Lettuce",
+      "item_names": [
+        "Lettuce"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "lime",
+      "name": "Lime",
+      "item_names": [
+        "Lime"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "lodestone",
+      "name": "Lodestone",
+      "item_names": [
+        "Lodestone",
+        "Lodestones"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "mento_seasoning",
+      "name": "Mento Seasoning",
+      "item_names": [
+        "Mento Seasoning"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "oak_fletching",
+      "name": "Oak Fletching",
+      "item_names": [
+        "Oak Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "oak_wooden_shaft",
+      "name": "Oak Wooden Shaft",
+      "item_names": [
+        "Oak Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "octopus_ink",
+      "name": "Octopus Ink",
+      "item_names": [
+        "Octopus Ink"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "onion",
+      "name": "Onion",
+      "item_names": [
+        "Onion",
+        "Onions"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "orb_fragment",
+      "name": "Orb Fragment",
+      "item_names": [
+        "Orb Fragment"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "page_of_insight",
+      "name": "Page of Insight",
+      "item_names": [
+        "Page of Insight"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "peach",
+      "name": "Peach",
+      "item_names": [
+        "Peach",
+        "Peaches"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "pear",
+      "name": "Pear",
+      "item_names": [
+        "Pear",
+        "Pears"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "perfect_emerald",
+      "name": "Perfect Emerald",
+      "item_names": [
+        "Perfect Emerald"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "poison_potion",
+      "name": "Poison Potion",
+      "item_names": [
+        "Poison Potion"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "powdered_iron",
+      "name": "Powdered Iron",
+      "item_names": [
+        "Powdered Iron"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "pumpkin",
+      "name": "Pumpkin",
+      "item_names": [
+        "Pumpkin"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raptor_tooth",
+      "name": "Raptor Tooth",
+      "item_names": [
+        "Raptor Teeth",
+        "Raptor Tooth"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_birds",
+      "name": "Raw Birds",
+      "item_names": [
+        "Raw Birds"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_chicken_legs",
+      "name": "Raw Chicken Legs",
+      "item_names": [
+        "Raw Chicken Legs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_fish_steaks",
+      "name": "Raw Fish Steaks",
+      "item_names": [
+        "Raw Fish Steaks"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_legs_of_lamb",
+      "name": "Raw Legs of Lamb",
+      "item_names": [
+        "Raw Legs of Lamb"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_meat",
+      "name": "Raw Meat",
+      "item_names": [
+        "Raw Meat"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "raw_ribs",
+      "name": "Raw Ribs",
+      "item_names": [
+        "Raw Ribs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "recall_scrolls",
+      "name": "Recall Scrolls",
+      "item_names": [
+        "Recall Scrolls"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "relic_fragment",
+      "name": "Relic Fragment",
+      "item_names": [
+        "Relic Fragment"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "ribs",
+      "name": "Ribs",
+      "item_names": [
+        "Ribs"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby",
+      "item_names": [
+        "Ruby"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sack_of_flour",
+      "name": "Sack of Flour",
+      "item_names": [
+        "Sack of Flour"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sack_of_sugar",
+      "name": "Sack of Sugar",
+      "item_names": [
+        "Sack of Sugar"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "samuels_secret_sauce",
+      "name": "Samuels Secret Sauce",
+      "item_names": [
+        "Samuels Secret Sauce"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sapphire",
+      "name": "Sapphire",
+      "item_names": [
+        "Sapphire"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sausage",
+      "name": "Sausage",
+      "item_names": [
+        "Sausage"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sea_weed",
+      "name": "Sea Weed",
+      "item_names": [
+        "Sea Weed"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "seed_of_renewel",
+      "name": "Seed of Renewel",
+      "item_names": [
+        "Seed of Renewel"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sextant_parts",
+      "name": "Sextant Parts",
+      "item_names": [
+        "Sextant Parts"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "shadow_iron_shards",
+      "name": "Shadow Iron Shards",
+      "item_names": [
+        "Shadow Iron Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "silver_wire",
+      "name": "Silver Wire",
+      "item_names": [
+        "Silver Wire"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "slith_tongue",
+      "name": "Slith Tongue",
+      "item_names": [
+        "Slith Tongue"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "softened_reeds",
+      "name": "Softened Reeds",
+      "item_names": [
+        "Softened Reeds"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "spined_wool",
+      "name": "Spined Wool",
+      "item_names": [
+        "Spined Wool"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "squash",
+      "name": "Squash",
+      "item_names": [
+        "Squash"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "star_sapphires",
+      "name": "Star Sapphires",
+      "item_names": [
+        "Star Sapphires"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sweet_cocoa_butter",
+      "name": "Sweet Cocoa Butter",
+      "item_names": [
+        "Sweet Cocoa Butter"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "sweet_dough",
+      "name": "Sweet Dough",
+      "item_names": [
+        "Sweet Dough"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "torso",
+      "name": "Torso",
+      "item_names": [
+        "Torso"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "tourmaline",
+      "name": "Tourmaline",
+      "item_names": [
+        "Tourmaline"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "unbaked_apple_pie",
+      "name": "Unbaked Apple Pie",
+      "item_names": [
+        "Unbaked Apple Pie"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "unbaked_peach_cobbler",
+      "name": "Unbaked Peach Cobbler",
+      "item_names": [
+        "Unbaked Peach Cobbler"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "unbaked_pumpkin_pie",
+      "name": "Unbaked Pumpkin Pie",
+      "item_names": [
+        "Unbaked Pumpkin Pie"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "unbaked_quiche",
+      "name": "Unbaked Quiche",
+      "item_names": [
+        "Unbaked Quiche"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "uncooked_cheese_pizza",
+      "name": "Uncooked Cheese Pizza",
+      "item_names": [
+        "Uncooked Cheese Pizza"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "uncooked_fruit_pie",
+      "name": "Uncooked Fruit Pie",
+      "item_names": [
+        "Uncooked Fruit Pie"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "uncooked_meat_pie",
+      "name": "Uncooked Meat Pie",
+      "item_names": [
+        "Uncooked Meat Pie"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "uncooked_sausage_pizza",
+      "name": "Uncooked Sausage Pizza",
+      "item_names": [
+        "Uncooked Sausage Pizza"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "undying_flesh",
+      "name": "Undying Flesh",
+      "item_names": [
+        "Undying Flesh"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "unmarked_runes",
+      "name": "Unmarked Runes",
+      "item_names": [
+        "Unmarked Runes"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "valorite_shards",
+      "name": "Valorite Shards",
+      "item_names": [
+        "Valorite Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "verite_shards",
+      "name": "Verite Shards",
+      "item_names": [
+        "Verite Shards"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "vial_of_vitriol",
+      "name": "Vial of Vitriol",
+      "item_names": [
+        "Vial of Vitriol"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "void_orb",
+      "name": "Void Orb",
+      "item_names": [
+        "Void Orb"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "item_names": [
+        "Water"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "wheat",
+      "name": "Wheat",
+      "item_names": [
+        "Wheat"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "yew_fletching",
+      "name": "Yew Fletching",
+      "item_names": [
+        "Yew Fletching"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "id": "yew_wooden_shaft",
+      "name": "Yew Wooden Shaft",
+      "item_names": [
+        "Yew Wooden Shaft"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    }
+  ],
+  "identity_file": "ingredient_ids.json"
+}

@@ -1,0 +1,11 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "cooking",
+  "name": "Cooking Training",
+  "target_skill": 120.0,
+  "informational": true,
+  "message": "You can train this fast by bulk cooking fishsteaks! Best of luck",
+  "resource_choices": {},
+  "stages": []
+}

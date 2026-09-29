@@ -1,0 +1,120 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "blacksmithy",
+  "name": "Blacksmithy Training",
+  "target_skill": 120.0,
+  "resource_choices": {
+    "metal": "iron"
+  },
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 50.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": {
+        "mode": "none",
+        "button": null,
+        "target_output": false
+      }
+    },
+    {
+      "min_skill": 50.0,
+      "max_skill": 55.0,
+      "mode": "craft",
+      "label": "Maces",
+      "recipe_ids": [ "mace" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 55.0,
+      "max_skill": 60.0,
+      "mode": "craft",
+      "label": "Mauls",
+      "recipe_ids": [ "maul" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 60.0,
+      "max_skill": 70.0,
+      "mode": "craft",
+      "label": "Cutlasses / Katanas",
+      "recipe_ids": [ "cutlass", "katana" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 70.0,
+      "max_skill": 95.0,
+      "mode": "craft",
+      "label": "Short Spears",
+      "recipe_ids": [ "short_spear" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 95.0,
+      "max_skill": 105.0,
+      "mode": "craft",
+      "label": "Plate Gorgets",
+      "recipe_ids": [ "platemail_gorget" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 105.0,
+      "max_skill": 108.0,
+      "mode": "craft",
+      "label": "Platemail Gloves",
+      "recipe_ids": [ "platemail_gloves" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 108.0,
+      "max_skill": 115.0,
+      "mode": "craft",
+      "label": "Platemail Arms",
+      "recipe_ids": [ "platemail_arms" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    },
+    {
+      "min_skill": 115.0,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Platemail Tunics",
+      "recipe_ids": [ "platemail_tunic" ],
+      "disposal": {
+        "mode": "smelt",
+        "button": 14,
+        "target_output": true
+      }
+    }
+  ]
+}

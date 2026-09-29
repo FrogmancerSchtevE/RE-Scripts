@@ -1,0 +1,76 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "carpentry",
+  "name": "Carpentry Training",
+  "target_skill": 120.0,
+  "resource_choices": {
+    "wood": "plain"
+  },
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 30.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 30.0,
+      "max_skill": 47.3,
+      "mode": "craft",
+      "label": "Medium / Small Crates",
+      "recipe_ids": ["medium_crate", "small_crate"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 47.3,
+      "max_skill": 70.0,
+      "mode": "craft",
+      "label": "Ballot Boxes",
+      "recipe_ids": ["ballot_box"],
+      "disposal": { "mode": "trash", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 70.0,
+      "max_skill": 73.6,
+      "mode": "craft",
+      "label": "Clubs",
+      "recipe_ids": ["club"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 73.6,
+      "max_skill": 78.9,
+      "mode": "craft",
+      "label": "Quarter Staffs",
+      "recipe_ids": ["quarter_staff"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 78.9,
+      "max_skill": 100.0,
+      "mode": "craft",
+      "label": "Gnarled Staffs",
+      "recipe_ids": ["gnarled_staff"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 100.0,
+      "max_skill": 107.5,
+      "mode": "craft",
+      "label": "Plain Wooden Chests",
+      "recipe_ids": ["plain_wooden_chest", "finished_wooden_chest", "gilded_wooden_chest"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 107.5,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Abbatoirs",
+      "recipe_ids": ["abbatoir"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    }
+  ]
+}

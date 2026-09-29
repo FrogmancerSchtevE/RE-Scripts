@@ -1,0 +1,68 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "tinkering",
+  "name": "Tinkering Training",
+  "target_skill": 120.0,
+  "resource_choices": {
+    "metal": "iron"
+  },
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 27.5,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 27.5,
+      "max_skill": 45.0,
+      "mode": "craft",
+      "label": "Scissors",
+      "recipe_ids": ["scissors"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 45.0,
+      "max_skill": 60.2,
+      "mode": "craft",
+      "label": "Hammers",
+      "recipe_ids": ["hammer"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 60.2,
+      "max_skill": 92.5,
+      "mode": "craft",
+      "label": "Lockpicks",
+      "recipe_ids": ["lockpick"],
+      "disposal": { "mode": "save", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 92.5,
+      "max_skill": 95.0,
+      "mode": "craft",
+      "label": "Candelabras",
+      "recipe_ids": ["candelabra"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 95.0,
+      "max_skill": 105.0,
+      "mode": "craft",
+      "label": "Scales / Spyglasses",
+      "recipe_ids": ["scales", "spyglass"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false  }
+    },
+    {
+      "min_skill": 105.0,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Braziers",
+      "recipe_ids": ["brazier"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    }
+  ]
+}

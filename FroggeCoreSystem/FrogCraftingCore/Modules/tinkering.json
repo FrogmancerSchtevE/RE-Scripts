@@ -1,0 +1,4395 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "tinkering",
+  "name": "Tinkering",
+  "skill_name": "Tinkering",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Tinker's Tools",
+    "item_ids": [
+      7864
+    ],
+    "item_names": [
+      "Tinker's Tools",
+      "Tinker Tools",
+      "Tinkering Tool"
+    ],
+    "toolbook_category_button": 10,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [
+        7864
+      ],
+      "output_names": [
+        "Tinker's Tools",
+        "Tinker Tools",
+        "Tinkering Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [
+    {
+      "id": "metal",
+      "name": "Metal",
+      "default": "iron",
+      "options": [
+        {
+          "id": "iron",
+          "name": "Iron",
+          "resource_key": "iron_ingot",
+          "craft_actions": [
+            7,
+            6
+          ]
+        },
+        {
+          "id": "dull_copper",
+          "name": "Dull Copper",
+          "resource_key": "dull_ingot",
+          "craft_actions": [
+            7,
+            13
+          ]
+        },
+        {
+          "id": "shadow_iron",
+          "name": "Shadow Iron",
+          "resource_key": "shadow_ingot",
+          "craft_actions": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "copper",
+          "name": "Copper",
+          "resource_key": "copper_ingot",
+          "craft_actions": [
+            7,
+            27
+          ]
+        },
+        {
+          "id": "bronze",
+          "name": "Bronze",
+          "resource_key": "bronze_ingot",
+          "craft_actions": [
+            7,
+            34
+          ]
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "resource_key": "gold_ingot",
+          "craft_actions": [
+            7,
+            41
+          ]
+        },
+        {
+          "id": "agapite",
+          "name": "Agapite",
+          "resource_key": "agapite_ingot",
+          "craft_actions": [
+            7,
+            48
+          ]
+        },
+        {
+          "id": "verite",
+          "name": "Verite",
+          "resource_key": "verite_ingot",
+          "craft_actions": [
+            7,
+            55
+          ]
+        },
+        {
+          "id": "valorite",
+          "name": "Valorite",
+          "resource_key": "valorite_ingot",
+          "craft_actions": [
+            7,
+            62
+          ]
+        },
+        {
+          "id": "azurite",
+          "name": "Azurite",
+          "resource_key": "azurite_ingot",
+          "craft_actions": [
+            7,
+            69
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "iron_ingot",
+          "craft_actions": [
+            7,
+            72
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "mastercrafting",
+      "name": "Mastercrafting",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "golem_assembly_kit",
+          "name": "Golem Assembly Kit",
+          "button": 2,
+          "enabled": true,
+          "source_row": 91,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "valorite_ingot",
+              "amount": 100
+            },
+            {
+              "resource_key": "gears",
+              "amount": 35
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Golem Assembly Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "golem_repair_kit",
+          "name": "Golem repair Kit",
+          "button": 9,
+          "enabled": true,
+          "source_row": 92,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            },
+            {
+              "resource_key": "gears",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Golem repair Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "golem_transmog_core",
+          "name": "Golem Transmog Core",
+          "button": 16,
+          "enabled": true,
+          "source_row": 93,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 50
+            },
+            {
+              "resource_key": "gears",
+              "amount": 25
+            },
+            {
+              "resource_key": "elixir_of_rebirth",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Golem Transmog Core"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dark_passage_lantern",
+          "name": "Dark Passage Lantern",
+          "button": 23,
+          "enabled": true,
+          "source_row": 94,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 100
+            },
+            {
+              "resource_key": "gears",
+              "amount": 15
+            },
+            {
+              "resource_key": "undying_flesh",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dark Passage Lantern"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bola",
+          "name": "Bola",
+          "button": 30,
+          "enabled": true,
+          "source_row": 95,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "bola_ball",
+              "amount": 4
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bola"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "traps",
+      "name": "Traps",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "trap_detonator",
+          "name": "Trap Detonator",
+          "button": 2,
+          "enabled": true,
+          "source_row": 96,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            },
+            {
+              "resource_key": "gears",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Trap Detonator"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "explosive_trap",
+          "name": "Explosive Trap",
+          "button": 9,
+          "enabled": true,
+          "source_row": 97,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "greater_explosion_potion",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Explosive Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "toxic_trap",
+          "name": "Toxic Trap",
+          "button": 16,
+          "enabled": true,
+          "source_row": 98,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "greater_poison_potion",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Toxic Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mortal_strike_trap",
+          "name": "Mortal Strike Trap",
+          "button": 23,
+          "enabled": true,
+          "source_row": 99,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "greater_heal_potion",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Mortal Strike Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "gruesome_trap",
+          "name": "Gruesome Trap",
+          "button": 30,
+          "enabled": true,
+          "source_row": 100,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "torso",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Gruesome Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bear_trap",
+          "name": "Bear Trap",
+          "button": 37,
+          "enabled": true,
+          "source_row": 101,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "gears",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bear Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "repair_kits",
+      "name": "Repair Kits",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "ship_repair_tool",
+          "name": "Ship Repair Tool",
+          "button": 2,
+          "enabled": true,
+          "source_row": 102,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 50
+            },
+            {
+              "choice_group": "metal",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ship Repair Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tailoring_repair_kit",
+          "name": "Tailoring Repair Kit",
+          "button": 9,
+          "enabled": true,
+          "source_row": 103,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tailoring Repair Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "blacksmith_repair_kit",
+          "name": "Blacksmith Repair Kit",
+          "button": 16,
+          "enabled": true,
+          "source_row": 104,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Blacksmith Repair Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "carpentry_repair_kit",
+          "name": "Carpentry Repair Kit",
+          "button": 23,
+          "enabled": true,
+          "source_row": 105,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 15
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Carpentry Repair Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "inscription_repair_kit",
+          "name": "Inscription Repair Kit",
+          "button": 30,
+          "enabled": true,
+          "source_row": 106,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Inscription",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 15
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Inscription Repair Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "ship_material",
+      "name": "Ship Material",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "explosive_barrel",
+          "name": "Explosive Barrel",
+          "button": 2,
+          "enabled": true,
+          "source_row": 107,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 50
+            },
+            {
+              "resource_key": "greater_explosion_potion",
+              "amount": 15
+            },
+            {
+              "resource_key": "lava_serpent_crust",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Explosive Barrel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "standard_cannonballs_25",
+          "name": "Standard Cannonballs (25)",
+          "button": 9,
+          "enabled": true,
+          "source_row": 108,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 125
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Standard Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "explosive_cannonballs_25",
+          "name": "Explosive Cannonballs (25)",
+          "button": 16,
+          "enabled": true,
+          "source_row": 109,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 125
+            },
+            {
+              "resource_key": "explosion_potions",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Explosive Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_explosive_cannonballs_25",
+          "name": "Greater Explosive Cannonballs (25)",
+          "button": 23,
+          "enabled": true,
+          "source_row": 110,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "gold_ingot",
+              "amount": 125
+            },
+            {
+              "resource_key": "greater_explosion_potion",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Explosive Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "poison_cannonballs_25",
+          "name": "Poison Cannonballs (25)",
+          "button": 30,
+          "enabled": true,
+          "source_row": 111,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Poisoning",
+              "min_skill": 25.0
+            },
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 35.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 125
+            },
+            {
+              "resource_key": "poison_potion",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Poison Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_poison_cannonballs_25",
+          "name": "Greater Poison Cannonballs (25)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 112,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 60.0
+            },
+            {
+              "skill_name": "Poisoning",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "shadow_ingot",
+              "amount": 125
+            },
+            {
+              "resource_key": "poison_potion",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Greater Poison Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "deadly_poison_cannonballs_25",
+          "name": "Deadly Poison Cannonballs (25)",
+          "button": 44,
+          "enabled": true,
+          "source_row": 113,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Alchemy",
+              "min_skill": 75.0
+            },
+            {
+              "skill_name": "Poisoning",
+              "min_skill": 90.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "gold_ingot",
+              "amount": 125
+            },
+            {
+              "resource_key": "deadly_poison_potion",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Deadly Poison Cannonballs (25)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "salvager_s_hook",
+          "name": "Salvager's Hook",
+          "button": 51,
+          "enabled": true,
+          "source_row": 114,
+          "min_skill": 65.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "copper_wire",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Salvager's Hook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "deep_sea_hook",
+          "name": "Deep-Sea Hook",
+          "button": 58,
+          "enabled": true,
+          "source_row": 115,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            },
+            {
+              "resource_key": "silver_wire",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Deep-Sea Hook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "serpent_hook",
+          "name": "Serpent Hook",
+          "button": 65,
+          "enabled": true,
+          "source_row": 116,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            },
+            {
+              "resource_key": "silver_wire",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Serpent Hook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "trawling_hook",
+          "name": "Trawling Hook",
+          "button": 72,
+          "enabled": true,
+          "source_row": 117,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            },
+            {
+              "resource_key": "gold_wire",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Trawling Hook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "jewelry",
+      "name": "Jewelry",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "ring",
+          "name": "Ring",
+          "button": 2,
+          "enabled": true,
+          "source_row": 118,
+          "min_skill": 65.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bracelet",
+          "name": "Bracelet",
+          "button": 9,
+          "enabled": true,
+          "source_row": 119,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_ring",
+          "name": "Star Sapphire Ring",
+          "button": 16,
+          "enabled": true,
+          "source_row": 120,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_necklace_silver",
+          "name": "Star Sapphire Necklace (silver)",
+          "button": 23,
+          "enabled": true,
+          "source_row": 121,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Necklace (silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_necklace_jewelled",
+          "name": "Star Sapphire Necklace (jewelled)",
+          "button": 30,
+          "enabled": true,
+          "source_row": 122,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Necklace (jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_earrings",
+          "name": "Star Sapphire Earrings",
+          "button": 37,
+          "enabled": true,
+          "source_row": 123,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_necklace_golden",
+          "name": "Star Sapphire Necklace (Golden)",
+          "button": 44,
+          "enabled": true,
+          "source_row": 124,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "star_sapphire_bracelet",
+          "name": "Star Sapphire Bracelet",
+          "button": 51,
+          "enabled": true,
+          "source_row": 125,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "star_sapphires",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Star Sapphire Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_ring",
+          "name": "Emerald Ring",
+          "button": 58,
+          "enabled": true,
+          "source_row": 126,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_necklace_silver",
+          "name": "Emerald Necklace (Silver)",
+          "button": 65,
+          "enabled": true,
+          "source_row": 127,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_necklace_jewelled",
+          "name": "Emerald Necklace (Jewelled)",
+          "button": 72,
+          "enabled": true,
+          "source_row": 128,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_earrings",
+          "name": "Emerald Earrings",
+          "button": 79,
+          "enabled": true,
+          "source_row": 129,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_necklace_holden",
+          "name": "Emerald Necklace (holden)",
+          "button": 86,
+          "enabled": true,
+          "source_row": 130,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Necklace (holden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "emerald_bracelet",
+          "name": "Emerald Bracelet",
+          "button": 93,
+          "enabled": true,
+          "source_row": 131,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Emerald Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_ring",
+          "name": "Sapphire Ring",
+          "button": 100,
+          "enabled": true,
+          "source_row": 132,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_necklace_silver",
+          "name": "Sapphire Necklace (Silver",
+          "button": 107,
+          "enabled": true,
+          "source_row": 133,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Necklace (Silver"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_necklace_jewelled",
+          "name": "Sapphire Necklace (Jewelled)",
+          "button": 114,
+          "enabled": true,
+          "source_row": 134,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_earrings",
+          "name": "Sapphire Earrings",
+          "button": 121,
+          "enabled": true,
+          "source_row": 135,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_necklace_golden",
+          "name": "Sapphire Necklace (Golden)",
+          "button": 128,
+          "enabled": true,
+          "source_row": 136,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "sapphire_bracelet",
+          "name": "Sapphire Bracelet",
+          "button": 135,
+          "enabled": true,
+          "source_row": 137,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sapphire Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_ring",
+          "name": "Ruby Ring",
+          "button": 142,
+          "enabled": true,
+          "source_row": 138,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_necklace_silver",
+          "name": "Ruby Necklace (Silver)",
+          "button": 149,
+          "enabled": true,
+          "source_row": 139,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_necklace_jewelled",
+          "name": "Ruby Necklace (Jewelled)",
+          "button": 156,
+          "enabled": true,
+          "source_row": 140,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_earrings",
+          "name": "Ruby Earrings",
+          "button": 163,
+          "enabled": true,
+          "source_row": 141,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_necklace_golden",
+          "name": "Ruby Necklace (Golden)",
+          "button": 170,
+          "enabled": true,
+          "source_row": 142,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ruby_bracelet",
+          "name": "Ruby Bracelet",
+          "button": 177,
+          "enabled": true,
+          "source_row": 143,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ruby Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_ring",
+          "name": "Citrine Ring",
+          "button": 184,
+          "enabled": true,
+          "source_row": 144,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_necklace_silver",
+          "name": "Citrine Necklace (Silver)",
+          "button": 191,
+          "enabled": true,
+          "source_row": 145,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_necklace_jewelled",
+          "name": "Citrine Necklace (Jewelled)",
+          "button": 198,
+          "enabled": true,
+          "source_row": 146,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_earrings",
+          "name": "Citrine Earrings",
+          "button": 205,
+          "enabled": true,
+          "source_row": 147,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_necklace_golden",
+          "name": "Citrine Necklace (Golden)",
+          "button": 212,
+          "enabled": true,
+          "source_row": 148,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "citrine_bracelet",
+          "name": "Citrine Bracelet",
+          "button": 219,
+          "enabled": true,
+          "source_row": 149,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Citrine Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_ring",
+          "name": "Amethyst Ring",
+          "button": 226,
+          "enabled": true,
+          "source_row": 150,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_necklace_silver",
+          "name": "Amethyst Necklace (Silver)",
+          "button": 233,
+          "enabled": true,
+          "source_row": 151,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_necklace_jewelled",
+          "name": "Amethyst Necklace (Jewelled)",
+          "button": 240,
+          "enabled": true,
+          "source_row": 152,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_earrings",
+          "name": "Amethyst Earrings",
+          "button": 247,
+          "enabled": true,
+          "source_row": 153,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_necklace_golden",
+          "name": "Amethyst Necklace (Golden)",
+          "button": 254,
+          "enabled": true,
+          "source_row": 154,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amethyst_bracelet",
+          "name": "Amethyst Bracelet",
+          "button": 261,
+          "enabled": true,
+          "source_row": 155,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amethyst Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_ring",
+          "name": "Tourmaline Ring",
+          "button": 268,
+          "enabled": true,
+          "source_row": 156,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_necklace_silver",
+          "name": "Tourmaline Necklace (Silver",
+          "button": 275,
+          "enabled": true,
+          "source_row": 157,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Necklace (Silver"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_necklace_jewelled",
+          "name": "Tourmaline Necklace (Jewelled)",
+          "button": 282,
+          "enabled": true,
+          "source_row": 158,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_earrings",
+          "name": "Tourmaline Earrings",
+          "button": 289,
+          "enabled": true,
+          "source_row": 159,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_necklace_golden",
+          "name": "Tourmaline Necklace (Golden)",
+          "button": 296,
+          "enabled": true,
+          "source_row": 160,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tourmaline_bracelet",
+          "name": "Tourmaline Bracelet",
+          "button": 303,
+          "enabled": true,
+          "source_row": 161,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tourmaline Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_ring",
+          "name": "Amber Ring",
+          "button": 310,
+          "enabled": true,
+          "source_row": 162,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_necklace_silver",
+          "name": "Amber Necklace (Silver)",
+          "button": 317,
+          "enabled": true,
+          "source_row": 163,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_necklace_jewelled",
+          "name": "Amber Necklace (Jewelled)",
+          "button": 324,
+          "enabled": true,
+          "source_row": 164,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_earrings",
+          "name": "Amber Earrings",
+          "button": 331,
+          "enabled": true,
+          "source_row": 165,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_necklace_golden",
+          "name": "Amber Necklace (Golden)",
+          "button": 338,
+          "enabled": true,
+          "source_row": 166,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "amber_bracelet",
+          "name": "Amber Bracelet",
+          "button": 345,
+          "enabled": true,
+          "source_row": 167,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "amber",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Amber Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_ring",
+          "name": "Diamond Ring",
+          "button": 352,
+          "enabled": true,
+          "source_row": 168,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_necklace_silver",
+          "name": "Diamond Necklace (Silver)",
+          "button": 359,
+          "enabled": true,
+          "source_row": 169,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Necklace (Silver)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_necklace_jewelled",
+          "name": "Diamond Necklace (Jewelled)",
+          "button": 366,
+          "enabled": true,
+          "source_row": 170,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Necklace (Jewelled)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_earrings",
+          "name": "Diamond Earrings",
+          "button": 373,
+          "enabled": true,
+          "source_row": 171,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Earrings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_necklace_golden",
+          "name": "Diamond Necklace (Golden)",
+          "button": 380,
+          "enabled": true,
+          "source_row": 172,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Necklace (Golden)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "diamond_bracelet",
+          "name": "Diamond Bracelet",
+          "button": 387,
+          "enabled": true,
+          "source_row": 173,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Diamond Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "magic_jewelry",
+      "name": "Magic Jewelry",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "brilliant_amber_bracelet",
+          "name": "Brilliant Amber Bracelet",
+          "button": 2,
+          "enabled": true,
+          "source_row": 174,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "amber",
+              "amount": 20
+            },
+            {
+              "resource_key": "brilliant_amber",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Brilliant Amber Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fire_ruby_bracelet",
+          "name": "Fire Ruby Bracelet",
+          "button": 9,
+          "enabled": true,
+          "source_row": 175,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "ruby",
+              "amount": 20
+            },
+            {
+              "resource_key": "fire_ruby",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fire Ruby Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dark_sapphire_bracelet",
+          "name": "Dark Sapphire Bracelet",
+          "button": 16,
+          "enabled": true,
+          "source_row": 176,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "sapphire",
+              "amount": 20
+            },
+            {
+              "resource_key": "dark_sapphire",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dark Sapphire Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "white_pearl_bracelet",
+          "name": "White Pearl Bracelet",
+          "button": 23,
+          "enabled": true,
+          "source_row": 177,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "tourmaline",
+              "amount": 20
+            },
+            {
+              "resource_key": "white_pearl",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "White Pearl Bracelet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ecru_citrine_ring",
+          "name": "Ecru Citrine Ring",
+          "button": 30,
+          "enabled": true,
+          "source_row": 178,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "citrine",
+              "amount": 20
+            },
+            {
+              "resource_key": "ecru_citrine",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ecru Citrine Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "blue_diamond_ring",
+          "name": "Blue Diamond Ring",
+          "button": 37,
+          "enabled": true,
+          "source_row": 179,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "diamond",
+              "amount": 20
+            },
+            {
+              "resource_key": "blue_diamond",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Blue Diamond Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "perfect_emerald_ring",
+          "name": "Perfect Emerald Ring",
+          "button": 44,
+          "enabled": true,
+          "source_row": 180,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "emerald",
+              "amount": 20
+            },
+            {
+              "resource_key": "perfect_emerald",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Perfect Emerald Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "turqoise_ring",
+          "name": "Turqoise Ring",
+          "button": 51,
+          "enabled": true,
+          "source_row": 181,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            },
+            {
+              "resource_key": "amethyst",
+              "amount": 20
+            },
+            {
+              "resource_key": "turquoise",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Turqoise Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "name": "Tools",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "scissors",
+          "name": "Scissors",
+          "button": 2,
+          "enabled": true,
+          "source_row": 182,
+          "min_skill": 5.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Scissors"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mortar_and_pestle",
+          "name": "Mortar and Pestle",
+          "button": 9,
+          "enabled": true,
+          "source_row": 183,
+          "min_skill": 20.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Mortar and Pestle"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "scorp",
+          "name": "Scorp",
+          "button": 16,
+          "enabled": true,
+          "source_row": 184,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [
+            4327
+          ],
+          "output_names": [
+            "Scorp"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tinker_s_tools",
+          "name": "Tinker's Tools",
+          "button": 23,
+          "enabled": true,
+          "source_row": 185,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [
+            7864
+          ],
+          "output_names": [
+            "Tinker's Tools"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "hatchet",
+          "name": "Hatchet",
+          "button": 30,
+          "enabled": true,
+          "source_row": 186,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hatchet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "draw_knife",
+          "name": "Draw Knife",
+          "button": 37,
+          "enabled": true,
+          "source_row": 187,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Draw Knife"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sewing_kit",
+          "name": "Sewing Kit",
+          "button": 44,
+          "enabled": true,
+          "source_row": 188,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sewing Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "saw",
+          "name": "Saw",
+          "button": 51,
+          "enabled": true,
+          "source_row": 189,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dovetail_saw",
+          "name": "Dovetail Saw",
+          "button": 58,
+          "enabled": true,
+          "source_row": 190,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "froe",
+          "name": "Froe",
+          "button": 65,
+          "enabled": true,
+          "source_row": 191,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Froe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "shovel",
+          "name": "Shovel",
+          "button": 72,
+          "enabled": true,
+          "source_row": 192,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shovel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "hammer",
+          "name": "Hammer",
+          "button": 79,
+          "enabled": true,
+          "source_row": 193,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tongs",
+          "name": "Tongs",
+          "button": 86,
+          "enabled": true,
+          "source_row": 194,
+          "min_skill": 35.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tongs"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "smith_s_hammer",
+          "name": "Smith's Hammer",
+          "button": 93,
+          "enabled": true,
+          "source_row": 195,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Smith's Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sledge_hammer",
+          "name": "Sledge Hammer",
+          "button": 100,
+          "enabled": true,
+          "source_row": 196,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sledge Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "inshave",
+          "name": "Inshave",
+          "button": 107,
+          "enabled": true,
+          "source_row": 197,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Inshave"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "pickaxe",
+          "name": "Pickaxe",
+          "button": 114,
+          "enabled": true,
+          "source_row": 198,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pickaxe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lockpick",
+          "name": "Lockpick",
+          "button": 121,
+          "enabled": true,
+          "source_row": 199,
+          "min_skill": 45.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lockpick"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "skillet",
+          "name": "Skillet",
+          "button": 128,
+          "enabled": true,
+          "source_row": 200,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Skillet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "flour_sifter",
+          "name": "Flour Sifter",
+          "button": 135,
+          "enabled": true,
+          "source_row": 201,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Flour Sifter"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fletcher_s_tools",
+          "name": "Fletcher's Tools",
+          "button": 142,
+          "enabled": true,
+          "source_row": 202,
+          "min_skill": 35.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [
+            4130
+          ],
+          "output_names": [
+            "Fletcher's Tools"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mapmaker_s_pen",
+          "name": "Mapmaker's Pen",
+          "button": 149,
+          "enabled": true,
+          "source_row": 203,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Mapmaker's Pen"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clippers",
+          "name": "Clippers",
+          "button": 156,
+          "enabled": true,
+          "source_row": 204,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Clippers"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "utensils",
+      "name": "Utensils",
+      "source_page": 2,
+      "button": 50,
+      "open_actions": [
+        105,
+        50
+      ],
+      "recipes": [
+        {
+          "id": "butcher_knife",
+          "name": "Butcher Knife",
+          "button": 2,
+          "enabled": true,
+          "source_row": 205,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Butcher Knife"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spoon_left",
+          "name": "Spoon (left)",
+          "button": 9,
+          "enabled": true,
+          "source_row": 206,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spoon (left)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spoon_right",
+          "name": "Spoon (right)",
+          "button": 16,
+          "enabled": true,
+          "source_row": 207,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spoon (right)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "plate",
+          "name": "Plate",
+          "button": 23,
+          "enabled": true,
+          "source_row": 208,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Plate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fork_left",
+          "name": "Fork (left)",
+          "button": 30,
+          "enabled": true,
+          "source_row": 209,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fork (left)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fork_right",
+          "name": "Fork (right)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 210,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fork (right)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "goblet",
+          "name": "Goblet",
+          "button": 65,
+          "enabled": true,
+          "source_row": 211,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Goblet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cleaver",
+          "name": "Cleaver",
+          "button": 44,
+          "enabled": true,
+          "source_row": 212,
+          "min_skill": 20.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cleaver"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "knife_left",
+          "name": "Knife(left)",
+          "button": 51,
+          "enabled": true,
+          "source_row": 212,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Knife"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "knife_right",
+          "name": "Knife(right)",
+          "button": 58,
+          "enabled": true,
+          "source_row": 212,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Knife"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "pewter_mug",
+          "name": "Pewter Mug",
+          "button": 72,
+          "enabled": true,
+          "source_row": 212,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pewter Mug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "skinning_knife",
+          "name": "Skinning Knife",
+          "button": 79,
+          "enabled": true,
+          "source_row": 213,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Skinning Knife"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "miscellaneous",
+      "name": "Miscellaneous",
+      "source_page": 2,
+      "button": 57,
+      "open_actions": [
+        105,
+        57
+      ],
+      "recipes": [
+        {
+          "id": "key_ring",
+          "name": "Key Ring",
+          "button": 2,
+          "enabled": true,
+          "source_row": 214,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Key Ring"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "scales",
+          "name": "Scales",
+          "button": 9,
+          "enabled": true,
+          "source_row": 215,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Scales"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "iron_key",
+          "name": "Iron Key",
+          "button": 16,
+          "enabled": true,
+          "source_row": 216,
+          "min_skill": 20.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Iron Key"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "globe",
+          "name": "Globe",
+          "button": 23,
+          "enabled": true,
+          "source_row": 217,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Globe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spyglass",
+          "name": "Spyglass",
+          "button": 30,
+          "enabled": true,
+          "source_row": 218,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spyglass"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heated_stand",
+          "name": "Heated Stand",
+          "button": 44,
+          "enabled": true,
+          "source_row": 219,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heated Stand"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+		{
+          "id": "lantern",
+          "name": "Lantern",
+          "button": 37,
+          "enabled": true,
+          "source_row": 220,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lantern"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "gears",
+          "name": "Gears",
+          "button": 51,
+          "enabled": true,
+          "source_row": 220,
+          "min_skill": 5.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [
+            4179
+          ],
+          "output_names": [
+            "Gears"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clock_parts",
+          "name": "Clock Parts",
+          "button": 58,
+          "enabled": true,
+          "source_row": 221,
+          "min_skill": 25.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            4175
+          ],
+          "output_names": [
+            "Clock Parts"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "barrel_tap",
+          "name": "Barrel Tap",
+          "button": 65,
+          "enabled": true,
+          "source_row": 222,
+          "min_skill": 35.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Barrel Tap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "springs",
+          "name": "Springs",
+          "button": 72,
+          "enabled": true,
+          "source_row": 223,
+          "min_skill": 5.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Springs"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sextant_parts",
+          "name": "Sextant Parts",
+          "button": 79,
+          "enabled": true,
+          "source_row": 224,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sextant Parts"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "barrel_hoops",
+          "name": "Barrel Hoops",
+          "button": 86,
+          "enabled": true,
+          "source_row": 225,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Barrel Hoops"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "hinge",
+          "name": "Hinge",
+          "button": 93,
+          "enabled": true,
+          "source_row": 226,
+          "min_skill": 5.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hinge"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bola_balls",
+          "name": "Bola Balls",
+          "button": 100,
+          "enabled": true,
+          "source_row": 227,
+          "min_skill": 45.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bola Balls"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "axle_with_gears",
+          "name": "Axle with Gears",
+          "button": 107,
+          "enabled": true,
+          "source_row": 228,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "axles",
+              "amount": 1,
+              "craft_recipe_id": "axle"
+            },
+            {
+              "resource_key": "gears",
+              "amount": 1,
+              "craft_recipe_id": "gears"
+            }
+          ],
+          "output_item_ids": [
+            4177
+          ],
+          "output_names": [
+            "Axle with Gears"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sextant_parts_2",
+          "name": "Sextant Parts",
+          "button": 114,
+          "enabled": true,
+          "source_row": 229,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "axles_with_gears",
+              "amount": 1
+            },
+            {
+              "resource_key": "hinges",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sextant Parts"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clock_right",
+          "name": "Clock (Right)",
+          "button": 121,
+          "enabled": true,
+          "source_row": 230,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "clock_frames",
+              "amount": 1,
+              "craft_recipe_id": "clock_frame"
+            },
+            {
+              "resource_key": "clock_parts",
+              "amount": 1,
+              "craft_recipe_id": "clock_parts"
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Clock (Right)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clock_left",
+          "name": "Clock (Left)",
+          "button": 128,
+          "enabled": true,
+          "source_row": 231,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "clock_frames",
+              "amount": 1,
+              "craft_recipe_id": "clock_frame"
+            },
+            {
+              "resource_key": "clock_parts",
+              "amount": 1,
+              "craft_recipe_id": "clock_parts"
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Clock (Left)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sextant_parts_3",
+          "name": "Sextant Parts",
+          "button": 135,
+          "enabled": true,
+          "source_row": 232,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sextant_parts",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sextant Parts"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "jointing_plane",
+          "name": "Jointing Plane",
+          "button": 142,
+          "enabled": true,
+          "source_row": 233,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Jointing Plane"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "moulding_planes",
+          "name": "Moulding Planes",
+          "button": 149,
+          "enabled": true,
+          "source_row": 234,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Moulding Planes"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "smoothing_plane",
+          "name": "Smoothing Plane",
+          "button": 156,
+          "enabled": true,
+          "source_row": 235,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Smoothing Plane"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clock_frame",
+          "name": "Clock Frame",
+          "button": 163,
+          "enabled": true,
+          "source_row": 236,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [
+            4173
+          ],
+          "output_names": [
+            "Clock Frame"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "axle",
+          "name": "Axle",
+          "button": 170,
+          "enabled": true,
+          "source_row": 237,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [
+            4187
+          ],
+          "output_names": [
+            "Axle"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "rolling_pin",
+          "name": "Rolling Pin",
+          "button": 177,
+          "enabled": true,
+          "source_row": 238,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "plain_board",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Rolling Pin"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "light_sources",
+      "name": "Light Sources",
+      "source_page": 2,
+      "button": 64,
+      "open_actions": [
+        105,
+        64
+      ],
+      "recipes": [
+        {
+          "id": "small_candle",
+          "name": "Small Candle",
+          "button": 2,
+          "enabled": true,
+          "source_row": 239,
+          "min_skill": 55.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Candle"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "candelabra",
+          "name": "Candelabra",
+          "button": 9,
+          "enabled": true,
+          "source_row": 240,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Candelabra"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "brazier",
+          "name": "Brazier",
+          "button": 16,
+          "enabled": true,
+          "source_row": 241,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 35
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Brazier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_candelabra",
+          "name": "Tall Candelabra",
+          "button": 23,
+          "enabled": true,
+          "source_row": 242,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Candelabra"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "royal_candelabra",
+          "name": "Royal Candelabra",
+          "button": 30,
+          "enabled": true,
+          "source_row": 243,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Royal Candelabra"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "ancestral_candelabra",
+          "name": "Ancestral Candelabra",
+          "button": 37,
+          "enabled": true,
+          "source_row": 244,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ancestral Candelabra"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_brazier",
+          "name": "Small Brazier",
+          "button": 44,
+          "enabled": true,
+          "source_row": 245,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Brazier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_brazier",
+          "name": "Tall Brazier",
+          "button": 51,
+          "enabled": true,
+          "source_row": 246,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Brazier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "skull_brazier",
+          "name": "Skull Brazier",
+          "button": 58,
+          "enabled": true,
+          "source_row": 247,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Skull Brazier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tokuno_brazier",
+          "name": "Tokuno Brazier",
+          "button": 65,
+          "enabled": true,
+          "source_row": 248,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tokuno Brazier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "hanging_candles",
+          "name": "Hanging Candles",
+          "button": 72,
+          "enabled": true,
+          "source_row": 249,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hanging Candles"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    }
+  ]
+}

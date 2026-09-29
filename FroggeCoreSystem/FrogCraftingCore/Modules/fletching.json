@@ -1,0 +1,435 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "fletching",
+  "name": "Fletching",
+  "skill_name": "Bowcraft",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Fletcher's Tools",
+    "item_ids": [
+      4130
+    ],
+    "item_names": [
+      "Fletcher's Tools",
+      "Fletcher Tools",
+      "Fletching Tool"
+    ],
+    "toolbook_category_button": 8,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [
+        4130
+      ],
+      "output_names": [
+        "Fletcher's Tools",
+        "Fletcher Tools",
+        "Fletching Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [
+    {
+      "id": "wood",
+      "name": "Wood",
+      "default": "plain",
+      "options": [
+        {
+          "id": "plain",
+          "name": "Wood",
+          "resource_key": "plain_board",
+          "craft_actions": [
+            7,
+            6
+          ]
+        },
+        {
+          "id": "oak",
+          "name": "Oak",
+          "resource_key": "oak_board",
+          "craft_actions": [
+            7,
+            13
+          ]
+        },
+        {
+          "id": "ash",
+          "name": "Ash",
+          "resource_key": "ash_board",
+          "craft_actions": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "yew",
+          "name": "Yew",
+          "resource_key": "yew_board",
+          "craft_actions": [
+            7,
+            27
+          ]
+        },
+        {
+          "id": "heartwood",
+          "name": "Heartwood",
+          "resource_key": "heartwood_board",
+          "craft_actions": [
+            7,
+            34
+          ]
+        },
+        {
+          "id": "bloodwood",
+          "name": "Bloodwood",
+          "resource_key": "bloodwood_board",
+          "craft_actions": [
+            7,
+            41
+          ]
+        },
+        {
+          "id": "frostwood",
+          "name": "Frostwood",
+          "resource_key": "frostwood_board",
+          "craft_actions": [
+            7,
+            48
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "plain_board",
+          "craft_actions": [
+            7,
+            72
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "quivers",
+      "name": "Quivers",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "quiver",
+          "name": "Quiver",
+          "button": 2,
+          "enabled": true,
+          "source_row": 626,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 50
+            },
+            {
+              "resource_key": "normal_leather",
+              "amount": 100
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Quiver",
+            "Quivers"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "materials",
+      "name": "Materials",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "kindling",
+          "name": "Kindling",
+          "button": 2,
+          "enabled": true,
+          "source_row": 627,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Kindling"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "shaft",
+          "name": "Shaft",
+          "button": 9,
+          "enabled": true,
+          "source_row": 628,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shaft"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        }
+      ]
+    },
+    {
+      "id": "ammunition",
+      "name": "Ammunition",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "arrow",
+          "name": "Arrow",
+          "button": 2,
+          "enabled": true,
+          "source_row": 629,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "shaft",
+              "amount": 1
+            },
+            {
+              "resource_key": "feather",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Arrow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "crossbow_bolt",
+          "name": "Crossbow Bolt",
+          "button": 9,
+          "enabled": true,
+          "source_row": 630,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "shaft",
+              "amount": 1
+            },
+            {
+              "resource_key": "feather",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Crossbow Bolt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        }
+      ]
+    },
+    {
+      "id": "weapons",
+      "name": "Weapons",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "bow",
+          "name": "Bow",
+          "button": 2,
+          "enabled": true,
+          "source_row": 631,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 7
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "crossbow",
+          "name": "Crossbow",
+          "button": 9,
+          "enabled": true,
+          "source_row": 632,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 7
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Crossbow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "heavy_crossbow",
+          "name": "Heavy Crossbow",
+          "button": 16,
+          "enabled": true,
+          "source_row": 633,
+          "min_skill": 70.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heavy Crossbow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "composite_bow",
+          "name": "Composite Bow",
+          "button": 23,
+          "enabled": true,
+          "source_row": 634,
+          "min_skill": 70.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 7
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Composite Bow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "repeating_crossbow",
+          "name": "Repeating Crossbow",
+          "button": 30,
+          "enabled": true,
+          "source_row": 635,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Repeating Crossbow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "yumi",
+          "name": "Yumi",
+          "button": 37,
+          "enabled": true,
+          "source_row": 636,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Yumi"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    }
+  ]
+}

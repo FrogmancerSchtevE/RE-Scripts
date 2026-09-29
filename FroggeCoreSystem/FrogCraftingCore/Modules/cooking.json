@@ -1,0 +1,2084 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "cooking",
+  "name": "Cooking",
+  "skill_name": "Cooking",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Cooking Tool",
+    "item_ids": [],
+    "item_names": [
+      "Skillet",
+      "Frying Pan",
+      "Cooking Tool"
+    ],
+    "toolbook_category_button": 6,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [],
+      "output_names": [
+        "Skillet",
+        "Frying Pan",
+        "Cooking Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [],
+  "categories": [
+    {
+      "id": "magical_food",
+      "name": "Magical Food",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "journeyman_feaster",
+          "name": "Journeyman Feaster",
+          "button": 2,
+          "enabled": true,
+          "source_row": 305,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cooked_ribs",
+              "amount": 10
+            },
+            {
+              "resource_key": "dragon_blood",
+              "amount": 3
+            },
+            {
+              "resource_key": "sack_of_flour",
+              "amount": 2
+            },
+            {
+              "resource_key": "jar_of_honey",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Journeyman Feaster"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "warrior_feast_table",
+          "name": "Warrior Feast Table",
+          "button": 9,
+          "enabled": true,
+          "source_row": 306,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_ribs",
+              "amount": 15
+            },
+            {
+              "resource_key": "daemon_claw",
+              "amount": 3
+            },
+            {
+              "resource_key": "mento_seasoning",
+              "amount": 2
+            },
+            {
+              "resource_key": "samuels_secret_sauce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Warrior Feast Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "arcane_feast_table",
+          "name": "Arcane Feast Table",
+          "button": 16,
+          "enabled": true,
+          "source_row": 307,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "fish_steak",
+              "amount": 15
+            },
+            {
+              "resource_key": "faery_dust",
+              "amount": 3
+            },
+            {
+              "resource_key": "tribal_berries",
+              "amount": 5
+            },
+            {
+              "resource_key": "vial_of_vitriol",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Arcane Feast Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "crab_cake_beetle_food",
+          "name": "Crab Cake (Beetle Food)",
+          "button": 23,
+          "enabled": true,
+          "source_row": 308,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "chaga_mushrooms",
+              "amount": 10
+            },
+            {
+              "resource_key": "crab",
+              "amount": 1
+            },
+            {
+              "resource_key": "sack_of_flour",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Crab Cake (Beetle Food)",
+            "Crabe Cake (Beetle Food)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "red_velvet_cake",
+          "name": "Red Velvet Cake",
+          "button": 30,
+          "enabled": true,
+          "source_row": 309,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "apple",
+              "amount": 10
+            },
+            {
+              "resource_key": "sack_of_sugar",
+              "amount": 1
+            },
+            {
+              "resource_key": "sack_of_flour",
+              "amount": 1
+            },
+            {
+              "resource_key": "daemon_claw",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Red Velvet Cake"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "Banana_pie",
+          "name": "Banana Pie",
+          "button": 37,
+          "enabled": true,
+          "source_row": 310,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sweet_cocoa_butter",
+              "amount": 1
+            },
+            {
+              "resource_key": "banana",
+              "amount": 5
+            },
+            {
+              "resource_key": "sack_of_flour",
+              "amount": 1
+            },
+            {
+              "resource_key": "peach",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Banana Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bowl_of_lich_goo",
+          "name": "Bowl of Lich Goo",
+          "button": 44,
+          "enabled": true,
+          "source_row": 311,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "vial_of_vitriol",
+              "amount": 1
+            },
+            {
+              "resource_key": "onion",
+              "amount": 5
+            },
+            {
+              "resource_key": "eggs",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bowl of Lich Goo"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bowl_of_marinated_rocks",
+          "name": "Bowl of Marinated Rocks",
+          "button": 51,
+          "enabled": true,
+          "source_row": 312,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "lodestone",
+              "amount": 1
+            },
+            {
+              "resource_key": "mento_seasoning",
+              "amount": 1
+            },
+            {
+              "resource_key": "onion",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bowl of Marinated Rocks"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "charcuterie_board",
+          "name": "Charcuterie Board",
+          "button": 58,
+          "enabled": true,
+          "source_row": 313,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "undying_flesh",
+              "amount": 2
+            },
+            {
+              "resource_key": "fish_steak",
+              "amount": 15
+            },
+            {
+              "resource_key": "samuels_secret_sauce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Charcuterie Board"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "juicy_apple_pie",
+          "name": "Juicy Apple Pie",
+          "button": 65,
+          "enabled": true,
+          "source_row": 314,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raptor_tooth",
+              "amount": 2
+            },
+            {
+              "resource_key": "greater_heal_potion",
+              "amount": 5
+            },
+            {
+              "resource_key": "sack_of_flour",
+              "amount": 1
+            },
+            {
+              "resource_key": "jar_of_honey",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Juicy Apple Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dragon_meat_feast",
+          "name": "Dragon Meat Feast",
+          "button": 72,
+          "enabled": true,
+          "source_row": 315,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dragon_blood",
+              "amount": 5
+            },
+            {
+              "resource_key": "cooked_ribs",
+              "amount": 10
+            },
+            {
+              "resource_key": "squash",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Meat Feast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "nimble_nut_feast",
+          "name": "Nimble Nut Feast",
+          "button": 79,
+          "enabled": true,
+          "source_row": 316,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "fey_wings",
+              "amount": 2
+            },
+            {
+              "resource_key": "coconuts",
+              "amount": 5
+            },
+            {
+              "resource_key": "squash",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Nimble Nut Feast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "farmers_feast",
+          "name": "Farmers Feast",
+          "button": 86,
+          "enabled": true,
+          "source_row": 317,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cooked_ribs",
+              "amount": 3
+            },
+            {
+              "resource_key": "eggs",
+              "amount": 2
+            },
+            {
+              "resource_key": "bacon",
+              "amount": 2
+            },
+            {
+              "resource_key": "seed_of_renewel",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Farmers Feast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "pixie_leg_feast",
+          "name": "Pixie Leg Feast",
+          "button": 93,
+          "enabled": true,
+          "source_row": 318,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "faery_dust",
+              "amount": 2
+            },
+            {
+              "resource_key": "chicken_leg",
+              "amount": 1
+            },
+            {
+              "resource_key": "onion",
+              "amount": 2
+            },
+            {
+              "resource_key": "samuels_secret_sauce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pixie Leg Feast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mermaid_meat_feast",
+          "name": "Mermaid Meat Feast",
+          "button": 100,
+          "enabled": true,
+          "source_row": 319,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "faery_dust",
+              "amount": 2
+            },
+            {
+              "resource_key": "crab",
+              "amount": 5
+            },
+            {
+              "resource_key": "squash",
+              "amount": 2
+            },
+            {
+              "resource_key": "peach",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Mermaid Meat Feast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "britannia_s_finest_fruits",
+          "name": "Britannia's Finest Fruits",
+          "button": 107,
+          "enabled": true,
+          "source_row": 320,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "tribal_berries",
+              "amount": 5
+            },
+            {
+              "resource_key": "apple",
+              "amount": 2
+            },
+            {
+              "resource_key": "grapes",
+              "amount": 2
+            },
+            {
+              "resource_key": "peach",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Britannia's Finest Fruits"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "creature_food",
+      "name": "Creature Food",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "spicy_wyrm_meat",
+          "name": "Spicy Wyrm Meat",
+          "button": 2,
+          "enabled": true,
+          "source_row": 321,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ribs",
+              "amount": 5
+            },
+            {
+              "resource_key": "bacon",
+              "amount": 2
+            },
+            {
+              "resource_key": "dried_herbs",
+              "amount": 1
+            },
+            {
+              "resource_key": "daemon_claw",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spicy Wyrm Meat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "grilled_sea_serpent",
+          "name": "Grilled Sea Serpent",
+          "button": 9,
+          "enabled": true,
+          "source_row": 322,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "squash",
+              "amount": 3
+            },
+            {
+              "resource_key": "fish_steak",
+              "amount": 5
+            },
+            {
+              "resource_key": "delicate_scales",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Grilled Sea Serpent"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "creature_food_fruit_pie",
+          "name": "Fruit Pie",
+          "button": 16,
+          "enabled": true,
+          "source_row": 323,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "apple",
+              "amount": 3
+            },
+            {
+              "resource_key": "pear",
+              "amount": 2
+            },
+            {
+              "resource_key": "faery_dust",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fruit Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "delicious_hay",
+          "name": "Delicious Hay",
+          "button": 23,
+          "enabled": true,
+          "source_row": 324,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "carrot",
+              "amount": 5
+            },
+            {
+              "resource_key": "wheat",
+              "amount": 5
+            },
+            {
+              "resource_key": "enchanted_essence",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Delicious Hay"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "harpy_egg",
+          "name": "Harpy Egg",
+          "button": 30,
+          "enabled": true,
+          "source_row": 325,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eggs",
+              "amount": 5
+            },
+            {
+              "resource_key": "faery_dust",
+              "amount": 1
+            },
+            {
+              "resource_key": "feather",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Harpy Egg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "ingredients",
+      "name": "Ingredients",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "sack_of_flour",
+          "name": "Sack of Flour",
+          "button": 2,
+          "enabled": true,
+          "source_row": 326,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "wheat",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sack of Flour"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dough",
+          "name": "Dough",
+          "button": 9,
+          "enabled": true,
+          "source_row": 327,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "flour",
+              "amount": 1
+            },
+            {
+              "resource_key": "water",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dough"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sweet_dough",
+          "name": "Sweet Dough",
+          "button": 16,
+          "enabled": true,
+          "source_row": 328,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "honey",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sweet Dough"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cake_mix",
+          "name": "Cake Mix",
+          "button": 23,
+          "enabled": true,
+          "source_row": 329,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "flour",
+              "amount": 1
+            },
+            {
+              "resource_key": "sweet_dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cake Mix"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cookie_mix",
+          "name": "Cookie Mix",
+          "button": 30,
+          "enabled": true,
+          "source_row": 330,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "honey",
+              "amount": 1
+            },
+            {
+              "resource_key": "sweet_dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cookie Mix"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "wheat_wort",
+          "name": "Wheat Wort",
+          "button": 37,
+          "enabled": true,
+          "source_row": 331,
+          "min_skill": 30.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "empty_bottle",
+              "amount": 1
+            },
+            {
+              "resource_key": "water",
+              "amount": 1
+            },
+            {
+              "resource_key": "flour",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wheat Wort"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "preperations",
+      "name": "Preperations",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "unbaked_quiche",
+          "name": "Unbaked Quiche",
+          "button": 2,
+          "enabled": true,
+          "source_row": 332,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "eggs",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Unbaked Quiche"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "unbaked_meat_pie",
+          "name": "Unbaked Meat Pie",
+          "button": 9,
+          "enabled": true,
+          "source_row": 333,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "raw_meat",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Unbaked Meat Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "uncooked_sausage_pizza",
+          "name": "Uncooked Sausage Pizza",
+          "button": 16,
+          "enabled": true,
+          "source_row": 334,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "sausage",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Uncooked Sausage Pizza"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "uncooked_cheese_pizza",
+          "name": "Uncooked Cheese Pizza",
+          "button": 23,
+          "enabled": true,
+          "source_row": 335,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "cheese",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Uncooked Cheese Pizza"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "uncooked_fruit_pie",
+          "name": "Uncooked Fruit Pie",
+          "button": 30,
+          "enabled": true,
+          "source_row": 336,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "pear",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Uncooked Fruit Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "unbaked_peach_cobbler",
+          "name": "Unbaked Peach Cobbler",
+          "button": 37,
+          "enabled": true,
+          "source_row": 337,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "peach",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Unbaked Peach Cobbler"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "unbaked_apple_pie",
+          "name": "Unbaked Apple Pie",
+          "button": 44,
+          "enabled": true,
+          "source_row": 338,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "apple",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Unbaked Apple Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "unbaked_pumpkin_pie",
+          "name": "Unbaked Pumpkin Pie",
+          "button": 51,
+          "enabled": true,
+          "source_row": 339,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "pumpkin",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Unbaked Pumpkin Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "egg_bomb",
+          "name": "Egg Bomb",
+          "button": 58,
+          "enabled": true,
+          "source_row": 340,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eggs",
+              "amount": 1
+            },
+            {
+              "resource_key": "flour",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Egg Bomb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "baking",
+      "name": "Baking",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "bread_loaf",
+          "name": "Bread Loaf",
+          "button": 2,
+          "enabled": true,
+          "source_row": 341,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bread Loaf"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "pan_of_cookies",
+          "name": "Pan of Cookies",
+          "button": 9,
+          "enabled": true,
+          "source_row": 342,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cookie_mix",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pan of Cookies"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cake",
+          "name": "Cake",
+          "button": 16,
+          "enabled": true,
+          "source_row": 343,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cake_mix",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cake"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "muffins",
+          "name": "Muffins",
+          "button": 23,
+          "enabled": true,
+          "source_row": 344,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sweet_dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Muffins"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_quiche",
+          "name": "Baked Quiche",
+          "button": 30,
+          "enabled": true,
+          "source_row": 345,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "unbaked_quiche",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Quiche"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_meat_pie",
+          "name": "Baked Meat Pie",
+          "button": 37,
+          "enabled": true,
+          "source_row": 346,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "uncooked_meat_pie",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Meat Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "sausage_pizza",
+          "name": "Sausage Pizza",
+          "button": 44,
+          "enabled": true,
+          "source_row": 347,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "uncooked_sausage_pizza",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sausage Pizza"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cheese_pizza",
+          "name": "Cheese Pizza",
+          "button": 51,
+          "enabled": true,
+          "source_row": 348,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "uncooked_cheese_pizza",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cheese Pizza"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_fruit_pie",
+          "name": "Baked Fruit Pie",
+          "button": 58,
+          "enabled": true,
+          "source_row": 349,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "uncooked_fruit_pie",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Fruit Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_peach_cobbler",
+          "name": "Baked Peach Cobbler",
+          "button": 65,
+          "enabled": true,
+          "source_row": 350,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "unbaked_peach_cobbler",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Peach Cobbler"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_apple_pie",
+          "name": "Baked Apple Pie",
+          "button": 72,
+          "enabled": true,
+          "source_row": 351,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "unbaked_apple_pie",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Apple Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "baked_pumpkin_pie",
+          "name": "Baked Pumpkin Pie",
+          "button": 79,
+          "enabled": true,
+          "source_row": 352,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "unbaked_pumpkin_pie",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Baked Pumpkin Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "barbecue",
+      "name": "Barbecue",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "cooked_bird",
+          "name": "Cooked Bird",
+          "button": 2,
+          "enabled": true,
+          "source_row": 353,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_birds",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cooked Bird"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "chicken_leg",
+          "name": "Chicken Leg",
+          "button": 9,
+          "enabled": true,
+          "source_row": 354,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_chicken_legs",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chicken Leg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "fish_steak",
+          "name": "Fish Steak",
+          "button": 16,
+          "enabled": true,
+          "source_row": 355,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_fish_steaks",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fish Steak"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "fried_eggs",
+          "name": "Fried Eggs",
+          "button": 23,
+          "enabled": true,
+          "source_row": 356,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "eggs",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fried Eggs"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "leg_of_lamb",
+          "name": "Leg of Lamb",
+          "button": 30,
+          "enabled": true,
+          "source_row": 357,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_legs_of_lamb",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leg of Lamb"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        },
+        {
+          "id": "cut_of_ribs",
+          "name": "Cut of Ribs",
+          "button": 37,
+          "enabled": true,
+          "source_row": 358,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "raw_ribs",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cut of Ribs"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false,
+          "batch_mode": "all_available"
+        }
+      ]
+    },
+    {
+      "id": "chocolatiering",
+      "name": "Chocolatiering",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "sweet_cocoa_butter",
+          "name": "Sweet Cocoa Butter",
+          "button": 2,
+          "enabled": true,
+          "source_row": 359,
+          "min_skill": 15.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sack_of_sugar",
+              "amount": 1
+            },
+            {
+              "resource_key": "cocoa_butter",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sweet Cocoa Butter"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "meals",
+      "name": "Meals",
+      "source_page": 2,
+      "button": 50,
+      "open_actions": [
+        105,
+        50
+      ],
+      "recipes": [
+        {
+          "id": "pear_salad",
+          "name": "Pear Salad",
+          "button": 2,
+          "enabled": true,
+          "source_row": 360,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "pear",
+              "amount": 1
+            },
+            {
+              "resource_key": "lettuce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pear Salad"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "vegetables_meal",
+          "name": "Vegetables Meal",
+          "button": 9,
+          "enabled": true,
+          "source_row": 361,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "carrot",
+              "amount": 1
+            },
+            {
+              "resource_key": "lettuce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Vegetables Meal",
+            "begetables meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "ham_meal",
+          "name": "Ham Meal",
+          "button": 16,
+          "enabled": true,
+          "source_row": 362,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ham",
+              "amount": 1
+            },
+            {
+              "resource_key": "squash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ham Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "chicken_legs_bowl",
+          "name": "Chicken Legs Bowl",
+          "button": 23,
+          "enabled": true,
+          "source_row": 363,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "chicken_legs",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chicken Legs Bowl"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "goby_fish_bowl",
+          "name": "Goby Fish Bowl",
+          "button": 30,
+          "enabled": true,
+          "source_row": 364,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "goby_fish_bowl",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Goby Fish Bowl"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "coconut_bowl",
+          "name": "Coconut Bowl",
+          "button": 37,
+          "enabled": true,
+          "source_row": 365,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "coconuts",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Coconut Bowl"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "salmon_meal",
+          "name": "Salmon Meal",
+          "button": 44,
+          "enabled": true,
+          "source_row": 366,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "fairy_salmon_steak",
+              "amount": 1
+            },
+            {
+              "resource_key": "samuels_secret_sauce",
+              "amount": 1
+            },
+            {
+              "resource_key": "lettuce",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Salmon Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "pork_meal",
+          "name": "Pork Meal",
+          "button": 51,
+          "enabled": true,
+          "source_row": 367,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "ham",
+              "amount": 1
+            },
+            {
+              "resource_key": "squash",
+              "amount": 1
+            },
+            {
+              "resource_key": "mento_seasoning",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pork Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lamb_leg_meal",
+          "name": "Lamb Leg Meal",
+          "button": 58,
+          "enabled": true,
+          "source_row": 368,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "lamb_leg",
+              "amount": 1
+            },
+            {
+              "resource_key": "squash",
+              "amount": 1
+            },
+            {
+              "resource_key": "bowl_of_peas",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lamb Leg Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bacon_and_egg_meal",
+          "name": "Bacon and Egg Meal",
+          "button": 65,
+          "enabled": true,
+          "source_row": 369,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "bacon",
+              "amount": 1
+            },
+            {
+              "resource_key": "eggs",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bacon and Egg Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "colorful_salad",
+          "name": "Colorful Salad",
+          "button": 72,
+          "enabled": true,
+          "source_row": 370,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "apple",
+              "amount": 1
+            },
+            {
+              "resource_key": "pear",
+              "amount": 2
+            },
+            {
+              "resource_key": "lettuce",
+              "amount": 1
+            },
+            {
+              "resource_key": "mento_seasoning",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Colorful Salad"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "porridge_meal",
+          "name": "Porridge Meal",
+          "button": 79,
+          "enabled": true,
+          "source_row": 371,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "flour",
+              "amount": 3
+            },
+            {
+              "resource_key": "sweet_cocoa_butter",
+              "amount": 1
+            },
+            {
+              "resource_key": "honey",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Porridge Meal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spicy_fish_bowl",
+          "name": "Spicy Fish Bowl",
+          "button": 86,
+          "enabled": true,
+          "source_row": 372,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "fish_steak",
+              "amount": 5
+            },
+            {
+              "resource_key": "samuels_secret_sauce",
+              "amount": 1
+            },
+            {
+              "resource_key": "bowl_of_peas",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spicy Fish Bowl"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "vegetable_pizza",
+          "name": "Vegetable Pizza",
+          "button": 93,
+          "enabled": true,
+          "source_row": 373,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "carrot",
+              "amount": 2
+            },
+            {
+              "resource_key": "dough",
+              "amount": 1
+            },
+            {
+              "resource_key": "onion",
+              "amount": 1
+            },
+            {
+              "resource_key": "cheese",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Vegetable Pizza"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lime_pie",
+          "name": "Lime Pie",
+          "button": 100,
+          "enabled": true,
+          "source_row": 374,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "honey",
+              "amount": 1
+            },
+            {
+              "resource_key": "lime",
+              "amount": 5
+            },
+            {
+              "resource_key": "dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lime Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fruit_pie",
+          "name": "Fruit Pie",
+          "button": 107,
+          "enabled": true,
+          "source_row": 375,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "apple",
+              "amount": 1
+            },
+            {
+              "resource_key": "pear",
+              "amount": 2
+            },
+            {
+              "resource_key": "dbanana",
+              "amount": 2
+            },
+            {
+              "resource_key": "dough",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fruit Pie"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    }
+  ]
+}

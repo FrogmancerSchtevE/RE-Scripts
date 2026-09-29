@@ -1,0 +1,74 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "alchemy",
+  "name": "Alchemy Training",
+  "target_skill": 100.0,
+  "resource_choices": {},
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 30.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 30.0,
+      "max_skill": 45.0,
+      "mode": "craft",
+      "label": "Lesser Heal Potion",
+      "recipe_ids": ["lesser_heal"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 45.0,
+      "max_skill": 55.0,
+      "mode": "craft",
+      "label": "Lesser Cure Potion",
+      "recipe_ids": ["lesser_cure"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 55.0,
+      "max_skill": 65.0,
+      "mode": "craft",
+      "label": "Agility Potion",
+      "recipe_ids": ["agility"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 65.0,
+      "max_skill": 75.0,
+      "mode": "craft",
+      "label": "Total Refresh Potion",
+      "recipe_ids": ["greater_refreshment"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 75.0,
+      "max_skill": 85.0,
+      "mode": "craft",
+      "label": "Greater Heal Potion",
+      "recipe_ids": ["greater_heal"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 85.0,
+      "max_skill": 95.0,
+      "mode": "craft",
+      "label": "Greater Cure Potion",
+      "recipe_ids": ["greater_cure"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 95.0,
+      "max_skill": 100.0,
+      "mode": "craft",
+      "label": "Greater Poison / Conflagration",
+      "recipe_ids": ["greater_poison", "greater_conflagration"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    }
+  ]
+}

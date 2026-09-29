@@ -1,0 +1,2539 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "inscription",
+  "name": "Inscription",
+  "skill_name": "Inscription",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Scribe's Pen",
+    "item_ids": [
+      4031
+    ],
+    "item_names": [
+      "Scribe's Pen",
+      "Scribe Pen",
+      "Inscription Tool"
+    ],
+    "toolbook_category_button": 9,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [
+        4031
+      ],
+      "output_names": [
+        "Scribe's Pen",
+        "Scribe Pen",
+        "Inscription Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [],
+  "categories": [
+    {
+      "id": "first_second_circle",
+      "name": "First - Second Circle",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "reactive_armor",
+          "name": "Reactive Armor",
+          "button": 2,
+          "enabled": true,
+          "source_row": 556,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7981
+          ],
+          "output_names": [
+            "Reactive Armor"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "clumsy",
+          "name": "Clumsy",
+          "button": 9,
+          "enabled": true,
+          "source_row": 557,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7982
+          ],
+          "output_names": [
+            "Clumsy"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "create_food",
+          "name": "Create Food",
+          "button": 16,
+          "enabled": true,
+          "source_row": 558,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7983
+          ],
+          "output_names": [
+            "Create Food"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "feeblemind",
+          "name": "Feeblemind",
+          "button": 23,
+          "enabled": true,
+          "source_row": 559,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7984
+          ],
+          "output_names": [
+            "Feeblemind"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heal",
+          "name": "Heal",
+          "button": 30,
+          "enabled": true,
+          "source_row": 560,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7985
+          ],
+          "output_names": [
+            "Heal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "magic_arrow",
+          "name": "Magic Arrow",
+          "button": 37,
+          "enabled": true,
+          "source_row": 561,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7986
+          ],
+          "output_names": [
+            "Magic Arrow"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "night_sight",
+          "name": "Night Sight",
+          "button": 44,
+          "enabled": true,
+          "source_row": 562,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7987
+          ],
+          "output_names": [
+            "Night Sight"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "weaken",
+          "name": "Weaken",
+          "button": 51,
+          "enabled": true,
+          "source_row": 563,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7988
+          ],
+          "output_names": [
+            "Weaken"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "agility",
+          "name": "Agility",
+          "button": 58,
+          "enabled": true,
+          "source_row": 564,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7989
+          ],
+          "output_names": [
+            "Agility"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cunning",
+          "name": "Cunning",
+          "button": 65,
+          "enabled": true,
+          "source_row": 565,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7990
+          ],
+          "output_names": [
+            "Cunning"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "cure",
+          "name": "Cure",
+          "button": 72,
+          "enabled": true,
+          "source_row": 566,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7991
+          ],
+          "output_names": [
+            "Cure"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "harm",
+          "name": "Harm",
+          "button": 79,
+          "enabled": true,
+          "source_row": 567,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7992
+          ],
+          "output_names": [
+            "Harm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "magic_trap",
+          "name": "Magic Trap",
+          "button": 86,
+          "enabled": true,
+          "source_row": 568,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7993
+          ],
+          "output_names": [
+            "Magic Trap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "magic_untrap",
+          "name": "Magic Untrap",
+          "button": 93,
+          "enabled": true,
+          "source_row": 569,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7994
+          ],
+          "output_names": [
+            "Magic Untrap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "protection",
+          "name": "Protection",
+          "button": 100,
+          "enabled": true,
+          "source_row": 570,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7995
+          ],
+          "output_names": [
+            "Protection"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "strength",
+          "name": "Strength",
+          "button": 107,
+          "enabled": true,
+          "source_row": 571,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7996
+          ],
+          "output_names": [
+            "Strength"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "third_fourth_circle",
+      "name": "Third - Fourth Circle",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "bless",
+          "name": "Bless",
+          "button": 2,
+          "enabled": true,
+          "source_row": 572,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7997
+          ],
+          "output_names": [
+            "Bless"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fireball",
+          "name": "Fireball",
+          "button": 9,
+          "enabled": true,
+          "source_row": 573,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+			{
+              "resource_key": "blank_scroll",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7998
+          ],
+          "output_names": [
+            "Fireball"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "magic_lock",
+          "name": "Magic Lock",
+          "button": 16,
+          "enabled": true,
+          "source_row": 574,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            7999
+          ],
+          "output_names": [
+            "Magic Lock"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "poison",
+          "name": "Poison",
+          "button": 23,
+          "enabled": true,
+          "source_row": 575,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8000
+          ],
+          "output_names": [
+            "Poison"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "telekinesis",
+          "name": "Telekinesis",
+          "button": 30,
+          "enabled": true,
+          "source_row": 576,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Telekinesis"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "teleport",
+          "name": "Teleport",
+          "button": 37,
+          "enabled": true,
+          "source_row": 577,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8002
+          ],
+          "output_names": [
+            "Teleport"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "unlock",
+          "name": "Unlock",
+          "button": 44,
+          "enabled": true,
+          "source_row": 578,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8003
+          ],
+          "output_names": [
+            "Unlock"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "wall_of_stone",
+          "name": "Wall of Stone",
+          "button": 51,
+          "enabled": true,
+          "source_row": 579,
+          "min_skill": 3.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8004
+          ],
+          "output_names": [
+            "Wall of Stone"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "arch_cure",
+          "name": "Arch Cure",
+          "button": 58,
+          "enabled": true,
+          "source_row": 580,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8005
+          ],
+          "output_names": [
+            "Arch Cure"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "arch_protection",
+          "name": "Arch Protection",
+          "button": 65,
+          "enabled": true,
+          "source_row": 581,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8006
+          ],
+          "output_names": [
+            "Arch Protection"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "curse",
+          "name": "Curse",
+          "button": 72,
+          "enabled": true,
+          "source_row": 582,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8007
+          ],
+          "output_names": [
+            "Curse"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "fire_field",
+          "name": "Fire Field",
+          "button": 79,
+          "enabled": true,
+          "source_row": 583,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8008
+          ],
+          "output_names": [
+            "Fire Field"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "greater_heal",
+          "name": "Greater Heal",
+          "button": 86,
+          "enabled": true,
+          "source_row": 584,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8009
+          ],
+          "output_names": [
+            "Greater Heal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lightning",
+          "name": "Lightning",
+          "button": 93,
+          "enabled": true,
+          "source_row": 585,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8010
+          ],
+          "output_names": [
+            "Lightning"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mana_drain",
+          "name": "Mana Drain",
+          "button": 100,
+          "enabled": true,
+          "source_row": 586,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8011
+          ],
+          "output_names": [
+            "Mana Drain"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "recall",
+          "name": "Recall",
+          "button": 107,
+          "enabled": true,
+          "source_row": 587,
+          "min_skill": 17.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8012
+          ],
+          "output_names": [
+            "Recall"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "fifth_sixth_circle",
+      "name": "Fifth - Sixth Circle",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "blade_spirits",
+          "name": "Blade Spirits",
+          "button": 2,
+          "enabled": true,
+          "source_row": 588,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8013
+          ],
+          "output_names": [
+            "Blade Spirits"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dispel_field",
+          "name": "Dispel Field",
+          "button": 9,
+          "enabled": true,
+          "source_row": 589,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8014
+          ],
+          "output_names": [
+            "Dispel Field"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "incognito",
+          "name": "Incognito",
+          "button": 16,
+          "enabled": true,
+          "source_row": 590,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8015
+          ],
+          "output_names": [
+            "Incognito"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "magic_reflection",
+          "name": "Magic Reflection",
+          "button": 23,
+          "enabled": true,
+          "source_row": 591,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8016
+          ],
+          "output_names": [
+            "Magic Reflection"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mind_blast",
+          "name": "Mind Blast",
+          "button": 30,
+          "enabled": true,
+          "source_row": 592,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8017
+          ],
+          "output_names": [
+            "Mind Blast"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "paralyze",
+          "name": "Paralyze",
+          "button": 37,
+          "enabled": true,
+          "source_row": 593,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8018
+          ],
+          "output_names": [
+            "Paralyze"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "poison_field",
+          "name": "Poison Field",
+          "button": 44,
+          "enabled": true,
+          "source_row": 594,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8019
+          ],
+          "output_names": [
+            "Poison Field"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summon_creature",
+          "name": "Summon Creature",
+          "button": 51,
+          "enabled": true,
+          "source_row": 595,
+          "min_skill": 32.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8020
+          ],
+          "output_names": [
+            "Summon Creature"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dispel",
+          "name": "Dispel",
+          "button": 58,
+          "enabled": true,
+          "source_row": 596,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8021
+          ],
+          "output_names": [
+            "Dispel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "energy_bolt",
+          "name": "Energy Bolt",
+          "button": 65,
+          "enabled": true,
+          "source_row": 597,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8022
+          ],
+          "output_names": [
+            "Energy Bolt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "explosion",
+          "name": "Explosion",
+          "button": 72,
+          "enabled": true,
+          "source_row": 598,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8023
+          ],
+          "output_names": [
+            "Explosion"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "invisibility",
+          "name": "Invisibility",
+          "button": 79,
+          "enabled": true,
+          "source_row": 599,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8024
+          ],
+          "output_names": [
+            "Invisibility"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mark",
+          "name": "Mark",
+          "button": 86,
+          "enabled": true,
+          "source_row": 600,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8025
+          ],
+          "output_names": [
+            "Mark"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mass_curse",
+          "name": "Mass Curse",
+          "button": 93,
+          "enabled": true,
+          "source_row": 601,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8026
+          ],
+          "output_names": [
+            "Mass Curse"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "paralyze_field",
+          "name": "Paralyze Field",
+          "button": 100,
+          "enabled": true,
+          "source_row": 602,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8027
+          ],
+          "output_names": [
+            "Paralyze Field"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "reveal",
+          "name": "Reveal",
+          "button": 107,
+          "enabled": true,
+          "source_row": 603,
+          "min_skill": 46.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8028
+          ],
+          "output_names": [
+            "Reveal"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "seventh_eigth_circle",
+      "name": "Seventh - Eigth Circle",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "chain_lightning",
+          "name": "Chain Lightning",
+          "button": 2,
+          "enabled": true,
+          "source_row": 604,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8029
+          ],
+          "output_names": [
+            "Chain Lightning"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "energy_field",
+          "name": "Energy Field",
+          "button": 9,
+          "enabled": true,
+          "source_row": 605,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8030
+          ],
+          "output_names": [
+            "Energy Field"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "flamestrike",
+          "name": "Flamestrike",
+          "button": 16,
+          "enabled": true,
+          "source_row": 606,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8031
+          ],
+          "output_names": [
+            "Flamestrike"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "gate_travel",
+          "name": "Gate Travel",
+          "button": 23,
+          "enabled": true,
+          "source_row": 607,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8032
+          ],
+          "output_names": [
+            "Gate Travel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mana_vampire",
+          "name": "Mana Vampire",
+          "button": 30,
+          "enabled": true,
+          "source_row": 608,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8033
+          ],
+          "output_names": [
+            "Mana Vampire"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "mass_dispel",
+          "name": "Mass Dispel",
+          "button": 37,
+          "enabled": true,
+          "source_row": 609,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8034
+          ],
+          "output_names": [
+            "Mass Dispel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "meteor_swarm",
+          "name": "Meteor Swarm",
+          "button": 44,
+          "enabled": true,
+          "source_row": 610,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8035
+          ],
+          "output_names": [
+            "Meteor Swarm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "polymorph",
+          "name": "Polymorph",
+          "button": 51,
+          "enabled": true,
+          "source_row": 611,
+          "min_skill": 60.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8036
+          ],
+          "output_names": [
+            "Polymorph"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "earthquake",
+          "name": "Earthquake",
+          "button": 58,
+          "enabled": true,
+          "source_row": 612,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8037
+          ],
+          "output_names": [
+            "Earthquake"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "energy_vortex",
+          "name": "Energy Vortex",
+          "button": 65,
+          "enabled": true,
+          "source_row": 613,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "black_pearl",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "nightshade",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8038
+          ],
+          "output_names": [
+            "Energy Vortex"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "resurrection",
+          "name": "Resurrection",
+          "button": 72,
+          "enabled": true,
+          "source_row": 614,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "ginseng",
+              "amount": 1
+            },
+            {
+              "resource_key": "garlic",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8039
+          ],
+          "output_names": [
+            "Resurrection"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summon_air_elemental",
+          "name": "Summon Air Elemental",
+          "button": 79,
+          "enabled": true,
+          "source_row": 615,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8040
+          ],
+          "output_names": [
+            "Summon Air Elemental"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summon_daemon",
+          "name": "Summon Daemon",
+          "button": 86,
+          "enabled": true,
+          "source_row": 616,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8041
+          ],
+          "output_names": [
+            "Summon Daemon"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summon_earth_elemental",
+          "name": "Summon Earth Elemental",
+          "button": 93,
+          "enabled": true,
+          "source_row": 617,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8042
+          ],
+          "output_names": [
+            "Summon Earth Elemental"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summong_fire_elemental",
+          "name": "Summong Fire Elemental",
+          "button": 100,
+          "enabled": true,
+          "source_row": 618,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            },
+            {
+              "resource_key": "sulfurous_ash",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8043
+          ],
+          "output_names": [
+            "Summong Fire Elemental"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "summon_water_elemental",
+          "name": "Summon Water Elemental",
+          "button": 107,
+          "enabled": true,
+          "source_row": 619,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 1
+            },
+            {
+              "resource_key": "bloodmoss",
+              "amount": 1
+            },
+            {
+              "resource_key": "mandrake_root",
+              "amount": 1
+            },
+            {
+              "resource_key": "spiders_silk",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [
+            8044
+          ],
+          "output_names": [
+            "Summon Water Elemental"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "books",
+      "name": "Books",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "enchanted_spellbook",
+          "name": "Enchanted Spellbook",
+          "button": 2,
+          "enabled": true,
+          "source_row": 620,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Magery",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "blank_scroll",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Enchanted Spellbook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "book_of_lost_knowledge",
+          "name": "Book of Lost Knowledge",
+          "button": 9,
+          "enabled": true,
+          "source_row": 621,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "page_of_insight",
+              "amount": 3
+            },
+            {
+              "resource_key": "blank_scroll",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Book of Lost Knowledge"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "runebook",
+          "name": "Runebook",
+          "button": 16,
+          "enabled": true,
+          "source_row": 622,
+          "min_skill": 45.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "blank_scroll",
+              "amount": 8
+            },
+            {
+              "resource_key": "recall_scrolls",
+              "amount": 1
+            },
+            {
+              "resource_key": "gate_scrolls",
+              "amount": 1
+            },
+            {
+              "resource_key": "unmarked_runes",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Runebook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "runebook_bless_deed",
+          "name": "Runebook Bless Deed",
+          "button": 23,
+          "enabled": true,
+          "source_row": 623,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "blank_scroll",
+              "amount": 25
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Runebook Bless Deed"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tome_of_the_harrower",
+          "name": "Tome of the Harrower",
+          "button": 30,
+          "enabled": true,
+          "source_row": 624,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "blank_scroll",
+              "amount": 25
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tome of the Harrower"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "blessing_deed_7days",
+          "name": "Blessing Deed (7days)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 625,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "blank_scroll",
+              "amount": 25
+            },
+            {
+              "resource_key": "arcane_dust",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Blessing Deed (7days)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    }
+  ]
+}

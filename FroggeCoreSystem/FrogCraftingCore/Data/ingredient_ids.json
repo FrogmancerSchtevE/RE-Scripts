@@ -1,0 +1,1310 @@
+{
+  "format": "frog-ingredient-identifiers",
+  "version": 1,
+  "name": "Frog Crafting Ingredient Identifiers",
+  "notes": [
+    "Fill item_id as a decimal JSON number or a quoted hexadecimal string such as \"0x1BF2\".",
+    "Use null while an item ID or hue is unknown.",
+    "Hue is optional. Leave it null to match any hue; set it when resources share a graphic but differ by material hue.",
+    "The core merges this file over resource_shelf.json whenever the suite starts or Reload is pressed.",
+    "resource_key is the stable link used by recipe modules; do not rename it unless the matching catalog and recipes are also updated."
+  ],
+  "ingredients": [
+    {
+      "resource_key": "iron_ingot",
+      "name": "Iron Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dull_ingot",
+      "name": "Dull Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x0973"
+    },
+    {
+      "resource_key": "shadow_ingot",
+      "name": "Shadow Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x0966"
+    },
+    {
+      "resource_key": "copper_ingot",
+      "name": "Copper Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x096D"
+    },
+    {
+      "resource_key": "bronze_ingot",
+      "name": "Bronze Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x0972"
+    },
+    {
+      "resource_key": "gold_ingot",
+      "name": "Gold Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x08A5"
+    },
+    {
+      "resource_key": "agapite_ingot",
+      "name": "Agapite Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x0979"
+    },
+    {
+      "resource_key": "verite_ingot",
+      "name": "Verite Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x089F"
+    },
+    {
+      "resource_key": "valorite_ingot",
+      "name": "Valorite Ingot",
+      "item_id": "0x1BF2",
+      "hue": "0x08AB"
+    },
+    {
+      "resource_key": "azurite_ingot",
+      "name": "Azurite Ingot",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "plain_board",
+      "name": "Plain Board",
+      "item_id": "0x1BD7",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "oak_board",
+      "name": "Oak Board",
+      "item_id": "0x1BD7",
+      "hue": "0x07DA"
+    },
+    {
+      "resource_key": "ash_board",
+      "name": "Ash Board",
+      "item_id": "0x1BD7",
+      "hue": "0x04A7"
+    },
+    {
+      "resource_key": "yew_board",
+      "name": "Yew Board",
+      "item_id": "0x1BD7",
+      "hue": "0x04A8"
+    },
+    {
+      "resource_key": "heartwood_board",
+      "name": "Heartwood Board",
+      "item_id": "0x1BD7",
+      "hue": "0x04A9"
+    },
+    {
+      "resource_key": "bloodwood_board",
+      "name": "Bloodwood Board",
+      "item_id": "0x1BD7",
+      "hue": "0x04AA"
+    },
+    {
+      "resource_key": "frostwood_board",
+      "name": "Frostwood Board",
+      "item_id": "0x1BD7",
+      "hue": "0x047F"
+    },
+    {
+      "resource_key": "normal_leather",
+      "name": "Normal Leather",
+      "item_id": "0x1081",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "spined_leather",
+      "name": "Spined",
+      "item_id": "0x1081",
+      "hue": "0x08AC"
+    },
+    {
+      "resource_key": "horned_leather",
+      "name": "Horned",
+      "item_id": "0x1081",
+      "hue": "0x0845"
+    },
+    {
+      "resource_key": "barbed_leather",
+      "name": "Barbed Leather",
+      "item_id": "0x1081",
+      "hue": "0x01C1"
+    },
+    {
+      "resource_key": "scaled_leather",
+      "name": "Scaled Leather",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "blue_diamond",
+      "name": "Blue Diamond",
+      "item_id": "0x3198",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dark_sapphire",
+      "name": "Dark Sapphire",
+      "item_id": "0x3192",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "ecru_citrine",
+      "name": "Ecru Citrine",
+      "item_id": "0x3195",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "fire_ruby",
+      "name": "Fire Ruby",
+      "item_id": "0x3197",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "emerald",
+      "name": "Emerald",
+      "item_id": "0x0F10",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "turquoise",
+      "name": "Turquoise",
+      "item_id": "0x3193",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "white_pearl",
+      "name": "White Pearl",
+      "item_id": "0x3196",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "amber",
+      "name": "Amber",
+      "item_id": "0x0F25",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "kindling",
+      "name": "Kindling",
+      "item_id": "0x0DE1",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "shaft",
+      "name": "Shaft",
+      "item_id": "0x1BD4",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "feather",
+      "name": "Feather",
+      "item_id": "0x1BD1",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "arrow",
+      "name": "Arrow",
+      "item_id": "0x0F3F",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bolt",
+      "name": "Bolt",
+      "item_id": "0x1BFB",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bandage",
+      "name": "Bandage",
+      "item_id": "0x0E21",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bola",
+      "name": "Bola",
+      "item_id": "0x26AC",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bola_ball",
+      "name": "Bola Ball",
+      "item_id": "0x0E73",
+      "hue": "0x08AC"
+    },
+    {
+      "resource_key": "arcane_dust",
+      "name": "Arcane Dust",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "blank_scroll",
+      "name": "Blank Scroll",
+      "item_id": "0x0EF3",
+      "hue": null
+    },
+    {
+      "resource_key": "red_scale",
+      "name": "Red Scale",
+      "item_id": "0x26B4",
+      "hue": "0x066D"
+    },
+    {
+      "resource_key": "yellow_scale",
+      "name": "Yellow Scale",
+      "item_id": "0x26B4",
+      "hue": "0x08A8"
+    },
+    {
+      "resource_key": "black_scale",
+      "name": "Black Scale",
+      "item_id": "0x26B4",
+      "hue": "0x0455"
+    },
+    {
+      "resource_key": "green_scale",
+      "name": "Green Scale",
+      "item_id": "0x26B4",
+      "hue": "0x0851"
+    },
+    {
+      "resource_key": "white_scale",
+      "name": "White Scale",
+      "item_id": "0x26B4",
+      "hue": "0x08FD"
+    },
+    {
+      "resource_key": "blue_scale",
+      "name": "Blue Scale",
+      "item_id": "0x26B4",
+      "hue": "0x08B0"
+    },
+    {
+      "resource_key": "bone",
+      "name": "Bone",
+      "item_id": " 0x0F7E",
+      "hue": null
+    },
+    {
+      "resource_key": "cloth",
+      "name": "Cloth",
+      "item_id": "0x1766",
+      "hue": null
+    },
+    {
+      "resource_key": "potion_keg",
+      "name": "Potion Keg",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "empty_bottle",
+      "name": "Empty Bottle",
+      "item_id": "0x0F0E",
+      "hue": null
+    },
+    {
+      "resource_key": "plain_rock",
+      "name": "Plain Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "dull_rock",
+      "name": "Dull Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "shadow_rock",
+      "name": "Shadow Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "copper_rock",
+      "name": "Copper Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "bronze_rock",
+      "name": "Bronze Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "gold_rock",
+      "name": "Gold Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "agapite_rock",
+      "name": "Agapite Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "verite_rock",
+      "name": "Verite Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "valorite_rock",
+      "name": "Valorite Rock",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "black_pearl",
+      "name": "Black Pearl",
+      "item_id": "0x138A",
+      "hue": null
+    },
+    {
+      "resource_key": "bloodmoss",
+      "name": "Bloodmoss",
+      "item_id": "0x0F7B",
+      "hue": null
+    },
+    {
+      "resource_key": "garlic",
+      "name": "Garlic",
+      "item_id": "0x138E",
+      "hue": null
+    },
+    {
+      "resource_key": "ginseng",
+      "name": "Ginseng",
+      "item_id": "0x0F85",
+      "hue": null
+    },
+    {
+      "resource_key": "mandrake_root",
+      "name": "Mandrake Root",
+      "item_id": "0x0F86",
+      "hue": null
+    },
+    {
+      "resource_key": "eye_of_newt",
+      "name": "Eye of Newt",
+      "item_id": "0x0F87",
+      "hue": null
+    },
+    {
+      "resource_key": "nightshade",
+      "name": "Nightshade",
+      "item_id": "0x1391",
+      "hue": null
+    },
+    {
+      "resource_key": "sulfurous_ash",
+      "name": "Sulfurous Ash",
+      "item_id": "0x0F8C",
+      "hue": null
+    },
+    {
+      "resource_key": "spiders_silk",
+      "name": "Spiders Silk",
+      "item_id": "0x138D",
+      "hue": null
+    },
+    {
+      "resource_key": "wyrms_heart",
+      "name": "Wyrms Heart",
+      "item_id": "0x0F91",
+      "hue": null
+    },
+    {
+      "resource_key": "eggs",
+      "name": "Eggs",
+      "item_id": "0x09B5",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "parasitic_plant",
+      "name": "Parasitic Plant",
+      "item_id": "0x3190",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "vial_of_tincture",
+      "name": "Vial of Tincture",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "wool",
+      "name": "Wool",
+      "item_id": "0x0DF8",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "tribal_berries",
+      "name": "Tribal Berries",
+      "item_id": "0x09D0",
+      "hue": "0x0006"
+    },
+    {
+      "resource_key": "book_of_lost_knowledge",
+      "name": "Book of Lost Knowledge",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "arcane_wool",
+      "name": "Arcane Wool",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "agapite_shards",
+      "name": "Agapite Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "amethyst",
+      "name": "amethyst",
+      "item_id": "0x0F16",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "apple",
+      "name": "Apple",
+      "item_id": "0x09D0",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "ash_fletching",
+      "name": "Ash Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "ash_wooden_shaft",
+      "name": "Ash Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "axles",
+      "name": "Axles",
+      "item_id": "0x105B",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "axles_with_gears",
+      "name": "Axles with gears",
+      "item_id": "0x1051",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bacon",
+      "name": "Bacon",
+      "item_id": "0x0979",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "banana",
+      "name": "Banana",
+      "item_id": "0x171F",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "barbed_wool",
+      "name": "Barbed Wool",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "barrel_hoops",
+      "name": "Barrel Hoops",
+      "item_id": "0x1DB7",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "barrel_lids",
+      "name": "Barrel Lids",
+      "item_id": "0x1DB8",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "barrel_staves",
+      "name": "Barrel Staves",
+      "item_id": "0x1EB1",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bloodwood_fletching",
+      "name": "Bloodwood Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "bloodwood_wooden_shaft",
+      "name": "Bloodwood Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "bowl_of_peas",
+      "name": "Bowl of Peas",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "brilliant_amber",
+      "name": "Brilliant Amber",
+      "item_id": "0x3199",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "bronze_shards",
+      "name": "Bronze Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "cake_mix",
+      "name": "Cake Mix",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "carrot",
+      "name": "Carrot",
+      "item_id": "0x0C78",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "chaga_mushrooms",
+      "name": "Chaga Mushrooms",
+      "item_id": "0x5743",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "cheese",
+      "name": "Cheese",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "chicken_leg",
+      "name": "Chicken Leg",
+      "item_id": "0x1608",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "chicken_legs",
+      "name": "Chicken Legs",
+      "item_id": "0x1608",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "citrine",
+      "name": "citrine",
+      "item_id": "0x0F15",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "clock_frames",
+      "name": "Clock Frames",
+      "item_id": "0x104D",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "clock_parts",
+      "name": "Clock Parts",
+      "item_id": "0x104F",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "cocoa_butter",
+      "name": "Cocoa Butter",
+      "item_id": "0x1044",
+      "hue": "0x0457"
+    },
+    {
+      "resource_key": "coconuts",
+      "name": "Coconuts",
+      "item_id": "0x1726",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "cooked_ribs",
+      "name": "Cooked Ribs",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "cookie_mix",
+      "name": "Cookie Mix",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "copper_shards",
+      "name": "Copper Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "copper_wire",
+      "name": "Copper Wire",
+      "item_id": "0x1879",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "crab",
+      "name": "Crab",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "crystal_shards",
+      "name": "Crystal Shards",
+      "item_id": "0x5738",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "crystalline_blackrock",
+      "name": "Crystalline Blackrock",
+      "item_id": "0x5732",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "daemon_claw",
+      "name": "Daemon Claw",
+      "item_id": "0x5721",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dbanana",
+      "name": "DBanana",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "deadly_poison_potion",
+      "name": "Deadly Poison Potion",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "delicate_scales",
+      "name": "Delicate Scales",
+      "item_id": "0x573A",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "diamond",
+      "name": "Diamond",
+      "item_id": "0x0F26",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dough",
+      "name": "Dough",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "dragon_blood",
+      "name": "Dragon Blood",
+      "item_id": "0x4077",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dried_herbs",
+      "name": "Dried Herbs",
+      "item_id": "0x0C42",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "dull_copper_shards",
+      "name": "Dull Copper Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "elixir_of_rebirth",
+      "name": "Elixir of Rebirth",
+      "item_id": "0x24E2",
+      "hue": "0x048E"
+    },
+    {
+      "resource_key": "elven_fletching",
+      "name": "Elven Fletching",
+      "item_id": "0x5737",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "enchanted_essence",
+      "name": "Enchanted Essence",
+      "item_id": "0x2DB2",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "explosion_potions",
+      "name": "Explosion Potions",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "faery_dust",
+      "name": "Faery Dust",
+      "item_id": "0x5745",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "fairy_salmon_steak",
+      "name": "Fairy Salmon Steak",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "fey_wings",
+      "name": "Fey Wings",
+      "item_id": "0x5726",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "fish_steak",
+      "name": "Fish Steak",
+      "item_id": "0x097B",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "flour",
+      "name": "Flour",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "fortune_coin",
+      "name": "Fortune Coin",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "frostwood_fletching",
+      "name": "Frostwood Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "frostwood_wooden_shaft",
+      "name": "Frostwood Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "gate_scrolls",
+      "name": "Gate Scrolls",
+      "item_id": "0x1F60",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "gears",
+      "name": "Gears",
+      "item_id": "0x1053",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "goblin_blood",
+      "name": "Goblin Blood",
+      "item_id": "0x572C",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "goby_fish_bowl",
+      "name": "Goby Fish Bowl",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "gold_shards",
+      "name": "Gold Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "gold_wire",
+      "name": "Gold Wire",
+      "item_id": "0x1878",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "grapes",
+      "name": "Grapes",
+      "item_id": "0x09D1",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "greater_explosion_potion",
+      "name": "Greater Explosion Potion",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "greater_heal_potion",
+      "name": "Greater Heal Potion",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "greater_poison_potion",
+      "name": "Greater Poison Potion",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "ham",
+      "name": "Ham",
+      "item_id": "0x09C9",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "heartwood_fletching",
+      "name": "Heartwood Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "heartwood_wooden_shaft",
+      "name": "Heartwood Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "hinges",
+      "name": "Hinges",
+      "item_id": "0x1055",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "honey",
+      "name": "Honey",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "horned_wool",
+      "name": "Horned Wool",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "jar_of_honey",
+      "name": "Jar of Honey",
+      "item_id": "0x09EC",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "lamb_leg",
+      "name": "Lamb Leg",
+      "item_id": "0x160A",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "lava_serpent_crust",
+      "name": "Lava Serpent Crust",
+      "item_id": "0x572D",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "lettuce",
+      "name": "Lettuce",
+      "item_id": "0x0C70",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "lime",
+      "name": "Lime",
+      "item_id": "0x172A",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "lodestone",
+      "name": "Lodestone",
+      "item_id": "0x5739",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "mento_seasoning",
+      "name": "Mento Seasoning",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "oak_fletching",
+      "name": "Oak Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "oak_wooden_shaft",
+      "name": "Oak Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "octopus_ink",
+      "name": "Octopus Ink",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "onion",
+      "name": "Onion",
+      "item_id": "0x0C6D",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "orb_fragment",
+      "name": "Orb Fragment",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "page_of_insight",
+      "name": "Page of Insight",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "peach",
+      "name": "Peach",
+      "item_id": "0x09D2",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "pear",
+      "name": "Pear",
+      "item_id": "0x0994",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "perfect_emerald",
+      "name": "Perfect Emerald",
+      "item_id": "0x3194",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "poison_potion",
+      "name": "Poison Potion",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "powdered_iron",
+      "name": "Powdered Iron",
+      "item_id": "0x573D",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "pumpkin",
+      "name": "Pumpkin",
+      "item_id": "0x0C6A",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raptor_tooth",
+      "name": "Raptor Tooth",
+      "item_id": "0x5747",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raw_birds",
+      "name": "Raw Birds",
+      "item_id": "0x09B9",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raw_chicken_legs",
+      "name": "Raw Chicken Legs",
+      "item_id": "0x1607",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raw_fish_steaks",
+      "name": "Raw Fish Steaks",
+      "item_id": "0x097A",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raw_legs_of_lamb",
+      "name": "Raw Legs of Lamb",
+      "item_id": "0x1609",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "raw_meat",
+      "name": "Raw Meat",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "raw_ribs",
+      "name": "Raw Ribs",
+      "item_id": "0x09F1",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "recall_scrolls",
+      "name": "Recall Scrolls",
+      "item_id": "0x1F4C",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "relic_fragment",
+      "name": "Relic Fragment",
+      "item_id": "0x2DB3",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "ribs",
+      "name": "Ribs",
+      "item_id": "0x09F2",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "ruby",
+      "name": "Ruby",
+      "item_id": "0x0F13",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "sack_of_flour",
+      "name": "Sack of Flour",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "sack_of_sugar",
+      "name": "Sack of Sugar",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "samuels_secret_sauce",
+      "name": "Samuels Secret Sauce",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "sapphire",
+      "name": "Sapphire",
+      "item_id": "0x0F11",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "sausage",
+      "name": "Sausage",
+      "item_id": "0x09C0",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "sea_weed",
+      "name": "Sea Weed",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "seed_of_renewel",
+      "name": "Seed of Renewel",
+      "item_id": "0x5736",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "sextant_parts",
+      "name": "Sextant Parts",
+      "item_id": "0x1059",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "shadow_iron_shards",
+      "name": "Shadow Iron Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "silver_wire",
+      "name": "Silver Wire",
+      "item_id": "0x1877",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "slith_tongue",
+      "name": "Slith Tongue",
+      "item_id": "0x5746",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "softened_reeds",
+      "name": "Softened Reeds",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "spined_wool",
+      "name": "Spined Wool",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "squash",
+      "name": "Squash",
+      "item_id": "0x0C72",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "star_sapphires",
+      "name": "Star Sapphires",
+      "item_id": "0x0F0F",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "sweet_cocoa_butter",
+      "name": "Sweet Cocoa Butter",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "sweet_dough",
+      "name": "Sweet Dough",
+      "item_id": "0x103D",
+      "hue": "0x0096"
+    },
+    {
+      "resource_key": "torso",
+      "name": "Torso",
+      "item_id": "0x1D9F",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "tourmaline",
+      "name": "Tourmaline",
+      "item_id": "0x0F18",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "unbaked_apple_pie",
+      "name": "Unbaked Apple Pie",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "unbaked_peach_cobbler",
+      "name": "Unbaked Peach Cobbler",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "unbaked_pumpkin_pie",
+      "name": "Unbaked Pumpkin Pie",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "unbaked_quiche",
+      "name": "Unbaked Quiche",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "uncooked_cheese_pizza",
+      "name": "Uncooked Cheese Pizza",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "uncooked_fruit_pie",
+      "name": "Uncooked Fruit Pie",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "uncooked_meat_pie",
+      "name": "Uncooked Meat Pie",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "uncooked_sausage_pizza",
+      "name": "Uncooked Sausage Pizza",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "undying_flesh",
+      "name": "Undying Flesh",
+      "item_id": "0x5731",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "unmarked_runes",
+      "name": "Unmarked Runes",
+      "item_id": "0x1F14",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "valorite_shards",
+      "name": "Valorite Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "verite_shards",
+      "name": "Verite Shards",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "vial_of_vitriol",
+      "name": "Vial of Vitriol",
+      "item_id": "0x5722",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "void_orb",
+      "name": "Void Orb",
+      "item_id": "0x573E",
+      "hue": "0x0000"
+    },
+    {
+      "resource_key": "water",
+      "name": "Water",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "wheat",
+      "name": "Wheat",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "yew_fletching",
+      "name": "Yew Fletching",
+      "item_id": null,
+      "hue": null
+    },
+    {
+      "resource_key": "yew_wooden_shaft",
+      "name": "Yew Wooden Shaft",
+      "item_id": null,
+      "hue": null
+    }
+  ]
+}

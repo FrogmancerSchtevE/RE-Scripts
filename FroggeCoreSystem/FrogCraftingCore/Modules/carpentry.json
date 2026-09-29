@@ -1,0 +1,2699 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "carpentry",
+  "name": "Carpentry",
+  "skill_name": "Carpentry",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Carpentry Tool",
+    "item_ids": [],
+    "item_names": [
+      "Dovetail Saw",
+      "Saw",
+      "Carpentry Tool",
+	  "Nails"
+    ],
+    "toolbook_category_button": 2,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [],
+      "output_names": [
+        "Dovetail Saw",
+        "Saw",
+        "Carpentry Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [
+    {
+      "id": "wood",
+      "name": "Wood",
+      "default": "plain",
+      "options": [
+        {
+          "id": "plain",
+          "name": "Wood",
+          "resource_key": "plain_board",
+          "craft_actions": [
+            7,
+            6
+          ]
+        },
+        {
+          "id": "oak",
+          "name": "Oak",
+          "resource_key": "oak_board",
+          "craft_actions": [
+            7,
+            13
+          ]
+        },
+        {
+          "id": "ash",
+          "name": "Ash",
+          "resource_key": "ash_board",
+          "craft_actions": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "yew",
+          "name": "Yew",
+          "resource_key": "yew_board",
+          "craft_actions": [
+            7,
+            27
+          ]
+        },
+        {
+          "id": "heartwood",
+          "name": "Heartwood",
+          "resource_key": "heartwood_board",
+          "craft_actions": [
+            7,
+            34
+          ]
+        },
+        {
+          "id": "bloodwood",
+          "name": "Bloodwood",
+          "resource_key": "bloodwood_board",
+          "craft_actions": [
+            7,
+            41
+          ]
+        },
+        {
+          "id": "frostwood",
+          "name": "Frostwood",
+          "resource_key": "frostwood_board",
+          "craft_actions": [
+            7,
+            48
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "plain_board",
+          "craft_actions": [
+            7,
+            72
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "wizard_staffs",
+      "name": "Wizard Staffs",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "tribal_staff",
+          "name": "Tribal Staff",
+          "button": 2,
+          "enabled": true,
+          "source_row": 459,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tribal Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "name": "Other",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "barrel_staves",
+          "name": "Barrel Staves",
+          "button": 2,
+          "enabled": true,
+          "source_row": 460,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Barrel Staves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "barrel_lid",
+          "name": "Barrel Lid",
+          "button": 9,
+          "enabled": true,
+          "source_row": 461,
+          "min_skill": 11.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Barrel Lid"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "short_music_stand_left",
+          "name": "Short Music Stand (Left)",
+          "button": 16,
+          "enabled": true,
+          "source_row": 462,
+          "min_skill": 78.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Short Music Stand (Left)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "short_music_stand_right",
+          "name": "Short Music Stand (Right)",
+          "button": 23,
+          "enabled": true,
+          "source_row": 463,
+          "min_skill": 78.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Short Music Stand (Right)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_music_stand_left",
+          "name": "Tall Music Stand (Left)",
+          "button": 30,
+          "enabled": true,
+          "source_row": 464,
+          "min_skill": 81.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Music Stand (Left)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_music_stand_right",
+          "name": "Tall Music Stand (Right)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 465,
+          "min_skill": 81.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Music Stand (Right)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "easel_south",
+          "name": "Easel (South)",
+          "button": 44,
+          "enabled": true,
+          "source_row": 466,
+          "min_skill": 86.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Easel (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "easel_east",
+          "name": "Easel (east)",
+          "button": 51,
+          "enabled": true,
+          "source_row": 467,
+          "min_skill": 86.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Easel (east)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "easel_north",
+          "name": "Easel (North)",
+          "button": 58,
+          "enabled": true,
+          "source_row": 468,
+          "min_skill": 86.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Easel (North)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "engraving_tools",
+      "name": "Engraving Tools",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "armor_engraving_tool",
+          "name": "Armor Engraving Tool",
+          "button": 2,
+          "enabled": true,
+          "source_row": 469,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "octopus_ink",
+              "amount": 1
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 10
+            },
+            {
+              "choice_group": "wood",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Armor Engraving Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "weapon_engraving_tool",
+          "name": "Weapon Engraving Tool",
+          "button": 9,
+          "enabled": true,
+          "source_row": 470,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "octopus_ink",
+              "amount": 1
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 10
+            },
+            {
+              "choice_group": "wood",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Weapon Engraving Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spellbook_engraving_tool",
+          "name": "Spellbook Engraving Tool",
+          "button": 16,
+          "enabled": true,
+          "source_row": 471,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "octopus_ink",
+              "amount": 1
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 10
+            },
+            {
+              "choice_group": "wood",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spellbook Engraving Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "furniture",
+      "name": "Furniture",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "foot_stool",
+          "name": "Foot Stool",
+          "button": 2,
+          "enabled": true,
+          "source_row": 472,
+          "min_skill": 11.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 9
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Foot Stool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "stool",
+          "name": "Stool",
+          "button": 9,
+          "enabled": true,
+          "source_row": 473,
+          "min_skill": 11.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 9
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Stool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "straw_chair",
+          "name": "Straw Chair",
+          "button": 16,
+          "enabled": true,
+          "source_row": 474,
+          "min_skill": 21.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 13
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Straw Chair"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_chair",
+          "name": "Wooden Chair",
+          "button": 23,
+          "enabled": true,
+          "source_row": 475,
+          "min_skill": 42.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Chair"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "vesper_style_chair",
+          "name": "Vesper-style Chair",
+          "button": 30,
+          "enabled": true,
+          "source_row": 476,
+          "min_skill": 42.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Vesper-style Chair"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "trinsic_style_chair",
+          "name": "Trinsic-style Chair",
+          "button": 37,
+          "enabled": true,
+          "source_row": 477,
+          "min_skill": 42.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 13
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Trinsic-style Chair"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_bench",
+          "name": "Wooden Bench",
+          "button": 44,
+          "enabled": true,
+          "source_row": 478,
+          "min_skill": 52.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 17
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Bench"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_throne",
+          "name": "Wooden Throne",
+          "button": 51,
+          "enabled": true,
+          "source_row": 479,
+          "min_skill": 52.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 17
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Throne",
+            "Wooden Throone"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "magncia_style_throne",
+          "name": "Magncia-style Throne",
+          "button": 58,
+          "enabled": true,
+          "source_row": 480,
+          "min_skill": 73.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 19
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Magncia-style Throne"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "small_table",
+          "name": "Small Table",
+          "button": 65,
+          "enabled": true,
+          "source_row": 481,
+          "min_skill": 42.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 17
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "writing_table",
+          "name": "Writing Table",
+          "button": 72,
+          "enabled": true,
+          "source_row": 482,
+          "min_skill": 63.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 17
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Writing Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "yew_wood_table",
+          "name": "Yew-Wood Table",
+          "button": 79,
+          "enabled": true,
+          "source_row": 483,
+          "min_skill": 84.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 27
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Yew-Wood Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "large_table",
+          "name": "Large Table",
+          "button": 86,
+          "enabled": true,
+          "source_row": 484,
+          "min_skill": 63.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 23
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Table"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "containers",
+      "name": "Containers",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "wooden_box",
+          "name": "Wooden Box",
+          "button": 2,
+          "enabled": true,
+          "source_row": 485,
+          "min_skill": 21.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Box"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "small_crate",
+          "name": "Small Crate",
+          "button": 9,
+          "enabled": true,
+          "source_row": 486,
+          "min_skill": 10.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Crate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "medium_crate",
+          "name": "Medium Crate",
+          "button": 16,
+          "enabled": true,
+          "source_row": 487,
+          "min_skill": 31.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Medium Crate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "large_crate",
+          "name": "Large Crate",
+          "button": 23,
+          "enabled": true,
+          "source_row": 488,
+          "min_skill": 73.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Crate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_chest",
+          "name": "Wooden Chest",
+          "button": 30,
+          "enabled": true,
+          "source_row": 489,
+          "min_skill": 31.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Chest"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_shelf",
+          "name": "Wooden Shelf",
+          "button": 37,
+          "enabled": true,
+          "source_row": 490,
+          "min_skill": 31.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Shelf"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "armoire_red",
+          "name": "Armoire (red)",
+          "button": 44,
+          "enabled": true,
+          "source_row": 491,
+          "min_skill": 84.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 35
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Armoire (red)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "armoire",
+          "name": "Armoire",
+          "button": 51,
+          "enabled": true,
+          "source_row": 492,
+          "min_skill": 84.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 35
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Armoire",
+            "Armoire (red)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "plain_wooden_chest",
+          "name": "Plain Wooden chest",
+          "button": 58,
+          "enabled": true,
+          "source_row": 493,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Plain Wooden chest"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ornate_wooden_chest",
+          "name": "Ornate Wooden chest",
+          "button": 65,
+          "enabled": true,
+          "source_row": 494,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ornate Wooden chest"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "gilded_wooden_chest",
+          "name": "Gilded Wooden Chest",
+          "button": 72,
+          "enabled": true,
+          "source_row": 495,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Gilded Wooden Chest"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wooden_footlocker",
+          "name": "Wooden Footlocker",
+          "button": 79,
+          "enabled": true,
+          "source_row": 496,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Footlocker"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "finished_wooden_chest",
+          "name": "Finished Wooden Chest",
+          "button": 86,
+          "enabled": true,
+          "source_row": 497,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Finished Wooden Chest"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tall_cabinet",
+          "name": "Tall Cabinet",
+          "button": 93,
+          "enabled": true,
+          "source_row": 498,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Cabinet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "short_cabinet",
+          "name": "Short Cabinet",
+          "button": 100,
+          "enabled": true,
+          "source_row": 499,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Short Cabinet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "red_armoire",
+          "name": "Red Armoire",
+          "button": 107,
+          "enabled": true,
+          "source_row": 500,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Red Armoire"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "elegant_armoire",
+          "name": "Elegant Armoire",
+          "button": 114,
+          "enabled": true,
+          "source_row": 501,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Elegant Armoire"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "maple_armoire",
+          "name": "Maple Armoire",
+          "button": 121,
+          "enabled": true,
+          "source_row": 502,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Maple Armoire"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "cherry_armoire",
+          "name": "Cherry Armoire",
+          "button": 128,
+          "enabled": true,
+          "source_row": 503,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cherry Armoire"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "keg",
+          "name": "Keg",
+          "button": 135,
+          "enabled": true,
+          "source_row": 504,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "barrel_staves",
+              "amount": 3
+            },
+            {
+              "resource_key": "barrel_hoops",
+              "amount": 1
+            },
+            {
+              "resource_key": "barrel_lids",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Keg"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "softened_reeds",
+          "name": "Softened Reeds",
+          "button": 142,
+          "enabled": true,
+          "source_row": 505,
+          "min_skill": 50.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "normal_leather",
+              "amount": 1
+            },
+            {
+              "resource_key": "wheat",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Softened Reeds"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "round_basket",
+          "name": "Round Basket",
+          "button": 149,
+          "enabled": true,
+          "source_row": 506,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 2
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Round Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bushel",
+          "name": "Bushel",
+          "button": 156,
+          "enabled": true,
+          "source_row": 507,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 2
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bushel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_bushel",
+          "name": "Small Bushel",
+          "button": 163,
+          "enabled": true,
+          "source_row": 508,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 1
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Bushel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "picnic_basket",
+          "name": "Picnic Basket",
+          "button": 170,
+          "enabled": true,
+          "source_row": 509,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 1
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Picnic Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "winnowing_basket",
+          "name": "Winnowing Basket",
+          "button": 177,
+          "enabled": true,
+          "source_row": 510,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 2
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Winnowing Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "square_basket",
+          "name": "Square Basket",
+          "button": 184,
+          "enabled": true,
+          "source_row": 511,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 2
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Square Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "basket",
+          "name": "Basket",
+          "button": 191,
+          "enabled": true,
+          "source_row": 512,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 2
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_round_vasket",
+          "name": "Tall Round Vasket",
+          "button": 198,
+          "enabled": true,
+          "source_row": 513,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 3
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Round Vasket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_square_basket",
+          "name": "Small Square Basket",
+          "button": 205,
+          "enabled": true,
+          "source_row": 514,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 1
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Square Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tall_basket",
+          "name": "Tall Basket",
+          "button": 212,
+          "enabled": true,
+          "source_row": 515,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 3
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_round_basket",
+          "name": "Small Round Basket",
+          "button": 219,
+          "enabled": true,
+          "source_row": 516,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "softened_reeds",
+              "amount": 1
+            },
+            {
+              "resource_key": "shaft",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Round Basket"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "weapons",
+      "name": "Weapons",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "shepher_s_crook",
+          "name": "Shepher's Crook",
+          "button": 2,
+          "enabled": true,
+          "source_row": 517,
+          "min_skill": 78.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 7
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shepher's Crook"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "quarter_staff",
+          "name": "Quarter Staff",
+          "button": 9,
+          "enabled": true,
+          "source_row": 518,
+          "min_skill": 73.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Quarter Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "gnarled_staff",
+          "name": "Gnarled Staff",
+          "button": 16,
+          "enabled": true,
+          "source_row": 519,
+          "min_skill": 78.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 7
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Gnarled Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fishing_pole",
+          "name": "Fishing Pole",
+          "button": 23,
+          "enabled": true,
+          "source_row": 520,
+          "min_skill": 68.4,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 40.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fishing Pole"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "club",
+          "name": "Club",
+          "button": 30,
+          "enabled": true,
+          "source_row": 521,
+          "min_skill": 65.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 9
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Club"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "black_staff",
+          "name": "Black Staff",
+          "button": 37,
+          "enabled": true,
+          "source_row": 522,
+          "min_skill": 81.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 9
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Black Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "armor",
+      "name": "Armor",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "wooden_shield",
+          "name": "Wooden Shield",
+          "button": 2,
+          "enabled": true,
+          "source_row": 523,
+          "min_skill": 52.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 9
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wooden Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "instruments",
+      "name": "Instruments",
+      "source_page": 2,
+      "button": 50,
+      "open_actions": [
+        105,
+        50
+      ],
+      "recipes": [
+        {
+          "id": "lap_harp",
+          "name": "Lap Harp",
+          "button": 2,
+          "enabled": true,
+          "source_row": 524,
+          "min_skill": 63.1,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lap Harp"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "standing_harp",
+          "name": "Standing Harp",
+          "button": 9,
+          "enabled": true,
+          "source_row": 525,
+          "min_skill": 78.9,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 35
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Standing Harp"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "drum",
+          "name": "Drum",
+          "button": 16,
+          "enabled": true,
+          "source_row": 526,
+          "min_skill": 57.8,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 20
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Drum"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "lute",
+          "name": "Lute",
+          "button": 23,
+          "enabled": true,
+          "source_row": 527,
+          "min_skill": 68.4,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 25
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Lute"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tambourine",
+          "name": "Tambourine",
+          "button": 30,
+          "enabled": true,
+          "source_row": 528,
+          "min_skill": 57.8,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tambourine"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "tambourine_tassel",
+          "name": "Tambourine (Tassel)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 529,
+          "min_skill": 57.8,
+          "skill_requirements": [
+            {
+              "skill_name": "Musicianship",
+              "min_skill": 45.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 15
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tambourine (Tassel)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "add_ons",
+      "name": "Add-Ons",
+      "source_page": 2,
+      "button": 64,
+      "open_actions": [
+        105,
+        64
+      ],
+      "recipes": [
+        {
+          "id": "small_forge",
+          "name": "Small Forge",
+          "button": 2,
+          "enabled": true,
+          "source_row": 530,
+          "min_skill": 73.6,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 75
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Forge"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "large_forge_east",
+          "name": "Large Forge (east)",
+          "button": 9,
+          "enabled": true,
+          "source_row": 531,
+          "min_skill": 78.9,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 100
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Forge (east)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "large_forge_south",
+          "name": "Large Forge (South)",
+          "button": 16,
+          "enabled": true,
+          "source_row": 532,
+          "min_skill": 78.9,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 100
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Forge (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "anvil_east",
+          "name": "Anvil (east)",
+          "button": 23,
+          "enabled": true,
+          "source_row": 533,
+          "min_skill": 73.6,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Anvil (east)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "anvil_south",
+          "name": "Anvil (South)",
+          "button": 30,
+          "enabled": true,
+          "source_row": 534,
+          "min_skill": 73.6,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Anvil (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dressform_front",
+          "name": "Dressform (Front)",
+          "button": 37,
+          "enabled": true,
+          "source_row": 535,
+          "min_skill": 63.1,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 25
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dressform (Front)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dressform_side",
+          "name": "Dressform (Side)",
+          "button": 44,
+          "enabled": true,
+          "source_row": 536,
+          "min_skill": 63.1,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 25
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dressform (Side)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_bed_south",
+          "name": "Small Bed (south)",
+          "button": 51,
+          "enabled": true,
+          "source_row": 537,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 100
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Bed (south)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "small_bed_east",
+          "name": "Small Bed (East)",
+          "button": 58,
+          "enabled": true,
+          "source_row": 538,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 100
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Small Bed (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "large_bed_south",
+          "name": "Large Bed (South)",
+          "button": 65,
+          "enabled": true,
+          "source_row": 539,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 150
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Bed (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "large_bed_east",
+          "name": "Large Bed (East)",
+          "button": 72,
+          "enabled": true,
+          "source_row": 540,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 150
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Bed (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dartboard_south",
+          "name": "Dartboard (South)",
+          "button": 79,
+          "enabled": true,
+          "source_row": 541,
+          "min_skill": 15.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dartboard (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dartboard_east",
+          "name": "Dartboard (East)",
+          "button": 86,
+          "enabled": true,
+          "source_row": 542,
+          "min_skill": 15.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dartboard (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ballot_box",
+          "name": "Ballot Box",
+          "button": 93,
+          "enabled": true,
+          "source_row": 543,
+          "min_skill": 47.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ballot Box"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "pentagram",
+          "name": "Pentagram",
+          "button": 100,
+          "enabled": true,
+          "source_row": 544,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Magery",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 40
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pentagram"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "abbatoir",
+          "name": "Abbatoir",
+          "button": 107,
+          "enabled": true,
+          "source_row": 545,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Magery",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 40
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Abbatoir"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spinning_wheel_east",
+          "name": "Spinning Wheel (East)",
+          "button": 114,
+          "enabled": true,
+          "source_row": 546,
+          "min_skill": 73.6,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 75
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spinning Wheel (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "spinning_wheel_south",
+          "name": "Spinning Wheel (South)",
+          "button": 121,
+          "enabled": true,
+          "source_row": 547,
+          "min_skill": 73.6,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 75
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spinning Wheel (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "loom_east",
+          "name": "Loom (East)",
+          "button": 128,
+          "enabled": true,
+          "source_row": 548,
+          "min_skill": 84.2,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 85
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Loom (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "loom_south",
+          "name": "Loom (South)",
+          "button": 135,
+          "enabled": true,
+          "source_row": 549,
+          "min_skill": 84.2,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 65.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 85
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Loom (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "stone_oven_east",
+          "name": "Stone Oven (East)",
+          "button": 142,
+          "enabled": true,
+          "source_row": 550,
+          "min_skill": 68.4,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 85
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 125
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Stone Oven (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "stone_oven_south",
+          "name": "Stone Oven (South)",
+          "button": 149,
+          "enabled": true,
+          "source_row": 551,
+          "min_skill": 68.4,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 85
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 125
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Stone Oven (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "flour_mill_east",
+          "name": "Flour Mill (East)",
+          "button": 156,
+          "enabled": true,
+          "source_row": 552,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Flour Mill (East)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "flour_mill_south",
+          "name": "Flour Mill (South)",
+          "button": 163,
+          "enabled": true,
+          "source_row": 553,
+          "min_skill": 94.7,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 100
+            },
+            {
+              "resource_key": "iron_ingot",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Flour Mill (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "water_trough_east",
+          "name": "Water Trough (east)",
+          "button": 170,
+          "enabled": true,
+          "source_row": 554,
+          "min_skill": 94.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Water Trough (east)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "water_trough_south",
+          "name": "Water Trough (South)",
+          "button": 177,
+          "enabled": true,
+          "source_row": 555,
+          "min_skill": 94.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "wood",
+              "amount": 150
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Water Trough (South)"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    }
+  ]
+}

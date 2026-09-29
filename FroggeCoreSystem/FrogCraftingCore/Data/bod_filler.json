@@ -1,0 +1,96 @@
+{
+  "format": "frog-bod-filler-data",
+  "version": 1,
+  "identification": {
+    "item_id": "0xA614",
+    "accept_order_property_match": true,
+    "hue_is_hint_only": true
+  },
+  "gump": {
+    "gump_id": "0x5AFBD742",
+    "combine_item_button": 2,
+    "combine_container_button": 4,
+    "exit_button": 1,
+    "numeric_text_layout": [
+      "amount_to_make",
+      "requested_item_id",
+      "amount_finished"
+    ]
+  },
+  "skill_filter": {
+    "minimum_skill_margin": 50.0,
+    "below_safe_threshold": "warn_and_continue",
+    "note": "The minimum-plus-50 value is a theoretical 100% success threshold. Below it, warn the player but continue when the real skill still meets the recipe minimum."
+  },
+  "fill_policy": {
+    "max_passes": 20,
+    "max_zero_accept_passes": 3,
+    "combine_settle_attempts": 4,
+    "recycle_rejected_items": true,
+    "recycle_attempts": 3,
+    "recycle_retries": 3
+  },
+  "craft_profiles": [
+    {
+      "module_id": "alchemy",
+      "bod_hue": "0x0A2D",
+      "stackable": true,
+      "default_material_label": "Standard"
+    },
+    {
+      "module_id": "cooking",
+      "bod_hue": "0x0A23",
+      "stackable": false,
+      "default_material_label": "Standard"
+    },
+    {
+      "module_id": "tinkering",
+      "bod_hue": "0x0A05",
+      "stackable": false,
+      "default_material_label": "Iron"
+    },
+    {
+      "module_id": "carpentry",
+      "bod_hue": "0x0A0F",
+      "stackable": false,
+      "default_material_label": "Plain Boards"
+    },
+    {
+      "module_id": "tailoring",
+      "bod_hue": null,
+      "stackable": false,
+      "default_material_label": "Normal"
+    },
+    {
+      "module_id": "blacksmithy",
+      "bod_hue": null,
+      "stackable": false,
+      "default_material_label": "Iron"
+    },
+    {
+      "module_id": "inscription",
+      "bod_hue": null,
+      "stackable": true,
+      "default_material_label": "Standard"
+    },
+    {
+      "module_id": "fletching",
+      "bod_hue": null,
+      "stackable": false,
+      "default_material_label": "Plain Boards"
+    }
+  ],
+  "stackable_default": false,
+  "bulk_filters": {
+    "exceptional": true,
+    "skills": {
+      "cooking": false
+    },
+    "ingredients": {
+      "bone": false,
+      "gems": false
+    },
+    "materials": {}
+  },
+  "recipe_overrides": []
+}

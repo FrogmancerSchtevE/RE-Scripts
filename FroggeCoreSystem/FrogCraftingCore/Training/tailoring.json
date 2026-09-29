@@ -1,0 +1,84 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "tailoring",
+  "name": "Tailoring Training",
+  "target_skill": 120.0,
+  "resource_choices": {
+    "leather": "normal"
+  },
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 30.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 30.0,
+      "max_skill": 50.0,
+      "mode": "craft",
+      "label": "Short Pants / Cloaks",
+      "recipe_ids": ["short_pants", "cloak"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 50.0,
+      "max_skill": 53.9,
+      "mode": "craft",
+      "label": "Thigh Boots",
+      "recipe_ids": ["thigh_boots"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 53.9,
+      "max_skill": 74.6,
+      "mode": "craft",
+      "label": "Robes",
+      "recipe_ids": ["robe"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 74.6,
+      "max_skill": 99.6,
+      "mode": "craft",
+      "label": "Oil Cloth",
+      "recipe_ids": ["oil_cloth"],
+      "disposal": { "mode": "trash", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 99.6,
+      "max_skill": 100.0,
+      "mode": "craft",
+      "label": "Studded Gorget",
+      "recipe_ids": ["studded_gorget"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 100.0,
+      "max_skill": 103.1,
+      "mode": "craft",
+      "label": "Studded Sleeves",
+      "recipe_ids": ["studded_sleeves", "studded_armor"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 103.1,
+      "max_skill": 110.0,
+      "mode": "craft",
+      "label": "Studded Tunic",
+      "recipe_ids": ["studded_tunic"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 110.0,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Bone Armor",
+      "recipe_ids": ["bone_armor", "bone_leggings"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "format": "frog-bod-book-filler-data",
+  "version": 1,
+  "book_item_id": "0x2259",
+  "gump_id": "0x26C52D10",
+  "category_button": 3,
+  "next_page_button": 2,
+  "interaction_cooldown_ms": 750,
+  "open_attempts": 4,
+  "gump_wait_ms": 3000,
+  "gump_settle_ms": 250,
+  "categories": [
+    {"id": "all", "label": "All Skills", "module_id": ""},
+    {"id": "blacksmith", "label": "Blacksmith", "module_id": "blacksmithy"},
+    {"id": "tailoring", "label": "Tailoring", "module_id": "tailoring"},
+    {"id": "carpentry", "label": "Carpentry", "module_id": "carpentry"},
+    {"id": "fletching", "label": "Fletching", "module_id": "fletching"},
+    {"id": "alchemy", "label": "Alchemy", "module_id": "alchemy"},
+    {"id": "tinkering", "label": "Tinkering", "module_id": "tinkering"},
+    {"id": "cooking", "label": "Cooking", "module_id": "cooking"},
+    {"id": "inscription", "label": "Inscription", "module_id": "inscription"}
+  ],
+  "skill_aliases": {
+    "blacksmith": "blacksmithy",
+    "blacksmithing": "blacksmithy"
+  },
+  "recipe_aliases": [
+    {"module_id": "tinkering", "book_name": "clock", "recipe_id": "clock_right"},
+    {"module_id": "tinkering", "book_name": "fork", "recipe_id": "fork_right"}
+  ],
+  "max_crafts_per_pass": 10,
+  "max_zero_progress_passes": 2,
+  "recycle_attempts": 3
+}

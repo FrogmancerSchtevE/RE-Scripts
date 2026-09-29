@@ -1,0 +1,60 @@
+{
+  "format": "frog-crafting-training",
+  "version": 1,
+  "module_id": "fletching",
+  "name": "Bowcraft & Fletching Training",
+  "target_skill": 120.0,
+  "resource_choices": {
+    "wood": "plain"
+  },
+  "stages": [
+    {
+      "min_skill": 0.0,
+      "max_skill": 30.0,
+      "mode": "npc_train",
+      "label": "NPC Train",
+      "recipe_ids": [],
+      "disposal": { "mode": "none", "button": null, "target_output": false }
+    },
+    {
+      "min_skill": 30.0,
+      "max_skill": 50.0,
+      "mode": "craft",
+      "label": "Arrows / Bolts",
+      "recipe_ids": ["arrow", "crossbow_bolt"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 50.0,
+      "max_skill": 60.0,
+      "mode": "craft",
+      "label": "Bows",
+      "recipe_ids": ["bow"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 60.0,
+      "max_skill": 80.0,
+      "mode": "craft",
+      "label": "Crossbows",
+      "recipe_ids": ["crossbow"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 80.0,
+      "max_skill": 90.0,
+      "mode": "craft",
+      "label": "Heavy Crossbows",
+      "recipe_ids": ["heavy_crossbow"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    },
+    {
+      "min_skill": 90.0,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Repeating Crossbows",
+      "recipe_ids": ["repeating_crossbow"],
+      "disposal": { "mode": "recycle", "button": 77, "target_output": true }
+    }
+  ]
+}

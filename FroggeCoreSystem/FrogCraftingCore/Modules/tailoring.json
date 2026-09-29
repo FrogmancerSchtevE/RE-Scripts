@@ -1,0 +1,2186 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "tailoring",
+  "name": "Tailoring",
+  "skill_name": "Tailoring",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Sewing Kit",
+    "item_ids": [],
+    "item_names": [
+      "Sewing Kit",
+      "Tailoring Tool"
+    ],
+    "toolbook_category_button": 3,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [],
+      "output_names": [
+        "Sewing Kit",
+        "Tailoring Tool"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [
+    {
+      "id": "leather",
+      "name": "Leather",
+      "default": "normal",
+      "options": [
+        {
+          "id": "normal",
+          "name": "Leather",
+          "resource_key": "normal_leather",
+          "craft_actions": [
+            7,
+            6
+          ]
+        },
+        {
+          "id": "spined",
+          "name": "Spined",
+          "resource_key": "spined_leather",
+          "craft_actions": [
+            7,
+            13
+          ]
+        },
+        {
+          "id": "horned",
+          "name": "Horned",
+          "resource_key": "horned_leather",
+          "craft_actions": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "barbed",
+          "name": "Barbed",
+          "resource_key": "barbed_leather",
+          "craft_actions": [
+            7,
+            27
+          ]
+        },
+        {
+          "id": "scaled",
+          "name": "Scaled",
+          "resource_key": "scaled_leather",
+          "craft_actions": [
+            7,
+            34
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "normal_leather",
+          "craft_actions": [
+            7,
+            35
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "hats",
+      "name": "Hats",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "skullcap",
+          "name": "Skullcap",
+          "button": 2,
+          "enabled": true,
+          "source_row": 376,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Skullcap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bandana",
+          "name": "Bandana",
+          "button": 9,
+          "enabled": true,
+          "source_row": 377,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bandana"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "floppy_hat",
+          "name": "Floppy Hat",
+          "button": 16,
+          "enabled": true,
+          "source_row": 378,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 11
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Floppy Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "cap",
+          "name": "Cap",
+          "button": 23,
+          "enabled": true,
+          "source_row": 379,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 11
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wide_brim_hat",
+          "name": "Wide-Brim Hat",
+          "button": 30,
+          "enabled": true,
+          "source_row": 380,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wide-Brim Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "straw_hat",
+          "name": "Straw Hat",
+          "button": 37,
+          "enabled": true,
+          "source_row": 381,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Straw Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tall_straw_hat",
+          "name": "Tall Straw Hat",
+          "button": 44,
+          "enabled": true,
+          "source_row": 382,
+          "min_skill": 6.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 13
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tall Straw Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "wizard_s_hat",
+          "name": "Wizard's Hat",
+          "button": 51,
+          "enabled": true,
+          "source_row": 383,
+          "min_skill": 7.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Wizard's Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bonnet",
+          "name": "Bonnet",
+          "button": 58,
+          "enabled": true,
+          "source_row": 384,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 11
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bonnet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "feathered_hat",
+          "name": "Feathered Hat",
+          "button": 65,
+          "enabled": true,
+          "source_row": 385,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Feathered Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tricorne_hat",
+          "name": "Tricorne Hat",
+          "button": 72,
+          "enabled": true,
+          "source_row": 386,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tricorne Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "jester_hat",
+          "name": "Jester Hat",
+          "button": 79,
+          "enabled": true,
+          "source_row": 387,
+          "min_skill": 7.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Jester Hat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "dyes",
+      "name": "Dyes",
+      "source_page": 1,
+      "button": 8,
+      "open_actions": [
+        8
+      ],
+      "recipes": [
+        {
+          "id": "rare_cloth",
+          "name": "Rare Cloth",
+          "button": 2,
+          "enabled": true,
+          "source_row": 388,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 1
+            },
+            {
+              "resource_key": "wool",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Rare Cloth"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "backpack_dye",
+          "name": "Backpack Dye",
+          "button": 9,
+          "enabled": true,
+          "source_row": 389,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Backpack Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "hair_dye",
+          "name": "Hair Dye",
+          "button": 16,
+          "enabled": true,
+          "source_row": 390,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Cooking",
+              "min_skill": 110.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 3
+            },
+            {
+              "resource_key": "tribal_berries",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hair Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "beard_dye",
+          "name": "Beard Dye",
+          "button": 23,
+          "enabled": true,
+          "source_row": 391,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Cooking",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 3
+            },
+            {
+              "resource_key": "tribal_berries",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Beard Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "weapon_dye",
+          "name": "Weapon Dye",
+          "button": 30,
+          "enabled": true,
+          "source_row": 392,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Blacksmith",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Weapon Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "spellbook_dye",
+          "name": "Spellbook Dye",
+          "button": 37,
+          "enabled": true,
+          "source_row": 393,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Inscription",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spellbook Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "runebook_dye",
+          "name": "Runebook Dye",
+          "button": 44,
+          "enabled": true,
+          "source_row": 394,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Inscription",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Runebook Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "furniture_dye",
+          "name": "Furniture Dye",
+          "button": 51,
+          "enabled": true,
+          "source_row": 395,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Furniture Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "carpet_tile_dye",
+          "name": "Carpet Tile Dye",
+          "button": 58,
+          "enabled": true,
+          "source_row": 396,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Carpet Tile Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "jewelry_dye",
+          "name": "Jewelry Dye",
+          "button": 65,
+          "enabled": true,
+          "source_row": 397,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "vial_of_tincture",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Jewelry Dye"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ship_paint",
+          "name": "Ship Paint",
+          "button": 72,
+          "enabled": true,
+          "source_row": 398,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "sea_weed",
+              "amount": 2
+            },
+            {
+              "resource_key": "plain_board",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ship Paint"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "mastercrafting",
+      "name": "Mastercrafting",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
+      ],
+      "recipes": [
+        {
+          "id": "aegis_sticher",
+          "name": "Aegis Sticher",
+          "button": 2,
+          "enabled": true,
+          "source_row": 399,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "arcane_wool",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Aegis Sticher"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "dying_kit",
+          "name": "Dying Kit",
+          "button": 9,
+          "enabled": true,
+          "source_row": 400,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "choice_group": "leather",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dying Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "veterinary_kit",
+          "name": "Veterinary Kit",
+          "button": 16,
+          "enabled": true,
+          "source_row": 401,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 100
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Veterinary Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "scavenger_satchel",
+          "name": "Scavenger Satchel",
+          "button": 23,
+          "enabled": true,
+          "source_row": 402,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 100
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Scavenger Satchel"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "carpets",
+      "name": "Carpets",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "asian_rug",
+          "name": "Asian Rug",
+          "button": 2,
+          "enabled": true,
+          "source_row": 403,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Asian Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "blue_rug",
+          "name": "Blue Rug",
+          "button": 9,
+          "enabled": true,
+          "source_row": 404,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Blue Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fancy_blue_rug",
+          "name": "Fancy Blue Rug",
+          "button": 16,
+          "enabled": true,
+          "source_row": 405,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fancy Blue Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fancy_rug",
+          "name": "Fancy rug",
+          "button": 23,
+          "enabled": true,
+          "source_row": 406,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fancy rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "red_rug",
+          "name": "Red Rug",
+          "button": 30,
+          "enabled": true,
+          "source_row": 407,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Red Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fancy_red_rug",
+          "name": "Fancy Red Rug",
+          "button": 37,
+          "enabled": true,
+          "source_row": 408,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fancy Red Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "golden_rug",
+          "name": "Golden Rug",
+          "button": 44,
+          "enabled": true,
+          "source_row": 409,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            },
+            {
+              "resource_key": "cloth",
+              "amount": 50
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Golden Rug"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "shirts_and_pants",
+      "name": "Shirts and Pants",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "doublet",
+          "name": "Doublet",
+          "button": 2,
+          "enabled": true,
+          "source_row": 410,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Doublet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "shirt",
+          "name": "Shirt",
+          "button": 9,
+          "enabled": true,
+          "source_row": 411,
+          "min_skill": 20.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shirt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "fancy_shirt",
+          "name": "Fancy Shirt",
+          "button": 16,
+          "enabled": true,
+          "source_row": 412,
+          "min_skill": 24.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Fancy Shirt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tunic",
+          "name": "Tunic",
+          "button": 23,
+          "enabled": true,
+          "source_row": 413,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "surcoat",
+          "name": "Surcoat",
+          "button": 30,
+          "enabled": true,
+          "source_row": 414,
+          "min_skill": 8.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Surcoat"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "plain_dress",
+          "name": "Plain Dress",
+          "button": 37,
+          "enabled": true,
+          "source_row": 415,
+          "min_skill": 12.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Plain Dress"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "cloak",
+          "name": "Cloak",
+          "button": 44,
+          "enabled": true,
+          "source_row": 416,
+          "min_skill": 41.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cloak"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "robe",
+          "name": "Robe",
+          "button": 51,
+          "enabled": true,
+          "source_row": 417,
+          "min_skill": 53.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Robe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "jester_suit",
+          "name": "Jester Suit",
+          "button": 58,
+          "enabled": true,
+          "source_row": 418,
+          "min_skill": 8.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Jester Suit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "body_sash",
+          "name": "Body Sash",
+          "button": 65,
+          "enabled": true,
+          "source_row": 419,
+          "min_skill": 4.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Body Sash"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "half_apron",
+          "name": "Half Apron",
+          "button": 72,
+          "enabled": true,
+          "source_row": 420,
+          "min_skill": 20.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Half Apron"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "full_apron",
+          "name": "Full Apron",
+          "button": 79,
+          "enabled": true,
+          "source_row": 421,
+          "min_skill": 29.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Full Apron"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "short_pants",
+          "name": "Short Pants",
+          "button": 86,
+          "enabled": true,
+          "source_row": 422,
+          "min_skill": 24.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Short Pants"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "long_pants",
+          "name": "Long Pants",
+          "button": 93,
+          "enabled": true,
+          "source_row": 423,
+          "min_skill": 24.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Long Pants"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "kilt",
+          "name": "Kilt",
+          "button": 100,
+          "enabled": true,
+          "source_row": 424,
+          "min_skill": 20.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Kilt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "skirt",
+          "name": "Skirt",
+          "button": 107,
+          "enabled": true,
+          "source_row": 425,
+          "min_skill": 29.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Skirt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "miscellaneous",
+      "name": "Miscellaneous",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "oil_cloth",
+          "name": "Oil Cloth",
+          "button": 2,
+          "enabled": true,
+          "source_row": 426,
+          "min_skill": 74.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Oil Cloth"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "teleporting_rope",
+          "name": "Teleporting Rope",
+          "button": 9,
+          "enabled": true,
+          "source_row": 427,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "parasitic_plant",
+              "amount": 1
+            },
+            {
+              "choice_group": "leather",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Teleporting Rope"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "boarding_rope",
+          "name": "Boarding Rope",
+          "button": 16,
+          "enabled": true,
+          "source_row": 428,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "jar_of_honey",
+              "amount": 5
+            },
+            {
+              "resource_key": "parasitic_plant",
+              "amount": 5
+            },
+            {
+              "choice_group": "leather",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Boarding Rope"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "footwear",
+      "name": "Footwear",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "sandals",
+          "name": "Sandals",
+          "button": 2,
+          "enabled": true,
+          "source_row": 429,
+          "min_skill": 12.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Sandals"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "shoes",
+          "name": "Shoes",
+          "button": 9,
+          "enabled": true,
+          "source_row": 430,
+          "min_skill": 16.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shoes"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "boots",
+          "name": "Boots",
+          "button": 16,
+          "enabled": true,
+          "source_row": 431,
+          "min_skill": 33.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Boots"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "thigh_boots",
+          "name": "Thigh Boots",
+          "button": 23,
+          "enabled": true,
+          "source_row": 432,
+          "min_skill": 41.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "cloth",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Thigh Boots"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "leather_armor",
+      "name": "Leather Armor",
+      "source_page": 2,
+      "button": 50,
+      "open_actions": [
+        105,
+        50
+      ],
+      "recipes": [
+        {
+          "id": "leather_gorget",
+          "name": "Leather Gorget",
+          "button": 2,
+          "enabled": true,
+          "source_row": 433,
+          "min_skill": 53.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Gorget"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_cap",
+          "name": "Leather Cap",
+          "button": 9,
+          "enabled": true,
+          "source_row": 434,
+          "min_skill": 6.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Cap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_gloves",
+          "name": "Leather Gloves",
+          "button": 16,
+          "enabled": true,
+          "source_row": 435,
+          "min_skill": 51.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_sleeves",
+          "name": "Leather Sleeves",
+          "button": 23,
+          "enabled": true,
+          "source_row": 436,
+          "min_skill": 53.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Sleeves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_leggings",
+          "name": "Leather Leggings",
+          "button": 30,
+          "enabled": true,
+          "source_row": 437,
+          "min_skill": 66.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_tunic",
+          "name": "Leather Tunic",
+          "button": 37,
+          "enabled": true,
+          "source_row": 438,
+          "min_skill": 70.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_mempo",
+          "name": "Leather Mempo",
+          "button": 44,
+          "enabled": true,
+          "source_row": 439,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Mempo"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "studded_armor",
+      "name": "Studded Armor",
+      "source_page": 2,
+      "button": 57,
+      "open_actions": [
+        105,
+        57
+      ],
+      "recipes": [
+        {
+          "id": "studded_cap",
+          "name": "Studded Cap",
+          "button": 2,
+          "enabled": true,
+          "source_row": 440,
+          "min_skill": 78.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Cap"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_gorget",
+          "name": "Studded Gorget",
+          "button": 9,
+          "enabled": true,
+          "source_row": 441,
+          "min_skill": 78.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Gorget"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_gloves",
+          "name": "Studded Gloves",
+          "button": 16,
+          "enabled": true,
+          "source_row": 442,
+          "min_skill": 82.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_sleeves",
+          "name": "Studded Sleeves",
+          "button": 23,
+          "enabled": true,
+          "source_row": 443,
+          "min_skill": 87.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Sleeves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_leggings",
+          "name": "Studded Leggings",
+          "button": 30,
+          "enabled": true,
+          "source_row": 444,
+          "min_skill": 91.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_tunic",
+          "name": "Studded Tunic",
+          "button": 37,
+          "enabled": true,
+          "source_row": 445,
+          "min_skill": 94.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_mempo",
+          "name": "Studded Mempo",
+          "button": 44,
+          "enabled": true,
+          "source_row": 446,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Mempo"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "female_armor",
+      "name": "Female Armor",
+      "source_page": 2,
+      "button": 64,
+      "open_actions": [
+        105,
+        64
+      ],
+      "recipes": [
+        {
+          "id": "leather_shorts",
+          "name": "Leather Shorts",
+          "button": 2,
+          "enabled": true,
+          "source_row": 447,
+          "min_skill": 62.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Shorts"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_skirt",
+          "name": "Leather Skirt",
+          "button": 9,
+          "enabled": true,
+          "source_row": 448,
+          "min_skill": 58.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Skirt"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "leather_bustier",
+          "name": "Leather Bustier",
+          "button": 16,
+          "enabled": true,
+          "source_row": 449,
+          "min_skill": 58.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Leather Bustier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_bustier",
+          "name": "Studded Bustier",
+          "button": 23,
+          "enabled": true,
+          "source_row": 450,
+          "min_skill": 82.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Bustier"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "female_leather_armor",
+          "name": "Female Leather Armor",
+          "button": 30,
+          "enabled": true,
+          "source_row": 451,
+          "min_skill": 62.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Female Leather Armor"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "studded_armor",
+          "name": "Studded Armor",
+          "button": 37,
+          "enabled": true,
+          "source_row": 452,
+          "min_skill": 87.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Studded Armor"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "bone_armor",
+      "name": "Bone Armor",
+      "source_page": 2,
+      "button": 71,
+      "open_actions": [
+        105,
+        71
+      ],
+      "recipes": [
+        {
+          "id": "bone_helmet",
+          "name": "Bone Helmet",
+          "button": 2,
+          "enabled": true,
+          "source_row": 453,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 4
+            },
+            {
+              "resource_key": "bone",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Helmet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bone_gloves",
+          "name": "Bone Gloves",
+          "button": 9,
+          "enabled": true,
+          "source_row": 454,
+          "min_skill": 89.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            },
+            {
+              "resource_key": "bone",
+              "amount": 2
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bone_arms",
+          "name": "Bone Arms",
+          "button": 16,
+          "enabled": true,
+          "source_row": 455,
+          "min_skill": 92.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 8
+            },
+            {
+              "resource_key": "bone",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Arms"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bone_leggings",
+          "name": "Bone Leggings",
+          "button": 23,
+          "enabled": true,
+          "source_row": 456,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 10
+            },
+            {
+              "resource_key": "bone",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bone_armor",
+          "name": "Bone Armor",
+          "button": 30,
+          "enabled": true,
+          "source_row": 457,
+          "min_skill": 96.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 12
+            },
+            {
+              "resource_key": "bone",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Armor"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "orc_helm",
+          "name": "Orc Helm",
+          "button": 37,
+          "enabled": true,
+          "source_row": 458,
+          "min_skill": 90.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "leather",
+              "amount": 6
+            },
+            {
+              "resource_key": "bone",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Orc Helm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    }
+  ]
+}
