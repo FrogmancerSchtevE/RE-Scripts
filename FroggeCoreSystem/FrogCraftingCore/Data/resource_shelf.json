@@ -2,7 +2,7 @@
   "format": "frog-resource-shelf",
   "version": 1,
   "name": "Unchained Resource Shelf",
-  "item_id": 29180,
+  "item_ids": ["0x71FC", "0x71FD"],
   "gump_id": 111922706,
   "withdraw_amount": 100,
   "withdraw_amount_button": 119,

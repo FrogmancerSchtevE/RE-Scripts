@@ -2,7 +2,7 @@
   "format": "frog-reagent-gem-shelf",
   "version": 1,
   "name": "Unchained Reagent and Gem Storage Shelf",
-  "item_id": null,
+  "item_ids": ["0xAFC1", "0xAFC2"],
   "gump_id": 2834126535,
   "withdraw_amount": 100,
   "restock_shelf_button": 1790,

@@ -32,7 +32,6 @@
 # Just don't feed the frogs to the robots.
 # ====================================================================
 
-
 import clr
 clr.AddReference("System.Web.Extensions")
 
@@ -169,6 +168,8 @@ RECIPE_ROWS = 10
 
 SOURCE_CHEST = "chest"
 SOURCE_SHELF = "shelf"
+RESOURCE_SHELF_IDS = (0x71FC, 0x71FD)
+REAGENT_SHELF_IDS = (0xAFC1, 0xAFC2)
 
 VIEW_HOME = "home"
 VIEW_CRAFT = "craft"
@@ -3384,6 +3385,17 @@ def descriptor_item_ids(record, field_name="item_ids"):
     return [int_value(value) for value in values if int_value(value) > 0]
 
 
+def configured_shelf_item_ids(record, fallback_ids):
+    item_ids = descriptor_item_ids(record)
+    if item_ids:
+        return item_ids
+    return [int_value(value) for value in fallback_ids if int_value(value) > 0]
+
+
+def item_id_choices_label(item_ids):
+    return " or ".join(["0x{0:04X}".format(int_value(value)) for value in item_ids if int_value(value) > 0])
+
+
 def find_descriptor_item(record, container_serial, hue=-1, id_field="item_ids", name_field="item_names"):
     ids = descriptor_item_ids(record, id_field)
     item = find_item(ids, container_serial, hue)
@@ -3595,16 +3607,16 @@ def set_target_serial(kind):
         return
 
     if kind == "resource_shelf":
-        expected_id = int_value(_shelf_data.get("item_id"), 0x71FC)
-        if expected_id > 0 and int_value(item.ItemID) != expected_id:
-            set_status("That is not a Resource Shelf (0x{0:X}).".format(expected_id), BAD_HUE, "Target Setup")
+        expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
+        if expected_ids and int_value(item.ItemID) not in expected_ids:
+            set_status("That is not a Resource Shelf (expected {0}).".format(item_id_choices_label(expected_ids)), BAD_HUE, "Target Setup")
             return
         _resource_shelf_serial = int(serial)
         set_status("Resource Shelf saved; withdrawal must be set to {0}.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), GOOD_HUE, "Ready")
     elif kind == "reagent_shelf":
-        expected_id = int_value(_reagent_shelf_data.get("item_id"))
-        if expected_id > 0 and int_value(item.ItemID) != expected_id:
-            set_status("That is not the configured Reagent/Gem Shelf item (0x{0:X}).".format(expected_id), BAD_HUE, "Target Setup")
+        expected_ids = configured_shelf_item_ids(_reagent_shelf_data, REAGENT_SHELF_IDS)
+        if expected_ids and int_value(item.ItemID) not in expected_ids:
+            set_status("That is not a Reagent/Gem Shelf (expected {0}).".format(item_id_choices_label(expected_ids)), BAD_HUE, "Target Setup")
             return
 
         shelf_gump_id = int_value(_reagent_shelf_data.get("gump_id"), 0xA8ED56C7)
@@ -3836,8 +3848,8 @@ def deposit_resource_shelf_from_backpack():
     if not shelf or not backpack:
         return False, "Resource Shelf is unavailable", 0
 
-    expected_id = int_value(_shelf_data.get("item_id"), 0x71FC)
-    if expected_id > 0 and int_value(shelf.ItemID) != expected_id:
+    expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
         return False, "Saved Resource Shelf has the wrong item ID", 0
 
     shelf_gump_id = int_value(_shelf_data.get("gump_id"), 0x06ABCE12)
@@ -3877,8 +3889,8 @@ def deposit_reagent_shelf_from_backpack():
     if not shelf or not backpack:
         return False, "Reagent/Gem Shelf is unavailable", 0
 
-    expected_id = int_value(_reagent_shelf_data.get("item_id"))
-    if expected_id > 0 and int_value(shelf.ItemID) != expected_id:
+    expected_ids = configured_shelf_item_ids(_reagent_shelf_data, REAGENT_SHELF_IDS)
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
         return False, "Saved Reagent/Gem Shelf has the wrong item ID", 0
 
     shelf_gump_id = int_value(_reagent_shelf_data.get("gump_id"), 0xA8ED56C7)
@@ -4144,9 +4156,9 @@ def pull_from_shelf(resource):
     if not shelf:
         return False, "Set a valid Resource Shelf."
 
-    expected_id = int_value(_shelf_data.get("item_id"), 0x71FC)
-    if expected_id > 0 and int_value(shelf.ItemID) != expected_id:
-        return False, "Saved shelf is not item 0x{0:X}.".format(expected_id)
+    expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
+        return False, "Saved shelf is not item {0}.".format(item_id_choices_label(expected_ids))
 
     shelf_gump_id = int_value(_shelf_data.get("gump_id"), 0x06ABCE12)
     next_button = int_value(_shelf_data.get("next_page_button"), 123)
@@ -4218,9 +4230,9 @@ def pull_from_reagent_shelf(resource):
     if not shelf:
         return False, "Set a valid Reagent/Gem Shelf."
 
-    expected_id = int_value(_reagent_shelf_data.get("item_id"))
-    if expected_id > 0 and int_value(shelf.ItemID) != expected_id:
-        return False, "Saved Reagent/Gem Shelf is not item 0x{0:X}.".format(expected_id)
+    expected_ids = configured_shelf_item_ids(_reagent_shelf_data, REAGENT_SHELF_IDS)
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
+        return False, "Saved Reagent/Gem Shelf is not item {0}.".format(item_id_choices_label(expected_ids))
 
     shelf_gump_id = int_value(_reagent_shelf_data.get("gump_id"), 0xA8ED56C7)
     actions = [int_value(value) for value in list_value(resource.get("reagent_shelf_actions")) if int_value(value) > 0]
