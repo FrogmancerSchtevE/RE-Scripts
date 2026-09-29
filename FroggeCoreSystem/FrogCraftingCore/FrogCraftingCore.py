@@ -32,17 +32,6 @@
 # Just don't feed the frogs to the robots.
 # ====================================================================
 
-# TRUSTED COPY ONLY
-# Frogmancer Schteve shares this core directly with trusted people.
-# Do not copy it or pass it to anyone else.
-# If you have this and did not get it directly from Frogmancer Schteve,
-# it is an unauthorized copy. Whoever passed it along is a twat.
-# Please let me know so I can address it.
-
-# Status: In Development
-#
-# The core owns the GUI, resource movement, tool acquisition, crafting
-# state, output storage, and module discovery. Craft modules are JSON data.
 
 import clr
 clr.AddReference("System.Web.Extensions")
