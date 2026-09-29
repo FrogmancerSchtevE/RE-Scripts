@@ -87,15 +87,46 @@
       }
     },
     "recipe_aliases": {
-      "battle axe": {"module_id": "blacksmithy", "recipe_id": "battle_axe"},
-      "spoon right": {"module_id": "tinkering", "recipe_id": "spoon_right"},
-      "knife right": {"module_id": "tinkering", "recipe_id": "knife_right"},
-      "fork left": {"module_id": "tinkering", "recipe_id": "fork_left"},
-      "goblet": {"module_id": "tinkering", "recipe_id": "goblet"},
-      "fork right": {"module_id": "tinkering", "recipe_id": "fork_right"},
-      "summon air elemental scroll": {"module_id": "inscription", "recipe_id": "summon_air_elemental"},
-      "invisibility scroll": {"module_id": "inscription", "recipe_id": "invisibility"},
-      "cutlass": {"module_id": "blacksmithy", "recipe_id": "cutlass"}
+      "battle axe": {
+        "module_id": "blacksmithy",
+        "recipe_id": "battle_axe"
+      },
+      "spoon right": {
+        "module_id": "tinkering",
+        "recipe_id": "spoon_right"
+      },
+      "knife right": {
+        "module_id": "tinkering",
+        "recipe_id": "knife_right"
+      },
+      "fork left": {
+        "module_id": "tinkering",
+        "recipe_id": "fork_left"
+      },
+      "goblet": {
+        "module_id": "tinkering",
+        "recipe_id": "goblet"
+      },
+      "fork right": {
+        "module_id": "tinkering",
+        "recipe_id": "fork_right"
+      },
+      "summon air elemental scroll": {
+        "module_id": "inscription",
+        "recipe_id": "summon_air_elemental"
+      },
+      "invisibility scroll": {
+        "module_id": "inscription",
+        "recipe_id": "invisibility"
+      },
+      "cutlass": {
+        "module_id": "blacksmithy",
+        "recipe_id": "cutlass"
+      },
+      "large table": {
+        "module_id": "carpentry",
+        "recipe_id": "yew_wood_table"
+      }
     }
   },
   "quest_rules": [
