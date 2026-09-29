@@ -31,9 +31,14 @@ QUEST_GUMP_ID = 0xDA2ACF13
 QUEST_COMMAND       = "[quest"
 QUEST_NEXT_BUTTON   = 2
 QUEST_PAGE_COUNT    = 7
+QUEST_MAX_PAGES     = 12
+QUEST_STARTUP_DELAY_MS = 1000
 QUEST_OPEN_TIMEOUT  = 3000
+QUEST_PAGE_TIMEOUT  = 2200
+QUEST_PAGE_SETTLE_MS = 450
+QUEST_PAGE_POLL_MS  = 125
 
-REFRESH_MS         = 125
+REFRESH_MS         = 250
 BUTTON_DEBOUNCE_MS = 180
 
 MAIN_WIDTH = 260
@@ -116,7 +121,12 @@ _journal_cursor = None
 # ====================================================================
 
 PROGRESS_RE = re.compile(r"(\d+)\s*/\s*(\d+)")
+PROGRESS_VALUE_RE = re.compile(r"^(\d+)\s*/\s*(\d+)$")
+PAGE_LABEL_RE = re.compile(r"^PAGE\s+(\d+)\s+OF\s+(\d+)$", re.I)
 VIAL_RE = re.compile(r"(vial kit|empty vial|emtpy vial)", re.I)
+
+QUEST_COLUMN_LABELS = ("Quest", "Region", "Type", "Difficulty", "Progress")
+QUEST_REWARD_TEXT = "Complete quests to obtain an extra reward!"
 
 
 def _clean_text(value):
@@ -245,6 +255,310 @@ def _capture_journal_cursor():
 # QUEST REFRESH
 # ====================================================================
 
+def _as_list(value):
+    try:
+        return list(value or [])
+    except:
+        return []
+
+
+def _layout_commands(layout):
+    commands = []
+    for match in re.finditer(r"\{\s*([^{}]+?)\s*\}", str(layout or "")):
+        command = match.group(1).strip()
+        if command:
+            commands.append(command)
+    return commands
+
+
+def _quest_page_marker(values):
+    for value in values:
+        match = PAGE_LABEL_RE.match(_clean_text(value))
+        if match:
+            current_page = int(match.group(1))
+            total_pages = int(match.group(2))
+            if current_page > 0 and total_pages >= current_page:
+                return current_page, total_pages
+    return None, None
+
+
+def _quest_gump_snapshot():
+    try:
+        gump_data = Gumps.GetGumpData(QUEST_GUMP_ID)
+    except:
+        gump_data = None
+
+    if not gump_data:
+        return None
+
+    try:
+        captured_id = int(getattr(gump_data, "gumpId", QUEST_GUMP_ID))
+        if captured_id != QUEST_GUMP_ID:
+            return None
+    except:
+        pass
+
+    layout = str(getattr(gump_data, "gumpLayout", "") or "")
+    string_table = _as_list(getattr(gump_data, "stringList", None))
+    data_members = _as_list(getattr(gump_data, "gumpData", None))
+
+    try:
+        is_current = int(Gumps.CurrentGump()) == QUEST_GUMP_ID
+    except:
+        is_current = False
+
+    if is_current and not data_members:
+        try:
+            data_members = _as_list(Gumps.LastGumpGetLineList())
+        except:
+            pass
+
+    if is_current and not layout:
+        try:
+            layout = str(Gumps.LastGumpRawData() or "")
+        except:
+            pass
+
+    current_page, total_pages = _quest_page_marker(string_table + data_members)
+    return {
+        "layout": layout,
+        "strings": string_table,
+        "members": data_members,
+        "page": current_page,
+        "total": total_pages
+    }
+
+
+def _resolved_text_controls(snapshot):
+    strings = snapshot.get("strings", [])
+    controls = []
+
+    for command in _layout_commands(snapshot.get("layout", "")):
+        parts = command.split()
+        if len(parts) < 5 or parts[0].lower() != "text":
+            continue
+
+        try:
+            x = int(parts[1])
+            y = int(parts[2])
+            text_index = int(parts[4])
+        except:
+            continue
+
+        if text_index < 0 or text_index >= len(strings):
+            continue
+
+        controls.append((x, y, _clean_text(strings[text_index])))
+
+    return controls
+
+
+def _parse_layout_quests(snapshot):
+    controls = _resolved_text_controls(snapshot)
+    if not controls:
+        return []
+
+    wanted_headers = dict((label.lower(), label) for label in QUEST_COLUMN_LABELS)
+    header_columns = None
+    header_y = None
+    controls_by_y = {}
+
+    for x, y, text in controls:
+        controls_by_y.setdefault(y, {})[x] = text
+
+    for y in sorted(controls_by_y.keys()):
+        row = controls_by_y[y]
+        found = {}
+        for x, text in row.items():
+            key = text.lower()
+            if key in wanted_headers:
+                found[wanted_headers[key]] = x
+        if all(label in found for label in QUEST_COLUMN_LABELS):
+            header_columns = found
+            header_y = y
+            break
+
+    if header_columns is None:
+        return []
+
+    quests = []
+    quest_x = header_columns["Quest"]
+
+    for y in sorted(controls_by_y.keys()):
+        if y <= header_y:
+            continue
+
+        row = controls_by_y[y]
+        if not all(header_columns[label] in row for label in QUEST_COLUMN_LABELS):
+            continue
+
+        progress = row[header_columns["Progress"]]
+        if not PROGRESS_VALUE_RE.match(progress):
+            continue
+
+        name = row[header_columns["Quest"]]
+        region = row[header_columns["Region"]]
+        quest_type = _strip_field_prefix(row[header_columns["Type"]], "Type")
+        difficulty = _strip_field_prefix(row[header_columns["Difficulty"]], "Difficulty")
+
+        if not name or not region or not quest_type or not difficulty:
+            continue
+
+        description = ""
+        for desc_x, desc_y, desc_text in controls:
+            if desc_x == quest_x and desc_y > y and desc_y <= y + 40:
+                description = desc_text
+                break
+
+        quests.append({
+            "name": name,
+            "progress": progress,
+            "region": region,
+            "type": quest_type,
+            "diff": difficulty,
+            "desc": description
+        })
+
+    return quests
+
+
+def _parse_member_quests(values):
+    lines = [_clean_text(value) for value in values]
+    header_end = -1
+    header_lower = [label.lower() for label in QUEST_COLUMN_LABELS]
+
+    for index in range(max(0, len(lines) - len(header_lower) + 1)):
+        candidate = [value.lower() for value in lines[index:index + len(header_lower)]]
+        if candidate == header_lower:
+            header_end = index + len(header_lower)
+            break
+
+    if header_end < 0:
+        return []
+
+    stop_index = len(lines)
+    for index in range(header_end, len(lines)):
+        if lines[index].lower() == QUEST_REWARD_TEXT.lower() or PAGE_LABEL_RE.match(lines[index]):
+            stop_index = index
+            break
+
+    quests = []
+    for index in range(header_end, stop_index):
+        progress = lines[index]
+        if not PROGRESS_VALUE_RE.match(progress):
+            continue
+
+        name_index = index - 4
+        description_index = index + 1
+        if name_index < header_end or description_index >= stop_index:
+            continue
+
+        name = lines[name_index]
+        region = lines[index - 3]
+        quest_type = _strip_field_prefix(lines[index - 2], "Type")
+        difficulty = _strip_field_prefix(lines[index - 1], "Difficulty")
+        description = lines[description_index]
+
+        if not name or name.isdigit() or not region or not quest_type or not difficulty:
+            continue
+
+        quests.append({
+            "name": name,
+            "progress": progress,
+            "region": region,
+            "type": quest_type,
+            "diff": difficulty,
+            "desc": description
+        })
+
+    return quests
+
+
+def _parse_snapshot_quests(snapshot):
+    quests = _parse_layout_quests(snapshot)
+    if quests:
+        return quests
+    return _parse_member_quests(snapshot.get("members", []))
+
+
+def _snapshot_has_quest_header(snapshot):
+    values = snapshot.get("strings", []) + snapshot.get("members", [])
+    lowered = set(_clean_text(value).lower() for value in values)
+    return all(label.lower() in lowered for label in QUEST_COLUMN_LABELS)
+
+
+def _snapshot_signature(snapshot):
+    quests = _parse_snapshot_quests(snapshot)
+    rows = tuple((_clean_text(quest.get("name", "")).lower(), quest.get("progress", "")) for quest in quests)
+    return snapshot.get("page"), snapshot.get("total"), rows
+
+
+def _wait_for_quest_snapshot(previous_snapshot=None):
+    deadline = time.time() + (QUEST_PAGE_TIMEOUT / 1000.0)
+    previous_signature = _snapshot_signature(previous_snapshot) if previous_snapshot else None
+
+    while time.time() < deadline:
+        snapshot = _quest_gump_snapshot()
+        if snapshot:
+            if previous_snapshot is None:
+                return snapshot
+
+            current_page = snapshot.get("page")
+            previous_page = previous_snapshot.get("page")
+            if current_page is not None and previous_page is not None and current_page != previous_page:
+                return snapshot
+
+            if (current_page is None or previous_page is None) and _snapshot_signature(snapshot) != previous_signature:
+                return snapshot
+
+        Misc.Pause(QUEST_PAGE_POLL_MS)
+
+    return None
+
+
+def _reward_token_count(snapshot):
+    layout_commands = _layout_commands(snapshot.get("layout", ""))
+    saw_reward_base = False
+    overlay_count = 0
+
+    for command in layout_commands:
+        parts = command.split()
+        if len(parts) < 4:
+            continue
+
+        command_name = parts[0].lower()
+        try:
+            art_id = int(parts[3])
+        except:
+            continue
+
+        if command_name == "tilepichue" and art_id == TREASURE_CHEST_ART_ID:
+            saw_reward_base = True
+        elif command_name == "tilepic" and art_id == TREASURE_CHEST_ART_ID:
+            overlay_count += 1
+
+    if saw_reward_base:
+        return max(0, min(TREASURE_GOAL, overlay_count))
+
+    marker_count = 0
+    for value in snapshot.get("members", []):
+        if _clean_text(value) == TREASURE_TOKEN_MARKER:
+            marker_count += 1
+    return max(0, min(TREASURE_GOAL, marker_count))
+
+
+def _merge_quest_rows(destination, page_quests):
+    known = dict((_clean_text(quest.get("name", "")).lower(), quest) for quest in destination)
+    for quest in page_quests:
+        key = _clean_text(quest.get("name", "")).lower()
+        if not key:
+            continue
+        if key in known:
+            known[key].update(quest)
+        else:
+            destination.append(quest)
+            known[key] = quest
+
 def _commit_refreshed_quests(new_quests, reward_tokens):
     global _quests
     global _active_quest_name
@@ -272,7 +586,8 @@ def refresh_quests():
     _refreshing = True
     _status_msg = "Refreshing quest data..."
 
-    ## Keeping Mags gump refresh logic intact, but added some extra checks to avoid crashing the script if the gump doesn't open or if the gump data is malformed.
+    # Preserve Mags' proven open-and-page workflow, but identify rows from the
+    # captured quest layout instead of relying on incidental list offsets alone.
     try:
         Gumps.CloseGump(GUI_GUMP_ID)
         Gumps.CloseGump(QUEST_GUMP_ID)
@@ -284,65 +599,64 @@ def refresh_quests():
             _status_msg = "Refresh failed: quest window did not open."
             return
 
+        # The server replaces this gump on every page reply. Preserve the
+        # original tracker cadence so several scripts do not hammer the
+        # client's shared gump cache at the same time.
+        Misc.Pause(QUEST_PAGE_SETTLE_MS)
+        snapshot = _wait_for_quest_snapshot()
+        if not snapshot or not _snapshot_has_quest_header(snapshot):
+            raise RuntimeError("quest gump data was incomplete")
+        if snapshot.get("page") is not None and snapshot.get("page") != 1:
+            raise RuntimeError("quest gump did not open on page 1")
+
         new_data = []
-        reward_tokens = 0
+        reward_tokens = _reward_token_count(snapshot)
+        visited_pages = set()
+        pages_scanned = 0
 
-        initial_lines = Gumps.LastGumpGetLineList()
-        if initial_lines:
-            for text in initial_lines:
-                if TREASURE_TOKEN_MARKER in str(text):
-                    reward_tokens += 1
+        while snapshot:
+            current_page = snapshot.get("page")
+            total_pages = snapshot.get("total")
 
-        for page in range(QUEST_PAGE_COUNT):
-            Misc.Pause(450)
-            lines = Gumps.LastGumpGetLineList()
+            if total_pages is not None and total_pages > QUEST_MAX_PAGES:
+                raise RuntimeError("quest gump reported too many pages")
 
-            if not lines:
-                gump_data = Gumps.GetGumpData(QUEST_GUMP_ID)
-                if gump_data:
-                    try:
-                        lines = list(gump_data.gumpStrings)
-                    except:
-                        pass
+            signature = _snapshot_signature(snapshot)
+            if signature in visited_pages:
+                raise RuntimeError("quest page did not advance")
+            visited_pages.add(signature)
 
-            if lines:
-                for index, text in enumerate(lines):
-                    clean_text = str(text).strip()
-                    if "/" in clean_text and any(character.isdigit() for character in clean_text):
-                        name_index = index - 4
-                        region_index = index - 3
-                        type_index = index - 2
-                        difficulty_index = index - 1
-                        description_index = index + 1
+            _merge_quest_rows(new_data, _parse_snapshot_quests(snapshot))
+            pages_scanned += 1
 
-                        if name_index >= 0 and description_index < len(lines):
-                            quest_name = str(lines[name_index]).strip()
-                            if not any(quest["name"] == quest_name for quest in new_data):
-                                raw_type = str(lines[type_index]).strip()
-                                raw_difficulty = str(lines[difficulty_index]).strip()
-                                if raw_type.lower().startswith("type:"):
-                                    raw_type = raw_type[5:].strip()
-                                if raw_difficulty.lower().startswith("difficulty:"):
-                                    raw_difficulty = raw_difficulty[11:].strip()
+            if current_page is not None and total_pages is not None:
+                if current_page >= total_pages:
+                    break
+            elif pages_scanned >= QUEST_PAGE_COUNT:
+                break
 
-                                new_data.append({
-                                    "name": quest_name,
-                                    "progress": clean_text,
-                                    "region": str(lines[region_index]).strip(),
-                                    "type": raw_type,
-                                    "diff": raw_difficulty,
-                                    "desc": str(lines[description_index]).strip()
-                                })
+            if pages_scanned >= QUEST_MAX_PAGES:
+                raise RuntimeError("quest page safety limit reached")
 
-            if page < QUEST_PAGE_COUNT - 1:
-                Gumps.SendAction(QUEST_GUMP_ID, QUEST_NEXT_BUTTON)
+            previous_snapshot = snapshot
+            Gumps.SendAction(QUEST_GUMP_ID, QUEST_NEXT_BUTTON)
+            Misc.Pause(QUEST_PAGE_SETTLE_MS)
+            snapshot = _wait_for_quest_snapshot(previous_snapshot)
+            if not snapshot:
+                raise RuntimeError("timed out waiting for the next quest page")
+            if not _snapshot_has_quest_header(snapshot):
+                raise RuntimeError("next quest page was incomplete")
+            if previous_snapshot.get("page") is not None and snapshot.get("page") is not None:
+                if snapshot.get("page") != previous_snapshot.get("page") + 1:
+                    raise RuntimeError("quest pages advanced out of sequence")
 
         _commit_refreshed_quests(new_data, reward_tokens)
-        _status_msg = "Refreshed {0} active quest{1}.".format(len(new_data), "" if len(new_data) == 1 else "s")
+        _status_msg = "Refreshed {0} quest{1} across {2} page{3}.".format(len(new_data), "" if len(new_data) == 1 else "s", pages_scanned, "" if pages_scanned == 1 else "s")
         Player.HeadMessage(63, "Goals Refreshed. Treasure Progress: {0}/{1}".format(_treasure_count, TREASURE_GOAL))
 
     except Exception as error:
-        _status_msg = "Refresh error: {0}".format(str(error))
+        _status_msg = "Refresh failed; kept previous data: {0}".format(str(error))
+        Player.HeadMessage(BAD_HUE, "Quest refresh failed; previous data kept.")
     finally:
         Gumps.CloseGump(QUEST_GUMP_ID)
         _refreshing = False
@@ -740,6 +1054,10 @@ def Main():
     _journal_cursor = _capture_journal_cursor()
     Gumps.CloseGump(GUI_GUMP_ID)
 
+    # FroggeSuite can launch several gump-owning cores together. Let their
+    # initial custom gumps settle before opening and paging the server tracker.
+    Misc.Pause(QUEST_STARTUP_DELAY_MS)
+
     while _running and Player.Connected:
         handled_button = False
         gump_data = Gumps.GetGumpData(GUI_GUMP_ID)
@@ -764,12 +1082,20 @@ def Main():
             continue
 
         process_journal()
+        did_refresh = False
 
         if _refresh_requested and not _refreshing:
             _refresh_requested = False
             refresh_quests()
+            did_refresh = True
 
-        visible_gump = Gumps.GetGumpData(GUI_GUMP_ID)
+        # Reuse the top-of-loop snapshot during idle cycles. GetGumpData uses
+        # Razor's shared gump cache, so avoiding a second read every cycle
+        # matters when the combat and loot cores are polling it too.
+        visible_gump = gump_data
+        if did_refresh or _dirty_ui or visible_gump is None:
+            visible_gump = Gumps.GetGumpData(GUI_GUMP_ID)
+
         pending_button = int(getattr(visible_gump, "buttonid", 0)) if visible_gump else 0
 
         # A click may arrive while a server-gump refresh is running. Leave this
