@@ -126,6 +126,14 @@
       "large table": {
         "module_id": "carpentry",
         "recipe_id": "yew_wood_table"
+      },
+      "spoon": {
+        "module_id": "tinkering",
+        "recipe_id": "spoon_left"
+      },
+      "spoon left": {
+        "module_id": "tinkering",
+        "recipe_id": "spoon_left"
       }
     }
   },
