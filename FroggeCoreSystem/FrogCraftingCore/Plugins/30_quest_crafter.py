@@ -124,7 +124,7 @@ class FrogQuestCrafterPlugin:
 
     def number(self, value, fallback=0):
         try:
-            return int(str(value), 0)
+            return int(str(value).replace(",", ""), 0)
         except:
             try:
                 return int(value)
@@ -461,7 +461,7 @@ class FrogQuestCrafterPlugin:
                 start = 0
             for index in range(start, len(lines)):
                 value = normalized[index]
-                if value in ignored or value.startswith("craft ") or re.search(r"\d+\s*/\s*\d+", value):
+                if value in ignored or value.startswith("craft ") or re.search(r"[\d,]+\s*/\s*[\d,]+", value):
                     continue
                 matched_title = lines[index]
                 break
@@ -475,14 +475,14 @@ class FrogQuestCrafterPlugin:
         self.time_left = self.value_after(lines, "TIME LEFT")
         self.top_contributor = self.value_after(lines, "TOP CONTRIBUTOR (#1)") or self.value_after(lines, "TOP CONTRIBUTOR")
         contribution_text = self.value_after(lines, "YOUR CONTRIBUTION")
-        contribution_match = re.search(r"\b(\d+)\b", contribution_text)
-        self.contribution = int(contribution_match.group(1)) if contribution_match else 0
+        contribution_match = re.search(r"\b([\d,]+)\b", contribution_text)
+        self.contribution = self.number(contribution_match.group(1), 0) if contribution_match else 0
 
         for line in lines:
-            progress_match = re.search(r"\b(\d+)\s*/\s*(\d+)\b", line)
+            progress_match = re.search(r"\b([\d,]+)\s*/\s*([\d,]+)\b", line)
             if progress_match:
-                self.progress = int(progress_match.group(1))
-                self.total = int(progress_match.group(2))
+                self.progress = self.number(progress_match.group(1), 0)
+                self.total = self.number(progress_match.group(2), 0)
                 break
 
         if matched_rule and self.description:
@@ -512,7 +512,7 @@ class FrogQuestCrafterPlugin:
         segments = []
         previous_progress = -1
         for index, line in enumerate(lines):
-            if not re.search(r"\d+\s*/\s*\d+", str(line)):
+            if not re.search(r"[\d,]+\s*/\s*[\d,]+", str(line)):
                 continue
             first = max(previous_progress + 1, index - max(1, int(lookback)))
             variants = []
@@ -594,7 +594,7 @@ class FrogQuestCrafterPlugin:
     def parse_compendium_lines(self, raw_lines):
         lines = [self.clean_line(value) for value in raw_lines if self.clean_line(value)]
         joined = " ".join(lines)
-        completed_match = re.search(r"Completed\s*:\s*(\d+)\s*/\s*(\d+)\s*tasks?", joined, re.IGNORECASE)
+        completed_match = re.search(r"Completed\s*:\s*([\d,]+)\s*/\s*([\d,]+)\s*tasks?", joined, re.IGNORECASE)
         if completed_match:
             self.weekly_completed = self.number(completed_match.group(1), 0)
             self.weekly_given = self.number(completed_match.group(2), 0)
@@ -609,7 +609,7 @@ class FrogQuestCrafterPlugin:
             resolved = None
             parsed = None
             for candidate in variants:
-                match = re.search(r"(\d+)\s*/\s*(\d+)\s*$", candidate)
+                match = re.search(r"([\d,]+)\s*/\s*([\d,]+)\s*$", candidate)
                 if not match:
                     continue
                 raw_name, material = self.split_compendium_label(candidate[:match.start()])
@@ -1427,13 +1427,13 @@ class FrogQuestCrafterPlugin:
             Gumps.AddLabel(gd, x + 18, y + 96, LABEL_HUE, self.host.short_text(global_batch_text, 82))
         else:
             Gumps.AddLabel(gd, x + 18, y + 77, WARN_HUE if self.global_block_reason else DIM_HUE, self.host.short_text(self.global_block_reason or "No Global craft plan loaded.", 82))
-        filters = [(str(rule.get("label", rule.get("id", "Rule"))), self.allowed(rule), self.button_id(BTN_RULE_BASE + index)) for index, rule in enumerate(self.rules[:6])]
+        filters = [(str(rule.get("label", rule.get("id", "Rule"))), self.allowed(rule), self.button_id(BTN_RULE_BASE + index)) for index, rule in enumerate(self.rules[:8])]
         for index, filter_data in enumerate(filters):
-            bx = x + 18 + (index % 3) * 205
-            by = y + 116 + (index // 3) * 19
+            bx = x + 18 + (index % 4) * 153
+            by = y + 116 + (index // 4) * 19
             label, enabled, button_id = filter_data
             self.host.add_button(gd, bx, by, button_id, "YES" if enabled else "NO", GOOD_HUE if enabled else BAD_HUE)
-            Gumps.AddLabel(gd, bx + 64, by + 1, LABEL_HUE, self.host.short_text(label, 17))
+            Gumps.AddLabel(gd, bx + 64, by + 1, LABEL_HUE, self.host.short_text(label, 13))
 
         weekly_plan = self.weekly_display_plan()
         Gumps.AddBackground(gd, x + 8, y + 164, width - 16, 144, 3000)

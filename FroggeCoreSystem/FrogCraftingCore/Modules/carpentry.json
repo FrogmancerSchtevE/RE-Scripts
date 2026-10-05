@@ -1549,8 +1549,8 @@
       ],
       "recipes": [
         {
-          "id": "shepher_s_crook",
-          "name": "Shepher's Crook",
+          "id": "shepherd_s_crook",
+          "name": "Shepherds Crook",
           "button": 2,
           "enabled": true,
           "source_row": 517,
@@ -1564,7 +1564,7 @@
           ],
           "output_item_ids": [],
           "output_names": [
-            "Shepher's Crook"
+            "Shepherds Crook"
           ],
           "output_hue": -1,
           "output_amount": 1,

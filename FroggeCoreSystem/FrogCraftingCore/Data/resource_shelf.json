@@ -5,6 +5,7 @@
   "item_ids": ["0x71FC", "0x71FD"],
   "gump_id": 111922706,
   "withdraw_amount": 100,
+  "withdraw_amount_text_entry_id": 0,
   "withdraw_amount_button": 119,
   "add_button": 120,
   "fill_from_backpack_button": 121,

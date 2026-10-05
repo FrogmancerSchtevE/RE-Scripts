@@ -93,6 +93,7 @@ SETTINGS_DIRECTORY = "Settings"
 SETTINGS_FORMAT = "frog-crafting-character-settings"
 RESOURCE_SHELF_FILE = "resource_shelf.json"
 REAGENT_SHELF_FILE = "reagent_gem_shelf.json"
+MASTER_SHELF_FILE = "master_shelf.json"
 INGREDIENT_IDS_FILE = "ingredient_ids.json"
 
 CORE_GUMP_ID = 0xF2064643
@@ -125,6 +126,7 @@ CRAFT_RESULT_POLL_MS = 50
 CRAFT_MENU_SETTLE_MS = 75
 CRAFT_OPEN_SETTLE_MS = 75
 CRAFT_GUMP_RETURN_POLL_MS = 25
+ACTIVE_CRAFT_UI_REDRAW_MS = 2000
 MAKE_LAST_CONFIRMATIONS_REQUIRED = 2
 QUEST_RESULT_WAIT_MS = 2500
 JOURNAL_POLL_MS = 100
@@ -168,6 +170,8 @@ RECIPE_ROWS = 10
 
 SOURCE_CHEST = "chest"
 SOURCE_SHELF = "shelf"
+SOURCE_MASTER_SHELF = "master_shelf"
+SOURCE_MODES = (SOURCE_CHEST, SOURCE_SHELF, SOURCE_MASTER_SHELF)
 RESOURCE_SHELF_IDS = (0x71FC, 0x71FD)
 REAGENT_SHELF_IDS = (0xAFC1, 0xAFC2)
 
@@ -205,6 +209,7 @@ KEY_SOURCE_MODE = KEY_PREFIX + "source_mode"
 KEY_RESOURCE_CHEST = KEY_PREFIX + "resource_chest"
 KEY_RESOURCE_SHELF = KEY_PREFIX + "resource_shelf"
 KEY_REAGENT_SHELF = KEY_PREFIX + "reagent_shelf"
+KEY_MASTER_SHELF = KEY_PREFIX + "master_shelf"
 KEY_OUTPUT_CHEST = KEY_PREFIX + "output_chest"
 KEY_TOOL_BOOK = KEY_PREFIX + "tool_book"
 KEY_TRASH_CONTAINER = KEY_PREFIX + "trash_container"
@@ -212,6 +217,7 @@ KEY_CRAFT_BAG_ENABLED = KEY_PREFIX + "craft_bag_enabled"
 KEY_CRAFT_BAG = KEY_PREFIX + "craft_bag"
 KEY_MODULE_ID = KEY_PREFIX + "module_id"
 KEY_CRAFT_FOCUS = KEY_PREFIX + "craft_focus"
+KEY_TURBO_MODE = KEY_PREFIX + "turbo_mode"
 
 
 # ===========================================================
@@ -259,12 +265,15 @@ BTN_GLASSES_BACK = 9055
 BTN_TEMPLATES_SETUP = 9056
 BTN_TEMPLATES_BACK = 9057
 BTN_TEMPLATE_FORGET_ACTIVE = 9058
+BTN_SPEED_TOGGLE = 9059
 
 BTN_ACTION_SMELT = 9060
 BTN_ACTION_REPAIR = 9061
 BTN_ACTION_MARK = 9062
 BTN_ACTION_SALVAGE = 9063
 BTN_ACTION_RECYCLE = 9064
+BTN_SET_MASTER_SHELF = 9065
+BTN_FILL_MASTER_SHELF = 9066
 
 BTN_TRAIN_TOGGLE = 9070
 BTN_TRAIN_WORKBENCH = 9071
@@ -294,6 +303,7 @@ _status_hue = WARN_HUE
 _step_name = "Startup"
 _dirty_ui = True
 _last_ui_snapshot = None
+_last_gui_render_at = 0.0
 _render_stage = "Not started"
 
 _serializer = JavaScriptSerializer()
@@ -317,6 +327,7 @@ _active_plugin_id = ""
 _plugin_craft_owner = ""
 _plugin_craft_context = {}
 _craft_focus = "unchanged"
+_turbo_mode = False
 _active_module_index = 0
 _current_view = VIEW_HOME
 
@@ -324,6 +335,8 @@ _shelf_data = {}
 _shelf_resources = {}
 _reagent_shelf_data = {}
 _reagent_shelf_resources = {}
+_master_shelf_data = {}
+_master_shelf_resources = {}
 
 _selected_category_id = ""
 _selected_recipe_id = ""
@@ -369,6 +382,13 @@ _cleanup_retry_count = 0
 _cleanup_skipped_serials = []
 _plugin_cleanup_saved_bag_enabled = None
 
+_master_fill_active = False
+_master_fill_stage = ""
+_master_fill_resource_ids = []
+_master_fill_index = 0
+_master_fill_retry_count = 0
+_master_fill_transferred = 0
+
 _training_active = False
 _training_crafts = 0
 _training_start_skill = 0.0
@@ -386,6 +406,7 @@ _source_mode = SOURCE_CHEST
 _resource_chest_serial = 0
 _resource_shelf_serial = 0
 _reagent_shelf_serial = 0
+_master_shelf_serial = 0
 _output_chest_serial = 0
 _tool_book_serial = 0
 _trash_container_serial = 0
@@ -1072,6 +1093,7 @@ def save_settings():
         "resource_chest": int(_resource_chest_serial),
         "resource_shelf": int(_resource_shelf_serial),
         "reagent_shelf": int(_reagent_shelf_serial),
+        "master_shelf": int(_master_shelf_serial),
         "output_chest": saved_output_chest,
         "tool_book": int(_tool_book_serial),
         "trash_container": int(_trash_container_serial),
@@ -1079,6 +1101,7 @@ def save_settings():
         "craft_bag": int(_craft_bag_serial),
         "module_id": str(module.get("id", "")) if module else "",
         "craft_focus": str(_craft_focus),
+        "turbo_mode": bool(_turbo_mode),
         "crafting_glasses": dict(_crafting_glasses_serials),
         "crafting_templates": dict(_crafting_template_map),
     }
@@ -1093,12 +1116,14 @@ def save_settings():
         Misc.SetSharedValue(KEY_RESOURCE_CHEST, int(_resource_chest_serial))
         Misc.SetSharedValue(KEY_RESOURCE_SHELF, int(_resource_shelf_serial))
         Misc.SetSharedValue(KEY_REAGENT_SHELF, int(_reagent_shelf_serial))
+        Misc.SetSharedValue(KEY_MASTER_SHELF, int(_master_shelf_serial))
         Misc.SetSharedValue(KEY_OUTPUT_CHEST, saved_output_chest)
         Misc.SetSharedValue(KEY_TOOL_BOOK, int(_tool_book_serial))
         Misc.SetSharedValue(KEY_TRASH_CONTAINER, int(_trash_container_serial))
         Misc.SetSharedValue(KEY_CRAFT_BAG_ENABLED, 1 if saved_bag_enabled else 0)
         Misc.SetSharedValue(KEY_CRAFT_BAG, int(_craft_bag_serial))
         Misc.SetSharedValue(KEY_CRAFT_FOCUS, str(_craft_focus))
+        Misc.SetSharedValue(KEY_TURBO_MODE, 1 if _turbo_mode else 0)
         if module:
             Misc.SetSharedValue(KEY_MODULE_ID, str(module.get("id", "")))
     except:
@@ -1107,9 +1132,9 @@ def save_settings():
 
 def load_saved_settings():
     global _target_amount, _source_mode, _craft_bag_enabled, _craft_bag_serial
-    global _resource_chest_serial, _resource_shelf_serial, _reagent_shelf_serial
+    global _resource_chest_serial, _resource_shelf_serial, _reagent_shelf_serial, _master_shelf_serial
     global _output_chest_serial, _tool_book_serial, _trash_container_serial
-    global _craft_focus, _crafting_glasses_serials, _crafting_glasses_bonus_cache
+    global _craft_focus, _turbo_mode, _crafting_glasses_serials, _crafting_glasses_bonus_cache
     global _crafting_template_map, _known_active_template, _last_template_command_at
 
     load_player_settings_json()
@@ -1117,10 +1142,11 @@ def load_saved_settings():
 
     _target_amount = max(1, min(MAX_CRAFT_AMOUNT, int_value(core_settings.get("amount"), load_shared_int(KEY_AMOUNT, DEFAULT_CRAFT_AMOUNT))))
     saved_mode = str(core_settings.get("source_mode", load_shared_text(KEY_SOURCE_MODE, SOURCE_CHEST))).lower()
-    _source_mode = saved_mode if saved_mode in (SOURCE_CHEST, SOURCE_SHELF) else SOURCE_CHEST
+    _source_mode = saved_mode if saved_mode in SOURCE_MODES else SOURCE_CHEST
     _resource_chest_serial = max(0, int_value(core_settings.get("resource_chest"), load_shared_int(KEY_RESOURCE_CHEST, 0)))
     _resource_shelf_serial = max(0, int_value(core_settings.get("resource_shelf"), load_shared_int(KEY_RESOURCE_SHELF, 0)))
     _reagent_shelf_serial = max(0, int_value(core_settings.get("reagent_shelf"), load_shared_int(KEY_REAGENT_SHELF, 0)))
+    _master_shelf_serial = max(0, int_value(core_settings.get("master_shelf"), load_shared_int(KEY_MASTER_SHELF, 0)))
     _output_chest_serial = max(0, int_value(core_settings.get("output_chest"), load_shared_int(KEY_OUTPUT_CHEST, 0)))
     _tool_book_serial = max(0, int_value(core_settings.get("tool_book"), load_shared_int(KEY_TOOL_BOOK, 0)))
     _trash_container_serial = max(0, int_value(core_settings.get("trash_container"), load_shared_int(KEY_TRASH_CONTAINER, 0)))
@@ -1128,6 +1154,7 @@ def load_saved_settings():
     _craft_bag_serial = max(0, int_value(core_settings.get("craft_bag"), load_shared_int(KEY_CRAFT_BAG, 0)))
     saved_focus = str(core_settings.get("craft_focus", load_shared_text(KEY_CRAFT_FOCUS, "unchanged"))).lower()
     _craft_focus = saved_focus if saved_focus in FOCUS_ORDER or saved_focus == "unchanged" else "unchanged"
+    _turbo_mode = bool(core_settings.get("turbo_mode", load_shared_int(KEY_TURBO_MODE, 0) > 0))
     saved_glasses = dict_value(core_settings.get("crafting_glasses"))
     _crafting_glasses_serials = {}
     _crafting_glasses_bonus_cache = {}
@@ -1639,6 +1666,106 @@ def load_reagent_shelf_data():
         return False
 
 
+def load_master_shelf_data():
+    global _master_shelf_data, _master_shelf_resources
+
+    _master_shelf_data = {}
+    _master_shelf_resources = {}
+    path = combine_path(_project_directory, DATA_DIRECTORY, MASTER_SHELF_FILE)
+
+    try:
+        data = read_json_file(path)
+        if not isinstance(data, dict) or data.get("format") != "frog-master-shelf":
+            raise Exception("unsupported master shelf data format")
+        if int_value(data.get("version")) != 1:
+            raise Exception("unsupported master shelf data version")
+        if int_value(data.get("gump_id")) <= 0:
+            raise Exception("master shelf gump_id is missing")
+        if int_value(data.get("fill_from_backpack_button")) <= 0:
+            raise Exception("master shelf fill button is missing")
+        if int_value(data.get("crafting_toggle_button")) <= 0:
+            raise Exception("crafting source toggle button is missing")
+
+        categories = {}
+        for raw_category in list_value(data.get("categories")):
+            category = dict_value(raw_category)
+            category_id = clean_key(category.get("id"))
+            category_button = int_value(category.get("button"))
+            if not category_id or category_button <= 0:
+                raise Exception("master shelf category mapping is incomplete")
+            if category_id in categories:
+                raise Exception("duplicate master shelf category " + category_id)
+            categories[category_id] = category_button
+
+        for raw_resource in list_value(data.get("resources")):
+            resource = dict_value(raw_resource)
+            key = clean_key(resource.get("id"))
+            category_id = clean_key(resource.get("category"))
+            page_number = int_value(resource.get("page"))
+            deposit_button = int_value(resource.get("deposit_button"))
+            withdraw_button = int_value(resource.get("withdraw_button"))
+            if not key:
+                raise Exception("master shelf resource entry is missing id")
+            if key in _master_shelf_resources:
+                raise Exception("duplicate master shelf resource id " + key)
+            if category_id not in categories or page_number <= 0 or deposit_button <= 0:
+                raise Exception("invalid master shelf mapping for " + key)
+
+            mapped = {}
+            for field, value in resource.items():
+                mapped[field] = value
+            mapped["id"] = key
+            mapped["master_shelf_category_button"] = categories[category_id]
+            mapped["master_shelf_deposit_button"] = deposit_button
+            mapped["master_shelf_withdraw_button"] = withdraw_button
+            _master_shelf_resources[key] = mapped
+
+            base = _shelf_resources.get(key)
+            if not base:
+                base = {
+                    "id": key,
+                    "name": str(resource.get("name", key)),
+                    "shelf_page": None,
+                    "shelf_button": None,
+                    "item_id": None,
+                    "hue": None,
+                    "item_names": [],
+                }
+                _shelf_resources[key] = base
+
+            existing_names = configured_names(base)
+            known = [normalized_item_name(value) for value in existing_names]
+            master_name = str(resource.get("name", "")).strip()
+            normalized_master_name = normalized_item_name(master_name)
+            if master_name and normalized_master_name not in known:
+                existing_names.append(master_name)
+            base["item_names"] = existing_names
+            base["master_shelf_category"] = category_id
+            base["master_shelf_page"] = page_number
+            base["master_shelf_deposit_button"] = deposit_button
+            base["master_shelf_withdraw_button"] = withdraw_button
+
+        fill_ids = []
+        for raw_key in list_value(data.get("resource_shelf_fill_ids")):
+            key = clean_key(raw_key)
+            base = _shelf_resources.get(key)
+            if not key or key not in _master_shelf_resources:
+                raise Exception("unknown master shelf fill resource " + str(raw_key))
+            if not base or int_value(base.get("shelf_page")) <= 0 or int_value(base.get("shelf_button")) <= 0:
+                raise Exception("master shelf fill resource has no Resource Shelf mapping: " + key)
+            if key not in fill_ids:
+                fill_ids.append(key)
+        if not fill_ids:
+            raise Exception("master shelf resource_shelf_fill_ids is empty")
+
+        data["validated_resource_shelf_fill_ids"] = fill_ids
+        _master_shelf_data = data
+        return True
+    except Exception as ex:
+        _module_errors.append("Master shelf data: " + str(ex))
+        return False
+
+
 def load_ingredient_id_data():
     path = combine_path(_project_directory, DATA_DIRECTORY, INGREDIENT_IDS_FILE)
 
@@ -1718,6 +1845,7 @@ def load_modules():
     _module_directory_path = combine_path(_project_directory, MODULE_DIRECTORY)
     load_resource_shelf_data()
     load_reagent_shelf_data()
+    load_master_shelf_data()
     load_ingredient_id_data()
 
     try:
@@ -2452,8 +2580,12 @@ def begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, res
         return False, "Plugin craft amount is outside the supported range."
     if _plugin_craft_owner:
         return False, "Another plugin craft job is already active."
-    if _runtime_active or _training_active or _cleanup_active or training_work_pending():
+    if _runtime_active or _training_active or _cleanup_active or _master_fill_active or training_work_pending():
         return False, "FCC is already crafting or processing training output."
+    if _source_mode == SOURCE_MASTER_SHELF:
+        master_ready, master_error = master_shelf_readiness(False)
+        if not master_ready:
+            return False, master_error + "."
     requested_workspace = str(workspace_override or "").lower()
     if requested_workspace not in ("", "backpack"):
         return False, "The requested crafting workspace is invalid."
@@ -3330,12 +3462,7 @@ def snapshot_direct_container(container_serial):
     snapshot = {}
     for item in direct_container_items(container_serial):
         try:
-            snapshot[int(item.Serial)] = {
-                "amount": int(item.Amount),
-                "item_id": int(item.ItemID),
-                "hue": int(item.Hue),
-                "name": item_name(item),
-            }
+            snapshot[int(item.Serial)] = {"amount": int(item.Amount)}
         except:
             pass
     return snapshot
@@ -3483,7 +3610,7 @@ def craft_workspace_readiness():
             return False, "The configured Craft Bag is not a container"
         if int(bag.Container) != int(Player.Backpack.Serial):
             return False, "Move the configured Craft Bag directly into the main backpack"
-        if int(bag.Serial) in (int(_resource_chest_serial), int(_resource_shelf_serial), int(_reagent_shelf_serial)):
+        if int(bag.Serial) in (int(_resource_chest_serial), int(_resource_shelf_serial), int(_reagent_shelf_serial), int(_master_shelf_serial)):
             return False, "Craft Bag cannot also be the configured resource source"
         if int(bag.Serial) == int(_trash_container_serial):
             return False, "Craft Bag cannot also be the training trash container"
@@ -3580,7 +3707,7 @@ def move_descriptor_deltas_to_craft_bag(deltas):
 
 
 def set_target_serial(kind):
-    global _resource_chest_serial, _resource_shelf_serial, _reagent_shelf_serial
+    global _resource_chest_serial, _resource_shelf_serial, _reagent_shelf_serial, _master_shelf_serial
     global _craft_bag_enabled, _craft_bag_serial
     global _output_chest_serial, _tool_book_serial, _trash_container_serial
 
@@ -3588,6 +3715,7 @@ def set_target_serial(kind):
         "resource_chest": "Target the resource chest",
         "resource_shelf": "Target the Resource Shelf",
         "reagent_shelf": "Target the Reagent and Gem Storage Shelf",
+        "master_shelf": "Target the Artificer Storage Shelf",
         "output_chest": "Target the crafted-item chest",
         "tool_book": "Target the Crafting Tool Storage book",
         "trash_container": "Target a trash barrel or disposal container",
@@ -3602,7 +3730,7 @@ def set_target_serial(kind):
         set_status("Target cancelled or item not found.", BAD_HUE, "Target Setup")
         return
 
-    if kind in ("resource_chest", "resource_shelf", "reagent_shelf", "trash_container") and int(serial) == int(_craft_bag_serial):
+    if kind in ("resource_chest", "resource_shelf", "reagent_shelf", "master_shelf", "trash_container") and int(serial) == int(_craft_bag_serial):
         set_status("That target is the configured Craft Bag; choose a separate container.", BAD_HUE, "Craft Bag Safety")
         return
 
@@ -3612,7 +3740,7 @@ def set_target_serial(kind):
             set_status("That is not a Resource Shelf (expected {0}).".format(item_id_choices_label(expected_ids)), BAD_HUE, "Target Setup")
             return
         _resource_shelf_serial = int(serial)
-        set_status("Resource Shelf saved; withdrawal must be set to {0}.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), GOOD_HUE, "Ready")
+        set_status("Resource Shelf saved; FCC will set each withdrawal to {0}.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), GOOD_HUE, "Ready")
     elif kind == "reagent_shelf":
         expected_ids = configured_shelf_item_ids(_reagent_shelf_data, REAGENT_SHELF_IDS)
         if expected_ids and int_value(item.ItemID) not in expected_ids:
@@ -3635,6 +3763,27 @@ def set_target_serial(kind):
         _reagent_shelf_serial = int(serial)
         withdraw_amount = int_value(_reagent_shelf_data.get("withdraw_amount"), 100)
         set_status("Reagent/Gem Shelf saved; set used withdrawal entries to {0}.".format(withdraw_amount), GOOD_HUE, "Ready")
+    elif kind == "master_shelf":
+        expected_ids = configured_shelf_item_ids(_master_shelf_data, ())
+        if expected_ids and int_value(item.ItemID) not in expected_ids:
+            set_status("That is not an Artificer Storage Shelf (expected {0}).".format(item_id_choices_label(expected_ids)), BAD_HUE, "Target Setup")
+            return
+
+        shelf_gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+        try:
+            close_gump(shelf_gump_id)
+            Items.UseItem(item)
+            Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+        except:
+            close_gump(shelf_gump_id)
+            set_status("Could not open that Artificer Storage Shelf target.", BAD_HUE, "Target Setup")
+            return
+        if not gump_is_open(shelf_gump_id):
+            set_status("That item did not open the Artificer Storage Shelf gump.", BAD_HUE, "Target Setup")
+            return
+        close_gump(shelf_gump_id)
+        _master_shelf_serial = int(serial)
+        set_status("Artificer Storage Shelf saved.", GOOD_HUE, "Ready")
     elif kind == "resource_chest":
         _resource_chest_serial = int(serial)
         set_status("Resource chest saved.", GOOD_HUE, "Ready")
@@ -3656,7 +3805,7 @@ def set_target_serial(kind):
         if not is_valid_bag:
             set_status("Craft Bag must be a container directly inside the main backpack.", BAD_HUE, "Target Setup")
             return
-        if int(serial) in (int(_resource_chest_serial), int(_resource_shelf_serial), int(_reagent_shelf_serial), int(_trash_container_serial)):
+        if int(serial) in (int(_resource_chest_serial), int(_resource_shelf_serial), int(_reagent_shelf_serial), int(_master_shelf_serial), int(_trash_container_serial)):
             set_status("Craft Bag must be separate from resource and trash containers.", BAD_HUE, "Craft Bag Safety")
             return
         _craft_bag_serial = int(serial)
@@ -3941,6 +4090,214 @@ def deposit_reagent_shelf_from_backpack():
     return True, "Reagent/Gem Shelf deposit checked", max(0, before - after)
 
 
+def master_shelf_readiness(open_gump=False):
+    shelf = valid_item(_master_shelf_serial)
+    if not shelf:
+        return False, "Set a valid Artificer Storage Shelf on Home / Setup"
+
+    expected_ids = configured_shelf_item_ids(_master_shelf_data, ())
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
+        return False, "Saved Artificer Storage Shelf has the wrong item ID"
+
+    gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+    if gump_id <= 0:
+        return False, "Artificer Storage Shelf gump is not mapped"
+    if not open_gump:
+        return True, ""
+
+    close_gump(gump_id)
+    Misc.Pause(150)
+    try:
+        Items.UseItem(shelf)
+        Gumps.WaitForGump(gump_id, SERVER_GUMP_WAIT_MS)
+    except:
+        close_gump(gump_id)
+        return False, "Artificer Storage Shelf gump did not open"
+    if consume_priority_control_button():
+        close_gump(gump_id)
+        return False, "Artificer Storage Shelf check was interrupted"
+    if not gump_is_open(gump_id):
+        return False, "Artificer Storage Shelf gump did not open"
+    return True, ""
+
+
+def wait_for_resource_decrease(container_serial, resource, previous_count, timeout_ms=SHELF_DELIVERY_WAIT_MS):
+    elapsed = 0
+    current = count_resource(container_serial, resource)
+    while current >= int(previous_count) and elapsed < int(timeout_ms):
+        if consume_priority_control_button():
+            return current
+        Misc.Pause(JOURNAL_POLL_MS)
+        elapsed += JOURNAL_POLL_MS
+        current = count_resource(container_serial, resource)
+    return current
+
+
+def deposit_master_shelf_from_backpack(resource):
+    backpack = Player.Backpack
+    if not backpack:
+        return "error", "Player backpack is unavailable.", 0
+
+    before = count_resource(backpack.Serial, resource)
+    if before <= 0:
+        return "ready", "No staged {0} remained to deposit.".format(resource.get("name", "resource")), 0
+
+    ready, message = master_shelf_readiness(True)
+    gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+    if not ready:
+        close_gump(gump_id)
+        return "interrupted" if _operation_interrupted else "error", message + ".", 0
+
+    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 900)
+    if fill_button <= 0:
+        close_gump(gump_id)
+        return "error", "Artificer Storage Shelf fill button is not mapped.", 0
+
+    try:
+        Gumps.SendAction(gump_id, fill_button)
+        Misc.Pause(MOVE_PAUSE_MS)
+    except:
+        close_gump(gump_id)
+        return "error", "Artificer Storage Shelf Fill From Backpack action failed.", 0
+    close_gump(gump_id)
+
+    after = wait_for_resource_decrease(backpack.Serial, resource, before)
+    if _operation_interrupted:
+        return "interrupted", "Artificer Storage Shelf deposit was interrupted.", 0
+    if after >= before:
+        return "error", "Artificer Storage Shelf did not accept staged {0}.".format(resource.get("name", "resource")), 0
+    return "ready", "Deposited {0} {1} into the Artificer Storage Shelf.".format(before - after, resource.get("name", "resource")), before - after
+
+
+def reset_master_shelf_fill():
+    global _master_fill_active, _master_fill_stage, _master_fill_resource_ids
+    global _master_fill_index, _master_fill_retry_count, _master_fill_transferred
+
+    _master_fill_active = False
+    _master_fill_stage = ""
+    _master_fill_resource_ids = []
+    _master_fill_index = 0
+    _master_fill_retry_count = 0
+    _master_fill_transferred = 0
+
+
+def stop_master_shelf_fill(message, hue=WARN_HUE):
+    global _dirty_ui
+
+    transferred = _master_fill_transferred
+    reset_master_shelf_fill()
+    close_gump(int_value(_shelf_data.get("gump_id"), 0x06ABCE12))
+    close_gump(int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83))
+    suffix = " Deposited {0} mapped resource unit{1}.".format(transferred, "" if transferred == 1 else "s") if transferred > 0 else ""
+    set_status(str(message).rstrip(".") + "." + suffix, hue, "Fill Master Shelf")
+    _dirty_ui = True
+
+
+def start_master_shelf_fill():
+    global _master_fill_active, _master_fill_stage, _master_fill_resource_ids
+    global _master_fill_index, _master_fill_retry_count, _master_fill_transferred
+    global _dirty_ui
+
+    plugin = active_plugin()
+    if _runtime_active or _training_active or _cleanup_active or training_work_pending() or _plugin_craft_owner:
+        set_status("Pause crafting and finish pending cleanup before filling the Artificer Storage Shelf.", WARN_HUE, "Fill Master Shelf")
+        return
+    if plugin and bool(getattr(plugin, "running", False)):
+        set_status("Stop the active crafting plugin before filling the Artificer Storage Shelf.", WARN_HUE, "Fill Master Shelf")
+        return
+
+    shelf = valid_item(_resource_shelf_serial)
+    expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
+    if not shelf or (expected_ids and int_value(shelf.ItemID) not in expected_ids):
+        set_status("Set a valid Resource Shelf before using Fill Master Shelf.", BAD_HUE, "Fill Master Shelf")
+        return
+    ready, message = master_shelf_readiness(True)
+    if not ready:
+        set_status(message + ".", BAD_HUE, "Fill Master Shelf")
+        return
+    close_gump(int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83))
+
+    fill_ids = [clean_key(value) for value in list_value(_master_shelf_data.get("validated_resource_shelf_fill_ids")) if clean_key(value)]
+    if not fill_ids:
+        set_status("No Resource Shelf to Artificer Storage Shelf transfer mappings are loaded.", BAD_HUE, "Fill Master Shelf")
+        return
+
+    reset_make_last(True)
+    _master_fill_active = True
+    _master_fill_stage = "withdraw"
+    _master_fill_resource_ids = fill_ids
+    _master_fill_index = 0
+    _master_fill_retry_count = 0
+    _master_fill_transferred = 0
+    set_status("Starting Resource Shelf transfer in fixed batches of {0}; Fill From Backpack may also take other supported backpack materials.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), GOOD_HUE, "Fill Master Shelf")
+    _dirty_ui = True
+
+
+def master_shelf_fill_step():
+    global _master_fill_stage, _master_fill_index, _master_fill_retry_count
+    global _master_fill_transferred, _dirty_ui
+
+    if not _master_fill_active:
+        return
+    if _master_fill_index >= len(_master_fill_resource_ids):
+        stop_master_shelf_fill("Artificer Storage Shelf fill pass complete", GOOD_HUE)
+        return
+
+    resource_key = _master_fill_resource_ids[_master_fill_index]
+    resource = _shelf_resources.get(resource_key)
+    if not resource:
+        stop_master_shelf_fill("Fill stopped because resource mapping {0} disappeared".format(resource_key), BAD_HUE)
+        return
+    position = "{0}/{1}".format(_master_fill_index + 1, len(_master_fill_resource_ids))
+
+    if _master_fill_stage == "withdraw":
+        set_status("Withdrawing up to {0} {1} from the Resource Shelf ({2}).".format(RESOURCE_SHELF_WITHDRAW_AMOUNT, resource.get("name", resource_key), position), LABEL_HUE, "Fill Master Shelf")
+        state, message, _amount, _before_snapshot = withdraw_resource_shelf_to_backpack(resource)
+        if not _master_fill_active or _operation_interrupted or state == "interrupted":
+            return
+        if state == "ready":
+            _master_fill_stage = "deposit"
+            _master_fill_retry_count = 0
+            set_status(message + " Depositing this batch next.", GOOD_HUE, "Fill Master Shelf")
+            _dirty_ui = True
+            return
+        if state == "empty":
+            _master_fill_index += 1
+            _master_fill_retry_count = 0
+            set_status("{0} Moving to the next mapped resource.".format(message), DIM_HUE, "Fill Master Shelf")
+            _dirty_ui = True
+            return
+
+        _master_fill_retry_count += 1
+        if _master_fill_retry_count <= MAX_ACTION_RETRIES:
+            set_status("{0} Retry {1}/{2}.".format(message.rstrip("."), _master_fill_retry_count, MAX_ACTION_RETRIES), WARN_HUE, "Fill Master Shelf")
+            return
+        stop_master_shelf_fill("Fill stopped after repeated Resource Shelf failures: " + message, BAD_HUE)
+        return
+
+    if _master_fill_stage == "deposit":
+        set_status("Depositing the {0} batch into the Artificer Storage Shelf ({1}).".format(resource.get("name", resource_key), position), LABEL_HUE, "Fill Master Shelf")
+        state, message, amount = deposit_master_shelf_from_backpack(resource)
+        if not _master_fill_active or _operation_interrupted or state == "interrupted":
+            return
+        if state == "ready" and amount > 0:
+            _master_fill_transferred += amount
+            _master_fill_stage = "withdraw"
+            _master_fill_retry_count = 0
+            set_status(message + " Checking the same resource for another batch.", GOOD_HUE, "Fill Master Shelf")
+            _dirty_ui = True
+            return
+
+        _master_fill_retry_count += 1
+        if _master_fill_retry_count <= MAX_ACTION_RETRIES:
+            set_status("{0} Retry {1}/{2}.".format(message.rstrip("."), _master_fill_retry_count, MAX_ACTION_RETRIES), WARN_HUE, "Fill Master Shelf")
+            return
+        stop_master_shelf_fill("Fill stopped after repeated Artificer Storage Shelf deposit failures: " + message, BAD_HUE)
+        return
+
+    stop_master_shelf_fill("Fill stopped because its workflow state was invalid", BAD_HUE)
+
+
 def finish_material_cleanup():
     global _runtime_active, _training_active, _dirty_ui
 
@@ -4117,6 +4474,110 @@ def wait_for_resource_increase(container_serial, resource, previous_count, timeo
     return current
 
 
+def send_resource_shelf_action(gump_id, button_id, amount=RESOURCE_SHELF_WITHDRAW_AMOUNT):
+    entry_id = int_value(_shelf_data.get("withdraw_amount_text_entry_id"), 0)
+    try:
+        Gumps.SendAdvancedAction(int(gump_id), int(button_id), [], [entry_id], [str(max(1, int_value(amount, RESOURCE_SHELF_WITHDRAW_AMOUNT)))])
+        return True
+    except:
+        return False
+
+
+def open_resource_shelf_resource_page(resource):
+    shelf = valid_item(_resource_shelf_serial)
+    if not shelf:
+        return "error", "Set a valid Resource Shelf.", 0
+
+    expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
+    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
+        return "error", "Saved shelf is not item {0}.".format(item_id_choices_label(expected_ids)), 0
+
+    shelf_gump_id = int_value(_shelf_data.get("gump_id"), 0x06ABCE12)
+    next_button = int_value(_shelf_data.get("next_page_button"), 123)
+    set_button = int_value(_shelf_data.get("withdraw_amount_button"), 119)
+    shelf_page = int_value(resource.get("shelf_page"))
+    shelf_button = int_value(resource.get("shelf_button"))
+    if shelf_page <= 0 or shelf_button <= 0 or set_button <= 0:
+        return "error", "Shelf button mapping is missing for {0}.".format(resource.get("name", "resource")), 0
+
+    close_gump(shelf_gump_id)
+    Misc.Pause(150)
+    try:
+        Items.UseItem(shelf)
+        Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+    except:
+        return "error", "Resource Shelf gump did not open.", 0
+
+    if consume_priority_control_button():
+        close_gump(shelf_gump_id)
+        return "interrupted", "Resource Shelf navigation interrupted.", 0
+    if not gump_is_open(shelf_gump_id):
+        return "error", "Resource Shelf gump did not open.", 0
+
+    if not send_resource_shelf_action(shelf_gump_id, set_button):
+        close_gump(shelf_gump_id)
+        return "error", "Resource Shelf withdrawal amount could not be set to {0}.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), 0
+    Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+    Misc.Pause(CRAFT_MENU_SETTLE_MS)
+
+    if consume_priority_control_button():
+        close_gump(shelf_gump_id)
+        return "interrupted", "Resource Shelf amount setup was interrupted.", 0
+    if not gump_is_open(shelf_gump_id):
+        try:
+            Items.UseItem(shelf)
+            Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+        except:
+            return "error", "Resource Shelf did not reopen after setting withdrawal amount.", 0
+        if not gump_is_open(shelf_gump_id):
+            return "error", "Resource Shelf did not reopen after setting withdrawal amount.", 0
+
+    for _page in range(1, shelf_page):
+        if consume_priority_control_button():
+            close_gump(shelf_gump_id)
+            return "interrupted", "Resource Shelf navigation interrupted.", 0
+        if not send_resource_shelf_action(shelf_gump_id, next_button):
+            close_gump(shelf_gump_id)
+            return "error", "Resource Shelf page action failed.", 0
+        Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+        Misc.Pause(180)
+        if not gump_is_open(shelf_gump_id):
+            close_gump(shelf_gump_id)
+            return "error", "Resource Shelf page navigation failed.", 0
+
+    return "ready", "", shelf_gump_id
+
+
+def withdraw_resource_shelf_to_backpack(resource):
+    backpack = Player.Backpack
+    if not backpack:
+        return "error", "Player backpack is unavailable.", 0, {}
+
+    before_snapshot = snapshot_direct_container(backpack.Serial)
+    before_count = count_resource(backpack.Serial, resource)
+    state, message, shelf_gump_id = open_resource_shelf_resource_page(resource)
+    if state != "ready":
+        return state, message, 0, before_snapshot
+
+    shelf_button = int_value(resource.get("shelf_button"))
+    if consume_priority_control_button():
+        close_gump(shelf_gump_id)
+        return "interrupted", "Resource Shelf withdrawal interrupted.", 0, before_snapshot
+    if not send_resource_shelf_action(shelf_gump_id, shelf_button):
+        close_gump(shelf_gump_id)
+        return "error", "Resource Shelf withdrawal action failed.", 0, before_snapshot
+    Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+    Misc.Pause(MOVE_PAUSE_MS)
+    close_gump(shelf_gump_id)
+
+    after_count = wait_for_resource_increase(backpack.Serial, resource, before_count)
+    if _operation_interrupted:
+        return "interrupted", "Resource Shelf withdrawal interrupted.", 0, before_snapshot
+    if after_count <= before_count:
+        return "empty", "Resource Shelf supplied no {0} after requesting {1}.".format(resource.get("name", "resource"), RESOURCE_SHELF_WITHDRAW_AMOUNT), 0, before_snapshot
+    return "ready", "Withdrew {0} {1} from the Resource Shelf.".format(after_count - before_count, resource.get("name", "resource")), after_count - before_count, before_snapshot
+
+
 def pull_from_chest(resource, target_count):
     chest = valid_item(_resource_chest_serial)
     if not chest:
@@ -4152,21 +4613,6 @@ def pull_from_chest(resource, target_count):
 
 
 def pull_from_shelf(resource):
-    shelf = valid_item(_resource_shelf_serial)
-    if not shelf:
-        return False, "Set a valid Resource Shelf."
-
-    expected_ids = configured_shelf_item_ids(_shelf_data, RESOURCE_SHELF_IDS)
-    if expected_ids and int_value(shelf.ItemID) not in expected_ids:
-        return False, "Saved shelf is not item {0}.".format(item_id_choices_label(expected_ids))
-
-    shelf_gump_id = int_value(_shelf_data.get("gump_id"), 0x06ABCE12)
-    next_button = int_value(_shelf_data.get("next_page_button"), 123)
-    shelf_page = int_value(resource.get("shelf_page"))
-    shelf_button = int_value(resource.get("shelf_button"))
-    if shelf_page <= 0 or shelf_button <= 0:
-        return False, "Shelf button mapping is missing for {0}.".format(resource.get("name", "resource"))
-
     workspace_ready, workspace_error = craft_workspace_readiness()
     workspace = craft_workspace_item()
     if not workspace_ready or not workspace:
@@ -4175,53 +4621,18 @@ def pull_from_shelf(resource):
     if _craft_bag_enabled:
         open_container(workspace.Serial)
     before = count_resource(workspace.Serial, resource)
-    before_main_pack = snapshot_direct_container(Player.Backpack.Serial)
-    before_main_count = count_resource(Player.Backpack.Serial, resource)
-    close_gump(shelf_gump_id)
-    Misc.Pause(150)
-    Items.UseItem(shelf)
-    Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
-
-    if consume_priority_control_button():
-        return False, "Resource Shelf navigation interrupted."
-
-    if not gump_is_open(shelf_gump_id):
-        return False, "Resource Shelf gump did not open."
-
-    for _page in range(1, shelf_page):
-        if consume_priority_control_button():
-            return False, "Resource Shelf navigation interrupted."
-        Gumps.SendAction(shelf_gump_id, next_button)
-        Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
-        Misc.Pause(180)
-        if consume_priority_control_button():
-            return False, "Resource Shelf navigation interrupted."
-        if not gump_is_open(shelf_gump_id):
-            close_gump(shelf_gump_id)
-            return False, "Resource Shelf page navigation failed."
-
-    if consume_priority_control_button():
-        return False, "Resource Shelf withdrawal interrupted."
-    Gumps.SendAction(shelf_gump_id, shelf_button)
-    Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
-    Misc.Pause(MOVE_PAUSE_MS)
-    close_gump(shelf_gump_id)
-
-    delivery_container = Player.Backpack.Serial if _craft_bag_enabled else workspace.Serial
-    delivery_before = before_main_count if _craft_bag_enabled else before
-    wait_for_resource_increase(delivery_container, resource, delivery_before)
-    if _operation_interrupted:
-        return False, "Resource Shelf withdrawal interrupted."
+    state, message, delivered, before_main_pack = withdraw_resource_shelf_to_backpack(resource)
+    if state != "ready":
+        return False, message
 
     if _craft_bag_enabled:
         withdrawn = detect_new_descriptor_items(resource, before_main_pack, Player.Backpack.Serial, int_value(resource.get("hue"), -1))
         if withdrawn and not move_descriptor_deltas_to_craft_bag(withdrawn):
-            delivered = sum([int_value(delta) for _item, delta in withdrawn])
             return True, "Shelf delivered {0} {1}; Craft Bag staging will retry.".format(delivered, resource.get("name", "resource"))
 
     after = count_resource(workspace.Serial, resource)
     if after <= before:
-        return False, "Shelf withdrew no {0}; verify amount is locked to {1}.".format(resource.get("name", "resource"), RESOURCE_SHELF_WITHDRAW_AMOUNT)
+        return False, "Shelf withdrew {0}, but it did not reach {1}.".format(resource.get("name", "resource"), craft_workspace_label())
     return True, "Shelf staged {0} {1} in {2}.".format(after - before, resource.get("name", "resource"), craft_workspace_label())
 
 
@@ -4344,10 +4755,11 @@ def craft_component_resource(resource):
     original_focus = ""
     tool = None
     try:
-        register_session_resources(component_resources)
-        resource_state, resource_error = ensure_resource_list(component_resources, 1)
-        if resource_state != "ready":
-            return resource_state, resource_error
+        if _source_mode != SOURCE_MASTER_SHELF:
+            register_session_resources(component_resources)
+            resource_state, resource_error = ensure_resource_list(component_resources, 1)
+            if resource_state != "ready":
+                return resource_state, resource_error
 
         tool_state, tool_result = ensure_tool(module)
         if _operation_interrupted or consume_priority_control_button():
@@ -4367,6 +4779,10 @@ def craft_component_resource(resource):
         set_status("Opening {0} to craft component {1}.".format(module.get("name", "crafting"), recipe.get("name", recipe_id)), LABEL_HUE, "Craft Component")
         if not open_server_craft_gump(craft_gump_id, tool):
             return "error", "Crafting gump did not open for component " + str(recipe.get("name", recipe_id)) + "."
+
+        source_ready, source_message = ensure_crafting_resource_source(craft_gump_id)
+        if not source_ready:
+            return "error", source_message
 
         original_focus = read_crafting_focus(craft_gump_id)
         if not original_focus:
@@ -4745,7 +5161,9 @@ def detect_new_outputs_detail(recipe, before_snapshot, hue=-1, container_serial=
             if int(hue) >= 0 and int(item.Hue) != int(hue):
                 continue
             id_match = int(item.ItemID) in output_ids
-            name_match = normalized_item_name(item_name(item)) in output_names
+            name_match = False
+            if not id_match and output_names:
+                name_match = normalized_item_name(item_name(item)) in output_names
             if id_match or name_match:
                 matched.append((item, delta))
         except:
@@ -4981,11 +5399,18 @@ def wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, j
     output_deltas = []
     actual_output = 0
     exact_output_match = False
+    journal_relevant = expected_focus in ("unchanged", "global", "weekly", "bod_book")
+    consumed_focus = expected_focus in ("global", "weekly", "bod_book")
     while True:
+        if consumed_focus:
+            consumed_quest_type = quest_success_since(journal_cursor, expected_focus)
+            if consumed_quest_type:
+                return output_deltas, output_amount, exact_output_match, consumed_quest_type
         output_deltas, actual_output, exact_output_match = detect_craft_outputs_detail(recipe, before_snapshots, output_hue)
-        consumed_quest_type = quest_success_since(journal_cursor, expected_focus)
-        if consumed_quest_type:
-            return output_deltas, output_amount, exact_output_match, consumed_quest_type
+        if journal_relevant and not consumed_focus:
+            consumed_quest_type = quest_success_since(journal_cursor, expected_focus)
+            if consumed_quest_type:
+                return output_deltas, output_amount, exact_output_match, consumed_quest_type
         if actual_output >= output_amount:
             if exact_output_match:
                 return output_deltas, actual_output, exact_output_match, ""
@@ -5062,6 +5487,109 @@ def crafting_focus_lines(gump_id):
     except:
         pass
     return lines
+
+
+def crafting_resource_source_from_lines(lines):
+    status_prefix = " ".join(str(_master_shelf_data.get("crafting_status_prefix", "you are currently using the resources from your")).strip().lower().split())
+    backpack_marker = " ".join(str(_master_shelf_data.get("crafting_backpack_marker", "backpack")).strip().lower().split())
+    storage_marker = " ".join(str(_master_shelf_data.get("crafting_shelf_marker", "storage")).strip().lower().split())
+    matches = []
+    saw_status = False
+
+    for value in list(lines or []):
+        line = " ".join(str(value).strip().lower().split())
+        if status_prefix and status_prefix not in line:
+            continue
+        saw_status = True
+        has_backpack = bool(backpack_marker) and backpack_marker in line
+        has_storage = bool(storage_marker) and storage_marker in line
+        if has_backpack == has_storage:
+            continue
+        source = "backpack" if has_backpack else SOURCE_MASTER_SHELF
+        if source not in matches:
+            matches.append(source)
+
+    return (matches[0] if len(matches) == 1 else ""), saw_status
+
+
+def read_crafting_resource_source(gump_id):
+    alert_text = " ".join(str(_master_shelf_data.get("crafting_alert_text", "an artificer storage shelf is nearby")).strip().lower().split())
+    line_groups = []
+
+    try:
+        values = Gumps.GetLineList(int(gump_id), False)
+        if values:
+            line_groups.append(list(values))
+    except:
+        pass
+    try:
+        data = Gumps.GetGumpData(int(gump_id))
+        values = getattr(data, "gumpStrings", None) or []
+        if values:
+            line_groups.append(list(values))
+    except:
+        pass
+
+    for lines in line_groups:
+        current, saw_status = crafting_resource_source_from_lines(lines)
+        if current:
+            return current
+        if saw_status:
+            return ""
+
+    normalized_lines = []
+    for lines in line_groups:
+        normalized_lines.extend([" ".join(str(value).strip().lower().split()) for value in lines])
+    if not normalized_lines:
+        return ""
+    alert_present = bool(alert_text) and any(alert_text in line for line in normalized_lines)
+    return "" if alert_present else "backpack"
+
+
+def wait_for_crafting_resource_source(gump_id, desired):
+    deadline = time.time() + (float(SERVER_GUMP_WAIT_MS) / 1000.0)
+    last_read = ""
+    while time.time() < deadline:
+        if consume_priority_control_button():
+            return ""
+        if gump_is_open(gump_id):
+            last_read = read_crafting_resource_source(gump_id)
+            if last_read == desired:
+                return last_read
+        Misc.Pause(CRAFT_GUMP_RETURN_POLL_MS)
+    return last_read
+
+
+def ensure_crafting_resource_source(gump_id):
+    desired = SOURCE_MASTER_SHELF if _source_mode == SOURCE_MASTER_SHELF else "backpack"
+    if desired == SOURCE_MASTER_SHELF:
+        ready, message = master_shelf_readiness(False)
+        if not ready:
+            return False, message + "."
+
+    current = read_crafting_resource_source(gump_id)
+    if current == desired:
+        label = "Artificer Storage Shelf" if desired == SOURCE_MASTER_SHELF else "backpack"
+        return True, "Crafting resource source verified: " + label + "."
+    if not current:
+        return False, "Could not read the crafting gump's backpack/Artificer Shelf status line."
+
+    toggle_button = int_value(_master_shelf_data.get("crafting_toggle_button"), 91)
+    if toggle_button <= 0:
+        return False, "Crafting source toggle button is not mapped."
+    if consume_priority_control_button():
+        return False, "Crafting source change was interrupted."
+    try:
+        Gumps.SendAction(int(gump_id), toggle_button)
+    except Exception as ex:
+        return False, "Crafting source toggle failed: " + str(ex)
+    changed = wait_for_crafting_resource_source(gump_id, desired)
+    if _operation_interrupted:
+        return False, "Crafting source change was interrupted."
+    if changed != desired:
+        wanted = "Artificer Storage Shelf" if desired == SOURCE_MASTER_SHELF else "backpack"
+        return False, "Crafting source did not change to " + wanted + "."
+    return True, "Crafting resource source changed and verified."
 
 
 def read_crafting_focus(gump_id):
@@ -5560,11 +6088,14 @@ def craft_make_last_signature(module, recipe, resources, wanted_focus):
     parts = [
         "owner=" + clean_key(_plugin_craft_owner or "core"),
         "workspace=" + make_last_workspace_signature(),
+        "source=" + clean_key(_source_mode),
         clean_key(module.get("id")),
         str(int_value(module.get("craft_gump_id"))),
         clean_key(recipe.get("id")),
         clean_key(wanted_focus or "unchanged"),
     ]
+    if _source_mode == SOURCE_MASTER_SHELF:
+        parts.append("master_shelf={0}".format(int_value(_master_shelf_serial)))
     used_groups = []
     for resource in resources:
         group_id = clean_key(resource.get("choice_group"))
@@ -5722,6 +6253,14 @@ def start_runtime():
     if _cleanup_active:
         set_status("Wait for material cleanup to finish before starting another job.", WARN_HUE, "Cleanup Materials")
         return
+    if _master_fill_active:
+        set_status("Stop Fill Master Shelf before starting a crafting job.", WARN_HUE, "Fill Master Shelf")
+        return
+    if _source_mode == SOURCE_MASTER_SHELF:
+        master_ready, master_error = master_shelf_readiness(False)
+        if not master_ready:
+            set_status("Cannot start: " + master_error + ".", BAD_HUE, "Master Shelf Validation")
+            return
 
     recipe = selected_recipe()
     ready, reason = recipe_readiness(recipe)
@@ -5794,6 +6333,14 @@ def start_training():
     if _cleanup_active:
         set_status("Wait for material cleanup to finish before starting training.", WARN_HUE, "Cleanup Materials")
         return
+    if _master_fill_active:
+        set_status("Stop Fill Master Shelf before starting training.", WARN_HUE, "Fill Master Shelf")
+        return
+    if _source_mode == SOURCE_MASTER_SHELF:
+        master_ready, master_error = master_shelf_readiness(False)
+        if not master_ready:
+            set_status("Cannot start training: " + master_error + ".", BAD_HUE, "Master Shelf Validation")
+            return
 
     reset_make_last()
 
@@ -6047,19 +6594,19 @@ def craft_step(training_stage=None):
                     stop_runtime("Need {0} {1:.1f}; current {2:.1f}.".format(skill_name, minimum, skill_value), BAD_HUE)
                     return
 
-    register_session_resources(resources)
-
-    remaining = RESTOCK_CHUNK_CRAFTS if training_mode else _target_amount - _completed_amount
-    resource_state, resource_error = ensure_resource_list(resources, remaining)
-    if _operation_interrupted or consume_priority_control_button():
-        return
-    if resource_state == "progress":
+    if _source_mode != SOURCE_MASTER_SHELF:
+        register_session_resources(resources)
+        remaining = RESTOCK_CHUNK_CRAFTS if training_mode else _target_amount - _completed_amount
+        resource_state, resource_error = ensure_resource_list(resources, remaining)
+        if _operation_interrupted or consume_priority_control_button():
+            return
+        if resource_state == "progress":
+            clear_action_failures("restock_resources")
+            return
+        if resource_state == "error":
+            retry_action_or_pause("restock_resources", resource_error, "Restock Resources")
+            return
         clear_action_failures("restock_resources")
-        return
-    if resource_state == "error":
-        retry_action_or_pause("restock_resources", resource_error, "Restock Resources")
-        return
-    clear_action_failures("restock_resources")
 
     output_hue = int_value(recipe.get("output_hue"), -1)
     output_amount = max(1, int_value(recipe.get("output_amount"), 1))
@@ -6108,6 +6655,14 @@ def craft_step(training_stage=None):
     clear_action_failures("open_craft_gump")
 
     if not handoff_current:
+        source_ready, source_message = ensure_crafting_resource_source(craft_gump_id)
+        if _operation_interrupted or consume_priority_control_button():
+            return
+        if not source_ready:
+            retry_action_or_pause("set_craft_resource_source", source_message, "Craft Resource Source")
+            return
+        clear_action_failures("set_craft_resource_source")
+
         focus_ready, focus_message = ensure_crafting_focus(craft_gump_id, wanted_focus)
         if _operation_interrupted or consume_priority_control_button():
             return
@@ -6124,7 +6679,7 @@ def craft_step(training_stage=None):
         craft_progress = "{0}/{1}".format(_completed_amount + 1, _target_amount)
     method_text = " with Make Last" if use_make_last else ""
     set_status("Crafting {0}{1} ({2}).".format(recipe.get("name", "recipe"), method_text, craft_progress), LABEL_HUE, action_label)
-    journal_cursor = capture_journal_cursor()
+    journal_cursor = capture_journal_cursor() if wanted_focus in ("unchanged", "global", "weekly", "bod_book") else None
     sequence_complete = send_server_actions(craft_gump_id, actions, action_label)
 
     if _operation_interrupted:
@@ -6334,13 +6889,21 @@ def add_button(gd, x, y, button_id, label, hue=LABEL_HUE, art_up=4005, art_down=
 
 
 def source_mode_label():
-    return "Shelf + Chest" if _source_mode == SOURCE_SHELF else "Resource Chest"
+    if _source_mode == SOURCE_SHELF:
+        return "Shelf + Chest"
+    if _source_mode == SOURCE_MASTER_SHELF:
+        return "Master Shelf"
+    return "Resource Chest"
 
 
 def automation_source_label():
     if not _craft_bag_enabled:
         return source_mode_label()
-    return ("Shelf > Craft Bag" if _source_mode == SOURCE_SHELF else "Chest > Craft Bag")
+    if _source_mode == SOURCE_SHELF:
+        return "Shelf > Craft Bag"
+    if _source_mode == SOURCE_MASTER_SHELF:
+        return "Master Shelf > Craft Bag"
+    return "Chest > Craft Bag"
 
 
 def ui_snapshot():
@@ -6364,6 +6927,10 @@ def ui_snapshot():
         _cleanup_active,
         _cleanup_stage,
         _cleanup_returned,
+        _master_fill_active,
+        _master_fill_stage,
+        _master_fill_index,
+        _master_fill_transferred,
         _training_crafts,
         training_skill,
         len(_training_pending_outputs),
@@ -6374,6 +6941,7 @@ def ui_snapshot():
         _resource_chest_serial,
         _resource_shelf_serial,
         _reagent_shelf_serial,
+        _master_shelf_serial,
         _output_chest_serial,
         _tool_book_serial,
         _trash_container_serial,
@@ -6383,6 +6951,7 @@ def ui_snapshot():
         tuple(sorted(_crafting_template_map.items())),
         _known_active_template,
         _craft_focus,
+        _turbo_mode,
         _step_name,
         _status_msg,
         _status_hue,
@@ -6395,6 +6964,23 @@ def update_ui_dirty_state():
     if snapshot != _last_ui_snapshot:
         _last_ui_snapshot = snapshot
         _dirty_ui = True
+
+
+def gui_redraw_due():
+    if not Gumps.GetGumpData(CORE_GUMP_ID):
+        return True
+    if not _dirty_ui:
+        return False
+    module = active_module()
+    accelerated = (
+        _turbo_mode and _runtime_active
+        and module
+        and can_use_make_last(module, _verified_make_last_signature)
+    )
+    if not accelerated:
+        return True
+    elapsed_ms = (time.time() - _last_gui_render_at) * 1000.0
+    return elapsed_ms >= ACTIVE_CRAFT_UI_REDRAW_MS
 
 
 def add_status_panel(gd, y, width=650, step_chars=70, status_chars=74):
@@ -6417,7 +7003,7 @@ def render_home_gui():
     plugin_panel_y = module_panel_y + module_panel_height + 6
     plugin_panel_height = 35 + plugin_rows * 24
     config_y = plugin_panel_y + plugin_panel_height + 6
-    config_height = 210
+    config_height = 236
     status_y = config_y + config_height + 6
     home_height = status_y + 62
 
@@ -6488,6 +7074,7 @@ def render_home_gui():
     Gumps.AddAlphaRegion(gd, 10, config_y, 650, config_height)
     Gumps.AddLabel(gd, 20, config_y + 6, TITLE_HUE, "SETUP & STORAGE")
     add_button(gd, 20, config_y + 29, BTN_SOURCE_TOGGLE, "Source: " + source_mode_label(), GOOD_HUE)
+    add_button(gd, 200, config_y + 29, BTN_SPEED_TOGGLE, "Speed: " + ("Turbo" if _turbo_mode else "Steady"), GOOD_HUE if _turbo_mode else LABEL_HUE)
     craft_bag_hue = GOOD_HUE if _craft_bag_enabled else DIM_HUE
     add_button(gd, 340, config_y + 29, BTN_CRAFT_BAG_TOGGLE, "Craft Bag: " + ("ON" if _craft_bag_enabled else "OFF"), craft_bag_hue)
 
@@ -6497,8 +7084,10 @@ def render_home_gui():
     Gumps.AddLabel(gd, 140, config_y + 82, LABEL_HUE, short_text(item_label(_resource_shelf_serial, "Shelf not set"), 25))
     add_button(gd, 20, config_y + 107, BTN_SET_REAGENT_SHELF, "Set Reagent Shelf")
     Gumps.AddLabel(gd, 170, config_y + 108, LABEL_HUE, short_text(item_label(_reagent_shelf_serial, "Reagent shelf not set"), 20))
-    add_button(gd, 20, config_y + 133, BTN_SET_CRAFT_BAG, "Set Craft Bag")
-    Gumps.AddLabel(gd, 160, config_y + 134, LABEL_HUE, short_text(item_label(_craft_bag_serial, "Craft bag not set"), 22))
+    add_button(gd, 20, config_y + 133, BTN_SET_MASTER_SHELF, "Set Master Shelf")
+    Gumps.AddLabel(gd, 170, config_y + 134, LABEL_HUE, short_text(item_label(_master_shelf_serial, "Master shelf not set"), 20))
+    fill_label = "Stop Shelf Fill" if _master_fill_active else "Fill Master Shelf"
+    add_button(gd, 20, config_y + 159, BTN_FILL_MASTER_SHELF, fill_label, WARN_HUE if _master_fill_active else GOOD_HUE)
 
     add_button(gd, 340, config_y + 55, BTN_SET_OUTPUT_CHEST, "Set Output")
     Gumps.AddLabel(gd, 464, config_y + 56, LABEL_HUE, short_text(item_label(_output_chest_serial, "Backpack output"), 23))
@@ -6506,18 +7095,20 @@ def render_home_gui():
     Gumps.AddLabel(gd, 464, config_y + 82, LABEL_HUE, short_text(item_label(_tool_book_serial, "Tool book not set"), 23))
     add_button(gd, 340, config_y + 107, BTN_SET_TRASH_CONTAINER, "Set Trash")
     Gumps.AddLabel(gd, 464, config_y + 108, LABEL_HUE, short_text(item_label(_trash_container_serial, "Trash not set"), 23))
+    add_button(gd, 340, config_y + 133, BTN_SET_CRAFT_BAG, "Set Craft Bag")
+    Gumps.AddLabel(gd, 464, config_y + 134, LABEL_HUE, short_text(item_label(_craft_bag_serial, "Craft bag not set"), 23))
     configured_glasses = len([serial for serial in _crafting_glasses_serials.values() if int_value(serial) > 0])
-    add_button(gd, 340, config_y + 133, BTN_GLASSES_SETUP, "Crafting Glasses", GOOD_HUE if configured_glasses else WARN_HUE)
-    Gumps.AddLabel(gd, 512, config_y + 134, DIM_HUE, "{0}/{1} set".format(configured_glasses, len(CRAFTING_GLASSES_PROFILES)))
+    add_button(gd, 340, config_y + 159, BTN_GLASSES_SETUP, "Crafting Glasses", GOOD_HUE if configured_glasses else WARN_HUE)
+    Gumps.AddLabel(gd, 512, config_y + 160, DIM_HUE, "{0}/{1} set".format(configured_glasses, len(CRAFTING_GLASSES_PROFILES)))
     configured_templates = len([value for value in _crafting_template_map.values() if int_value(value) > 0])
-    add_button(gd, 340, config_y + 159, BTN_TEMPLATES_SETUP, "Craft Templates", GOOD_HUE if configured_templates else WARN_HUE)
-    Gumps.AddLabel(gd, 512, config_y + 160, DIM_HUE, "{0}/{1} set".format(configured_templates, len(CRAFT_SKILL_PROFILES)))
+    add_button(gd, 340, config_y + 185, BTN_TEMPLATES_SETUP, "Craft Templates", GOOD_HUE if configured_templates else WARN_HUE)
+    Gumps.AddLabel(gd, 512, config_y + 186, DIM_HUE, "{0}/{1} set".format(configured_templates, len(CRAFT_SKILL_PROFILES)))
 
-    Gumps.AddLabel(gd, 20, config_y + 160, TITLE_HUE, "Craft Focus:")
-    Gumps.AddButton(gd, 125, config_y + 159, 4014, 4016, BTN_FOCUS_PREV, 1, 0)
-    Gumps.AddLabel(gd, 154, config_y + 160, GOOD_HUE, FOCUS_LABELS.get(_craft_focus, "As-is"))
-    Gumps.AddButton(gd, 300, config_y + 159, 4005, 4007, BTN_FOCUS_NEXT, 1, 0)
-    Gumps.AddLabel(gd, 20, config_y + 187, DIM_HUE, "Shelf users: set and lock withdrawal values to 100, including used reagent/gem entries.")
+    Gumps.AddLabel(gd, 20, config_y + 186, TITLE_HUE, "Craft Focus:")
+    Gumps.AddButton(gd, 125, config_y + 185, 4014, 4016, BTN_FOCUS_PREV, 1, 0)
+    Gumps.AddLabel(gd, 154, config_y + 186, GOOD_HUE, FOCUS_LABELS.get(_craft_focus, "As-is"))
+    Gumps.AddButton(gd, 300, config_y + 185, 4005, 4007, BTN_FOCUS_NEXT, 1, 0)
+    Gumps.AddLabel(gd, 20, config_y + 213, DIM_HUE, "Resource Shelf pulls auto-set 100; reagent/gem entries still need their server values set to 100.")
 
     _render_stage = "Home status panel"
     add_status_panel(gd, status_y)
@@ -6716,6 +7307,7 @@ def render_crafting_gui():
     Gumps.AddBackground(gd, 10, 330, 650, 108, 3000)
     Gumps.AddAlphaRegion(gd, 10, 330, 650, 108)
     Gumps.AddLabel(gd, 20, 336, TITLE_HUE, "CRAFTING OPTIONS")
+    add_button(gd, 180, 335, BTN_SPEED_TOGGLE, "Speed: " + ("Turbo" if _turbo_mode else "Steady"), GOOD_HUE if _turbo_mode else LABEL_HUE)
     Gumps.AddLabel(gd, 335, 336, LABEL_HUE, "Focus:")
     Gumps.AddButton(gd, 385, 335, 4014, 4016, BTN_FOCUS_PREV, 1, 0)
     Gumps.AddLabel(gd, 415, 336, GOOD_HUE, FOCUS_LABELS.get(_craft_focus, "As-is"))
@@ -6921,8 +7513,10 @@ def render_error_gui(error_message):
 
 
 def render_gui_safe():
+    global _last_gui_render_at
     try:
         render_gui()
+        _last_gui_render_at = time.time()
         return True
     except Exception as ex:
         message = "GUI error in {0}: {1}".format(_render_stage, ex)
@@ -6945,6 +7539,8 @@ def priority_control_button(button_id):
     if button_id == BTN_TOGGLE_RUN and _runtime_active:
         return True
     if button_id == BTN_TRAIN_TOGGLE and _training_active:
+        return True
+    if button_id == BTN_FILL_MASTER_SHELF and _master_fill_active:
         return True
     plugin = active_plugin()
     if _current_view == VIEW_PLUGIN and plugin and bool(getattr(plugin, "running", False)):
@@ -7005,13 +7601,14 @@ def consume_custom_gump_button(priority_only=False, stop_toggle_controls=False):
             close_gump(int_value(module.get("craft_gump_id")))
         close_gump(int_value(_shelf_data.get("gump_id"), 0x06ABCE12))
         close_gump(int_value(_reagent_shelf_data.get("gump_id"), 0xA8ED56C7))
+        close_gump(int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83))
 
     Misc.Pause(BUTTON_DEBOUNCE_MS)
     return True
 
 
 def consume_priority_control_button():
-    if not (_runtime_active or _training_active or _cleanup_active):
+    if not (_runtime_active or _training_active or _cleanup_active or _master_fill_active):
         return False
     return consume_custom_gump_button(True)
 
@@ -7020,16 +7617,20 @@ def handle_button(button_id):
     global _running, _runtime_active, _training_active, _dirty_ui
     global _target_amount, _source_mode, _craft_bag_enabled
     global _category_page, _recipe_page, _current_view
-    global _craft_focus
+    global _craft_focus, _turbo_mode
 
     if button_id == BTN_CLOSE:
         _runtime_active = False
         _training_active = False
         reset_material_cleanup(False)
+        reset_master_shelf_fill()
         _running = False
         return
 
     if button_id == BTN_TOGGLE_RUN:
+        if _master_fill_active:
+            set_status("Fill Master Shelf is running; stop it before crafting.", WARN_HUE, "Fill Master Shelf")
+            return
         if _cleanup_active:
             set_status("Material cleanup is still running; use Cancel Job to stop it.", WARN_HUE, "Cleanup Materials")
             return
@@ -7040,7 +7641,17 @@ def handle_button(button_id):
         return
 
     if button_id == BTN_CANCEL:
+        if _master_fill_active:
+            stop_master_shelf_fill("Artificer Storage Shelf fill cancelled by player", WARN_HUE)
+            return
         stop_runtime("Job cancelled at {0}/{1}.".format(_completed_amount, _target_amount), WARN_HUE)
+        return
+
+    if button_id == BTN_FILL_MASTER_SHELF:
+        if _master_fill_active:
+            stop_master_shelf_fill("Artificer Storage Shelf fill stopped by player", WARN_HUE)
+        else:
+            start_master_shelf_fill()
         return
 
     if button_id == BTN_HOME:
@@ -7055,7 +7666,7 @@ def handle_button(button_id):
         return
 
     if button_id == BTN_GLASSES_SETUP:
-        if _runtime_active or _training_active:
+        if _runtime_active or _training_active or _cleanup_active or _master_fill_active:
             set_status("Pause active crafting before changing Artificer Glasses.", WARN_HUE, "Glasses Setup")
             return
         _current_view = VIEW_GLASSES
@@ -7069,7 +7680,7 @@ def handle_button(button_id):
         return
 
     if button_id == BTN_TEMPLATES_SETUP:
-        if _runtime_active or _training_active:
+        if _runtime_active or _training_active or _cleanup_active or _master_fill_active:
             set_status("Pause active crafting before changing template assignments.", WARN_HUE, "Template Setup")
             return
         _current_view = VIEW_TEMPLATES
@@ -7083,6 +7694,9 @@ def handle_button(button_id):
         return
 
     if button_id == BTN_TRAIN_TOGGLE:
+        if _master_fill_active:
+            set_status("Fill Master Shelf is running; stop it before training.", WARN_HUE, "Fill Master Shelf")
+            return
         if _cleanup_active:
             set_status("Material cleanup is still running; use Cancel Job to stop it.", WARN_HUE, "Cleanup Materials")
             return
@@ -7092,7 +7706,7 @@ def handle_button(button_id):
             start_training()
         return
 
-    if _cleanup_active:
+    if _cleanup_active or _master_fill_active:
         plugin = active_plugin()
         if _current_view == VIEW_PLUGIN and plugin and bool(getattr(plugin, "running", False)):
             try:
@@ -7104,7 +7718,10 @@ def handle_button(button_id):
                     return
             except:
                 pass
-        set_status("Wait for material cleanup to finish before changing the setup.", WARN_HUE, "Cleanup Materials")
+        if _master_fill_active:
+            set_status("Stop Fill Master Shelf before changing the setup.", WARN_HUE, "Fill Master Shelf")
+        else:
+            set_status("Wait for material cleanup to finish before changing the setup.", WARN_HUE, "Cleanup Materials")
         return
 
     if _current_view == VIEW_GLASSES and button_id in _glasses_set_button_map:
@@ -7169,6 +7786,15 @@ def handle_button(button_id):
             set_status("Crafting focus: {0}. It will be verified when a tool opens.".format(FOCUS_LABELS[_craft_focus]), GOOD_HUE, "Craft Focus")
         return
 
+    if button_id == BTN_SPEED_TOGGLE:
+        _turbo_mode = not _turbo_mode
+        save_settings()
+        if _turbo_mode:
+            set_status("Turbo mode enabled: verified Make Last batches use lean checks and throttled display refresh.", GOOD_HUE, "Craft Speed")
+        else:
+            set_status("Steady mode enabled: the display refreshes after every crafting transaction.", LABEL_HUE, "Craft Speed")
+        return
+
     if _current_view == VIEW_PLUGIN:
         plugin = active_plugin()
         if plugin:
@@ -7220,7 +7846,13 @@ def handle_button(button_id):
         return
 
     if button_id == BTN_SOURCE_TOGGLE:
-        _source_mode = SOURCE_SHELF if _source_mode == SOURCE_CHEST else SOURCE_CHEST
+        plugin = active_plugin()
+        if _runtime_active or _training_active or _cleanup_active or (plugin and bool(getattr(plugin, "running", False))):
+            set_status("Pause active crafting before changing the resource source.", WARN_HUE, "Resource Source")
+            return
+        current_index = SOURCE_MODES.index(_source_mode) if _source_mode in SOURCE_MODES else 0
+        _source_mode = SOURCE_MODES[(current_index + 1) % len(SOURCE_MODES)]
+        reset_make_last(True)
         save_settings()
         set_status("Resource source: " + source_mode_label() + ".", GOOD_HUE, "Ready")
         return
@@ -7251,6 +7883,9 @@ def handle_button(button_id):
         return
     if button_id == BTN_SET_REAGENT_SHELF:
         set_target_serial("reagent_shelf")
+        return
+    if button_id == BTN_SET_MASTER_SHELF:
+        set_target_serial("master_shelf")
         return
     if button_id == BTN_SET_OUTPUT_CHEST:
         set_target_serial("output_chest")
@@ -7343,7 +7978,10 @@ def Main():
         try:
             handled_button = consume_custom_gump_button()
         except Exception as ex:
-            stop_runtime("Button error: " + str(ex), BAD_HUE)
+            if _master_fill_active:
+                stop_master_shelf_fill("Button error stopped Fill Master Shelf: " + str(ex), BAD_HUE)
+            else:
+                stop_runtime("Button error: " + str(ex), BAD_HUE)
             Misc.SendMessage("Frog Crafting button error: " + str(ex), BAD_HUE)
 
         if not _running:
@@ -7351,7 +7989,10 @@ def Main():
 
         if not handled_button:
             try:
-                if _cleanup_active:
+                if _master_fill_active:
+                    work_step_ran = True
+                    master_shelf_fill_step()
+                elif _cleanup_active:
                     work_step_ran = True
                     material_cleanup_step()
                 elif _training_active:
@@ -7373,10 +8014,13 @@ def Main():
 
                 if not handled_button:
                     update_ui_dirty_state()
-                    if _dirty_ui or not Gumps.GetGumpData(CORE_GUMP_ID):
+                    if gui_redraw_due():
                         render_gui_safe()
             except Exception as ex:
-                stop_runtime("Runtime exception; core paused.", BAD_HUE)
+                if _master_fill_active:
+                    stop_master_shelf_fill("Runtime exception stopped Fill Master Shelf: " + str(ex), BAD_HUE)
+                else:
+                    stop_runtime("Runtime exception; core paused.", BAD_HUE)
                 Misc.SendMessage("Frog Crafting runtime error: " + str(ex), BAD_HUE)
                 _dirty_ui = True
 
@@ -7394,6 +8038,7 @@ def Main():
         close_gump(int_value(module.get("craft_gump_id")))
     close_gump(int_value(_shelf_data.get("gump_id"), 0x06ABCE12))
     close_gump(int_value(_reagent_shelf_data.get("gump_id"), 0xA8ED56C7))
+    close_gump(int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83))
     Misc.SendMessage("Frog Crafting Core stopped.", BAD_HUE)
 
 
