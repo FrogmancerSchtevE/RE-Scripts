@@ -1319,6 +1319,18 @@
       "hue": null
     },
     {
+      "id": "daemon_bone",
+      "name": "Sturdy Daemon Bone",
+      "item_names": [
+        "Sturdy Daemon Bone",
+        "Daemon Bone"
+      ],
+      "shelf_page": null,
+      "shelf_button": null,
+      "item_id": null,
+      "hue": null
+    },
+    {
       "id": "daemon_claw",
       "name": "Daemon Claw",
       "item_names": [

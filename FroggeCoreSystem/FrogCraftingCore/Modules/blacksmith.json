@@ -1,0 +1,2624 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "blacksmithy",
+  "name": "Blacksmithy",
+  "skill_name": "Blacksmith",
+  "craft_gump_id": 949095101,
+  "tool": {
+    "name": "Smith's Hammer",
+    "item_ids": [
+      5091
+    ],
+    "item_names": [
+      "Smith's Hammer",
+      "Smith Hammer"
+    ],
+    "toolbook_category_button": 1,
+    "auto_craft": {
+      "enabled": false,
+      "skill_name": "Tinkering",
+      "min_skill": null,
+      "crafting_tool_item_ids": [],
+      "crafting_tool_item_names": [
+        "Tinker's Tools",
+        "Tinker Tools"
+      ],
+      "craft_gump_id": 949095101,
+      "craft_actions": [],
+      "resources": [],
+      "output_item_ids": [
+        5091
+      ],
+      "output_names": [
+        "Smith's Hammer",
+        "Smith Hammer"
+      ]
+    }
+  },
+  "server_actions": {
+    "next_category_page": 105,
+    "make_last": 98,
+    "smelt_item": 14,
+    "repair_item": 42,
+    "mark_item": 49,
+    "salvage": 63,
+    "recycle": 77
+  },
+  "resource_choice_groups": [
+    {
+      "id": "metal",
+      "name": "Metal",
+      "default": "iron",
+      "options": [
+        {
+          "id": "iron",
+          "name": "Iron",
+          "resource_key": "iron_ingot",
+          "craft_actions": [
+            7,
+            6
+          ]
+        },
+        {
+          "id": "dull_copper",
+          "name": "Dull Copper",
+          "resource_key": "dull_ingot",
+          "craft_actions": [
+            7,
+            13
+          ]
+        },
+        {
+          "id": "shadow_iron",
+          "name": "Shadow Iron",
+          "resource_key": "shadow_ingot",
+          "craft_actions": [
+            7,
+            20
+          ]
+        },
+        {
+          "id": "copper",
+          "name": "Copper",
+          "resource_key": "copper_ingot",
+          "craft_actions": [
+            7,
+            27
+          ]
+        },
+        {
+          "id": "bronze",
+          "name": "Bronze",
+          "resource_key": "bronze_ingot",
+          "craft_actions": [
+            7,
+            34
+          ]
+        },
+        {
+          "id": "gold",
+          "name": "Gold",
+          "resource_key": "gold_ingot",
+          "craft_actions": [
+            7,
+            41
+          ]
+        },
+        {
+          "id": "agapite",
+          "name": "Agapite",
+          "resource_key": "agapite_ingot",
+          "craft_actions": [
+            7,
+            48
+          ]
+        },
+        {
+          "id": "verite",
+          "name": "Verite",
+          "resource_key": "verite_ingot",
+          "craft_actions": [
+            7,
+            55
+          ]
+        },
+        {
+          "id": "valorite",
+          "name": "Valorite",
+          "resource_key": "valorite_ingot",
+          "craft_actions": [
+            7,
+            62
+          ]
+        },
+        {
+          "id": "azurite",
+          "name": "Azurite",
+          "resource_key": "azurite_ingot",
+          "craft_actions": [
+            7,
+            69
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "iron_ingot",
+          "craft_actions": [
+            7,
+            72
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scales",
+      "name": "Scales",
+      "default": "red",
+      "options": [
+        {
+          "id": "red",
+          "name": "Red Scales",
+          "resource_key": "red_scale",
+          "craft_actions": [
+            56,
+            6
+          ]
+        },
+        {
+          "id": "yellow",
+          "name": "Yellow Scales",
+          "resource_key": "yellow_scale",
+          "craft_actions": [
+            56,
+            13
+          ]
+        },
+        {
+          "id": "black",
+          "name": "Black Scales",
+          "resource_key": "black_scale",
+          "craft_actions": [
+            56,
+            20
+          ]
+        },
+        {
+          "id": "green",
+          "name": "Green Scales",
+          "resource_key": "green_scale",
+          "craft_actions": [
+            56,
+            27
+          ]
+        },
+        {
+          "id": "white",
+          "name": "White Scales",
+          "resource_key": "white_scale",
+          "craft_actions": [
+            56,
+            34
+          ]
+        },
+        {
+          "id": "blue",
+          "name": "Blue Scales",
+          "resource_key": "blue_scale",
+          "craft_actions": [
+            56,
+            41
+          ]
+        },
+        {
+          "id": "do_not_color",
+          "name": "Do Not Color",
+          "resource_key": "red_scale",
+          "craft_actions": [
+            56,
+            48
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "runic_tools",
+      "name": "Runic Tools",
+      "source_page": 1,
+      "button": 1,
+      "open_actions": [
+        1
+      ],
+      "recipes": [
+        {
+          "id": "dull_copper_hammer",
+          "name": "Dull Copper Hammer",
+          "button": 2,
+          "enabled": true,
+          "source_row": 2,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "dull_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "dull_copper_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dull Copper Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "shadow_iron_hammer",
+          "name": "Shadow Iron Hammer",
+          "button": 9,
+          "enabled": true,
+          "source_row": 3,
+          "min_skill": 80.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 70.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "shadow_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "shadow_iron_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Shadow Iron Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "copper_hammer",
+          "name": "Copper Hammer",
+          "button": 16,
+          "enabled": true,
+          "source_row": 4,
+          "min_skill": 85.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "copper_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "copper_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Copper Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bronze_hammer",
+          "name": "Bronze Hammer",
+          "button": 23,
+          "enabled": true,
+          "source_row": 5,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "bronze_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "bronze_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bronze Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "gold_hammer",
+          "name": "Gold Hammer",
+          "button": 30,
+          "enabled": true,
+          "source_row": 6,
+          "min_skill": 95.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 85.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "gold_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "gold_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Gold Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "agapite_hammer",
+          "name": "Agapite Hammer",
+          "button": 37,
+          "enabled": true,
+          "source_row": 7,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 90.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "agapite_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "agapite_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Agapite Hammer",
+            "Agaptie Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "verite_hammer",
+          "name": "Verite Hammer",
+          "button": 44,
+          "enabled": true,
+          "source_row": 8,
+          "min_skill": 105.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 95.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "verite_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "verite_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Verite Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "valorite_hammer",
+          "name": "Valorite Hammer",
+          "button": 51,
+          "enabled": true,
+          "source_row": 9,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tinkering",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "valorite_ingot",
+              "amount": 25
+            },
+            {
+              "resource_key": "valorite_shards",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Valorite Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "spined_sewing_kit",
+          "name": "Spined Sewing Kit",
+          "button": 58,
+          "enabled": true,
+          "source_row": 10,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "spined_leather",
+              "amount": 25
+            },
+            {
+              "resource_key": "spined_wool",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spined Sewing Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "horned_sewing_kit",
+          "name": "Horned Sewing Kit",
+          "button": 65,
+          "enabled": true,
+          "source_row": 11,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "horned_leather",
+              "amount": 25
+            },
+            {
+              "resource_key": "horned_wool",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Horned Sewing Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "barbed_sewing_kit",
+          "name": "Barbed Sewing Kit",
+          "button": 72,
+          "enabled": true,
+          "source_row": 12,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Tailoring",
+              "min_skill": 75.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "barbed_leather",
+              "amount": 25
+            },
+            {
+              "resource_key": "barbed_wool",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Barbed Sewing Kit",
+            "Babed Sewing Kit"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "oak_fletcher_tool",
+          "name": "Oak Fletcher Tool",
+          "button": 79,
+          "enabled": true,
+          "source_row": 13,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "oak_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "oak_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Oak Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "ash_fletching_tool",
+          "name": "Ash Fletching Tool",
+          "button": 86,
+          "enabled": true,
+          "source_row": 14,
+          "min_skill": 80.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "ash_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "ash_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ash Fletching Tool",
+            "Ash Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "yew_fletching_tool",
+          "name": "Yew Fletching Tool",
+          "button": 93,
+          "enabled": true,
+          "source_row": 15,
+          "min_skill": 85.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 70.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "yew_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "yew_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Yew Fletching Tool",
+            "Yew Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heartwood_fletching_tool",
+          "name": "Heartwood Fletching Tool",
+          "button": 100,
+          "enabled": true,
+          "source_row": 16,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "heartwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "heartwood_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heartwood Fletching Tool",
+            "Heartwood Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bloodwood_fletching_tool",
+          "name": "Bloodwood Fletching Tool",
+          "button": 107,
+          "enabled": true,
+          "source_row": 17,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 90.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "bloodwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "bloodwood_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bloodwood Fletching Tool",
+            "Bloodwood Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "frostwood_fletching_tool",
+          "name": "Frostwood Fletching Tool",
+          "button": 114,
+          "enabled": true,
+          "source_row": 18,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Bowcraft",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "frostwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "frostwood_fletching",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Frostwood Fletching Tool",
+            "Frostwood Fletcher Tool"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "oak_dovetail_saw",
+          "name": "Oak Dovetail Saw",
+          "button": 121,
+          "enabled": true,
+          "source_row": 19,
+          "min_skill": 75.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 50.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "oak_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "oak_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Oak Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "ash_dovetail_saw",
+          "name": "Ash Dovetail Saw",
+          "button": 128,
+          "enabled": true,
+          "source_row": 20,
+          "min_skill": 80.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 60.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "ash_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "ash_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ash Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "yew_dovetail_saw",
+          "name": "Yew Dovetail Saw",
+          "button": 135,
+          "enabled": true,
+          "source_row": 21,
+          "min_skill": 85.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 70.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "yew_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "yew_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Yew Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heartwood_dovetail_saw",
+          "name": "Heartwood Dovetail Saw",
+          "button": 142,
+          "enabled": true,
+          "source_row": 22,
+          "min_skill": 90.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 80.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "heartwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "heartwood_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heartwood Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "bloodwood_dovetail_saw",
+          "name": "Bloodwood Dovetail Saw",
+          "button": 149,
+          "enabled": true,
+          "source_row": 23,
+          "min_skill": 100.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 90.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "bloodwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "bloodwood_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bloodwood Dovetail Saw",
+            "Bloodwod Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "frostwood_dovetail_saw",
+          "name": "Frostwood Dovetail Saw",
+          "button": 156,
+          "enabled": true,
+          "source_row": 24,
+          "min_skill": 110.0,
+          "skill_requirements": [
+            {
+              "skill_name": "Carpentry",
+              "min_skill": 100.0
+            }
+          ],
+          "resources": [
+            {
+              "resource_key": "frostwood_board",
+              "amount": 25
+            },
+            {
+              "resource_key": "frostwood_wooden_shaft",
+              "amount": 5
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Frostwood Dovetail Saw"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        }
+      ]
+    },
+    {
+      "id": "metal_armor",
+      "name": "Metal Armor",
+      "source_page": 1,
+      "button": 22,
+      "open_actions": [
+        22
+      ],
+      "recipes": [
+        {
+          "id": "ringmail_gloves",
+          "name": "Ringmail Gloves",
+          "button": 2,
+          "enabled": true,
+          "source_row": 25,
+          "min_skill": 12.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ringmail Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ringmail_leggings",
+          "name": "Ringmail Leggings",
+          "button": 9,
+          "enabled": true,
+          "source_row": 26,
+          "min_skill": 19.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ringmail Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ringmail_sleeves",
+          "name": "Ringmail Sleeves",
+          "button": 16,
+          "enabled": true,
+          "source_row": 27,
+          "min_skill": 16.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ringmail Sleeves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ringmail_tunic",
+          "name": "Ringmail Tunic",
+          "button": 23,
+          "enabled": true,
+          "source_row": 28,
+          "min_skill": 21.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ringmail Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "chainmail_coif",
+          "name": "Chainmail Coif",
+          "button": 30,
+          "enabled": true,
+          "source_row": 29,
+          "min_skill": 14.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chainmail Coif"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "chainmail_leggings",
+          "name": "Chainmail Leggings",
+          "button": 37,
+          "enabled": true,
+          "source_row": 30,
+          "min_skill": 36.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chainmail Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "chainmail_tunic",
+          "name": "Chainmail Tunic",
+          "button": 44,
+          "enabled": true,
+          "source_row": 31,
+          "min_skill": 39.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chainmail Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_arms",
+          "name": "Platemail Arms",
+          "button": 51,
+          "enabled": true,
+          "source_row": 32,
+          "min_skill": 66.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Arms"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_gloves",
+          "name": "Platemail Gloves",
+          "button": 58,
+          "enabled": true,
+          "source_row": 33,
+          "min_skill": 58.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_gorget",
+          "name": "Platemail Gorget",
+          "button": 65,
+          "enabled": true,
+          "source_row": 34,
+          "min_skill": 56.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Gorget"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_legs",
+          "name": "Platemail Legs",
+          "button": 72,
+          "enabled": true,
+          "source_row": 35,
+          "min_skill": 68.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Legs"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_tunic",
+          "name": "Platemail Tunic",
+          "button": 79,
+          "enabled": true,
+          "source_row": 36,
+          "min_skill": 75.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_female",
+          "name": "Platemail (Female)",
+          "button": 86,
+          "enabled": true,
+          "source_row": 37,
+          "min_skill": 44.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail (Female)",
+            "Platemail Female",
+            "Female Plate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "platemail_mempo",
+          "name": "Platemail Mempo",
+          "button": 93,
+          "enabled": true,
+          "source_row": 38,
+          "min_skill": 80.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Platemail Mempo"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "helmets",
+      "name": "Helmets",
+      "source_page": 1,
+      "button": 29,
+      "open_actions": [
+        29
+      ],
+      "recipes": [
+        {
+          "id": "bascinet",
+          "name": "Bascinet",
+          "button": 2,
+          "enabled": true,
+          "source_row": 39,
+          "min_skill": 8.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bascinet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "close_helmet",
+          "name": "Close Helmet",
+          "button": 9,
+          "enabled": true,
+          "source_row": 40,
+          "min_skill": 37.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Close Helmet"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "helmet",
+          "name": "Helmet",
+          "button": 16,
+          "enabled": true,
+          "source_row": 41,
+          "min_skill": 37.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Helmet",
+            "Helmets"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "norse_helm",
+          "name": "Norse Helm",
+          "button": 23,
+          "enabled": true,
+          "source_row": 42,
+          "min_skill": 37.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Norse Helm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "plate_helm",
+          "name": "Plate Helm",
+          "button": 30,
+          "enabled": true,
+          "source_row": 43,
+          "min_skill": 62.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 15
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Plate Helm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "shields",
+      "name": "Shields",
+      "source_page": 1,
+      "button": 36,
+      "open_actions": [
+        36
+      ],
+      "recipes": [
+        {
+          "id": "buckler",
+          "name": "Buckler",
+          "button": 2,
+          "enabled": true,
+          "source_row": 44,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Buckler"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bronze_shield",
+          "name": "Bronze Shield",
+          "button": 9,
+          "enabled": true,
+          "source_row": 45,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bronze Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "heater_shield",
+          "name": "Heater Shield",
+          "button": 16,
+          "enabled": true,
+          "source_row": 46,
+          "min_skill": 24.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heater Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "metal_shield",
+          "name": "Metal Shield",
+          "button": 23,
+          "enabled": true,
+          "source_row": 47,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Metal Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "metal_kite_shield",
+          "name": "Metal Kite Shield",
+          "button": 30,
+          "enabled": true,
+          "source_row": 48,
+          "min_skill": 4.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Metal Kite Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "tear_kite_shield",
+          "name": "Tear Kite Shield",
+          "button": 37,
+          "enabled": true,
+          "source_row": 49,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Tear Kite Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "chaos_shield",
+          "name": "Chaos Shield",
+          "button": 44,
+          "enabled": true,
+          "source_row": 50,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Chaos Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "order_shield",
+          "name": "Order Shield",
+          "button": 51,
+          "enabled": true,
+          "source_row": 51,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Order Shield"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "bladed",
+      "name": "Bladed",
+      "source_page": 1,
+      "button": 43,
+      "open_actions": [
+        43
+      ],
+      "recipes": [
+        {
+          "id": "bone_harvester",
+          "name": "Bone Harvester",
+          "button": 2,
+          "enabled": true,
+          "source_row": 52,
+          "min_skill": 33.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bone Harvester"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "broadsword",
+          "name": "Broadsword",
+          "button": 9,
+          "enabled": true,
+          "source_row": 53,
+          "min_skill": 35.4,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Broadsword"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "cutlass",
+          "name": "Cutlass",
+          "button": 16,
+          "enabled": true,
+          "source_row": 54,
+          "min_skill": 24.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Cutlass"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dagger",
+          "name": "Dagger",
+          "button": 23,
+          "enabled": true,
+          "source_row": 55,
+          "min_skill": 0.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 3
+            }
+          ],
+          "output_item_ids": [
+            3922
+          ],
+          "output_names": [
+            "Dagger"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "katana",
+          "name": "Katana",
+          "button": 30,
+          "enabled": true,
+          "source_row": 56,
+          "min_skill": 44.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Katana"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "kryss",
+          "name": "Kryss",
+          "button": 37,
+          "enabled": true,
+          "source_row": 57,
+          "min_skill": 36.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Kryss"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "longsword",
+          "name": "Longsword",
+          "button": 44,
+          "enabled": true,
+          "source_row": 58,
+          "min_skill": 28.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Longsword"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "scimitar",
+          "name": "Scimitar",
+          "button": 51,
+          "enabled": true,
+          "source_row": 59,
+          "min_skill": 31.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Scimitar"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "viking_sword",
+          "name": "Viking Sword",
+          "button": 58,
+          "enabled": true,
+          "source_row": 60,
+          "min_skill": 24.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Viking Sword"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "axes",
+      "name": "Axes",
+      "source_page": 2,
+      "button": 50,
+      "open_actions": [
+        105,
+        50
+      ],
+      "recipes": [
+        {
+          "id": "axe",
+          "name": "Axe",
+          "button": 2,
+          "enabled": true,
+          "source_row": 61,
+          "min_skill": 34.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Axe",
+            "Axes"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "battle_axe",
+          "name": "Battle Axe",
+          "button": 9,
+          "enabled": true,
+          "source_row": 62,
+          "min_skill": 30.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Battle Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "double_axe",
+          "name": "Double Axe",
+          "button": 16,
+          "enabled": true,
+          "source_row": 63,
+          "min_skill": 29.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Double Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "ornate_axe",
+          "name": "Ornate Axe",
+          "button": 23,
+          "enabled": true,
+          "source_row": 64,
+          "min_skill": 34.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Ornate Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "executioners_axe",
+          "name": "Executioners Axe",
+          "button": 30,
+          "enabled": true,
+          "source_row": 65,
+          "min_skill": 34.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Executioners Axe",
+            "Executioner's Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "large_battle_axe",
+          "name": "Large Battle Axe",
+          "button": 37,
+          "enabled": true,
+          "source_row": 66,
+          "min_skill": 28.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Large Battle Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "two_handed_axe",
+          "name": "Two Handed Axe",
+          "button": 44,
+          "enabled": true,
+          "source_row": 67,
+          "min_skill": 33.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Two Handed Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "war_axe",
+          "name": "War Axe",
+          "button": 51,
+          "enabled": true,
+          "source_row": 68,
+          "min_skill": 39.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "War Axe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "polearms",
+      "name": "Polearms",
+      "source_page": 2,
+      "button": 57,
+      "open_actions": [
+        105,
+        57
+      ],
+      "recipes": [
+        {
+          "id": "bardiche",
+          "name": "Bardiche",
+          "button": 2,
+          "enabled": true,
+          "source_row": 69,
+          "min_skill": 31.7,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 18
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bardiche"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "bladed_staff",
+          "name": "Bladed Staff",
+          "button": 9,
+          "enabled": true,
+          "source_row": 70,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Bladed Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "double_bladed_staff",
+          "name": "Double Bladed Staff",
+          "button": 16,
+          "enabled": true,
+          "source_row": 71,
+          "min_skill": 45.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Double Bladed Staff"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "halberd",
+          "name": "Halberd",
+          "button": 23,
+          "enabled": true,
+          "source_row": 72,
+          "min_skill": 39.1,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Halberd"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "pike",
+          "name": "Pike",
+          "button": 30,
+          "enabled": true,
+          "source_row": 73,
+          "min_skill": 47.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pike"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "short_spear",
+          "name": "Short Spear",
+          "button": 37,
+          "enabled": true,
+          "source_row": 74,
+          "min_skill": 45.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Short Spear"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "scythe",
+          "name": "Scythe",
+          "button": 44,
+          "enabled": true,
+          "source_row": 75,
+          "min_skill": 39.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Scythe"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "spear",
+          "name": "Spear",
+          "button": 51,
+          "enabled": true,
+          "source_row": 76,
+          "min_skill": 49.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Spear"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "pitchfork",
+          "name": "Pitchfork",
+          "button": 58,
+          "enabled": true,
+          "source_row": 77,
+          "min_skill": 40.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Pitchfork"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "war_fork",
+          "name": "War Fork",
+          "button": 65,
+          "enabled": true,
+          "source_row": 78,
+          "min_skill": 42.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "War Fork"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "bashing",
+      "name": "Bashing",
+      "source_page": 2,
+      "button": 64,
+      "open_actions": [
+        105,
+        64
+      ],
+      "recipes": [
+        {
+          "id": "hammer_pick",
+          "name": "Hammer Pick",
+          "button": 2,
+          "enabled": true,
+          "source_row": 79,
+          "min_skill": 34.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Hammer Pick"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "mace",
+          "name": "Mace",
+          "button": 9,
+          "enabled": true,
+          "source_row": 80,
+          "min_skill": 14.5,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": ["0x0F5C"],
+          "output_names": [
+            "Mace"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "maul",
+          "name": "Maul",
+          "button": 16,
+          "enabled": true,
+          "source_row": 81,
+          "min_skill": 19.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 10
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Maul"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "war_mace",
+          "name": "War Mace",
+          "button": 23,
+          "enabled": true,
+          "source_row": 82,
+          "min_skill": 28.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 14
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "War Mace"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "war_hammer",
+          "name": "War Hammer",
+          "button": 30,
+          "enabled": true,
+          "source_row": 83,
+          "min_skill": 34.2,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "War Hammer"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "dragon_armor",
+      "name": "Dragon Armor",
+      "source_page": 2,
+      "button": 71,
+      "open_actions": [
+        105,
+        71
+      ],
+      "recipes": [
+        {
+          "id": "dragon_gloves",
+          "name": "Dragon Gloves",
+          "button": 2,
+          "enabled": true,
+          "source_row": 84,
+          "min_skill": 68.9,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "scales",
+              "amount": 16
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Gloves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dragon_helm",
+          "name": "Dragon Helm",
+          "button": 9,
+          "enabled": true,
+          "source_row": 85,
+          "min_skill": 72.6,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "scales",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Helm",
+            "Draon Helm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dragon_leggings",
+          "name": "Dragon Leggings",
+          "button": 16,
+          "enabled": true,
+          "source_row": 86,
+          "min_skill": 78.8,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "scales",
+              "amount": 28
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dragon_sleeves",
+          "name": "Dragon Sleeves",
+          "button": 23,
+          "enabled": true,
+          "source_row": 87,
+          "min_skill": 76.3,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "scales",
+              "amount": 24
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Sleeves"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "dragon_breastplate",
+          "name": "Dragon Breastplate",
+          "button": 30,
+          "enabled": true,
+          "source_row": 88,
+          "min_skill": 85.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "scales",
+              "amount": 36
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Breastplate"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "miscellaneous",
+      "name": "Miscellaneous",
+      "source_page": 2,
+      "button": 78,
+      "open_actions": [
+        105,
+        78
+      ],
+      "recipes": [
+        {
+          "id": "dragon_barding_deed",
+          "name": "Dragon Barding Deed",
+          "button": 2,
+          "enabled": true,
+          "source_row": 89,
+          "min_skill": 110.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 750
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 5
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Dragon Barding Deed"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "harvester_s_blade",
+          "name": "Harvester's Blade",
+          "button": 9,
+          "enabled": true,
+          "source_row": 90,
+          "min_skill": 100.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 25
+            },
+            {
+              "resource_key": "book_of_lost_knowledge",
+              "amount": 1
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Harvester's Blade"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    }
+  ]
+}

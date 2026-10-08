@@ -683,6 +683,12 @@
       "hue": "0x0000"
     },
     {
+      "resource_key": "daemon_bone",
+      "name": "Sturdy Daemon Bone",
+      "item_id": null,
+      "hue": null
+    },
+    {
       "resource_key": "daemon_claw",
       "name": "Daemon Claw",
       "item_id": "0x5721",

@@ -4169,6 +4169,57 @@ def deposit_master_shelf_from_backpack(resource):
     return "ready", "Deposited {0} {1} into the Artificer Storage Shelf.".format(before - after, resource.get("name", "resource")), before - after
 
 
+def deposit_master_shelf_cleanup_from_backpack():
+    backpack = Player.Backpack
+    if not backpack:
+        return False, "Player backpack is unavailable", 0
+
+    before = cleanup_direct_total(backpack.Serial)
+    if before <= 0:
+        return True, "No recovered materials remained for the Artificer Storage Shelf", 0
+
+    ready, message = master_shelf_readiness(True)
+    gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+    if not ready:
+        close_gump(gump_id)
+        return False, message, 0
+
+    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 900)
+    if fill_button <= 0:
+        close_gump(gump_id)
+        return False, "Artificer Storage Shelf fill button is not mapped", 0
+
+    try:
+        Gumps.SendAction(gump_id, fill_button)
+        Misc.Pause(MOVE_PAUSE_MS)
+    except:
+        close_gump(gump_id)
+        return False, "Artificer Storage Shelf Fill From Backpack action failed", 0
+    close_gump(gump_id)
+
+    deadline = time.time() + (float(SHELF_DELIVERY_WAIT_MS) / 1000.0)
+    after = cleanup_direct_total(backpack.Serial)
+    while after >= before and time.time() < deadline:
+        if consume_priority_control_button():
+            return False, "Artificer Storage Shelf cleanup was interrupted", 0
+        Misc.Pause(JOURNAL_POLL_MS)
+        after = cleanup_direct_total(backpack.Serial)
+
+    returned = max(0, before - after)
+    if returned <= 0:
+        return False, "Artificer Storage Shelf did not accept recovered materials", 0
+    if after > 0:
+        return False, "Artificer Storage Shelf accepted {0}, but {1} recovered material{2} remain".format(
+            returned,
+            after,
+            "" if after == 1 else "s",
+        ), returned
+    return True, "Returned {0} recovered material{1} to the Artificer Storage Shelf".format(
+        returned,
+        "" if returned == 1 else "s",
+    ), returned
+
+
 def reset_master_shelf_fill():
     global _master_fill_active, _master_fill_stage, _master_fill_resource_ids
     global _master_fill_index, _master_fill_retry_count, _master_fill_transferred
@@ -4358,6 +4409,8 @@ def begin_material_cleanup(kind, final_message, final_hue, final_step, head_mess
 
     if _source_mode == SOURCE_SHELF:
         _cleanup_stage = "stage_backpack" if _craft_bag_enabled else "resource_shelf"
+    elif _source_mode == SOURCE_MASTER_SHELF:
+        _cleanup_stage = "stage_master_backpack" if _craft_bag_enabled else "master_shelf"
     else:
         _cleanup_stage = "storage_chest"
     set_status("Crafting finished; returning unused materials to storage.", WARN_HUE, "Cleanup Materials")
@@ -4378,6 +4431,33 @@ def material_cleanup_step():
             set_cleanup_stage("resource_shelf")
             return
         cleanup_move_stage(bag.Serial, backpack.Serial, "resource_shelf", "Stage shelf deposit", False)
+        return
+
+    if _cleanup_stage == "stage_master_backpack":
+        bag = craft_bag_item()
+        backpack = Player.Backpack
+        if not bag or not backpack:
+            add_cleanup_note("Craft Bag could not be staged for Artificer Shelf cleanup")
+            set_cleanup_stage("master_shelf")
+            return
+        cleanup_move_stage(bag.Serial, backpack.Serial, "master_shelf", "Stage Artificer Shelf deposit", False)
+        return
+
+    if _cleanup_stage == "master_shelf":
+        ok, message, returned = deposit_master_shelf_cleanup_from_backpack()
+        if not _cleanup_active or _operation_interrupted:
+            return
+        _cleanup_returned += returned
+        if ok:
+            set_status(message + ".", GOOD_HUE, "Cleanup Materials")
+            set_cleanup_stage("finish")
+            return
+        _cleanup_retry_count += 1
+        if _cleanup_retry_count <= MAX_ACTION_RETRIES:
+            set_status("{0}; retry {1}/{2}.".format(message, _cleanup_retry_count, MAX_ACTION_RETRIES), WARN_HUE, "Cleanup Materials")
+            return
+        add_cleanup_note(message)
+        set_cleanup_stage("fallback_chest_main")
         return
 
     if _cleanup_stage == "resource_shelf":
@@ -5743,7 +5823,8 @@ def queue_recovered_training_resources(recipe, before_main_pack, module_id, comp
     global _training_pending_recovery
     global _training_pending_recovery_module_id, _training_pending_recovery_completion
 
-    if not _craft_bag_enabled or not recipe:
+    master_destination = _source_mode == SOURCE_MASTER_SHELF
+    if (not _craft_bag_enabled and not master_destination) or not recipe:
         return True, ""
 
     resources, error = resolve_resource_list(recipe.get("resources"))
@@ -5754,8 +5835,8 @@ def queue_recovered_training_resources(recipe, before_main_pack, module_id, comp
         _training_pending_recovery_completion = str(completion_message)
         return False, recovery_error
 
-    bag = craft_bag_item()
-    if not bag:
+    bag = craft_bag_item() if _craft_bag_enabled else None
+    if not master_destination and not bag:
         recovery_error = "the Craft Bag is unavailable"
         _training_pending_recovery = [{"error": recovery_error}]
         _training_pending_recovery_module_id = str(module_id)
@@ -5768,12 +5849,15 @@ def queue_recovered_training_resources(recipe, before_main_pack, module_id, comp
         recovered_amount = sum(max(1, int_value(delta, 1)) for _item, delta in recovered)
         if recovered_amount <= 0:
             continue
-        pending.append({
+        record = {
             "resource": resource,
             "recovered_amount": recovered_amount,
-            "target_count": count_resource(bag.Serial, resource) + recovered_amount,
             "name": str(resource.get("name", "resource")),
-        })
+            "destination": SOURCE_MASTER_SHELF if master_destination else "craft_bag",
+        }
+        if not master_destination:
+            record["target_count"] = count_resource(bag.Serial, resource) + recovered_amount
+        pending.append(record)
 
     if pending:
         _training_pending_recovery = pending
@@ -5786,6 +5870,29 @@ def process_pending_training_recovery():
     if not _training_pending_recovery:
         return "ready", "No recovered resources are waiting."
 
+    record = dict_value(_training_pending_recovery[0])
+    if record.get("error"):
+        return "error", str(record.get("error"))
+    resource = dict_value(record.get("resource"))
+    if not resource:
+        return "error", "Recovered-resource descriptor is missing"
+
+    destination = clean_key(record.get("destination"))
+    if destination == SOURCE_MASTER_SHELF:
+        state, message, _returned = deposit_master_shelf_from_backpack(resource)
+        if state == "interrupted":
+            return "progress", message
+        if state != "ready":
+            return "retry", message
+
+        _training_pending_recovery.pop(0)
+        if _training_pending_recovery:
+            return "progress", message + " More recovered resources remain."
+
+        completion = _training_pending_recovery_completion
+        clear_training_pending_recovery()
+        return "ready", completion + "; recovered resources returned to the Artificer Storage Shelf."
+
     if not _craft_bag_enabled:
         completion = _training_pending_recovery_completion
         clear_training_pending_recovery()
@@ -5794,13 +5901,6 @@ def process_pending_training_recovery():
     bag = craft_bag_item()
     if not bag:
         return "retry", "Craft Bag is unavailable for recovered resources"
-
-    record = dict_value(_training_pending_recovery[0])
-    if record.get("error"):
-        return "error", str(record.get("error"))
-    resource = dict_value(record.get("resource"))
-    if not resource:
-        return "error", "Recovered-resource descriptor is missing"
 
     target_count = max(0, int_value(record.get("target_count")))
     current_count = count_resource(bag.Serial, resource)
@@ -5829,6 +5929,7 @@ def release_pending_training_recovery():
     bag = craft_bag_item()
     returned_names = []
     backpack_names = []
+    master_shelf_names = []
 
     for record in list(_training_pending_recovery):
         record = dict_value(record)
@@ -5836,6 +5937,10 @@ def release_pending_training_recovery():
         resource_name = str(record.get("name", "resource"))
         if not resource:
             backpack_names.append(resource_name)
+            continue
+
+        if clean_key(record.get("destination")) == SOURCE_MASTER_SHELF:
+            master_shelf_names.append(resource_name)
             continue
 
         bag_count = count_resource(bag.Serial, resource) if bag else 0
@@ -5858,6 +5963,10 @@ def release_pending_training_recovery():
 
     clear_training_pending_recovery()
 
+    if master_shelf_names:
+        return "Artificer Shelf recovery skipped after retries; {0} may remain in the main backpack. Training will continue.".format(
+            ", ".join(master_shelf_names)
+        )
     if backpack_names:
         return "Recovery move skipped after retries; {0} may remain in the main backpack and will be swept by restocking later.".format(
             ", ".join(backpack_names)
@@ -5997,7 +6106,8 @@ def process_training_pending_outputs():
         if before_amount > int_value(record.get("amount"), 1):
             Target.Cancel()
             return "error", "Cannot safely {0} a stack containing older items; move existing {1} out of {2}.".format(mode, _training_pending_recipe_name, craft_workspace_label())
-        before_recovery = snapshot_direct_container(Player.Backpack.Serial) if _craft_bag_enabled else {}
+        track_recovery = _craft_bag_enabled or _source_mode == SOURCE_MASTER_SHELF
+        before_recovery = snapshot_direct_container(Player.Backpack.Serial) if track_recovery else {}
         Target.TargetExecute(item.Serial)
         Misc.Pause(CRAFT_RESULT_PAUSE_MS)
 
@@ -6023,7 +6133,7 @@ def process_training_pending_outputs():
         if not recovery_ready:
             return "error", completion_message + ", but " + recovery_error
         if _training_pending_recovery:
-            return "progress", completion_message + "; staging recovered resources next."
+            return "progress", completion_message + "; processing recovered resources next."
         if _training_pending_outputs:
             return "progress", completion_message + "; more training output remains."
         return "ready", completion_message + "."
@@ -6594,8 +6704,8 @@ def craft_step(training_stage=None):
                     stop_runtime("Need {0} {1:.1f}; current {2:.1f}.".format(skill_name, minimum, skill_value), BAD_HUE)
                     return
 
+    register_session_resources(resources)
     if _source_mode != SOURCE_MASTER_SHELF:
-        register_session_resources(resources)
         remaining = RESTOCK_CHUNK_CRAFTS if training_mode else _target_amount - _completed_amount
         resource_state, resource_error = ensure_resource_list(resources, remaining)
         if _operation_interrupted or consume_priority_control_button():

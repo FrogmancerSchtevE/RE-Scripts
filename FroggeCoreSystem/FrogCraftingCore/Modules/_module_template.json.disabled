@@ -1,0 +1,37 @@
+{
+  "format": "frog-crafting-module",
+  "version": 1,
+  "id": "new_craft_type",
+  "name": "New Craft Type",
+  "skill_name": "Tinkering",
+  "craft_gump_id": 0,
+  "tool": {
+    "name": "Crafting Tool",
+    "item_ids": [],
+    "item_names": ["Crafting Tool"],
+    "toolbook_category_button": null,
+    "auto_craft": {"enabled": false}
+  },
+  "resource_choice_groups": [],
+  "categories": [
+    {
+      "id": "example_category",
+      "name": "Example Category",
+      "source_page": 1,
+      "button": null,
+      "open_actions": [],
+      "recipes": [
+        {
+          "id": "example_recipe",
+          "name": "Example Recipe",
+          "button": null,
+          "enabled": false,
+          "min_skill": null,
+          "resources": [],
+          "output_item_ids": [],
+          "output_names": ["Example Recipe"]
+        }
+      ]
+    }
+  ]
+}

@@ -3610,28 +3610,6 @@
           "retains_material_color": false
         },
         {
-          "id": "heated_stand",
-          "name": "Heated Stand",
-          "button": 44,
-          "enabled": true,
-          "source_row": 219,
-          "min_skill": 60.0,
-          "skill_requirements": [],
-          "resources": [
-            {
-              "choice_group": "metal",
-              "amount": 4
-            }
-          ],
-          "output_item_ids": [],
-          "output_names": [
-            "Heated Stand"
-          ],
-          "output_hue": -1,
-          "output_amount": 1,
-          "retains_material_color": false
-        },
-		{
           "id": "lantern",
           "name": "Lantern",
           "button": 37,
@@ -3648,6 +3626,28 @@
           "output_item_ids": [],
           "output_names": [
             "Lantern"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": false
+        },
+        {
+          "id": "heated_stand",
+          "name": "Heated Stand",
+          "button": 44,
+          "enabled": true,
+          "source_row": 219,
+          "min_skill": 60.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "choice_group": "metal",
+              "amount": 4
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Heated Stand"
           ],
           "output_hue": -1,
           "output_amount": 1,

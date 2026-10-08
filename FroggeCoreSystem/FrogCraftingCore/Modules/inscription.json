@@ -743,7 +743,9 @@
               "amount": 1
             }
           ],
-          "output_item_ids": [],
+          "output_item_ids": [
+            8001
+          ],
           "output_names": [
             "Telekinesis"
           ],

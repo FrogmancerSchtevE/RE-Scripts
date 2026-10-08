@@ -381,12 +381,181 @@
       ]
     },
     {
-      "id": "dyes",
-      "name": "Dyes",
+      "id": "daemon_bone_set",
+      "name": "Daemon Bone Set",
       "source_page": 1,
       "button": 8,
       "open_actions": [
         8
+      ],
+      "recipes": [
+        {
+          "id": "daemon_bone_gorget",
+          "name": "Daemon Bone Gorget",
+          "button": 2,
+          "enabled": true,
+          "source_row": 392,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 8
+            },
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Gorget"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "daemon_bone_gloves",
+          "name": "Daemon Bone Gloves",
+          "button": 9,
+          "enabled": true,
+          "source_row": 393,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 8
+            },
+            {
+              "choice_group": "leather",
+              "amount": 6
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Gloves",
+            "Daemon Bone Globes"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "daemon_bone_helm",
+          "name": "Daemon Bone Helm",
+          "button": 16,
+          "enabled": true,
+          "source_row": 394,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 12
+            },
+            {
+              "choice_group": "leather",
+              "amount": 8
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Helm"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "daemon_bone_arms",
+          "name": "Daemon Bone Arms",
+          "button": 23,
+          "enabled": true,
+          "source_row": 395,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 16
+            },
+            {
+              "choice_group": "leather",
+              "amount": 12
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Arms"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "daemon_bone_legs",
+          "name": "Daemon Bone Legs",
+          "button": 30,
+          "enabled": true,
+          "source_row": 396,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 20
+            },
+            {
+              "choice_group": "leather",
+              "amount": 20
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Legs",
+            "Daemon Bone Leggings"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        },
+        {
+          "id": "daemon_bone_tunic",
+          "name": "Daemon Bone Tunic",
+          "button": 37,
+          "enabled": true,
+          "source_row": 397,
+          "min_skill": 95.0,
+          "skill_requirements": [],
+          "resources": [
+            {
+              "resource_key": "daemon_bone",
+              "amount": 24
+            },
+            {
+              "choice_group": "leather",
+              "amount": 24
+            }
+          ],
+          "output_item_ids": [],
+          "output_names": [
+            "Daemon Bone Tunic"
+          ],
+          "output_hue": -1,
+          "output_amount": 1,
+          "retains_material_color": true
+        }
+      ]
+    },
+    {
+      "id": "dyes",
+      "name": "Dyes",
+      "source_page": 1,
+      "button": 15,
+      "open_actions": [
+        15
       ],
       "recipes": [
         {
@@ -683,9 +852,9 @@
       "id": "mastercrafting",
       "name": "Mastercrafting",
       "source_page": 1,
-      "button": 15,
+      "button": 22,
       "open_actions": [
-        15
+        22
       ],
       "recipes": [
         {
@@ -798,9 +967,9 @@
       "id": "carpets",
       "name": "Carpets",
       "source_page": 1,
-      "button": 22,
+      "button": 29,
       "open_actions": [
-        22
+        29
       ],
       "recipes": [
         {
@@ -991,9 +1160,9 @@
       "id": "shirts_and_pants",
       "name": "Shirts and Pants",
       "source_page": 1,
-      "button": 29,
+      "button": 36,
       "open_actions": [
-        29
+        36
       ],
       "recipes": [
         {
@@ -1354,9 +1523,9 @@
       "id": "miscellaneous",
       "name": "Miscellaneous",
       "source_page": 1,
-      "button": 36,
+      "button": 43,
       "open_actions": [
-        36
+        43
       ],
       "recipes": [
         {
@@ -1442,10 +1611,11 @@
     {
       "id": "footwear",
       "name": "Footwear",
-      "source_page": 1,
-      "button": 43,
+      "source_page": 2,
+      "button": 50,
       "open_actions": [
-        43
+        105,
+        50
       ],
       "recipes": [
         {
@@ -1542,10 +1712,10 @@
       "id": "leather_armor",
       "name": "Leather Armor",
       "source_page": 2,
-      "button": 50,
+      "button": 57,
       "open_actions": [
         105,
-        50
+        57
       ],
       "recipes": [
         {
@@ -1708,10 +1878,10 @@
       "id": "studded_armor",
       "name": "Studded Armor",
       "source_page": 2,
-      "button": 57,
+      "button": 64,
       "open_actions": [
         105,
-        57
+        64
       ],
       "recipes": [
         {
@@ -1874,10 +2044,10 @@
       "id": "female_armor",
       "name": "Female Armor",
       "source_page": 2,
-      "button": 64,
+      "button": 71,
       "open_actions": [
         105,
-        64
+        71
       ],
       "recipes": [
         {
@@ -2018,10 +2188,10 @@
       "id": "bone_armor",
       "name": "Bone Armor",
       "source_page": 2,
-      "button": 71,
+      "button": 78,
       "open_actions": [
         105,
-        71
+        78
       ],
       "recipes": [
         {
