@@ -1300,8 +1300,8 @@ class FrogBODFillerPlugin:
         if not self.bulk_queue:
             self.host.set_status("Scan Orders before starting Bulk mode.", BAD_HUE, "BOD Ready")
             return
-        if self.host_craft_job_api_version() < 6:
-            self.host.set_status("Stop and restart FrogCraftingCore.py to load FCC 1.0 and its crafting-focus bridge.", BAD_HUE, "BOD Start")
+        if self.host_craft_job_api_version() < 12:
+            self.host.set_status("Stop and restart FrogCraftingCore.py to load host API 12 verified reject cleanup.", BAD_HUE, "BOD Start")
             return
         if self.host.craft_bag_serial() <= 0:
             self.host.set_status("Enable and set an FCC Craft Bag before starting Bulk mode.", BAD_HUE, "BOD Start")
@@ -1423,8 +1423,8 @@ class FrogBODFillerPlugin:
         )
 
     def start_craft_pass(self):
-        if self.host_craft_job_api_version() < 6:
-            raise Exception("FCC crafting-focus bridge is unavailable; stop and restart FrogCraftingCore.py to load FCC 1.0")
+        if self.host_craft_job_api_version() < 12:
+            raise Exception("FCC verified reject cleanup is unavailable; stop and restart FrogCraftingCore.py to load host API 12")
         remaining = self.amount_to_craft - self.amount_crafted
         if remaining <= 0:
             self.finish_fill()
@@ -1437,6 +1437,13 @@ class FrogBODFillerPlugin:
 
         self.job_initial_finished = self.amount_crafted
         self.job_remaining = remaining
+        if self.matched_module_id == "cooking":
+            cooking = self.host.plugin("cooking_bod")
+            preparer = getattr(cooking, "prepare_external_recipe", None) if cooking else None
+            if callable(preparer):
+                prepared, preparation_message = preparer(self.matched_recipe_id, self.job_remaining)
+                if not prepared:
+                    raise Exception("Cooking preparation stopped: " + str(preparation_message))
         started, start_message = self.host.begin_craft_job(self.plugin_id, self.matched_module_id, self.matched_category_id, self.matched_recipe_id, self.job_remaining, self.job_resource_choices, "none")
         if not started:
             raise Exception(start_message)
@@ -1465,9 +1472,9 @@ class FrogBODFillerPlugin:
         if not self.current_bod_serial or not self.matched_module_id or not self.matched_recipe_id:
             self.host.set_status("Target and inspect a BOD before starting.", BAD_HUE, "BOD Ready")
             return
-        if self.host_craft_job_api_version() < 6:
-            message = "An older FCC core is still running. Stop and restart FrogCraftingCore.py to load FCC 1.0; Reload only refreshes data and plugins."
-            self.host.overhead("Restart FrogCraftingCore.py to load FCC 1.0.", WARN_HUE)
+        if self.host_craft_job_api_version() < 12:
+            message = "An older FCC core is still running. Stop and restart FrogCraftingCore.py to load host API 12; Reload only refreshes data and plugins."
+            self.host.overhead("Restart FrogCraftingCore.py to load host API 12.", WARN_HUE)
             self.host.set_status(message, BAD_HUE, "BOD Start")
             return
 
@@ -1604,7 +1611,7 @@ class FrogBODFillerPlugin:
         disposer = getattr(self.host, "trash_craft_bag_item", None)
         if not callable(disposer):
             self.cancel_fill(
-                "BOD reject recycling stopped: {0} The rejected output remains in the Craft Bag; restart FrogCraftingCore.py to load FCC 1.0.".format(recycle_message),
+                "BOD reject recycling stopped: {0} The rejected output remains in the Craft Bag; restart FrogCraftingCore.py to load host API 12.".format(recycle_message),
                 BAD_HUE,
             )
             return
@@ -1634,10 +1641,10 @@ class FrogBODFillerPlugin:
 
         recycler = getattr(self.host, "recycle_craft_bag_contents", None)
         if not callable(recycler):
-            self.cancel_fill("FCC bag-wide recycle bridge is unavailable; restart FrogCraftingCore.py to load FCC 1.0. Rejected items remain in the Craft Bag.", BAD_HUE)
+            self.cancel_fill("FCC bag-wide recycle bridge is unavailable; restart FrogCraftingCore.py to load host API 12. Rejected items remain in the Craft Bag.", BAD_HUE)
             return
         before = list(self.recycle_queue)
-        state, message, remaining = recycler(self.plugin_id, self.matched_module_id, self.matched_recipe_id, before, self.observed_output_item_id or self.current_item_id)
+        state, message, remaining = recycler(self.plugin_id, self.matched_module_id, self.matched_recipe_id, before, self.observed_output_item_id or self.current_item_id, self.job_resource_choices)
         if not self.running:
             return
         if state in ("complete", "leftovers"):
@@ -1669,7 +1676,8 @@ class FrogBODFillerPlugin:
             if self.recycle_action_failures < max_failures:
                 self.host.set_status("Recycle action retry {0}/{1}: {2}".format(self.recycle_action_failures, max_failures, message), WARN_HUE, "BOD Recycle")
                 return
-            self.cancel_fill("BOD recycling could not send the bag-wide action: {0} Rejected items remain in the Craft Bag.".format(message), BAD_HUE)
+            self.recycle_container_exhausted = True
+            self.trash_unrecyclable_output(self.recycle_queue[0], message)
             return
         self.cancel_fill("BOD bag-wide recycling stopped: {0} Rejected items remain in the Craft Bag.".format(message), WARN_HUE if state == "cancelled" else BAD_HUE)
 
@@ -1697,55 +1705,7 @@ class FrogBODFillerPlugin:
                 self.cancel_fill("BOD cleanup stopped: " + str(ex), BAD_HUE)
             return
 
-        if not self.job_stackable:
-            self.recycle_rejected_container()
-            return
-
-        serial = self.recycle_queue[0]
-        item = Items.FindBySerial(serial)
-        if not item:
-            self.recycle_queue.pop(0)
-            self.recycle_retry_count = 0
-            return
-
-        state, message = self.host.recycle_craft_bag_item(
-            self.plugin_id,
-            self.matched_module_id,
-            self.matched_recipe_id,
-            serial,
-            self.observed_output_item_id or self.current_item_id,
-        )
-        if not self.running:
-            return
-        if state == "complete":
-            self.recycle_queue.pop(0)
-            self.recycle_retry_count = 0
-            self.recycled_total += 1
-            self.host.set_status(
-                "{0} {1} rejected item(s) remain to recycle.".format(message, len(self.recycle_queue)),
-                WARN_HUE,
-                "BOD Recycle",
-            )
-            return
-        if state == "progress":
-            self.host.set_status(message, WARN_HUE, "BOD Recycle")
-            return
-        if state == "cancelled":
-            self.cancel_fill(message, WARN_HUE)
-            return
-        if state == "retry":
-            self.recycle_retry_count += 1
-            max_attempts = max(1, self.policy_int("recycle_attempts", self.policy_int("recycle_retries", 3)))
-            if self.recycle_retry_count < max_attempts:
-                self.host.set_status(
-                    "Recycle attempt {0}/{1} failed; retrying: {2}".format(self.recycle_retry_count, max_attempts, message),
-                    WARN_HUE,
-                    "BOD Recycle",
-                )
-                return
-            self.trash_unrecyclable_output(serial, message)
-            return
-        self.cancel_fill("BOD reject recycling stopped: " + str(message), BAD_HUE)
+        self.recycle_rejected_container()
 
     def combine_crafted_output(self):
         output_items = []

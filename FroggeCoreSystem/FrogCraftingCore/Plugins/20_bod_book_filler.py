@@ -728,8 +728,8 @@ class FrogBODBookPlugin:
         if not self.book_item():
             self.stop("The BOD Book is no longer directly in the main backpack.", BAD_HUE)
             return
-        if self.host.craft_job_api_version() < 11:
-            self.stop("Restart FrogCraftingCore.py to load host API 11 journal-progress support.", BAD_HUE)
+        if self.host.craft_job_api_version() < 12:
+            self.stop("Restart FrogCraftingCore.py to load host API 12 verified reject cleanup.", BAD_HUE)
             return
         if not self.host.craft_bag_serial():
             self.stop("Set and enable a Craft Bag for rejected-output cleanup; book crafting itself will use the root backpack.", BAD_HUE)
@@ -748,6 +748,14 @@ class FrogBODBookPlugin:
         self.before_outputs = self.output_snapshot(self.active, Player.Backpack.Serial)
         remaining = self.active["total"] - self.before_progress
         amount = min(remaining, max(1, self.number(self.data.get("max_crafts_per_pass"), 10)))
+        if self.active.get("module_id") == "cooking":
+            cooking = self.host.plugin("cooking_bod")
+            preparer = getattr(cooking, "prepare_external_recipe", None) if cooking else None
+            if callable(preparer):
+                prepared, preparation_message = preparer(self.active.get("recipe_id", ""), amount)
+                if not prepared:
+                    self.stop("Cooking preparation stopped: " + str(preparation_message), BAD_HUE)
+                    return
         started, message = self.host.begin_craft_job(self.plugin_id, self.active["module_id"], self.active["category_id"], self.active["recipe_id"], amount, self.active["material_choices"], "bod_book", "backpack")
         if not started:
             self.stop("Book craft could not start: " + str(message), BAD_HUE)
@@ -843,32 +851,29 @@ class FrogBODBookPlugin:
         if not self.output_matches(item, self.active):
             self.stop("Rejected Craft Bag output changed identity; cleanup stopped.", BAD_HUE)
             return
-        if self.active.get("stackable"):
+        max_attempts = max(1, self.number(self.data.get("recycle_attempts"), 3))
+        if self.recycle_attempts >= max_attempts:
             state, message = self.host.trash_craft_bag_item(self.plugin_id, serial, int(item.ItemID))
         else:
-            max_attempts = max(1, self.number(self.data.get("recycle_attempts"), 3))
-            if self.recycle_attempts >= max_attempts:
-                state, message = self.host.trash_craft_bag_item(self.plugin_id, serial, int(item.ItemID))
-            else:
-                before = list(self.recycle_queue)
-                state, message, remaining = self.host.recycle_craft_bag_contents(self.plugin_id, self.active["module_id"], self.active["recipe_id"], before, 0)
-                if state in ("complete", "leftovers"):
-                    remaining = [self.number(value, 0) for value in remaining]
-                    if len(remaining) != len(set(remaining)) or any(value not in before for value in remaining):
-                        self.stop("Safety stop: bag-wide recycle returned an unexpected rejected-item list.", BAD_HUE)
-                        return
-                    self.recycle_queue = remaining
-                    if not remaining:
-                        self.recycle_attempts = 0
-                        self.announce(str(message), GOOD_HUE, "Book Rejects")
-                        return
-                    self.recycle_attempts += 1
-                    self.announce("{0} Attempt {1}/{2}; {3} rejected item(s) remain.".format(message, self.recycle_attempts, max_attempts, len(remaining)), WARN_HUE, "Book Rejects")
+            before = list(self.recycle_queue)
+            state, message, remaining = self.host.recycle_craft_bag_contents(self.plugin_id, self.active["module_id"], self.active["recipe_id"], before, 0, self.active.get("material_choices", {}))
+            if state in ("complete", "leftovers"):
+                remaining = [self.number(value, 0) for value in remaining]
+                if len(remaining) != len(set(remaining)) or any(value not in before for value in remaining):
+                    self.stop("Safety stop: bag-wide recycle returned an unexpected rejected-item list.", BAD_HUE)
                     return
-                if state == "retry":
-                    self.recycle_attempts += 1
-                    self.announce("Recycle attempt {0}/{1} did not clear the rejects: {2}".format(self.recycle_attempts, max_attempts, message), WARN_HUE, "Book Rejects")
+                self.recycle_queue = remaining
+                if not remaining:
+                    self.recycle_attempts = 0
+                    self.announce(str(message), GOOD_HUE, "Book Rejects")
                     return
+                self.recycle_attempts += 1
+                self.announce("{0} Attempt {1}/{2}; {3} verified reject item(s) remain.".format(message, self.recycle_attempts, max_attempts, len(remaining)), WARN_HUE, "Book Rejects")
+                return
+            if state == "retry":
+                self.recycle_attempts += 1
+                self.announce("Recycle attempt {0}/{1} did not clear the verified rejects: {2}".format(self.recycle_attempts, max_attempts, message), WARN_HUE, "Book Rejects")
+                return
         if state == "complete":
             self.recycle_queue.pop(0)
             if not self.recycle_queue:

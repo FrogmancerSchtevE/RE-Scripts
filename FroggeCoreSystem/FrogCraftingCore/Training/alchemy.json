@@ -3,7 +3,7 @@
   "version": 1,
   "module_id": "alchemy",
   "name": "Alchemy Training",
-  "target_skill": 100.0,
+  "target_skill": 120.0,
   "resource_choices": {},
   "stages": [
     {
@@ -16,59 +16,43 @@
     },
     {
       "min_skill": 30.0,
-      "max_skill": 45.0,
-      "mode": "craft",
-      "label": "Lesser Heal Potion",
-      "recipe_ids": ["lesser_heal"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
-    },
-    {
-      "min_skill": 45.0,
       "max_skill": 55.0,
       "mode": "craft",
-      "label": "Lesser Cure Potion",
-      "recipe_ids": ["lesser_cure"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
+      "label": "Lesser Poison",
+      "recipe_ids": ["lesser_poison"],
+      "disposal": { "mode": "drink", "button": null, "target_output": false, "required_mastery": "Poison Mastery", "batch_size": 40 }
     },
     {
       "min_skill": 55.0,
-      "max_skill": 65.0,
-      "mode": "craft",
-      "label": "Agility Potion",
-      "recipe_ids": ["agility"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
-    },
-    {
-      "min_skill": 65.0,
       "max_skill": 75.0,
       "mode": "craft",
-      "label": "Total Refresh Potion",
-      "recipe_ids": ["greater_refreshment"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
+      "label": "Poison",
+      "recipe_ids": ["poison"],
+      "disposal": { "mode": "drink", "button": null, "target_output": false, "required_mastery": "Poison Mastery", "batch_size": 40 }
     },
     {
       "min_skill": 75.0,
-      "max_skill": 85.0,
-      "mode": "craft",
-      "label": "Greater Heal Potion",
-      "recipe_ids": ["greater_heal"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
-    },
-    {
-      "min_skill": 85.0,
-      "max_skill": 95.0,
-      "mode": "craft",
-      "label": "Greater Cure Potion",
-      "recipe_ids": ["greater_cure"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
-    },
-    {
-      "min_skill": 95.0,
       "max_skill": 100.0,
       "mode": "craft",
-      "label": "Greater Poison / Conflagration",
-      "recipe_ids": ["greater_poison", "greater_conflagration"],
-      "disposal": { "mode": "trash", "button": null, "target_output": false }
+      "label": "Greater Poison",
+      "recipe_ids": ["greater_poison"],
+      "disposal": { "mode": "drink", "button": null, "target_output": false, "required_mastery": "Poison Mastery", "batch_size": 40 }
+    },
+    {
+      "min_skill": 100.0,
+      "max_skill": 110.0,
+      "mode": "craft",
+      "label": "Deadly Poison",
+      "recipe_ids": ["deadly_poison"],
+      "disposal": { "mode": "drink", "button": null, "target_output": false, "required_mastery": "Poison Mastery", "batch_size": 40 }
+    },
+    {
+      "min_skill": 110.0,
+      "max_skill": 120.0,
+      "mode": "craft",
+      "label": "Invisibility",
+      "recipe_ids": ["invisibility"],
+      "disposal": { "mode": "save", "destination": "resource_chest", "button": null, "target_output": false }
     }
   ]
 }

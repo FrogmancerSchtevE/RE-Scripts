@@ -7,7 +7,9 @@
   "craft_gump_id": 949095101,
   "tool": {
     "name": "Cooking Tool",
-    "item_ids": [],
+    "item_ids": [
+      2431
+    ],
     "item_names": [
       "Skillet",
       "Frying Pan",
@@ -26,7 +28,9 @@
       "craft_gump_id": 949095101,
       "craft_actions": [],
       "resources": [],
-      "output_item_ids": [],
+      "output_item_ids": [
+        2431
+      ],
       "output_names": [
         "Skillet",
         "Frying Pan",
@@ -133,7 +137,8 @@
           "resources": [
             {
               "resource_key": "fish_steak",
-              "amount": 15
+              "amount": 15,
+              "craft_recipe_id": "fish_steak"
             },
             {
               "resource_key": "faery_dust",
@@ -232,7 +237,8 @@
           "resources": [
             {
               "resource_key": "sweet_cocoa_butter",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "sweet_cocoa_butter"
             },
             {
               "resource_key": "banana",
@@ -330,7 +336,8 @@
             },
             {
               "resource_key": "fish_steak",
-              "amount": 15
+              "amount": 15,
+              "craft_recipe_id": "fish_steak"
             },
             {
               "resource_key": "samuels_secret_sauce",
@@ -488,7 +495,8 @@
             },
             {
               "resource_key": "chicken_leg",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "chicken_leg"
             },
             {
               "resource_key": "onion",
@@ -635,7 +643,8 @@
             },
             {
               "resource_key": "fish_steak",
-              "amount": 5
+              "amount": 5,
+              "craft_recipe_id": "fish_steak"
             },
             {
               "resource_key": "delicate_scales",
@@ -840,7 +849,8 @@
             },
             {
               "resource_key": "sweet_dough",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "sweet_dough"
             }
           ],
           "output_item_ids": [],
@@ -866,7 +876,8 @@
             },
             {
               "resource_key": "sweet_dough",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "sweet_dough"
             }
           ],
           "output_item_ids": [],
@@ -1042,7 +1053,8 @@
           ],
           "output_item_ids": [],
           "output_names": [
-            "Uncooked Fruit Pie"
+            "Uncooked Fruit Pie",
+            "Unbaked Fruit Pie"
           ],
           "output_hue": -1,
           "output_amount": 1,
@@ -1196,7 +1208,8 @@
           "resources": [
             {
               "resource_key": "cookie_mix",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "cookie_mix"
             }
           ],
           "output_item_ids": [],
@@ -1218,7 +1231,8 @@
           "resources": [
             {
               "resource_key": "cake_mix",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "cake_mix"
             }
           ],
           "output_item_ids": [],
@@ -1240,7 +1254,8 @@
           "resources": [
             {
               "resource_key": "sweet_dough",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "sweet_dough"
             }
           ],
           "output_item_ids": [],
@@ -1262,7 +1277,8 @@
           "resources": [
             {
               "resource_key": "unbaked_quiche",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "unbaked_quiche"
             }
           ],
           "output_item_ids": [],
@@ -1284,7 +1300,12 @@
           "resources": [
             {
               "resource_key": "uncooked_meat_pie",
-              "amount": 1
+              "amount": 1,
+              "item_names": [
+                "Uncooked Meat Pie",
+                "Unbaked Meat Pie"
+              ],
+              "craft_recipe_id": "unbaked_meat_pie"
             }
           ],
           "output_item_ids": [],
@@ -1306,7 +1327,8 @@
           "resources": [
             {
               "resource_key": "uncooked_sausage_pizza",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "uncooked_sausage_pizza"
             }
           ],
           "output_item_ids": [],
@@ -1328,7 +1350,8 @@
           "resources": [
             {
               "resource_key": "uncooked_cheese_pizza",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "uncooked_cheese_pizza"
             }
           ],
           "output_item_ids": [],
@@ -1350,7 +1373,12 @@
           "resources": [
             {
               "resource_key": "uncooked_fruit_pie",
-              "amount": 1
+              "amount": 1,
+              "item_names": [
+                "Uncooked Fruit Pie",
+                "Unbaked Fruit Pie"
+              ],
+              "craft_recipe_id": "uncooked_fruit_pie"
             }
           ],
           "output_item_ids": [],
@@ -1372,7 +1400,8 @@
           "resources": [
             {
               "resource_key": "unbaked_peach_cobbler",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "unbaked_peach_cobbler"
             }
           ],
           "output_item_ids": [],
@@ -1394,7 +1423,8 @@
           "resources": [
             {
               "resource_key": "unbaked_apple_pie",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "unbaked_apple_pie"
             }
           ],
           "output_item_ids": [],
@@ -1416,7 +1446,8 @@
           "resources": [
             {
               "resource_key": "unbaked_pumpkin_pie",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "unbaked_pumpkin_pie"
             }
           ],
           "output_item_ids": [],
@@ -1935,7 +1966,8 @@
             },
             {
               "resource_key": "sweet_cocoa_butter",
-              "amount": 1
+              "amount": 1,
+              "craft_recipe_id": "sweet_cocoa_butter"
             },
             {
               "resource_key": "honey",
@@ -1961,7 +1993,8 @@
           "resources": [
             {
               "resource_key": "fish_steak",
-              "amount": 5
+              "amount": 5,
+              "craft_recipe_id": "fish_steak"
             },
             {
               "resource_key": "samuels_secret_sauce",

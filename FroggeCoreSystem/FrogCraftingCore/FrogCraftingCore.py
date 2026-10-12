@@ -46,6 +46,7 @@ import Gumps
 import Items
 import Journal
 import Misc
+import Mobiles
 import Player
 import Target
 
@@ -73,8 +74,8 @@ MAX_CRAFT_AMOUNT = 9999
 DEFAULT_TOOL_BOOK_CHARGES = 50
 RESTOCK_CHUNK_CRAFTS = 25
 
-# The Resource Shelf withdrawal text must be set and locked to this value
-# by the player. The core intentionally does not edit that server text field.
+# The Core returns this value with each Resource Shelf row reply so a partial
+# final withdrawal cannot shrink the shelf's amount for the next request.
 RESOURCE_SHELF_WITHDRAW_AMOUNT = 100
 
 
@@ -119,6 +120,24 @@ TEMPLATE_APPLY_WAIT_MS = 1500
 TEMPLATE_COMMAND_COOLDOWN_MS = 4000
 MAX_TEMPLATE_SLOT = 20
 
+PAPERDOLL_GUMP_ID = 0x1CD
+PAPERDOLL_COMPENDIUM_BUTTON = 1
+PAPERDOLL_COMPENDIUM_SWITCHES = [1739]
+COMPENDIUM_GUMP_ID = 0x3B95CC55
+COMPENDIUM_MASTERY_BUTTON = 3514
+MASTERY_GUMP_ID = 0xEF0115F3
+POISON_MASTERY_BUTTON = 107
+USE_MASTERY_BUTTON = 200
+MASTERY_GUMP_WAIT_MS = 5000
+POISON_POTION_ITEM_ID = 0x0F0A
+POISON_POTION_HUE = 0
+EMPTY_BOTTLE_ITEM_ID = 0x0F0E
+DEFAULT_POISON_TRAINING_BATCH_SIZE = 40
+POISON_DRINK_COOLDOWN_MS = 1250
+POISON_DRINK_BACKOFF_MS = 1800
+POISON_DRINK_MAX_ATTEMPTS = 5
+POISON_BATCH_RECONCILE_PASSES = 2
+
 SERVER_GUMP_WAIT_MS = 2500
 CRAFT_RESULT_PAUSE_MS = 700
 CRAFT_FALLBACK_SETTLE_MS = 300
@@ -158,7 +177,8 @@ FOCUS_TEXT = {
 FOCUS_LABELS = {"unchanged": "As-is", "none": "None", "bod_book": "BOD Book", "weekly": "Weekly", "global": "Global", "guild": "Guild"}
 
 BG_ID = 5054
-TITLE_HUE = 1152
+TITLE_HUE = 88
+FROG_HUE = 1152
 LABEL_HUE = 0x0481
 DIM_HUE = 0x044E
 GOOD_HUE = 68
@@ -193,7 +213,9 @@ CRAFTING_GLASSES_PROFILES = (
     {"id": "tailoring", "label": "Tailoring", "aliases": ("tailoring",)},
     {"id": "tinkering", "label": "Tinkering", "aliases": ("tinkering",)},
 )
-CRAFT_SKILL_PROFILES = CRAFTING_GLASSES_PROFILES
+CRAFT_SKILL_PROFILES = CRAFTING_GLASSES_PROFILES + (
+    {"id": "musicianship", "label": "Musicianship", "aliases": ("musicianship",)},
+)
 
 DISPOSAL_NONE = "none"
 DISPOSAL_SAVE = "save"
@@ -201,6 +223,7 @@ DISPOSAL_TRASH = "trash"
 DISPOSAL_SMELT = "smelt"
 DISPOSAL_SALVAGE = "salvage"
 DISPOSAL_RECYCLE = "recycle"
+DISPOSAL_DRINK = "drink"
 TARGETED_DISPOSAL_MODES = (DISPOSAL_SMELT, DISPOSAL_SALVAGE, DISPOSAL_RECYCLE)
 
 KEY_PREFIX = "frog_crafting_core_"
@@ -337,6 +360,7 @@ _reagent_shelf_data = {}
 _reagent_shelf_resources = {}
 _master_shelf_data = {}
 _master_shelf_resources = {}
+_master_component_credits = {}
 
 _selected_category_id = ""
 _selected_recipe_id = ""
@@ -401,6 +425,13 @@ _training_pending_recipe_name = ""
 _training_pending_recovery = []
 _training_pending_recovery_module_id = ""
 _training_pending_recovery_completion = ""
+_poison_mastery_ready_session = False
+_training_drink_recovery_snapshot = {}
+_training_next_drink_at = 0.0
+_training_poison_reconcile_passes = 0
+_training_poison_batch_consumed = 0
+_training_poison_bottle_start_count = -1
+_training_poison_batch_start_bottle_count = -1
 
 _source_mode = SOURCE_CHEST
 _resource_chest_serial = 0
@@ -602,7 +633,17 @@ def craft_skill_profile(value):
 
 
 def crafting_glasses_profile(value):
-    return craft_skill_profile(value)
+    wanted_key = clean_key(value)
+    wanted_name = normalized_item_name(value)
+    for profile in CRAFTING_GLASSES_PROFILES:
+        if wanted_key == clean_key(profile.get("id")):
+            return profile
+        if wanted_name == normalized_item_name(profile.get("label")):
+            return profile
+        for alias in profile.get("aliases", ()):
+            if wanted_name == normalized_item_name(alias):
+                return profile
+    return None
 
 
 def crafting_glasses_profile_for_module(module):
@@ -1498,9 +1539,13 @@ def validate_training_profile(data, path):
 
         disposal = dict_value(stage.get("disposal"))
         disposal_mode = clean_key(disposal.get("mode", DISPOSAL_NONE))
-        valid_modes = (DISPOSAL_NONE, DISPOSAL_SAVE, DISPOSAL_TRASH) + TARGETED_DISPOSAL_MODES
+        valid_modes = (DISPOSAL_NONE, DISPOSAL_SAVE, DISPOSAL_TRASH, DISPOSAL_DRINK) + TARGETED_DISPOSAL_MODES
         if disposal_mode not in valid_modes:
             raise Exception("stage {0} has invalid disposal mode {1}".format(index + 1, disposal_mode))
+        if disposal_mode == DISPOSAL_DRINK and clean_key(disposal.get("required_mastery")) != "poison_mastery":
+            raise Exception("stage {0} drink disposal requires Poison Mastery".format(index + 1))
+        if disposal_mode == DISPOSAL_DRINK and int_value(disposal.get("batch_size"), DEFAULT_POISON_TRAINING_BATCH_SIZE) <= 0:
+            raise Exception("stage {0} drink disposal batch_size must be greater than zero".format(index + 1))
 
     data["module_id"] = module_id
     data["informational"] = informational
@@ -1974,10 +2019,13 @@ class CraftingPluginHost:
         return int(bag.Serial) if bag else 0
 
     def craft_job_api_version(self):
-        return 11
+        return 13
 
-    def begin_craft_job(self, owner, module_id, category_id, recipe_id, amount, resource_choices=None, focus_override=None, workspace_override=None, ignore_skill_requirements=False):
-        return begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, resource_choices, focus_override, workspace_override, ignore_skill_requirements)
+    def craft_source_mode(self):
+        return str(_source_mode)
+
+    def begin_craft_job(self, owner, module_id, category_id, recipe_id, amount, resource_choices=None, focus_override=None, workspace_override=None, ignore_skill_requirements=False, max_consecutive_failures=0, staged_components_only=False):
+        return begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, resource_choices, focus_override, workspace_override, ignore_skill_requirements, max_consecutive_failures, staged_components_only)
 
     def craft_job_status(self, owner):
         return plugin_craft_job_status(owner)
@@ -1994,8 +2042,8 @@ class CraftingPluginHost:
     def recycle_craft_bag_item(self, owner, module_id, recipe_id, item_serial, expected_item_id=0):
         return recycle_plugin_craft_bag_item(owner, module_id, recipe_id, item_serial, expected_item_id)
 
-    def recycle_craft_bag_contents(self, owner, module_id, recipe_id, item_serials, expected_item_id=0):
-        return recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials, expected_item_id)
+    def recycle_craft_bag_contents(self, owner, module_id, recipe_id, item_serials, expected_item_id=0, resource_choices=None):
+        return recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials, expected_item_id, resource_choices)
 
     def trash_craft_bag_item(self, owner, item_serial, expected_item_id=0):
         return trash_plugin_craft_bag_item(owner, item_serial, expected_item_id)
@@ -2483,6 +2531,91 @@ def player_skill_cap(skill_name):
     return 0.0
 
 
+def poison_mastery_ready():
+    return bool(_poison_mastery_ready_session)
+
+
+def open_compendium_for_mastery():
+    global _last_template_command_at
+
+    close_gump(MASTERY_GUMP_ID)
+    close_gump(COMPENDIUM_GUMP_ID)
+
+    if not gump_is_open(PAPERDOLL_GUMP_ID):
+        try:
+            Player.OpenPaperdoll()
+            Gumps.WaitForGump(PAPERDOLL_GUMP_ID, 1000)
+        except:
+            pass
+
+    if gump_is_open(PAPERDOLL_GUMP_ID):
+        try:
+            Gumps.SendAdvancedAction(PAPERDOLL_GUMP_ID, PAPERDOLL_COMPENDIUM_BUTTON, list(PAPERDOLL_COMPENDIUM_SWITCHES), [], [])
+            Gumps.WaitForGump(COMPENDIUM_GUMP_ID, MASTERY_GUMP_WAIT_MS)
+        except:
+            pass
+
+    if gump_is_open(COMPENDIUM_GUMP_ID):
+        return "ready", "Opened the Compendium from the paperdoll"
+
+    for _attempt in range(2):
+        if not wait_for_template_command_cooldown():
+            return "interrupted", "Compendium command was interrupted"
+        try:
+            Player.ChatSay("[compendium")
+            _last_template_command_at = time.time()
+            Gumps.WaitForGump(COMPENDIUM_GUMP_ID, MASTERY_GUMP_WAIT_MS)
+        except Exception as ex:
+            return "error", "Could not open the Compendium: " + str(ex)
+        if gump_is_open(COMPENDIUM_GUMP_ID):
+            return "ready", "Opened the Compendium"
+    return "error", "Compendium gump did not open after the four-second command cooldown retry"
+
+
+def activate_poison_mastery():
+    global _poison_mastery_ready_session
+
+    state, message = open_compendium_for_mastery()
+    if state != "ready":
+        return state, message
+
+    try:
+        Gumps.SendAction(COMPENDIUM_GUMP_ID, COMPENDIUM_MASTERY_BUTTON)
+        Gumps.WaitForGump(MASTERY_GUMP_ID, MASTERY_GUMP_WAIT_MS)
+    except Exception as ex:
+        return "error", "Could not open the Mastery page: " + str(ex)
+    if not gump_is_open(MASTERY_GUMP_ID):
+        return "error", "Mastery gump did not open"
+
+    try:
+        Gumps.SendAction(MASTERY_GUMP_ID, POISON_MASTERY_BUTTON)
+        Gumps.WaitForGump(MASTERY_GUMP_ID, MASTERY_GUMP_WAIT_MS)
+    except Exception as ex:
+        return "error", "Could not select Poison Mastery: " + str(ex)
+    if not gump_is_open(MASTERY_GUMP_ID):
+        return "error", "Poison Mastery selection did not return the Mastery gump"
+
+    try:
+        Gumps.SendAction(MASTERY_GUMP_ID, USE_MASTERY_BUTTON)
+    except Exception as ex:
+        return "error", "Could not activate Poison Mastery: " + str(ex)
+    Misc.Pause(250)
+    _poison_mastery_ready_session = True
+    close_gump(MASTERY_GUMP_ID)
+    return "ready", "Poison Mastery was selected through the Compendium"
+
+
+def ensure_training_mastery(stage):
+    required = clean_key(training_disposal(stage).get("required_mastery"))
+    if not required:
+        return "ready", ""
+    if required != "poison_mastery":
+        return "error", "Unsupported training mastery requirement: " + required
+    if poison_mastery_ready():
+        return "ready", "Poison Mastery was selected for this training session"
+    return activate_poison_mastery()
+
+
 def training_goal(profile, skill_cap):
     configured = number_value(dict_value(profile).get("target_skill"), 100.0)
     if skill_cap > 0:
@@ -2567,7 +2700,7 @@ def apply_plugin_resource_choices(configured_choices):
     return True, ""
 
 
-def begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, resource_choices=None, focus_override=None, workspace_override=None, ignore_skill_requirements=False):
+def begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, resource_choices=None, focus_override=None, workspace_override=None, ignore_skill_requirements=False, max_consecutive_failures=0, staged_components_only=False):
     global _plugin_craft_owner, _plugin_craft_context
     global _active_module_index, _selected_category_id, _selected_recipe_id
     global _target_amount, _output_chest_serial, _craft_bag_enabled, _dirty_ui
@@ -2594,6 +2727,11 @@ def begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, res
     requested_focus = str(focus_override or "").lower()
     if requested_focus and requested_focus not in FOCUS_ORDER:
         return False, "The requested crafting focus is invalid."
+    requested_failure_limit = int_value(max_consecutive_failures, 0)
+    if requested_failure_limit < 0 or requested_failure_limit > MAX_CONSECUTIVE_FAILURES:
+        return False, "The requested craft failure limit is invalid."
+    if requested_failure_limit > 0:
+        requested_failure_limit = max(1, requested_failure_limit)
 
     requested_index = -1
     requested_module = None
@@ -2632,6 +2770,8 @@ def begin_plugin_craft_job(owner, module_id, category_id, recipe_id, amount, res
         "focus_override": requested_focus,
         "workspace_override": requested_workspace,
         "ignore_skill_requirements": bool(ignore_skill_requirements),
+        "max_consecutive_failures": requested_failure_limit,
+        "staged_components_only": bool(staged_components_only),
         "bod_book_complete": False,
         "bod_book_points": 0,
         "bod_book_progress_finished": -1,
@@ -2691,6 +2831,29 @@ def plugin_craft_job_status(owner):
         "bod_book_progress_total": int_value(dict_value(_plugin_craft_context).get("bod_book_progress_total"), -1),
         "message": str(_status_msg),
     }
+
+
+def current_craft_failure_limit():
+    if _plugin_craft_owner:
+        requested = int_value(dict_value(_plugin_craft_context).get("max_consecutive_failures"), 0)
+        if requested > 0:
+            return min(MAX_CONSECUTIVE_FAILURES, max(1, requested))
+    return MAX_CONSECUTIVE_FAILURES
+
+
+def staged_plugin_components_ready(resources):
+    if not _plugin_craft_owner or not bool(dict_value(_plugin_craft_context).get("staged_components_only", False)):
+        return True, ""
+    workspace = craft_workspace_item()
+    if not workspace:
+        return False, "Plugin component workspace is unavailable."
+    for resource in resources:
+        if not clean_key(resource.get("craft_recipe_id")):
+            continue
+        required_now = max(1, int_value(resource.get("amount"), 1))
+        if count_resource(workspace.Serial, resource) < required_now:
+            return False, "Staged {0} is exhausted; returning control to the plugin.".format(resource.get("name", "component"))
+    return True, ""
 
 
 def end_plugin_craft_job(owner, cancel=False):
@@ -2862,7 +3025,75 @@ def recycle_plugin_craft_bag_item(owner, module_id, recipe_id, item_serial, expe
         _dirty_ui = True
 
 
-def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials, expected_item_id=0):
+def plugin_reject_matches_recipe(item, recipe, expected_item_id=0):
+    if not item or not recipe:
+        return False
+    expected_id = int_value(expected_item_id)
+    try:
+        if expected_id > 0:
+            return int(item.ItemID) == expected_id
+        if int(item.ItemID) in output_ids_for_recipe(recipe):
+            return True
+    except:
+        return False
+    wanted_names = [normalized_item_name(name) for name in output_names_for_recipe(recipe)]
+    return bool(wanted_names) and normalized_item_name(item_name(item)) in wanted_names
+
+
+def isolate_plugin_rejects_in_craft_bag(bag, pending_serials):
+    backpack = Player.Backpack
+    if not bag or not backpack:
+        return False, "The Craft Bag or main backpack is unavailable."
+    try:
+        Items.WaitForContents(bag, 1500)
+    except:
+        pass
+    wanted = set([int_value(serial) for serial in list_value(pending_serials) if int_value(serial) > 0])
+    for item in direct_container_items(bag.Serial):
+        try:
+            serial = int(item.Serial)
+            if serial in wanted:
+                continue
+            Items.Move(serial, int(backpack.Serial), max(1, int(item.Amount)))
+            Misc.Pause(MOVE_PAUSE_MS)
+            moved = valid_item(serial)
+            if moved and int(moved.Container) == int(bag.Serial):
+                return False, "Could not isolate verified rejects; an unrelated Craft Bag item did not move out."
+        except Exception as ex:
+            return False, "Could not isolate verified rejects: " + str(ex)
+
+    try:
+        Items.WaitForContents(bag, 1500)
+    except:
+        pass
+    remaining_serials = []
+    for item in direct_container_items(bag.Serial):
+        try:
+            remaining_serials.append(int(item.Serial))
+        except:
+            return False, "Could not verify the isolated Craft Bag contents."
+    if set(remaining_serials) != wanted:
+        return False, "Safety stop: the Craft Bag does not contain only the verified reject set."
+    return True, "Verified rejects isolated in the Craft Bag."
+
+
+def plugin_recycle_recovery_total(resources, before_backpack, before_bag, bag_serial):
+    recovered = 0
+    seen = []
+    for resource in list_value(resources):
+        signature = cleanup_resource_signature(resource)
+        if signature in seen:
+            continue
+        seen.append(signature)
+        hue = int_value(resource.get("hue"), -1)
+        backpack_deltas = detect_new_descriptor_items(resource, before_backpack, Player.Backpack.Serial, hue)
+        bag_deltas = detect_new_descriptor_items(resource, before_bag, bag_serial, hue)
+        recovered += sum(max(1, int_value(delta, 1)) for _item, delta in backpack_deltas)
+        recovered += sum(max(1, int_value(delta, 1)) for _item, delta in bag_deltas)
+    return recovered
+
+
+def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials, expected_item_id=0, resource_choices=None):
     global _active_module_index, _selected_category_id, _selected_recipe_id
     global _choice_group_index, _choice_indices, _target_amount, _completed_amount
     global _output_chest_serial, _dirty_ui
@@ -2890,29 +3121,22 @@ def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials,
     if not bag:
         return "error", "The configured Craft Bag is unavailable.", serials
     pending = []
+    pending_amounts = {}
     for serial in serials:
         item = valid_item(serial)
         if not item:
             continue
         try:
-            if int(item.Container) != int(bag.Serial) or int(item.Amount) != 1:
-                return "error", "Safety stop: a rejected output is not one item directly inside the Craft Bag.", serials
+            if int(item.Container) != int(bag.Serial) or int(item.Amount) <= 0:
+                return "error", "Safety stop: a rejected output is not directly inside the Craft Bag.", serials
             if int_value(expected_item_id) > 0 and int(item.ItemID) != int_value(expected_item_id):
                 return "error", "Safety stop: a rejected output has the wrong item graphic.", serials
+            pending_amounts[serial] = int(item.Amount)
         except:
             return "error", "Could not validate the rejected Craft Bag output.", serials
         pending.append(serial)
     if not pending:
         return "complete", "Rejected output was already removed.", []
-
-    other_items = {}
-    for item in direct_container_items(bag.Serial):
-        try:
-            serial = int(item.Serial)
-            if serial not in pending:
-                other_items[serial] = max(1, int(item.Amount))
-        except:
-            return "error", "Could not validate other Craft Bag contents before recycling.", pending
 
     requested_index = -1
     requested_module = None
@@ -2926,6 +3150,9 @@ def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials,
     _category, recipe = find_module_recipe(requested_module, recipe_id)
     if not recipe:
         return "error", "The rejected output's FCC recipe is unavailable.", pending
+    for serial in pending:
+        if not plugin_reject_matches_recipe(valid_item(serial), recipe, expected_item_id):
+            return "error", "Safety stop: the Craft Bag reject no longer matches the requested FCC recipe.", pending
     recycle_button = int_value(dict_value(requested_module.get("server_actions")).get("recycle"))
     if recycle_button <= 0:
         return "error", "Recycle is not mapped for " + str(requested_module.get("name", module_id)) + ".", pending
@@ -2944,6 +3171,12 @@ def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials,
     try:
         _active_module_index = requested_index
         initialize_choices()
+        choices_ready, choices_error = apply_plugin_resource_choices(resource_choices)
+        if not choices_ready:
+            return "error", choices_error, pending
+        recovery_resources, recovery_error = resolve_resource_list(recipe.get("resources"))
+        if not recovery_resources:
+            return "error", recovery_error or "The rejected output's recovery resources could not be resolved.", pending
         tool_state, tool_result = ensure_tool(requested_module)
         if _operation_interrupted or consume_priority_control_button():
             return "cancelled", "Rejected-output recycling was interrupted.", pending
@@ -2951,6 +3184,12 @@ def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials,
             return "progress", "Acquiring a tool before recycling rejected output.", pending
         if tool_state == "error":
             return "error", str(tool_result), pending
+
+        isolated, isolation_message = isolate_plugin_rejects_in_craft_bag(bag, pending)
+        if not isolated:
+            return "error", isolation_message, pending
+        before_backpack = snapshot_direct_container(Player.Backpack.Serial)
+        before_bag = snapshot_direct_container(bag.Serial)
 
         Target.Cancel()
         if not open_server_craft_gump(craft_gump_id, tool_result):
@@ -2972,29 +3211,40 @@ def recycle_plugin_craft_bag_contents(owner, module_id, recipe_id, item_serials,
             Items.WaitForContents(bag, 1500)
         except:
             pass
-        for serial, amount in other_items.items():
-            item = valid_item(serial)
-            if not item:
-                return "error", "Safety stop: bag-wide recycle also consumed an unrelated item.", pending
-            try:
-                if int(item.Container) != int(bag.Serial) or int(item.Amount) < amount:
-                    return "error", "Safety stop: bag-wide recycle changed an unrelated item.", pending
-            except:
-                return "error", "Could not verify other Craft Bag contents after recycling.", pending
+        try:
+            Items.WaitForContents(Player.Backpack, 1500)
+        except:
+            pass
 
         remaining = []
+        consumed_amount = 0
         for serial in pending:
             item = valid_item(serial)
             if not item:
+                consumed_amount += pending_amounts.get(serial, 1)
                 continue
             try:
                 if int(item.Container) == int(bag.Serial):
+                    if not plugin_reject_matches_recipe(item, recipe, expected_item_id):
+                        return "error", "Safety stop: rejected output changed identity during recycling.", pending
+                    consumed_amount += max(0, pending_amounts.get(serial, 1) - int(item.Amount))
                     remaining.append(serial)
+                else:
+                    consumed_amount += pending_amounts.get(serial, 1)
             except:
                 return "error", "Could not verify rejected output after recycling.", pending
+        recovered_amount = plugin_recycle_recovery_total(recovery_resources, before_backpack, before_bag, bag.Serial)
+        if consumed_amount > 0 and recovered_amount <= 0:
+            return "error", "Recycle consumed verified reject output, but no recovered recipe resource was detected.", remaining
+        if consumed_amount <= 0 and recovered_amount > 0:
+            return "error", "Recovered resources changed even though no verified reject was consumed.", remaining
         if remaining:
-            return "leftovers", "Bag-wide recycle left {0} rejected item(s).".format(len(remaining)), remaining
-        return "complete", "Bag-wide recycle consumed all rejected output.", []
+            if recovered_amount > 0:
+                message = "Recovered {0} resource item(s); {1} verified reject stack(s) remain.".format(recovered_amount, len(remaining))
+            else:
+                message = "Recycle recovered no resources; {0} verified reject stack(s) remain.".format(len(remaining))
+            return "leftovers", message, remaining
+        return "complete", "Recycled all verified rejects and recovered {0} resource item(s).".format(recovered_amount), []
     except Exception as ex:
         return "retry", "Could not complete bag-wide recycle: " + str(ex), pending
     finally:
@@ -3104,13 +3354,172 @@ def training_disposal(stage):
     return dict_value(dict_value(stage).get("disposal"))
 
 
+def training_pending_output_amount():
+    total = 0
+    for record in _training_pending_outputs:
+        total += max(0, int_value(dict_value(record).get("amount"), 0))
+    return total
+
+
+def verified_poison_potion(item):
+    if not item:
+        return False
+    try:
+        return (
+            int(item.ItemID) == POISON_POTION_ITEM_ID
+            and int(item.Hue) == POISON_POTION_HUE
+            and "poison" in normalized_item_name(item_name(item))
+        )
+    except:
+        return False
+
+
+def empty_bottle_item(item):
+    if not item:
+        return False
+    try:
+        return int(item.ItemID) == EMPTY_BOTTLE_ITEM_ID
+    except:
+        return False
+
+
+def poison_training_output_containers():
+    containers = []
+    backpack = Player.Backpack
+    if backpack:
+        containers.append(int(backpack.Serial))
+    bag = craft_bag_item() if _craft_bag_enabled else None
+    if bag:
+        bag_serial = int(bag.Serial)
+        if bag_serial not in containers:
+            containers.append(bag_serial)
+    return containers
+
+
+def verified_poison_output_records():
+    records = []
+    for container_serial in poison_training_output_containers():
+        for item in direct_container_items(container_serial):
+            if not verified_poison_potion(item):
+                continue
+            try:
+                records.append({
+                    "serial": int(item.Serial),
+                    "amount": max(1, int(item.Amount)),
+                    "container_serial": int(container_serial),
+                    "drink_attempts": 0,
+                })
+            except:
+                pass
+    return records
+
+
+def poison_storage_items(container_serial):
+    result = []
+    for item in direct_container_items(container_serial):
+        if verified_poison_potion(item) or empty_bottle_item(item):
+            result.append(item)
+    return result
+
+
+def poison_storage_total(container_serial):
+    total = 0
+    for item in poison_storage_items(container_serial):
+        try:
+            total += max(1, int(item.Amount))
+        except:
+            total += 1
+    return total
+
+
+def poison_bottle_inventory_total():
+    backpack = Player.Backpack
+    if not backpack:
+        return 0
+    container_serials = [int(backpack.Serial)]
+    bag = craft_bag_item() if _craft_bag_enabled else None
+    if bag and int(bag.Serial) not in container_serials:
+        container_serials.append(int(bag.Serial))
+    total = 0
+    for container_serial in container_serials:
+        for item in direct_container_items(container_serial):
+            if not empty_bottle_item(item):
+                continue
+            total += max(1, int_value(getattr(item, "Amount", 1), 1))
+    return total
+
+
+def begin_poison_training_batch():
+    global _training_drink_recovery_snapshot, _training_poison_batch_start_bottle_count
+
+    if _training_poison_batch_start_bottle_count >= 0:
+        return
+    _training_poison_batch_start_bottle_count = poison_bottle_inventory_total()
+    _training_drink_recovery_snapshot = snapshot_direct_container(Player.Backpack.Serial)
+
+
+def poison_training_new_bottle_amount():
+    if _training_poison_batch_start_bottle_count < 0:
+        return 0
+    return max(0, poison_bottle_inventory_total() - _training_poison_batch_start_bottle_count)
+
+
+def poison_training_batch_load():
+    return training_pending_output_amount() + poison_training_new_bottle_amount()
+
+
+def poison_drink_wait_ms():
+    remaining = int(round(max(0.0, _training_next_drink_at - time.time()) * 1000.0))
+    return remaining
+
+
+def poison_training_batch_size(disposal=None):
+    configured = int_value(dict_value(disposal or _training_pending_disposal).get("batch_size"), DEFAULT_POISON_TRAINING_BATCH_SIZE)
+    return max(1, min(100, configured))
+
+
+def training_pending_outputs_ready(stage, recipe, skill_value, goal):
+    if not _training_pending_outputs:
+        return False
+    pending_mode = clean_key(_training_pending_disposal.get("mode", DISPOSAL_NONE))
+    if pending_mode != DISPOSAL_DRINK:
+        return True
+    if bool(_training_pending_disposal.get("force_drain", False)):
+        return True
+    if skill_value >= goal or not stage or not recipe:
+        return True
+    if clean_key(training_disposal(stage).get("mode", DISPOSAL_NONE)) != DISPOSAL_DRINK:
+        return True
+    return poison_training_batch_load() >= poison_training_batch_size()
+
+
+def poison_failure_bottle_flush_ready(stage):
+    if _training_pending_outputs or _training_poison_batch_start_bottle_count < 0:
+        return False
+    if clean_key(training_disposal(stage).get("mode", DISPOSAL_NONE)) != DISPOSAL_DRINK:
+        return False
+    return poison_training_new_bottle_amount() >= poison_training_batch_size(training_disposal(stage))
+
+
+def request_poison_batch_drain(reason):
+    if not _training_pending_outputs or clean_key(_training_pending_disposal.get("mode")) != DISPOSAL_DRINK:
+        return False
+    _training_pending_disposal["force_drain"] = True
+    set_status(str(reason) + " Draining the partial poison batch first.", WARN_HUE, "Drain Poison Batch")
+    return True
+
+
 def training_disposal_label(stage):
     disposal = training_disposal(stage)
     mode = clean_key(disposal.get("mode", DISPOSAL_NONE))
     if mode == DISPOSAL_SAVE:
+        if clean_key(disposal.get("destination")) == "resource_chest":
+            return "Save to resource chest"
         return "Save to output chest" if _output_chest_serial else "Save in " + craft_workspace_label()
     if mode == DISPOSAL_TRASH:
         return "Trash output"
+    if mode == DISPOSAL_DRINK:
+        return "Batch {0}, drink poison, recover bottles".format(poison_training_batch_size(disposal))
     if mode in TARGETED_DISPOSAL_MODES:
         return "{0} output (button {1})".format(mode.title(), int_value(disposal.get("button")))
     return "Leave output in backpack"
@@ -3123,11 +3532,19 @@ def training_disposal_readiness(stage):
 
     disposal = training_disposal(stage)
     mode = clean_key(disposal.get("mode", DISPOSAL_NONE))
-    if mode in (DISPOSAL_NONE, DISPOSAL_SAVE):
+    if mode == DISPOSAL_NONE:
+        return True, ""
+    if mode == DISPOSAL_SAVE:
+        if clean_key(disposal.get("destination")) == "resource_chest" and not valid_item(_resource_chest_serial):
+            return False, "Set a valid Resource Chest on Home / Setup"
         return True, ""
     if mode == DISPOSAL_TRASH:
         if not valid_item(_trash_container_serial):
             return False, "Set a valid training trash container on Home / Setup"
+        return True, ""
+    if mode == DISPOSAL_DRINK:
+        if clean_key(disposal.get("required_mastery")) != "poison_mastery":
+            return False, "Poison-drinking training must require Poison Mastery"
         return True, ""
     if mode in TARGETED_DISPOSAL_MODES:
         if int_value(disposal.get("button")) <= 0:
@@ -4148,7 +4565,7 @@ def deposit_master_shelf_from_backpack(resource):
         close_gump(gump_id)
         return "interrupted" if _operation_interrupted else "error", message + ".", 0
 
-    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 900)
+    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 901)
     if fill_button <= 0:
         close_gump(gump_id)
         return "error", "Artificer Storage Shelf fill button is not mapped.", 0
@@ -4184,7 +4601,7 @@ def deposit_master_shelf_cleanup_from_backpack():
         close_gump(gump_id)
         return False, message, 0
 
-    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 900)
+    fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 901)
     if fill_button <= 0:
         close_gump(gump_id)
         return False, "Artificer Storage Shelf fill button is not mapped", 0
@@ -4574,10 +4991,9 @@ def open_resource_shelf_resource_page(resource):
 
     shelf_gump_id = int_value(_shelf_data.get("gump_id"), 0x06ABCE12)
     next_button = int_value(_shelf_data.get("next_page_button"), 123)
-    set_button = int_value(_shelf_data.get("withdraw_amount_button"), 119)
     shelf_page = int_value(resource.get("shelf_page"))
     shelf_button = int_value(resource.get("shelf_button"))
-    if shelf_page <= 0 or shelf_button <= 0 or set_button <= 0:
+    if shelf_page <= 0 or shelf_button <= 0:
         return "error", "Shelf button mapping is missing for {0}.".format(resource.get("name", "resource")), 0
 
     close_gump(shelf_gump_id)
@@ -4594,29 +5010,13 @@ def open_resource_shelf_resource_page(resource):
     if not gump_is_open(shelf_gump_id):
         return "error", "Resource Shelf gump did not open.", 0
 
-    if not send_resource_shelf_action(shelf_gump_id, set_button):
-        close_gump(shelf_gump_id)
-        return "error", "Resource Shelf withdrawal amount could not be set to {0}.".format(RESOURCE_SHELF_WITHDRAW_AMOUNT), 0
-    Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
-    Misc.Pause(CRAFT_MENU_SETTLE_MS)
-
-    if consume_priority_control_button():
-        close_gump(shelf_gump_id)
-        return "interrupted", "Resource Shelf amount setup was interrupted.", 0
-    if not gump_is_open(shelf_gump_id):
-        try:
-            Items.UseItem(shelf)
-            Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
-        except:
-            return "error", "Resource Shelf did not reopen after setting withdrawal amount.", 0
-        if not gump_is_open(shelf_gump_id):
-            return "error", "Resource Shelf did not reopen after setting withdrawal amount.", 0
-
     for _page in range(1, shelf_page):
         if consume_priority_control_button():
             close_gump(shelf_gump_id)
             return "interrupted", "Resource Shelf navigation interrupted.", 0
-        if not send_resource_shelf_action(shelf_gump_id, next_button):
+        try:
+            Gumps.SendAction(shelf_gump_id, next_button)
+        except:
             close_gump(shelf_gump_id)
             return "error", "Resource Shelf page action failed.", 0
         Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
@@ -4653,6 +5053,29 @@ def withdraw_resource_shelf_to_backpack(resource):
     after_count = wait_for_resource_increase(backpack.Serial, resource, before_count)
     if _operation_interrupted:
         return "interrupted", "Resource Shelf withdrawal interrupted.", 0, before_snapshot
+    if after_count <= before_count:
+        # The released shelf path uses an ordinary row reply.  Keep it as the
+        # bounded fallback for shard revisions that ignore the text-bearing
+        # advanced reply.
+        state, message, shelf_gump_id = open_resource_shelf_resource_page(resource)
+        if state != "ready":
+            return state, message, 0, before_snapshot
+        if consume_priority_control_button():
+            close_gump(shelf_gump_id)
+            return "interrupted", "Resource Shelf withdrawal interrupted.", 0, before_snapshot
+        try:
+            Gumps.SendAction(shelf_gump_id, shelf_button)
+        except:
+            close_gump(shelf_gump_id)
+            return "error", "Resource Shelf fallback withdrawal action failed.", 0, before_snapshot
+        Gumps.WaitForGump(shelf_gump_id, SERVER_GUMP_WAIT_MS)
+        Misc.Pause(MOVE_PAUSE_MS)
+        close_gump(shelf_gump_id)
+        after_count = wait_for_resource_increase(backpack.Serial, resource, before_count)
+        if _operation_interrupted:
+            return "interrupted", "Resource Shelf withdrawal interrupted.", 0, before_snapshot
+        if after_count > before_count:
+            return "ready", "Withdrew {0} {1} from the Resource Shelf after a plain-row retry.".format(after_count - before_count, resource.get("name", "resource")), after_count - before_count, before_snapshot
     if after_count <= before_count:
         return "empty", "Resource Shelf supplied no {0} after requesting {1}.".format(resource.get("name", "resource"), RESOURCE_SHELF_WITHDRAW_AMOUNT), 0, before_snapshot
     return "ready", "Withdrew {0} {1} from the Resource Shelf.".format(after_count - before_count, resource.get("name", "resource")), after_count - before_count, before_snapshot
@@ -4835,7 +5258,11 @@ def craft_component_resource(resource):
     original_focus = ""
     tool = None
     try:
-        if _source_mode != SOURCE_MASTER_SHELF:
+        if _source_mode == SOURCE_MASTER_SHELF:
+            resource_state, resource_error = ensure_master_component_list(component_resources)
+            if resource_state != "ready":
+                return resource_state, resource_error
+        else:
             register_session_resources(component_resources)
             resource_state, resource_error = ensure_resource_list(component_resources, 1)
             if resource_state != "ready":
@@ -4893,9 +5320,15 @@ def craft_component_resource(resource):
         staged, _staged_deltas, stage_error = stage_new_outputs_in_craft_bag(recipe, output_deltas, output_hue)
         if not staged:
             return "error", stage_error
-        after_count = count_resource(workspace.Serial, resource)
-        if after_count <= before_count:
-            return "error", "Crafted {0}, but it did not match the parent recipe's {1} resource identity.".format(recipe.get("name", recipe_id), resource.get("name", resource.get("resource_key", "component")))
+        if _source_mode == SOURCE_MASTER_SHELF:
+            consume_master_component_credits(component_resources)
+            deposit_state, deposit_message = deposit_master_component_outputs(resource, _staged_deltas)
+            if deposit_state != "ready":
+                return deposit_state, deposit_message
+        else:
+            after_count = count_resource(workspace.Serial, resource)
+            if after_count <= before_count:
+                return "error", "Crafted {0}, but it did not match the parent recipe's {1} resource identity.".format(recipe.get("name", recipe_id), resource.get("name", resource.get("resource_key", "component")))
 
         clear_action_failures("component_" + recipe_key)
         return "progress", "Crafted {0} for {1}; the parent recipe will resume next.".format(recipe.get("name", recipe_id), resource.get("name", "component"))
@@ -4915,6 +5348,84 @@ def craft_component_resource(resource):
             _component_recipe_stack.pop()
         elif recipe_key in _component_recipe_stack:
             _component_recipe_stack.remove(recipe_key)
+
+
+def ensure_master_component_list(resources):
+    workspace = craft_workspace_item()
+    for resource in resources:
+        if not clean_key(resource.get("craft_recipe_id")):
+            continue
+        key = clean_key(resource.get("resource_key"))
+        required_now = max(1, int_value(resource.get("amount"), 1))
+        if workspace and count_resource(workspace.Serial, resource) >= required_now:
+            continue
+        if int_value(_master_component_credits.get(key), 0) >= required_now:
+            continue
+        component_state, component_message = craft_component_resource(resource)
+        if component_state == "progress":
+            set_status(component_message, GOOD_HUE, "Craft Component")
+        return component_state, component_message
+    return "ready", ""
+
+
+def consume_master_component_credits(resources):
+    if _source_mode != SOURCE_MASTER_SHELF:
+        return
+    for resource in resources:
+        if not clean_key(resource.get("craft_recipe_id")):
+            continue
+        key = clean_key(resource.get("resource_key"))
+        consumed = max(1, int_value(resource.get("amount"), 1))
+        remaining = max(0, int_value(_master_component_credits.get(key), 0) - consumed)
+        if remaining > 0:
+            _master_component_credits[key] = remaining
+        elif key in _master_component_credits:
+            del _master_component_credits[key]
+
+
+def deposit_master_component_outputs(resource, output_deltas):
+    key = clean_key(resource.get("resource_key"))
+    if not key:
+        return "error", "Master Shelf component identity is missing."
+    add_button = int_value(_master_shelf_data.get("add_item_button"), 901)
+    if add_button <= 0:
+        return "error", "Artificer Storage Shelf Add Item button is not mapped."
+    gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+    deposited = 0
+    for item, delta in merge_output_deltas(output_deltas):
+        serial = int_value(getattr(item, "Serial", 0), 0)
+        expected = max(1, int_value(delta, 1))
+        before_item = valid_item(serial)
+        before_amount = max(1, int_value(getattr(before_item, "Amount", 1), 1)) if before_item else 0
+        if not before_item or before_amount < expected:
+            return "error", "Crafted component changed before it could be added to the Master Shelf."
+        ready, message = master_shelf_readiness(True)
+        if not ready:
+            close_gump(gump_id)
+            return "interrupted" if _operation_interrupted else "error", message + "."
+        try:
+            Target.Cancel()
+            Gumps.SendAction(gump_id, add_button)
+            target_ready = bool(Target.WaitForTarget(TARGET_CURSOR_WAIT_MS, False)) or bool(Target.HasTarget())
+            if not target_ready:
+                close_gump(gump_id)
+                return "error", "Artificer Storage Shelf Add Item did not produce a target cursor."
+            Target.TargetExecute(serial)
+            Misc.Pause(MOVE_PAUSE_MS)
+        except Exception as ex:
+            close_gump(gump_id)
+            return "error", "Could not add crafted component to the Master Shelf: " + str(ex)
+        close_gump(gump_id)
+        after_item = valid_item(serial)
+        after_amount = max(0, int_value(getattr(after_item, "Amount", 0), 0)) if after_item else 0
+        accepted = max(0, before_amount - after_amount)
+        if accepted < expected:
+            return "error", "Artificer Storage Shelf did not accept the verified {0} component.".format(resource.get("name", key))
+        deposited += expected
+    if deposited <= 0:
+        return "error", "No verified component output was available for Master Shelf storage."
+    _master_component_credits[key] = int_value(_master_component_credits.get(key), 0) + deposited
+    return "ready", "Stored {0} {1} component(s) in the Master Shelf.".format(deposited, resource.get("name", key))
 
 
 def ensure_resource_list(resources, crafts_remaining):
@@ -5223,6 +5734,7 @@ def snapshot_direct_backpack():
 def detect_new_outputs_detail(recipe, before_snapshot, hue=-1, container_serial=None):
     output_ids = output_ids_for_recipe(recipe)
     output_names = [normalized_item_name(name) for name in output_names_for_recipe(recipe)]
+    recipe_resources, _resource_error = resolve_resource_list(recipe.get("resources"))
     matched = []
     positive = []
     container = valid_item(container_serial) if container_serial else Player.Backpack
@@ -5236,7 +5748,8 @@ def detect_new_outputs_detail(recipe, before_snapshot, hue=-1, container_serial=
             delta = int(item.Amount) - int_value(before_record.get("amount"), 0)
             if delta <= 0:
                 continue
-            positive.append((item, delta))
+            if not any(item_matches_descriptor(item, resource, -1) for resource in recipe_resources):
+                positive.append((item, delta))
 
             if int(hue) >= 0 and int(item.Hue) != int(hue):
                 continue
@@ -5427,6 +5940,40 @@ def capture_journal_cursor():
     return None
 
 
+def journal_contains_since(journal_cursor, wanted_text):
+    wanted = normalized_item_name(wanted_text)
+    if not wanted:
+        return False
+    try:
+        journal_entries = Journal.GetJournalEntry(journal_cursor) if journal_cursor is not None else Journal.GetJournalEntry(0)
+    except:
+        journal_entries = []
+    for journal_entry in journal_entries or []:
+        try:
+            if wanted in normalized_item_name(getattr(journal_entry, "Text", "")):
+                return True
+        except:
+            pass
+    return False
+
+
+def expected_training_craft_failure(module, recipe, gump_id, journal_cursor, include_gump=True):
+    phrases = []
+    phrases.extend(list_value(dict_value(module).get("craft_failure_texts")))
+    phrases.extend(list_value(dict_value(recipe).get("craft_failure_texts")))
+    normalized_lines = crafting_focus_lines(gump_id) if include_gump else []
+
+    for value in phrases:
+        phrase = normalized_item_name(value)
+        if not phrase:
+            continue
+        if journal_contains_since(journal_cursor, phrase):
+            return str(value)
+        if any(phrase in line for line in normalized_lines):
+            return str(value)
+    return ""
+
+
 def quest_success_since(journal_cursor, expected_focus="unchanged"):
     try:
         if journal_cursor is None:
@@ -5473,8 +6020,9 @@ def quest_success_since(journal_cursor, expected_focus="unchanged"):
     return matched_success_type
 
 
-def wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, journal_cursor, expected_focus):
+def wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, journal_cursor, expected_focus, failure_module=None):
     deadline = time.time() + (float(QUEST_RESULT_WAIT_MS) / 1000.0)
+    failure_gump_ready_at = time.time() + (float(CRAFT_RESULT_PAUSE_MS) / 1000.0)
     fallback_seen_at = 0.0
     output_deltas = []
     actual_output = 0
@@ -5485,21 +6033,25 @@ def wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, j
         if consumed_focus:
             consumed_quest_type = quest_success_since(journal_cursor, expected_focus)
             if consumed_quest_type:
-                return output_deltas, output_amount, exact_output_match, consumed_quest_type
+                return output_deltas, output_amount, exact_output_match, consumed_quest_type, ""
         output_deltas, actual_output, exact_output_match = detect_craft_outputs_detail(recipe, before_snapshots, output_hue)
         if journal_relevant and not consumed_focus:
             consumed_quest_type = quest_success_since(journal_cursor, expected_focus)
             if consumed_quest_type:
-                return output_deltas, output_amount, exact_output_match, consumed_quest_type
+                return output_deltas, output_amount, exact_output_match, consumed_quest_type, ""
         if actual_output >= output_amount:
             if exact_output_match:
-                return output_deltas, actual_output, exact_output_match, ""
+                return output_deltas, actual_output, exact_output_match, "", ""
             if fallback_seen_at <= 0.0:
                 fallback_seen_at = time.time()
             elif time.time() - fallback_seen_at >= float(CRAFT_FALLBACK_SETTLE_MS) / 1000.0:
-                return output_deltas, actual_output, exact_output_match, ""
+                return output_deltas, actual_output, exact_output_match, "", ""
+        if failure_module and not exact_output_match:
+            expected_failure = expected_training_craft_failure(failure_module, recipe, dict_value(failure_module).get("craft_gump_id"), journal_cursor, time.time() >= failure_gump_ready_at)
+            if expected_failure:
+                return output_deltas, actual_output, exact_output_match, "", expected_failure
         if time.time() >= deadline or consume_priority_control_button():
-            return output_deltas, actual_output, exact_output_match, ""
+            return output_deltas, actual_output, exact_output_match, "", ""
         Misc.Pause(CRAFT_RESULT_POLL_MS)
 
 
@@ -5762,6 +6314,10 @@ def clear_training_pending_recovery():
 def clear_training_pending_outputs(clear_recovery=True):
     global _training_pending_outputs, _training_pending_disposal
     global _training_pending_module_id, _training_pending_recipe_id, _training_pending_recipe_name
+    global _training_drink_recovery_snapshot, _training_next_drink_at
+    global _training_poison_reconcile_passes
+    global _training_poison_batch_consumed, _training_poison_bottle_start_count
+    global _training_poison_batch_start_bottle_count
 
     count = len(_training_pending_outputs)
     _training_pending_outputs = []
@@ -5769,6 +6325,12 @@ def clear_training_pending_outputs(clear_recovery=True):
     _training_pending_module_id = ""
     _training_pending_recipe_id = ""
     _training_pending_recipe_name = ""
+    _training_drink_recovery_snapshot = {}
+    _training_next_drink_at = 0.0
+    _training_poison_reconcile_passes = 0
+    _training_poison_batch_consumed = 0
+    _training_poison_bottle_start_count = -1
+    _training_poison_batch_start_bottle_count = -1
     if clear_recovery:
         count += clear_training_pending_recovery()
     return count
@@ -5778,19 +6340,36 @@ def queue_training_outputs(output_deltas, stage, module, recipe):
     global _training_pending_outputs, _training_pending_disposal
     global _training_pending_module_id, _training_pending_recipe_id, _training_pending_recipe_name
 
-    pending = []
+    disposal = dict(training_disposal(stage))
+    batching_poison = clean_key(disposal.get("mode", DISPOSAL_NONE)) == DISPOSAL_DRINK
+    pending = list(_training_pending_outputs) if batching_poison else []
     for item, delta in output_deltas:
         try:
-            pending.append({
-                "serial": int(item.Serial),
-                "amount": max(1, int(delta)),
-                "container_serial": int(item.Container),
-            })
+            serial = int(item.Serial)
+            container_serial = int(item.Container)
+            amount = max(1, int(delta))
+            existing = None
+            for record in pending:
+                if int_value(record.get("serial")) == serial and int_value(record.get("container_serial")) == container_serial:
+                    existing = record
+                    break
+            if existing:
+                existing["amount"] = max(0, int_value(existing.get("amount"))) + amount
+            else:
+                pending.append({
+                    "serial": serial,
+                    "amount": amount,
+                    "container_serial": container_serial,
+                    "item_id": int_value(getattr(item, "ItemID", 0), 0),
+                    "hue": int_value(getattr(item, "Hue", -1), -1),
+                    "item_name": item_name(item),
+                    "drink_attempts": 0,
+                })
         except:
             pass
 
     _training_pending_outputs = pending
-    _training_pending_disposal = training_disposal(stage)
+    _training_pending_disposal = disposal
     _training_pending_module_id = str(module.get("id", ""))
     _training_pending_recipe_id = str(recipe.get("id", ""))
     _training_pending_recipe_name = str(recipe.get("name", "crafted item"))
@@ -5815,7 +6394,12 @@ def pending_training_location_ready(record, item):
         return False, "Safety stop: training output location could not be verified."
 
     if _craft_bag_enabled and expected_container != int(_craft_bag_serial):
-        return False, "Safety stop: automated disposal is restricted to the Craft Bag."
+        poison_in_main_pack = (
+            clean_key(_training_pending_disposal.get("mode", DISPOSAL_NONE)) == DISPOSAL_DRINK
+            and expected_container == int(Player.Backpack.Serial)
+        )
+        if not poison_in_main_pack:
+            return False, "Safety stop: automated disposal is restricted to the Craft Bag."
     return True, ""
 
 
@@ -5884,6 +6468,9 @@ def process_pending_training_recovery():
             return "progress", message
         if state != "ready":
             return "retry", message
+        remaining = count_resource(Player.Backpack.Serial, resource)
+        if remaining > 0:
+            return "progress", message + " {0} remain; repeating Fill From Backpack.".format(remaining)
 
         _training_pending_recovery.pop(0)
         if _training_pending_recovery:
@@ -5929,7 +6516,6 @@ def release_pending_training_recovery():
     bag = craft_bag_item()
     returned_names = []
     backpack_names = []
-    master_shelf_names = []
 
     for record in list(_training_pending_recovery):
         record = dict_value(record)
@@ -5940,7 +6526,21 @@ def release_pending_training_recovery():
             continue
 
         if clean_key(record.get("destination")) == SOURCE_MASTER_SHELF:
-            master_shelf_names.append(resource_name)
+            outstanding = count_resource(Player.Backpack.Serial, resource)
+            if outstanding <= 0:
+                continue
+            moved = 0
+            if resource_chest:
+                moved = move_descriptor_from_main_pack_to_container(
+                    resource,
+                    outstanding,
+                    resource_chest.Serial,
+                    int_value(resource.get("hue"), -1),
+                )
+            if moved >= outstanding:
+                returned_names.append(resource_name)
+            else:
+                backpack_names.append(resource_name)
             continue
 
         bag_count = count_resource(bag.Serial, resource) if bag else 0
@@ -5963,10 +6563,6 @@ def release_pending_training_recovery():
 
     clear_training_pending_recovery()
 
-    if master_shelf_names:
-        return "Artificer Shelf recovery skipped after retries; {0} may remain in the main backpack. Training will continue.".format(
-            ", ".join(master_shelf_names)
-        )
     if backpack_names:
         return "Recovery move skipped after retries; {0} may remain in the main backpack and will be swept by restocking later.".format(
             ", ".join(backpack_names)
@@ -5978,11 +6574,73 @@ def release_pending_training_recovery():
     return "Recovered resources were already accounted for; continuing training."
 
 
-def move_pending_training_output(destination_serial, verb):
-    record, item = pending_training_item()
+def pending_training_record_matches(item, record):
     if not item:
-        clear_training_pending_outputs()
-        return "ready", verb + " output already handled."
+        return False
+    item_id = int_value(record.get("item_id"), 0)
+    hue = int_value(record.get("hue"), -1)
+    wanted_name = normalized_item_name(record.get("item_name", ""))
+    try:
+        if item_id > 0 and int(item.ItemID) != item_id:
+            return False
+        if hue >= 0 and int(item.Hue) != hue:
+            return False
+        if item_id <= 0 and wanted_name and normalized_item_name(item_name(item)) != wanted_name:
+            return False
+        return item_id > 0 or bool(wanted_name)
+    except:
+        return False
+
+
+def find_pending_training_record_item(record):
+    item = valid_item(record.get("serial"))
+    expected_container = int_value(record.get("container_serial"), Player.Backpack.Serial)
+    if item:
+        try:
+            if int(item.Container) == expected_container:
+                return item
+        except:
+            pass
+
+    for candidate in direct_container_items(expected_container):
+        if pending_training_record_matches(candidate, record):
+            record["serial"] = int(candidate.Serial)
+            return candidate
+    return None
+
+
+def count_pending_training_record(container_serial, record):
+    total = 0
+    for candidate in direct_container_items(container_serial):
+        if not pending_training_record_matches(candidate, record):
+            continue
+        total += max(1, int_value(getattr(candidate, "Amount", 1), 1))
+    return total
+
+
+def wait_for_pending_training_destination(container_serial, record, previous_count, expected_increase):
+    deadline = time.time() + (float(SHELF_DELIVERY_WAIT_MS) / 1000.0)
+    current = count_pending_training_record(container_serial, record)
+    while current < previous_count + expected_increase and time.time() < deadline:
+        if consume_priority_control_button():
+            return current
+        Misc.Pause(JOURNAL_POLL_MS)
+        current = count_pending_training_record(container_serial, record)
+    return current
+
+
+def move_pending_training_output(destination_serial, verb):
+    if not _training_pending_outputs:
+        return "ready", "No training output is waiting."
+
+    recipe_name = _training_pending_recipe_name or "training"
+    storage_label = "Resource Chest" if clean_key(_training_pending_disposal.get("destination")) == "resource_chest" else "output chest"
+    record = dict_value(_training_pending_outputs[0])
+    item = find_pending_training_record_item(record)
+    if not item:
+        return "error", "Verified {0} output could not be found in its crafting container; storage was not credited.".format(
+            recipe_name
+        )
 
     destination = valid_item(destination_serial)
     if not destination:
@@ -6003,6 +6661,9 @@ def move_pending_training_output(destination_serial, verb):
         return "error", "Craft Bag cannot also be the training trash container."
 
     move_amount = int_value(record.get("amount"), 1)
+    if verb == "Stored" and not open_container(destination.Serial):
+        return "error", "The configured training storage container could not be opened."
+    destination_before = count_pending_training_record(destination.Serial, record) if verb == "Stored" else 0
     try:
         before_amount = int(item.Amount)
     except:
@@ -6013,6 +6674,16 @@ def move_pending_training_output(destination_serial, verb):
         Misc.Pause(MOVE_PAUSE_MS)
     except Exception as ex:
         return "error", "Could not {0} training output: {1}".format(verb.lower(), ex)
+
+    if verb == "Stored":
+        destination_after = wait_for_pending_training_destination(destination.Serial, record, destination_before, move_amount)
+        if destination_after < destination_before + move_amount:
+            return "error", "{0} did not gain the verified {1} output ({2}/{3}); the pending craft was retained.".format(
+                storage_label,
+                recipe_name,
+                max(0, destination_after - destination_before),
+                move_amount,
+            )
 
     remaining = valid_item(item.Serial)
     if remaining:
@@ -6027,11 +6698,179 @@ def move_pending_training_output(destination_serial, verb):
     _training_pending_outputs.pop(0)
     if not _training_pending_outputs:
         clear_training_pending_outputs()
+        if verb == "Stored":
+            return "ready", "Stored {0} verified {1} output in the {2}.".format(
+                move_amount,
+                recipe_name,
+                storage_label,
+            )
         return "ready", verb + " training output."
     return "progress", verb + " one training output."
 
 
+def stage_poison_storage_items_in_main_pack():
+    backpack = Player.Backpack
+    bag = craft_bag_item() if _craft_bag_enabled else None
+    if not backpack or not bag:
+        return True, ""
+
+    for item in poison_storage_items(bag.Serial):
+        try:
+            amount = max(1, int(item.Amount))
+            Items.Move(item.Serial, backpack.Serial, amount)
+            Misc.Pause(MOVE_PAUSE_MS)
+        except Exception as ex:
+            return False, "Could not stage poison cleanup from the Craft Bag: " + str(ex)
+
+    if poison_storage_items(bag.Serial):
+        return False, "Verified poison or bottle stacks remain in the Craft Bag after staging."
+    return True, ""
+
+
+def move_poison_storage_items_to_chest():
+    backpack = Player.Backpack
+    chest = valid_item(_resource_chest_serial)
+    if not backpack or not chest:
+        return 0
+    open_container(chest.Serial)
+    moved = 0
+    for item in poison_storage_items(backpack.Serial):
+        try:
+            amount = max(1, int(item.Amount))
+            Items.Move(item.Serial, chest.Serial, amount)
+            Misc.Pause(MOVE_PAUSE_MS)
+            remaining = valid_item(item.Serial)
+            if not remaining or int_value(getattr(remaining, "Container", 0)) == int(chest.Serial):
+                moved += amount
+        except:
+            pass
+    return moved
+
+
+def force_store_poison_batch():
+    backpack = Player.Backpack
+    if not backpack:
+        return False, "Player backpack is unavailable for poison fallback storage."
+
+    staged, stage_error = stage_poison_storage_items_in_main_pack()
+    if not staged:
+        return False, stage_error
+
+    before = poison_storage_total(backpack.Serial)
+    if _source_mode == SOURCE_MASTER_SHELF and before > 0:
+        ready, message = master_shelf_readiness(True)
+        gump_id = int_value(_master_shelf_data.get("gump_id"), 0x79DF5A83)
+        if ready:
+            fill_button = int_value(_master_shelf_data.get("fill_from_backpack_button"), 901)
+            try:
+                Gumps.SendAction(gump_id, fill_button)
+                Misc.Pause(max(MOVE_PAUSE_MS, POISON_DRINK_COOLDOWN_MS))
+            except:
+                pass
+        close_gump(gump_id)
+    elif _source_mode == SOURCE_SHELF and before > 0:
+        if valid_item(_resource_shelf_serial):
+            deposit_resource_shelf_from_backpack()
+        if poison_storage_total(backpack.Serial) > 0 and valid_item(_reagent_shelf_serial):
+            Misc.Pause(POISON_DRINK_COOLDOWN_MS)
+            deposit_reagent_shelf_from_backpack()
+
+    moved_to_chest = 0
+    if poison_storage_total(backpack.Serial) > 0:
+        moved_to_chest = move_poison_storage_items_to_chest()
+
+    remaining_storage = 0
+    remaining_containers = [int(backpack.Serial)]
+    bag = craft_bag_item() if _craft_bag_enabled else None
+    if bag:
+        remaining_containers.append(int(bag.Serial))
+    for container_serial in remaining_containers:
+        remaining_storage += poison_storage_total(container_serial)
+    if remaining_storage > 0:
+        return False, "Poison batch storage left {0} potion/bottle item(s) in the crafting workspace.".format(
+            remaining_storage
+        )
+
+    after = poison_storage_total(backpack.Serial)
+    stored = max(0, before - after)
+    clear_training_pending_outputs()
+    detail = "Stored {0} poison/bottle item(s) through the configured storage".format(stored)
+    if moved_to_chest > 0:
+        detail += "; {0} went to the resource chest".format(moved_to_chest)
+    return True, detail + "."
+
+
+def finish_or_reconcile_poison_batch(pending_recipe, module):
+    global _training_pending_outputs, _training_next_drink_at
+    global _training_poison_reconcile_passes
+
+    leftovers = verified_poison_output_records()
+    if leftovers:
+        if _training_poison_reconcile_passes < POISON_BATCH_RECONCILE_PASSES:
+            _training_poison_reconcile_passes += 1
+            _training_pending_outputs = leftovers
+            _training_next_drink_at = time.time() + (float(POISON_DRINK_BACKOFF_MS) / 1000.0)
+            return "progress", "Found {0} verified poison potion(s) after the batch count; retrying them after the action delay.".format(
+                training_pending_output_amount()
+            )
+        stored, storage_message = force_store_poison_batch()
+        return ("ready" if stored else "error"), storage_message
+
+    expected_bottles = max(0, int_value(_training_poison_batch_consumed, 0))
+    start_bottles = max(0, int_value(_training_poison_bottle_start_count, 0))
+    recovered_bottles = max(0, poison_bottle_inventory_total() - start_bottles)
+    if expected_bottles > 0 and recovered_bottles < expected_bottles:
+        Misc.Pause(POISON_DRINK_COOLDOWN_MS)
+        recovered_bottles = max(0, poison_bottle_inventory_total() - start_bottles)
+        if recovered_bottles < expected_bottles:
+            stored, storage_message = force_store_poison_batch()
+            mismatch = "Recovered {0}/{1} expected empty bottles after the poison batch. ".format(recovered_bottles, expected_bottles)
+            return ("ready" if stored else "error"), mismatch + storage_message
+
+    if _source_mode == SOURCE_MASTER_SHELF and _craft_bag_enabled:
+        staged, stage_error = stage_poison_storage_items_in_main_pack()
+        if not staged:
+            return "error", stage_error
+
+    completion_message = "Drank the verified poison batch"
+    before_recovery = dict(_training_drink_recovery_snapshot)
+    clear_training_pending_outputs(False)
+    recovery_ready, recovery_error = queue_recovered_training_resources(
+        pending_recipe,
+        before_recovery,
+        module.get("id", ""),
+        completion_message,
+    )
+    if not recovery_ready:
+        return "error", completion_message + ", but " + recovery_error
+    if _training_pending_recovery:
+        return "progress", completion_message + "; returning the recovered bottles next."
+    return "ready", completion_message + "; the empty bottles remain available for the next batch."
+
+
+def schedule_poison_drink_retry(record, message, throttled=False):
+    global _training_next_drink_at
+
+    _training_next_drink_at = time.time() + (float(POISON_DRINK_BACKOFF_MS) / 1000.0)
+    if throttled:
+        record["drink_attempts"] = 0
+        return "progress", str(message) + " Waiting for the shard action delay before retrying the same potion."
+
+    attempts = max(0, int_value(record.get("drink_attempts"), 0)) + 1
+    record["drink_attempts"] = attempts
+    if attempts < POISON_DRINK_MAX_ATTEMPTS:
+        return "progress", "{0} Retry {1}/{2} after the action delay.".format(message, attempts, POISON_DRINK_MAX_ATTEMPTS)
+
+    stored, storage_message = force_store_poison_batch()
+    if stored:
+        return "ready", "Repeated poison-use verification failed. " + storage_message
+    return "error", "Repeated poison-use verification failed, and fallback storage did not resolve it: " + storage_message
+
+
 def process_training_pending_outputs():
+    global _training_drink_recovery_snapshot, _training_next_drink_at
+    global _training_poison_batch_consumed, _training_poison_bottle_start_count
+
     if not _training_pending_outputs:
         return "ready", "No training output is waiting."
 
@@ -6040,12 +6879,104 @@ def process_training_pending_outputs():
         clear_training_pending_outputs()
         return "ready", "Left training output in " + craft_workspace_label() + "."
     if mode == DISPOSAL_SAVE:
+        if clean_key(_training_pending_disposal.get("destination")) == "resource_chest":
+            return move_pending_training_output(_resource_chest_serial, "Stored")
         if not _output_chest_serial:
             clear_training_pending_outputs()
             return "ready", "Saved training output in " + craft_workspace_label() + "."
         return move_pending_training_output(_output_chest_serial, "Stored")
     if mode == DISPOSAL_TRASH:
         return move_pending_training_output(_trash_container_serial, "Trashed")
+    if mode == DISPOSAL_DRINK:
+        if clean_key(_training_pending_disposal.get("required_mastery")) != "poison_mastery":
+            return "error", "Poison-drinking output is missing its Poison Mastery requirement."
+        if not poison_mastery_ready():
+            mastery_state, mastery_message = activate_poison_mastery()
+            if mastery_state == "interrupted":
+                return "progress", mastery_message
+            if mastery_state != "ready":
+                return "error", mastery_message
+
+        module = module_by_id(_training_pending_module_id)
+        if not module:
+            return "error", "The training output's craft module is no longer loaded."
+        _recipe_category, pending_recipe = find_module_recipe(module, _training_pending_recipe_id)
+        if not pending_recipe:
+            return "error", "The pending poison recipe could not be resolved."
+
+        record, item = pending_training_item()
+        if not item:
+            return finish_or_reconcile_poison_batch(pending_recipe, module)
+        location_ready, location_error = pending_training_location_ready(record, item)
+        if not location_ready:
+            return "error", location_error
+
+        if not verified_poison_potion(item):
+            return "error", "Poison output identity could not be verified; nothing was consumed."
+
+        wait_ms = poison_drink_wait_ms()
+        if _training_next_drink_at <= 0.0:
+            _training_next_drink_at = time.time() + (float(POISON_DRINK_COOLDOWN_MS) / 1000.0)
+            return "progress", "Poison batch is ready; waiting for the shard action delay before the first drink."
+        if wait_ms > 0:
+            return "progress", "Waiting for the shard action delay before the next poison drink."
+
+        try:
+            before_amount = int(item.Amount)
+        except:
+            before_amount = max(1, int_value(record.get("amount"), 1))
+        if _training_poison_batch_start_bottle_count < 0:
+            begin_poison_training_batch()
+        track_recovery = _craft_bag_enabled or _source_mode == SOURCE_MASTER_SHELF
+        if _training_poison_bottle_start_count < 0:
+            _training_poison_bottle_start_count = poison_bottle_inventory_total()
+            if track_recovery and _training_poison_batch_start_bottle_count < 0:
+                _training_drink_recovery_snapshot = snapshot_direct_container(Player.Backpack.Serial)
+
+        journal_cursor = capture_journal_cursor()
+        try:
+            Items.UseItem(item.Serial)
+        except Exception as ex:
+            return schedule_poison_drink_retry(record, "Could not drink the verified poison output: " + str(ex))
+
+        deadline = time.time() + (float(CRAFT_RESULT_PAUSE_MS + SERVER_GUMP_WAIT_MS) / 1000.0)
+        consumed = False
+        throttled = False
+        while time.time() < deadline:
+            if consume_priority_control_button():
+                return "progress", "Poison consumption verification was interrupted."
+            remaining = valid_item(item.Serial)
+            if not remaining:
+                consumed = True
+                break
+            try:
+                if int(remaining.Amount) < before_amount:
+                    consumed = True
+                    break
+            except:
+                pass
+            if journal_contains_since(journal_cursor, "you must wait to perform another action"):
+                throttled = True
+                break
+            Misc.Pause(CRAFT_RESULT_POLL_MS)
+        if not consumed:
+            return schedule_poison_drink_retry(
+                record,
+                "The shard rejected the poison drink." if throttled else "Poison potion was not consumed after forcing Poison Mastery.",
+                throttled,
+            )
+
+        record["drink_attempts"] = 0
+        _training_poison_batch_consumed += 1
+        _training_next_drink_at = time.time() + (float(POISON_DRINK_COOLDOWN_MS) / 1000.0)
+        record["amount"] = max(0, int_value(record.get("amount"), 1) - 1)
+        if int_value(record.get("amount")) <= 0:
+            _training_pending_outputs.pop(0)
+        remaining_count = training_pending_output_amount()
+        if remaining_count > 0:
+            return "progress", "Drank one verified poison potion; {0} remain in this batch.".format(remaining_count)
+
+        return finish_or_reconcile_poison_batch(pending_recipe, module)
     if mode not in TARGETED_DISPOSAL_MODES:
         return "error", "Unsupported training disposal mode: " + mode
 
@@ -6343,11 +7274,13 @@ def retry_recovery_or_continue(message):
 def stop_runtime(message="Stopped.", hue=WARN_HUE):
     global _runtime_active, _training_active, _dirty_ui
     global _component_recipe_stack, _component_parent_focus
+    global _master_component_credits
 
     _runtime_active = False
     _training_active = False
     _component_recipe_stack = []
     _component_parent_focus = ""
+    _master_component_credits = {}
     reset_make_last(True)
     if _cleanup_active:
         reset_material_cleanup(False)
@@ -6359,6 +7292,7 @@ def start_runtime():
     global _runtime_active, _training_active, _completed_amount, _consecutive_failures
     global _button_sequence_failures, _dirty_ui
     global _component_recipe_stack, _component_parent_focus
+    global _master_component_credits
 
     if _cleanup_active:
         set_status("Wait for material cleanup to finish before starting another job.", WARN_HUE, "Cleanup Materials")
@@ -6388,6 +7322,7 @@ def start_runtime():
     _button_sequence_failures = 0
     _component_recipe_stack = []
     _component_parent_focus = ""
+    _master_component_credits = {}
     prepare_make_last_for_runtime()
     clear_action_failures()
     reset_session_resources()
@@ -6439,6 +7374,7 @@ def start_training():
     global _training_start_skill, _training_session_module_id
     global _consecutive_failures, _button_sequence_failures
     global _selected_category_id, _selected_recipe_id, _dirty_ui
+    global _poison_mastery_ready_session
 
     if _cleanup_active:
         set_status("Wait for material cleanup to finish before starting training.", WARN_HUE, "Cleanup Materials")
@@ -6453,6 +7389,7 @@ def start_training():
             return
 
     reset_make_last()
+    _poison_mastery_ready_session = False
 
     module = active_module()
     profile = training_profile(module)
@@ -6500,6 +7437,14 @@ def start_training():
         return
     if not recipe or not category:
         set_status("Cannot start: " + reason, BAD_HUE, "Training Mapping")
+        return
+
+    mastery_state, mastery_message = ensure_training_mastery(stage)
+    if mastery_state == "interrupted":
+        set_status("Training start interrupted while checking Poison Mastery.", WARN_HUE, "Training Mastery")
+        return
+    if mastery_state != "ready":
+        set_status("Cannot start: " + mastery_message + ".", BAD_HUE, "Training Mastery")
         return
 
     disposal_ready, disposal_error = training_disposal_readiness(stage)
@@ -6567,7 +7512,17 @@ def training_step():
         _dirty_ui = True
         return
 
-    if _training_pending_outputs:
+    pending_module, pending_profile, pending_skill, _pending_cap, pending_goal, pending_stage, _pending_category, pending_recipe, _pending_reason = training_context()
+    if poison_failure_bottle_flush_ready(pending_stage):
+        stored, storage_message = force_store_poison_batch()
+        if stored:
+            clear_action_failures("training_poison_workspace")
+            set_status("Failure-only poison batch cleared. " + storage_message, GOOD_HUE, "Clear Poison Workspace")
+        else:
+            retry_action_or_pause("training_poison_workspace", storage_message, "Clear Poison Workspace")
+        _dirty_ui = True
+        return
+    if _training_pending_outputs and training_pending_outputs_ready(pending_stage, pending_recipe, pending_skill, pending_goal):
         state, message = process_training_pending_outputs()
         if _operation_interrupted:
             return
@@ -6619,6 +7574,13 @@ def training_step():
         stop_runtime("Training paused: " + reason, BAD_HUE)
         return
 
+    mastery_state, mastery_message = ensure_training_mastery(stage)
+    if _operation_interrupted or mastery_state == "interrupted":
+        return
+    if mastery_state != "ready":
+        stop_runtime("Training paused: " + mastery_message + ".", BAD_HUE)
+        return
+
     disposal_ready, disposal_error = training_disposal_readiness(stage)
     if not disposal_ready:
         stop_runtime("Training paused: " + disposal_error + ".", BAD_HUE)
@@ -6634,6 +7596,7 @@ def craft_step(training_stage=None):
     global _training_crafts, _dirty_ui
 
     training_mode = training_stage is not None
+    failure_limit = current_craft_failure_limit()
 
     if training_mode:
         if not _training_active:
@@ -6649,6 +7612,8 @@ def craft_step(training_stage=None):
     recipe = selected_recipe()
     ready, reason = recipe_readiness(recipe)
     if not ready:
+        if training_mode and request_poison_batch_drain(reason):
+            return
         stop_runtime("Paused: " + reason + ".", BAD_HUE)
         return
 
@@ -6663,6 +7628,8 @@ def craft_step(training_stage=None):
 
     resources, error = resolve_resource_list(recipe.get("resources"))
     if not resources:
+        if training_mode and request_poison_batch_drain(error):
+            return
         retry_action_or_pause("resolve_resources", "Resource setup error: " + error, "Resolve Resources")
         return
     clear_action_failures("resolve_resources")
@@ -6704,8 +7671,25 @@ def craft_step(training_stage=None):
                     stop_runtime("Need {0} {1:.1f}; current {2:.1f}.".format(skill_name, minimum, skill_value), BAD_HUE)
                     return
 
+    staged_ready, staged_message = staged_plugin_components_ready(resources)
+    if not staged_ready:
+        stop_runtime(staged_message, WARN_HUE)
+        return
+
     register_session_resources(resources)
-    if _source_mode != SOURCE_MASTER_SHELF:
+    if _source_mode == SOURCE_MASTER_SHELF:
+        resource_state, resource_error = ensure_master_component_list(resources)
+        if _operation_interrupted or consume_priority_control_button():
+            return
+        if resource_state == "progress":
+            clear_action_failures("restock_resources")
+            return
+        if resource_state == "error":
+            if training_mode and request_poison_batch_drain(resource_error):
+                return
+            retry_action_or_pause("restock_resources", resource_error, "Craft Component")
+            return
+    else:
         remaining = RESTOCK_CHUNK_CRAFTS if training_mode else _target_amount - _completed_amount
         resource_state, resource_error = ensure_resource_list(resources, remaining)
         if _operation_interrupted or consume_priority_control_button():
@@ -6714,10 +7698,14 @@ def craft_step(training_stage=None):
             clear_action_failures("restock_resources")
             return
         if resource_state == "error":
+            if training_mode and request_poison_batch_drain(resource_error):
+                return
             retry_action_or_pause("restock_resources", resource_error, "Restock Resources")
             return
         clear_action_failures("restock_resources")
 
+    if training_mode and clean_key(training_disposal(training_stage).get("mode", DISPOSAL_NONE)) == DISPOSAL_DRINK:
+        begin_poison_training_batch()
     output_hue = int_value(recipe.get("output_hue"), -1)
     output_amount = max(1, int_value(recipe.get("output_amount"), 1))
     before_snapshots = snapshot_output_locations()
@@ -6750,6 +7738,8 @@ def craft_step(training_stage=None):
             clear_action_failures("acquire_tool")
             return
         if tool_state == "error":
+            if training_mode and request_poison_batch_drain(str(tool_result)):
+                return
             retry_action_or_pause("acquire_tool", str(tool_result), "Acquire Tool")
             return
         clear_action_failures("acquire_tool")
@@ -6789,21 +7779,38 @@ def craft_step(training_stage=None):
         craft_progress = "{0}/{1}".format(_completed_amount + 1, _target_amount)
     method_text = " with Make Last" if use_make_last else ""
     set_status("Crafting {0}{1} ({2}).".format(recipe.get("name", "recipe"), method_text, craft_progress), LABEL_HUE, action_label)
-    journal_cursor = capture_journal_cursor() if wanted_focus in ("unchanged", "global", "weekly", "bod_book") else None
+    journal_cursor = capture_journal_cursor() if training_mode or wanted_focus in ("unchanged", "global", "weekly", "bod_book") else None
     sequence_complete = send_server_actions(craft_gump_id, actions, action_label)
 
     if _operation_interrupted:
         return
 
-    output_deltas, actual_output, exact_output_match, consumed_quest_type = wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, journal_cursor, wanted_focus)
+    output_deltas, actual_output, exact_output_match, consumed_quest_type, expected_failure = wait_for_craft_result(recipe, before_snapshots, output_hue, output_amount, journal_cursor, wanted_focus, module if training_mode else None)
     if _operation_interrupted:
         return
     strong_output_verification = bool(exact_output_match) or (bool(consumed_quest_type) and bool(sequence_complete))
 
+    if expected_failure:
+        _button_sequence_failures = 0
+        _consecutive_failures = 0
+        clear_action_failures("stage_craft_output")
+        set_status(
+            "{0} failed normally; continuing. Batch load {1}/{2} ({3} poison).".format(
+                recipe.get("name", "Training craft"),
+                poison_training_batch_load(),
+                poison_training_batch_size(training_disposal(training_stage)),
+                training_pending_output_amount(),
+            ),
+            WARN_HUE,
+            "Training Attempt",
+        )
+        _dirty_ui = True
+        return
+
     if use_make_last and actual_output >= output_amount and not strong_output_verification:
         reset_make_last()
         _consecutive_failures += 1
-        if _consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+        if _consecutive_failures >= failure_limit:
             stop_runtime("Paused after {0} unverified Make Last outputs.".format(_consecutive_failures), BAD_HUE)
             return
         set_status(
@@ -6839,10 +7846,10 @@ def craft_step(training_stage=None):
     if actual_output < output_amount:
         reset_make_last()
         _consecutive_failures += 1
-        if _consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+        if _consecutive_failures >= failure_limit:
             stop_runtime("Paused after {0} unverified craft failures.".format(_consecutive_failures), BAD_HUE)
             return
-        set_status("No output detected; retry {0}/{1}.".format(_consecutive_failures, MAX_CONSECUTIVE_FAILURES), WARN_HUE, "Verify Output")
+        set_status("No output detected; retry {0}/{1}.".format(_consecutive_failures, failure_limit), WARN_HUE, "Verify Output")
         _dirty_ui = True
         return
 
@@ -6851,19 +7858,30 @@ def craft_step(training_stage=None):
         stored = True
         store_message = "Contributed crafted output to {0}.".format(FOCUS_LABELS.get(quest_success_focus(consumed_quest_type), consumed_quest_type))
     else:
-        while True:
-            staged, staged_deltas, stage_error = stage_new_outputs_in_craft_bag(recipe, output_deltas, output_hue)
-            if staged:
-                output_deltas = staged_deltas
-                clear_action_failures("stage_craft_output")
-                break
-            if not retry_action_or_pause("stage_craft_output", stage_error, "Stage Craft Output"):
-                return
-            Misc.Pause(MOVE_PAUSE_MS)
+        disposal_mode = clean_key(training_disposal(training_stage).get("mode", DISPOSAL_NONE)) if training_mode else DISPOSAL_NONE
+        if training_mode and disposal_mode == DISPOSAL_DRINK:
+            clear_action_failures("stage_craft_output")
+        else:
+            while True:
+                staged, staged_deltas, stage_error = stage_new_outputs_in_craft_bag(recipe, output_deltas, output_hue)
+                if staged:
+                    output_deltas = staged_deltas
+                    clear_action_failures("stage_craft_output")
+                    break
+                if not retry_action_or_pause("stage_craft_output", stage_error, "Stage Craft Output"):
+                    return
+                Misc.Pause(MOVE_PAUSE_MS)
         if training_mode:
             queue_training_outputs(output_deltas, training_stage, module, recipe)
             stored = True
-            store_message = "Crafted output is ready for " + clean_key(training_disposal(training_stage).get("mode", DISPOSAL_NONE)) + "."
+            if disposal_mode == DISPOSAL_DRINK:
+                store_message = "Poison batch load {0}/{1} ({2} poison).".format(
+                    poison_training_batch_load(),
+                    poison_training_batch_size(training_disposal(training_stage)),
+                    training_pending_output_amount(),
+                )
+            else:
+                store_message = "Crafted output is ready for " + disposal_mode + "."
         else:
             while True:
                 stored, store_message = store_new_outputs(output_deltas)
@@ -6894,6 +7912,8 @@ def craft_step(training_stage=None):
         _dirty_ui = True
         return
 
+    if _source_mode == SOURCE_MASTER_SHELF:
+        consume_master_component_credits(resources)
     _completed_amount += actual_output
     if _completed_amount > _target_amount:
         _completed_amount = _target_amount
@@ -7043,7 +8063,7 @@ def ui_snapshot():
         _master_fill_transferred,
         _training_crafts,
         training_skill,
-        len(_training_pending_outputs),
+        training_pending_output_amount(),
         len(_training_pending_recovery),
         _target_amount,
         _completed_amount,
@@ -7124,7 +8144,7 @@ def render_home_gui():
     Gumps.AddBackground(gd, 0, 0, GUMP_WIDTH, home_height, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, GUMP_WIDTH, home_height)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddButton(gd, GUMP_WIDTH - 34, 7, 4017, 4018, BTN_CLOSE, 1, 0)
 
@@ -7239,7 +8259,7 @@ def render_glasses_gui():
     Gumps.AddBackground(gd, 0, 0, GUMP_WIDTH, GLASSES_GUMP_HEIGHT, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, GUMP_WIDTH, GLASSES_GUMP_HEIGHT)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddLabel(gd, 210, 8, GOOD_HUE, "Crafting Glasses")
     add_button(gd, 535, 7, BTN_GLASSES_BACK, "Setup", GOOD_HUE)
@@ -7288,7 +8308,7 @@ def render_templates_gui():
     Gumps.AddBackground(gd, 0, 0, GUMP_WIDTH, GLASSES_GUMP_HEIGHT, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, GUMP_WIDTH, GLASSES_GUMP_HEIGHT)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddLabel(gd, 210, 8, GOOD_HUE, "Craft Templates")
     add_button(gd, 535, 7, BTN_TEMPLATES_BACK, "Setup", GOOD_HUE)
@@ -7323,7 +8343,7 @@ def render_templates_gui():
         Gumps.AddLabel(gd, x + 176, y + 1, GOOD_HUE if template_id > 0 else DIM_HUE, template_text)
         Gumps.AddButton(gd, x + 282, y, 4005, 4007, plus_button, 1, 0)
 
-    Gumps.AddLabel(gd, 20, 280, DIM_HUE, "Startup is Unknown; the first mapped craft synchronizes once, then same-template skills do not swap.")
+    Gumps.AddLabel(gd, 20, 280, DIM_HUE, "First craft syncs startup. Instruments need Carpentry + Musicianship on the same template.")
     add_status_panel(gd, 298)
 
     _render_stage = "Send Crafting Templates gump"
@@ -7343,7 +8363,7 @@ def render_crafting_gui():
     Gumps.AddBackground(gd, 0, 0, GUMP_WIDTH, CRAFT_GUMP_HEIGHT, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, GUMP_WIDTH, CRAFT_GUMP_HEIGHT)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddButton(gd, GUMP_WIDTH - 34, 7, 4017, 4018, BTN_CLOSE, 1, 0)
 
@@ -7482,7 +8502,7 @@ def render_training_gui():
     Gumps.AddBackground(gd, 0, 0, TRAIN_GUMP_WIDTH, TRAIN_GUMP_HEIGHT, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, TRAIN_GUMP_WIDTH, TRAIN_GUMP_HEIGHT)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     add_button(gd, 420, 7, BTN_HOME, "Home", GOOD_HUE)
     Gumps.AddButton(gd, TRAIN_GUMP_WIDTH - 34, 7, 4017, 4018, BTN_CLOSE, 1, 0)
@@ -7526,7 +8546,7 @@ def render_training_gui():
         Gumps.AddLabel(gd, 20, 85, LABEL_HUE, "Stage: " + stage_range)
         Gumps.AddLabel(gd, 185, 85, GOOD_HUE if recipe else WARN_HUE, "Crafting: " + short_text(recipe_name, 37))
         Gumps.AddLabel(gd, 20, 106, LABEL_HUE, "Output: " + short_text(output_label, 58))
-        pending_text = " | recovery pending" if _training_pending_recovery else (" | output pending" if _training_pending_outputs else "")
+        pending_text = " | recovery pending" if _training_pending_recovery else (" | poison batch {0}/{1}".format(training_pending_output_amount(), poison_training_batch_size()) if _training_pending_outputs and clean_key(_training_pending_disposal.get("mode")) == DISPOSAL_DRINK else (" | output pending" if _training_pending_outputs else ""))
         Gumps.AddLabel(gd, 20, 128, DIM_HUE, "Crafts this run: {0} | Skill gained: +{1:.1f}{2}".format(_training_crafts, gain, pending_text))
 
     _render_stage = "Training controls"
@@ -7562,7 +8582,7 @@ def render_plugin_gui():
     Gumps.AddBackground(gd, 0, 0, GUMP_WIDTH, PLUGIN_GUMP_HEIGHT, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, GUMP_WIDTH, PLUGIN_GUMP_HEIGHT)
 
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddLabel(gd, 210, 8, DIM_HUE, "Plugin:")
     Gumps.AddLabel(gd, 267, 8, GOOD_HUE, short_text(plugin.name, 18))
@@ -7611,7 +8631,7 @@ def render_error_gui(error_message):
     Gumps.AddPage(gd, 0)
     Gumps.AddBackground(gd, 0, 0, 520, 150, BG_ID)
     Gumps.AddAlphaRegion(gd, 0, 0, 520, 150)
-    Gumps.AddItem(gd, 8, 5, 0x2130, TITLE_HUE)
+    Gumps.AddItem(gd, 8, 5, 0x2130, FROG_HUE)
     Gumps.AddLabel(gd, 42, 8, TITLE_HUE, "FROG CRAFTING CORE " + VERSION)
     Gumps.AddButton(gd, 486, 7, 4017, 4018, BTN_CLOSE, 1, 0)
     Gumps.AddLabel(gd, 18, 42, BAD_HUE, "The full interface could not be rendered.")

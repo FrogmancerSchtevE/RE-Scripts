@@ -1,0 +1,257 @@
+{
+  "format": "frog-cooking-bod-rules",
+  "version": 1,
+  "name": "Unchained Cooking BOD Rules",
+  "shopping_buffer_percent": 10,
+  "subcraft_batch_size": 5,
+  "auto_rescan_after_fill": true,
+  "bod": {
+    "item_id": "0xA614",
+    "cooking_hue": "0x0A23",
+    "gump_id": "0x5AFBD742",
+    "combine_item_button": 2,
+    "exit_button": 1,
+    "numeric_text_layout": [
+      "amount_to_make",
+      "requested_item_id",
+      "amount_finished"
+    ]
+  },
+  "timing": {
+    "refresh_ms": 125,
+    "move_pause_ms": 700,
+    "move_verify_ms": 2500,
+    "gump_wait_ms": 3000,
+    "gump_settle_ms": 250,
+    "craft_open_settle_ms": 250,
+    "craft_menu_settle_ms": 250,
+    "post_staging_settle_ms": 750,
+    "craft_settle_ms": 1200,
+    "prepare_pause_ms": 650,
+    "water_target_wait_ms": 2500,
+    "water_fill_pause_ms": 850,
+    "water_verify_ms": 2500,
+    "master_withdraw_verify_ms": 2500,
+    "storage_gump_wait_ms": 3500,
+    "storage_action_wait_ms": 1500,
+    "storage_settle_ms": 300,
+    "max_craft_failures": 4,
+    "max_combine_failures": 4
+  },
+  "storage": {
+    "master_shelf": {
+      "title_markers": [],
+      "manual_sack_preparation": true,
+      "accept_journal_withdrawal": true,
+      "strict_withdraw_verification": false
+    },
+    "chef_shelf": {
+      "gump_id": "0x06ABCE12",
+      "next_page_button": 163,
+      "row_button_min": 1,
+      "row_button_max": 149,
+      "max_pages": 6,
+      "title_markers": [
+        "Chef's Ingredients & Meals",
+        "Chef Ingredients & Meals"
+      ]
+    },
+    "name_aliases": {
+      "bowl_of_peas": ["Wooden Bowl of Peas"],
+      "cake_mix": ["Cake Mix"],
+      "cheese": ["Cheese Wheel"],
+      "chicken_legs": ["Chicken Leg", "Chicken Legs"],
+      "chaga_mushrooms": ["Chaga Mushroom"],
+      "coconuts": ["Coconut"],
+      "cooked_ribs": ["Ribs"],
+      "empty_bottle": ["Bottle"],
+      "empty_pitcher": ["Pitcher", "Empty Pitcher", "Pitcher of Water"],
+      "flour": ["Sack Flour", "Sack of Flour", "Flour"],
+      "honey": ["Jar Honey", "Jar of Honey"],
+      "jar_of_honey": ["Jar Honey", "Jar of Honey"],
+      "raptor_tooth": ["Raptor Teeth"],
+      "raw_fish_steaks": ["Raw Fish Steak"],
+      "sack_of_flour": ["Sack Flour", "Sack of Flour"],
+      "samuels_secret_sauce": ["Samuels Secret Sauce", "Secret Sauce"],
+      "tribal_berries": ["Tribal Berry"],
+      "water": ["Pitcher", "Pitcher of Water"],
+      "wheat": ["Wheat Sheaf"]
+    }
+  },
+  "tool_item_ids": [
+    2431
+  ],
+  "tool_names": [
+    "Skillet",
+    "Frying Pan",
+    "Cooking Tool"
+  ],
+  "raw_resource_keys": [
+    "dough",
+    "goby_fish_bowl",
+    "raw_meat",
+    "sack_of_flour",
+    "sack_of_sugar"
+  ],
+  "component_aliases": {
+    "uncooked_meat_pie": "unbaked_meat_pie"
+  },
+  "recipe_aliases": {
+    "bread": "bread_loaf",
+    "cookies": "pan_of_cookies",
+    "meat pie": "baked_meat_pie",
+    "quiche": "baked_quiche",
+    "fruit pie": "baked_fruit_pie",
+    "peach cobbler": "baked_peach_cobbler",
+    "apple pie": "baked_apple_pie",
+    "pumpkin pie": "baked_pumpkin_pie"
+  },
+  "preparations": [
+    {
+      "id": "open_flour_sack",
+      "output_resource_key": "flour",
+      "source_resource_key": "sack_of_flour",
+      "shopping_name": "Sack of Flour",
+      "units_per_source": 20,
+      "action": "use_each",
+      "master_shelf_optional": true,
+      "master_resource_id": "sack_of_flour",
+      "closed_names": [
+        "Sack of Flour",
+        "Closed Sack of Flour"
+      ],
+      "prepared_names": [
+        "Open Sack of Flour",
+        "Flour"
+      ]
+    },
+    {
+      "id": "open_sugar_sack",
+      "output_resource_key": "sack_of_sugar",
+      "source_resource_key": "sack_of_sugar",
+      "shopping_name": "Sack of Sugar",
+      "units_per_source": 1,
+      "action": "use_each",
+      "master_shelf_optional": true,
+      "master_resource_id": "sack_of_sugar",
+      "closed_names": [
+        "Sack of Sugar",
+        "Closed Sack of Sugar"
+      ],
+      "prepared_names": [
+        "Open Sack of Sugar",
+        "Sugar"
+      ]
+    },
+    {
+      "id": "fill_water_pitcher",
+      "output_resource_key": "water",
+      "source_resource_key": "empty_pitcher",
+      "shopping_name": "Reusable Water Pitcher",
+      "units_per_source": 1,
+      "reusable": true,
+      "action": "fill_at_target",
+      "source_names": [
+        "Pitcher",
+        "Empty Pitcher"
+      ],
+      "filled_names": [
+        "Pitcher of Water"
+      ],
+      "master_resource_id": "pitcher",
+      "master_withdraw_button": 2187
+    }
+  ],
+  "resource_overrides": {
+    "empty_pitcher": {
+      "name": "Reusable Water Pitcher",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Pitcher",
+        "Empty Pitcher",
+        "Pitcher of Water"
+      ]
+    },
+    "sack_of_flour": {
+      "name": "Sack of Flour",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Sack of Flour",
+        "Closed Sack of Flour",
+        "Open Sack of Flour"
+      ]
+    },
+    "flour": {
+      "name": "Flour",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Flour",
+        "Open Sack of Flour"
+      ]
+    },
+    "water": {
+      "name": "Water",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Water",
+        "Pitcher of Water"
+      ]
+    },
+    "sack_of_sugar": {
+      "name": "Sack of Sugar",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Sack of Sugar",
+        "Closed Sack of Sugar",
+        "Open Sack of Sugar",
+        "Sugar"
+      ]
+    },
+    "honey": {
+      "name": "Honey",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Honey",
+        "Jar of Honey"
+      ]
+    },
+    "cheese": {
+      "name": "Cheese",
+      "item_ids": [],
+      "hues": [],
+      "names": [
+        "Cheese",
+        "Cheese Wheel"
+      ]
+    },
+    "raw_meat": {
+      "name": "Raw Meat",
+      "item_ids": [
+        "0x09B9",
+        "0x09F1",
+        "0x1607",
+        "0x1609"
+      ],
+      "hues": [
+        "0x0000"
+      ],
+      "names": [
+        "Raw Meat",
+        "Raw Bird",
+        "Raw Birds",
+        "Raw Chicken Leg",
+        "Raw Chicken Legs",
+        "Raw Leg of Lamb",
+        "Raw Legs of Lamb",
+        "Raw Ribs",
+        "Cut of Raw Ribs"
+      ]
+    }
+  }
+}
